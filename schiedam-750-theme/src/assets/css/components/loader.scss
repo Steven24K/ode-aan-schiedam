@@ -1,0 +1,33 @@
+/* Full-screen loader container */
+.loader-container {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: rgba(27, 27, 27, 0.35); /* Semi-transparent background */
+    z-index: 9999; /* Ensure it appears on top of everything */
+  }
+  
+  /* The spinning loader itself */
+  .spinner {
+    border: 8px solid #f3f3f3; /* Light grey background for the circle */
+    border-top: 8px solid #004085; /* Blue section for the top, adds the color */
+    border-radius: 50%;
+    width: 60px;
+    height: 60px;
+    animation: spin 1.5s linear infinite;
+  }
+  
+  /* Animation for the spinning effect */
+  @keyframes spin {
+    0% {
+        transform: rotate(0deg);
+    }
+    100% {
+        transform: rotate(360deg);
+    }
+  }

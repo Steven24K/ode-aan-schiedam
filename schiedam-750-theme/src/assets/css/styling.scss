@@ -1,0 +1,224 @@
+$primary-color: #ecc410;
+$primary-color--hover: #f5d20c93;
+$secondary-color: #d6453b;
+$secondary-color--hover: #d6453b75;
+$text-color: #333;
+$background-color: #ffffff;
+$background-color--dark: #ffffffa9;
+$spacing-unit: 16px;
+
+@use "./components/loader.scss";
+
+@font-face {
+  font-family: Gotham;
+  src: url(../fonts/Gotham-Book.ttf);
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: Gotham;
+  color: $text-color;
+  background-color: $background-color;
+  line-height: 1.6;
+}
+
+// Flexbox Utility Classes
+.flex {
+  display: flex;
+}
+
+.flex-center {
+  @extend .flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.flex-column {
+  @extend .flex;
+  flex-direction: column;
+}
+
+.flex-space-between {
+  @extend .flex;
+  justify-content: space-between;
+}
+
+.flex-wrap {
+  @extend .flex;
+  flex-wrap: wrap;
+}
+
+// Container
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: $spacing-unit;
+}
+
+// Grid System
+.row {
+  @extend .flex;
+  flex-wrap: wrap;
+}
+
+.col {
+  flex: 1;
+  padding: calc($spacing-unit / 2);
+}
+
+.col-2 {
+  flex: 0 0 16.66%;
+}
+
+.col-3 {
+  flex: 0 0 25%;
+}
+
+.col-4 {
+  flex: 0 0 33.33%;
+}
+
+.col-6 {
+  flex: 0 0 50%;
+}
+
+.col-12 {
+  flex: 0 0 100%;
+}
+
+// Buttons
+.btn {
+  display: inline-block;
+  padding: $spacing-unit calc($spacing-unit * 1.5);
+  background-color: $primary-color;
+  color: #fff;
+  text-decoration: none;
+  border: none;
+  border-radius: 4px;
+  text-align: center;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+
+  &:hover {
+    background-color: $primary-color--hover;
+  }
+}
+
+.btn-secondary {
+  background-color: $secondary-color;
+
+  &:hover {
+    background-color: $secondary-color--hover;
+  }
+}
+
+// Spacing Utility Classes
+.margin-sm {
+  margin: calc($spacing-unit / 2);
+}
+
+.margin-md {
+  margin: $spacing-unit;
+}
+
+.margin-lg {
+  margin: calc($spacing-unit * 2);
+}
+
+.padding-sm {
+  padding: calc($spacing-unit / 2);
+}
+
+.padding-md {
+  padding: $spacing-unit;
+}
+
+.padding-lg {
+  padding: calc($spacing-unit * 2);
+}
+
+// Splash Screen Styling
+.splash-screen {
+  @extend .flex;
+  @extend .flex-center;
+  height: 100vh;
+  background-color: $primary-color;
+  color: #fff;
+  text-align: center;
+  animation: fadeIn 1.5s forwards;
+}
+
+.splash-content {
+  @extend .flex;
+  @extend .flex-column;
+  @extend .flex-center;
+  gap: $spacing-unit;
+}
+
+.splash-title {
+  font-size: 2.5rem;
+  font-weight: bold;
+  margin-bottom: $spacing-unit;
+}
+
+.splash-logo {
+  max-width: 150px;
+  border-radius: 50%;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.splash-button {
+  @extend .btn;
+  @extend .btn-secondary;
+  margin-top: $spacing-unit;
+}
+
+// Animation
+@keyframes fadeIn {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+
+// Story Sections Styling
+.section {
+  margin-bottom: calc($spacing-unit * 3);
+  padding: calc($spacing-unit * 2);
+  background-color: $background-color--dark;
+  border-radius: 8px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.section-title {
+  font-size: 1.5rem;
+  margin-bottom: $spacing-unit;
+  color: $primary-color;
+}
+
+.section-list {
+  list-style-type: none;
+  padding: 0;
+  margin-bottom: $spacing-unit;
+
+  li {
+    margin-bottom: calc($spacing-unit / 2);
+  }
+}
+
+.section-button {
+  @extend .btn;
+  background-color: $secondary-color;
+
+  &:hover {
+    background-color: $secondary-color--hover;
+  }
+}

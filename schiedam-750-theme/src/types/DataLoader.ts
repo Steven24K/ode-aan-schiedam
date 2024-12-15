@@ -26,10 +26,10 @@ export const unloaded = <a>(): DataLoader<a> =>
 export const loading = <a>(_loader: () => Promise<DataLoader<a>>): DataLoader<a> =>
     ({ kind: 'loading', loader: _loader, getValue: () => None() })
 
-export const failed = <a>(_msg: string = ""): DataLoader<a> =>
+const failed = <a>(_msg: string = ""): DataLoader<a> =>
     ({ kind: 'failed', msg: _msg, getValue: () => None() })
 
-export const loaded = <a>(_v: a): DataLoader<a> =>
+const loaded = <a>(_v: a): DataLoader<a> =>
     ({ kind: 'loaded', v: _v, getValue: () => Some(_v) })
 
 

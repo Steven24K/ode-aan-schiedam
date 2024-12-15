@@ -2,28 +2,22 @@ import { SiteInfo } from "../types/SiteInfo"
 
 type SplashScreenProps = {
     siteInfo: SiteInfo
+    unSplash: () => void
 }
 
 export const SplashScreen = (props: SplashScreenProps) => {
-    const { siteInfo } = props
-    return <div className="bg-white">
-        <div className="flex items-center justify-center h-screen">
-            <div
-                className="flex flex-col items-center animate-fade-in opacity-0"
-                style={{ animation: "fadeIn 1.5s forwards" }}
-            >
-                <h1 className="text-4xl font-bold text-gray-800 mb-4 text-center">
-                    {siteInfo.name}
-                </h1>
+    const { siteInfo, unSplash } = props;
+    return (
+        <div className="splash-screen">
+            <div className="splash-content">
+                <h1 className="splash-title">{siteInfo.name}</h1>
                 <img
                     alt="750 Schiedam Logo"
                     src={siteInfo.site_icon_url}
-                    className="w-100 h-auto"
+                    className="splash-logo"
                 />
-                <button className="p-4 bg-yellow-500 hover:bg-yellow-700 ">
-                    {siteInfo.description}
-                </button>
+                <button onClick={unSplash} className="splash-button">{siteInfo.description}</button>
             </div>
         </div>
-    </div>
-}
+    );
+};
