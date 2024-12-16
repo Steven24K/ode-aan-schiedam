@@ -48,7 +48,7 @@ export const HomePage = (props: HomePageProps) => {
                         tags.map(tag =>
                             <div key={tag.id} className="category-item flex flex-center flex-column">
                                 <h2 className="category-title">{tag.name}</h2>
-                                <NavLink to={`/odes/${tag.slug}`} className="category-button">Bekijk alle verhalen</NavLink>
+                                <NavLink to={`/odes/${tag.slug}`} className="category-button">Bekijk alle odes over {tag.name}</NavLink>
                             </div>))
                     .visit<React.ReactNode>(
                         elememts => elememts,

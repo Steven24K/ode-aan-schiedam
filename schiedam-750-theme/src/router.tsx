@@ -6,6 +6,10 @@ import { StoryOverviewPage } from "./pages/StoryOverviewPage";
 import { WordPressPost } from "./pages/WordPressPost";
 import { DisplayWordPressPage } from "./pages/WordPressPage";
 
+export type CustomRouteParams = {
+    slug: string
+    category: string
+}
 
 export const router = (siteInfo: SiteInfo) =>
     createBrowserRouter(
