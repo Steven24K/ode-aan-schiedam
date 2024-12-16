@@ -39,8 +39,8 @@ export const HomePage = (props: HomePageProps) => {
         }))
 
     return <DisplayPage slug="homepage">
+        <LoadData loader={state.categories} updater={data => setState(s => ({ ...s, categories: data }))} />
         <section className="categories">
-            <LoadData loader={state.categories} updater={data => setState(s => ({ ...s, categories: data }))} />
             {
                 state.categories
                     .getValue()

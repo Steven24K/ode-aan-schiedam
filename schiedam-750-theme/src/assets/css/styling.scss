@@ -226,3 +226,33 @@ body {
     background-color: darken($secondary-color, 10%);
   }
 }
+
+// Styling for Alert Error Component
+
+.alert-error {
+  background-color: #f8d7da; // Light red background
+  color: #842029; // Dark red text for contrast
+  padding: 1rem;
+  border: 1px solid #f5c2c7; // Subtle border
+  border-radius: 8px;
+  font-size: 1rem;
+  font-weight: bold;
+  text-align: center;
+  margin: 1rem 0;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+
+  // Animation for appearance
+  animation: fadeIn 0.5s ease-out;
+}
+
+// Keyframes for fade-in animation
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}

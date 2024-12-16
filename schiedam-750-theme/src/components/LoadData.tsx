@@ -9,9 +9,15 @@ interface LoadDataProps<a> {
 export function LoadData<a>(props: LoadDataProps<a>): React.ReactNode {
     let { loader, updater } = props
 
-    if (loader.kind == 'loading') loader.loader().then(v => updater(v))
+    if (loader.kind == 'loading') {
+        loader.loader().then(v => updater(v))
+        return <Loader />
+    }
 
-    if (loader.kind == 'loading') return <Loader />
-    if (loader.kind == 'failed') return <div className="alert-error">{loader.msg}</div>
+    if (loader.kind == 'failed')
+        return <div className="flex-center">
+            <div className="alert-error">{loader.msg}</div>
+        </div>
+
     return null
 }
