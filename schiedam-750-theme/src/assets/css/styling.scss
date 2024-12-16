@@ -188,37 +188,41 @@ body {
   }
 }
 
-
-// Story Sections Styling
-.section {
-  margin-bottom: calc($spacing-unit * 3);
+// Categories Grid Styling
+.categories {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: $spacing-unit;
   padding: calc($spacing-unit * 2);
-  background-color: $background-color--dark;
-  border-radius: 8px;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  background-color: $background-color;
 }
 
-.section-title {
-  font-size: 1.5rem;
+.category-item {
+  background-color: lighten($primary-color, 40%);
+  border-radius: 10px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  padding: $spacing-unit;
+  text-align: center;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+
+  &:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 6px 10px rgba(0, 0, 0, 0.15);
+  }
+}
+
+.category-title {
+  font-size: 1.25rem;
   margin-bottom: $spacing-unit;
   color: $primary-color;
 }
 
-.section-list {
-  list-style-type: none;
-  padding: 0;
-  margin-bottom: $spacing-unit;
-
-  li {
-    margin-bottom: calc($spacing-unit / 2);
-  }
-}
-
-.section-button {
+.category-button {
   @extend .btn;
   background-color: $secondary-color;
+  margin-top: $spacing-unit;
 
   &:hover {
-    background-color: $secondary-color--hover;
+    background-color: darken($secondary-color, 10%);
   }
 }

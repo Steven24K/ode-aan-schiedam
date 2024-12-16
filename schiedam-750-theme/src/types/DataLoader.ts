@@ -14,23 +14,32 @@ export type DataLoader<a> = ({
 } |
 {
     kind: 'unloaded'
-}) & {
+}) & DataLoaderMethods<a>
+
+type DataLoaderMethods<a> = {
     getValue: () => Option<a>
 }
+
+const _dataLoaderMethods = <a>(): DataLoaderMethods<a> => ({
+    getValue: function (this: DataLoader<a>): Option<a> {
+        if (this.kind == 'loaded') return Some(this.v)
+        return None()
+    }
+})
 
 
 
 export const unloaded = <a>(): DataLoader<a> =>
-    ({ kind: 'unloaded', getValue: () => None() })
+    ({ kind: 'unloaded', ..._dataLoaderMethods() })
 
 export const loading = <a>(_loader: () => Promise<DataLoader<a>>): DataLoader<a> =>
-    ({ kind: 'loading', loader: _loader, getValue: () => None() })
+    ({ kind: 'loading', loader: _loader, ..._dataLoaderMethods() })
 
 const failed = <a>(_msg: string = ""): DataLoader<a> =>
-    ({ kind: 'failed', msg: _msg, getValue: () => None() })
+    ({ kind: 'failed', msg: _msg, ..._dataLoaderMethods() })
 
 const loaded = <a>(_v: a): DataLoader<a> =>
-    ({ kind: 'loaded', v: _v, getValue: () => Some(_v) })
+    ({ kind: 'loaded', v: _v, ..._dataLoaderMethods() })
 
 
 type DataLoaderOptions<b> = {

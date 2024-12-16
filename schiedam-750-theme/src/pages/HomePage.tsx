@@ -2,6 +2,10 @@ import * as React from "react"
 import { SplashScreen } from "../components/SplashScreen"
 import { SiteInfo } from "../types/SiteInfo"
 import { DisplayPage } from "../components/DisplayPage"
+import { DataLoader, loadData, loading, unloaded } from "../types/DataLoader"
+import { PostCategory } from "../types/PostCategory"
+import { LoadData } from "../components/LoadData"
+import { NavLink } from "react-router-dom"
 
 type HomePageProps = {
     siteInfo: SiteInfo
@@ -9,10 +13,12 @@ type HomePageProps = {
 
 type HomePageState = {
     splash: boolean
+    categories: DataLoader<PostCategory[]>
 }
 
 const zeroHomePageState = (): HomePageState => ({
     splash: true,
+    categories: unloaded(),
 })
 
 export const HomePage = (props: HomePageProps) => {
@@ -24,43 +30,30 @@ export const HomePage = (props: HomePageProps) => {
         unSplash={() => setState(s => ({ ...s, splash: false }))}
     />
 
+    const parent_category = 7
+    if (state.categories.kind == 'unloaded')
+        setState(s =>
+        ({
+            ...s,
+            categories: loading(loadData<PostCategory[]>(`/wp-json/wp/v2/categories?parent=${parent_category}`))
+        }))
 
     return <DisplayPage slug="homepage">
-        <section className="section flex flex-center flex-column">
-            <h2 className="section-title">Poëzie</h2>
-            <ul className="section-list">
-                <li>Een mooie nacht</li>
-                <li>De beste dag</li>
-                <li>Liefdesgedicht</li>
-            </ul>
-            <button className="section-button">Bekijk alle verhalen</button>
-        </section>
-
-        <section className="section flex flex-center flex-column">
-            <h2 className="section-title">Liefde</h2>
-            <ul className="section-list">
-                <li>De eerste kus</li>
-                <li>In het café</li>
-                <li>Op het eerste gezicht</li>
-            </ul>
-            <button className="section-button">Bekijk alle verhalen</button>
-        </section>
-
-        <section className="section flex flex-center flex-column">
-            <h2 className="section-title">Uit de stad</h2>
-            <ul className="section-list">
-                <li>Mijn favoriete plek</li>
-                <li>Mijn eerste huis</li>
-            </ul>
-            <button className="section-button">Bekijk alle verhalen</button>
-        </section>
-
-        <section className="section flex flex-center flex-column">
-            <h2 className="section-title">Vriendschap</h2>
-            <ul className="section-list">
-                <li>Deze is voor...</li>
-            </ul>
-            <button className="section-button">Bekijk alle verhalen</button>
+        <section className="categories">
+            <LoadData loader={state.categories} updater={data => setState(s => ({ ...s, categories: data }))} />
+            {
+                state.categories
+                    .getValue()
+                    .map<React.ReactElement[]>(tags =>
+                        tags.map(tag =>
+                            <div key={tag.id} className="category-item flex flex-center flex-column">
+                                <h2 className="category-title">{tag.name}</h2>
+                                <NavLink to={`/odes/${tag.slug}`} className="category-button">Bekijk alle verhalen</NavLink>
+                            </div>))
+                    .visit<React.ReactNode>(
+                        elememts => elememts,
+                        () => <div className="nothing"></div>)
+            }
         </section>
     </DisplayPage>
 }
