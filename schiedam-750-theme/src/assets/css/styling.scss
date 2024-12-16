@@ -4,7 +4,7 @@ $secondary-color: #d6453b;
 $secondary-color--hover: #d6453b75;
 $text-color: #333;
 $background-color: #ffffff;
-$background-color--dark: #ffffffa9;
+$background-color--dark: #f0ededda;
 $spacing-unit: 16px;
 
 @use "./components/loader.scss";
@@ -198,7 +198,7 @@ body {
 }
 
 .category-item {
-  background-color: lighten($primary-color, 40%);
+  background-color: $background-color--dark;
   border-radius: 10px;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
   padding: $spacing-unit;
@@ -223,7 +223,7 @@ body {
   margin-top: $spacing-unit;
 
   &:hover {
-    background-color: darken($secondary-color, 10%);
+    background-color: $secondary-color--hover;
   }
 }
 
