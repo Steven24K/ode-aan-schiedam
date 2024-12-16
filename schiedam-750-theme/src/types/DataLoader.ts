@@ -46,7 +46,7 @@ type DataLoaderOptions<b> = {
     method: 'GET' | 'POST' | 'PUT' | 'DELETE'
     body: b
     errorMsg: string
-    parser: (json: any) => b
+    parser: (json: any, headers: Headers) => b
 }
 
 export const loadData = <a, b = object>(url: string, options: Partial<DataLoaderOptions<b>> = {}) => async (): Promise<DataLoader<a>> => {
@@ -59,7 +59,7 @@ export const loadData = <a, b = object>(url: string, options: Partial<DataLoader
     )
     if (response.ok) {
         let json = await response.json()
-        if (options.parser) json = options.parser(json)
+        if (options.parser) json = options.parser(json, response.headers)
         return loaded(json)
     }
     return failed(options.errorMsg || `Server responded with status code: ${response.status}`)
