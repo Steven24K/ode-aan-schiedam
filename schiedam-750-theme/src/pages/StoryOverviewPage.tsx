@@ -1,5 +1,5 @@
 import React from "react"
-import { useParams } from "react-router-dom"
+import { useParams, NavLink } from "react-router-dom"
 import { CustomRouteParams } from "../router"
 import { DataLoader, loadData, loading, unloaded } from "../types/DataLoader"
 import { PostCategory } from "../types/PostCategory"
@@ -7,7 +7,6 @@ import { None, Option, Some } from "../types/Option"
 import { LoadData } from "../components/LoadData"
 import { WordPressPage } from "../types/WordPressPage"
 import { _paginate, Paginated } from "../types/Paginated"
-import { NavLink } from "react-router-dom"
 
 type OverviewState = {
     category: DataLoader<Option<PostCategory>>
@@ -43,11 +42,13 @@ export const StoryOverviewPage = () => {
     const { category } = useParams<CustomRouteParams>()
     const [state, setState] = React.useState<OverviewState>(zeroOverviewState)
 
-    if (state.category.kind == 'unloaded') setState(s => ({
-        ...s, category: loading(loadData<Option<PostCategory>>(`/wp-json/wp/v2/categories?slug=${category}`, {
-            parser: json => json.length > 0 ? Some(json[0]) : None()
+    React.useEffect(() => {
+        setState(s => ({
+            ...s, category: loading(loadData<Option<PostCategory>>(`/wp-json/wp/v2/categories?slug=${category}`, {
+                parser: json => json.length > 0 ? Some(json[0]) : None()
+            }))
         }))
-    }))
+    }, [category])
 
     if (state.category.kind != 'loaded') return <LoadData loader={state.category}
         updater={data => setState(loadNextStories(data))}

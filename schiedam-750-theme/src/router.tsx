@@ -3,8 +3,7 @@ import { PageLayout } from "./shared/PageLayout";
 import { HomePage } from "./pages/HomePage";
 import { SiteInfo } from "./types/SiteInfo";
 import { StoryOverviewPage } from "./pages/StoryOverviewPage";
-import { DisplayWordPressPost } from "./pages/WordPressPost";
-import { DisplayWordPressPage } from "./pages/WordPressPage";
+import { DisplayContentType } from "./components/DisplayContentType";
 
 export type CustomRouteParams = {
     slug: string
@@ -17,8 +16,8 @@ export const router = (siteInfo: SiteInfo) =>
             <Route path="/" element={<PageLayout />}>
                 <Route path="/" element={<HomePage siteInfo={siteInfo} />} />
                 <Route path="/odes/:category" element={<StoryOverviewPage />} />
-                <Route path="/:slug/ode/" element={<DisplayWordPressPost />} />
-                <Route path="/:slug*" element={<DisplayWordPressPage />} />
+                <Route path="/:slug/ode/" element={<DisplayContentType content_type="posts" />} />
+                <Route path="/:slug*" element={<DisplayContentType content_type="pages" />} />
             </Route>
         )
     )

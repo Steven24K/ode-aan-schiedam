@@ -3,12 +3,14 @@ import { DataLoader, loadData, loading, unloaded } from "../types/DataLoader"
 import { None, Option, Some } from "../types/Option"
 import { WordPressPage } from "../types/WordPressPage"
 import { LoadData } from "./LoadData"
+import { useParams } from "react-router-dom"
+import { CustomRouteParams } from "../router"
 
 type ContentType = "pages" | "posts"
 
 type PageProps = {
     children?: React.ReactNode
-    slug: string
+    isHome?: boolean
     content_type: ContentType
 }
 
@@ -21,8 +23,11 @@ const zeroPageState = (): PageState => ({
 })
 
 export const DisplayContentType = (props: PageProps) => {
-    const { children, slug, content_type} = props
+    const { children, content_type, isHome } = props
+    let { slug } = useParams<CustomRouteParams>()
     const [state, setState] = React.useState<PageState>(zeroPageState)
+
+    if (isHome) slug = 'homepage'
 
     React.useEffect(() => {
         setState(s => ({

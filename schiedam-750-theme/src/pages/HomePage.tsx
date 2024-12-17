@@ -38,7 +38,7 @@ export const HomePage = (props: HomePageProps) => {
             categories: loading(loadData<PostCategory[]>(`/wp-json/wp/v2/categories?parent=${parent_category}`))
         }))
 
-    return <DisplayContentType slug="homepage" content_type="pages">
+    return <DisplayContentType isHome content_type="pages">
         <LoadData loader={state.categories} updater={data => setState(s => ({ ...s, categories: data }))} />
         <section className="categories">
             {
