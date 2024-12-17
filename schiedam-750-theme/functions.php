@@ -49,6 +49,7 @@ function my_theme_register_menus()
     register_nav_menus(
         array(
             'primary-menu' => __('Primary Menu', 'my-theme'),
+            'footer-menu' => __('Footer Menu', 'my-theme'),
         )
     );
 }
