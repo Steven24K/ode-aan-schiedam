@@ -388,7 +388,7 @@ $hover-color: #1a1b1b;
     transform: rotate(-45deg);
   }
   &:hover {
-    background-color: darken($hover-color, 10%);
+    background-color: scale($hover-color, 10%);
   }
 }
 
