@@ -4,9 +4,12 @@ import { None, Option, Some } from "../types/Option"
 import { WordPressPage } from "../types/WordPressPage"
 import { LoadData } from "./LoadData"
 
+type ContentType = "pages" | "posts"
+
 type PageProps = {
     children?: React.ReactNode
     slug: string
+    content_type: ContentType
 }
 
 type PageState = {
@@ -17,14 +20,14 @@ const zeroPageState = (): PageState => ({
     page: unloaded()
 })
 
-export const DisplayPage = (props: PageProps) => {
-    const { children, slug } = props
+export const DisplayContentType = (props: PageProps) => {
+    const { children, slug, content_type} = props
     const [state, setState] = React.useState<PageState>(zeroPageState)
 
     if (state.page.kind == 'unloaded') {
         setState(s => ({
             ...s,
-            page: loading(loadData<Option<WordPressPage>>(`/wp-json/wp/v2/pages/?slug=${slug}`, {
+            page: loading(loadData<Option<WordPressPage>>(`/wp-json/wp/v2/${content_type}/?slug=${slug}`, {
                 parser: json => json.length > 0 ? Some(json[0]) : None()
             }))
         }))

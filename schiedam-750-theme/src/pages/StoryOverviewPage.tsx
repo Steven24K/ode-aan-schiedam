@@ -80,7 +80,7 @@ export const StoryOverviewPage = () => {
                     .map(story => <div key={story.id}>
                         <h2>{story.title.rendered}</h2>
                         <p dangerouslySetInnerHTML={{ __html: story.excerpt.rendered }}></p>
-                        <NavLink to={`/ode/${story.slug}`}>Lees meer</NavLink>
+                        <NavLink to={`/${story.slug}/ode/`}>Lees meer</NavLink>
                     </div>)
             }
             {

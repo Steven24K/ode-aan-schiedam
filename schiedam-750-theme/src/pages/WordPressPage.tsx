@@ -1,10 +1,10 @@
 import * as React from "react"
 import { useParams } from "react-router-dom"
-import { DisplayPage } from "../components/DisplayPage"
+import { DisplayContentType } from "../components/DisplayContentType"
 import { CustomRouteParams } from "../router"
 
 
 export const DisplayWordPressPage = () => {
     const { slug } = useParams<CustomRouteParams>()
-    return <DisplayPage slug={slug || ""} />
+    return <DisplayContentType slug={slug || ""} content_type="pages" />
 }

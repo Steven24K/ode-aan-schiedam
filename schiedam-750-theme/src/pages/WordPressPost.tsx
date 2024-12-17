@@ -1,9 +1,8 @@
-export const WordPressPost = () => {
-    return <div>
-        <h1>WordPress Post</h1>
-        <p> 
-            This page will display the content of a story/post 
-            from the CMS.
-        </p>
-    </div>
+import { useParams } from "react-router-dom"
+import { DisplayContentType } from "../components/DisplayContentType"
+import { CustomRouteParams } from "../router"
+
+export const DisplayWordPressPost = () => {
+    const { slug } = useParams<CustomRouteParams>()
+    return <DisplayContentType slug={slug || ""} content_type="posts" />
 }

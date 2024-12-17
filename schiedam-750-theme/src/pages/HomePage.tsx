@@ -1,7 +1,7 @@
 import * as React from "react"
 import { SplashScreen } from "../components/SplashScreen"
 import { SiteInfo } from "../types/SiteInfo"
-import { DisplayPage } from "../components/DisplayPage"
+import { DisplayContentType } from "../components/DisplayContentType"
 import { DataLoader, loadData, loading, unloaded } from "../types/DataLoader"
 import { PostCategory } from "../types/PostCategory"
 import { LoadData } from "../components/LoadData"
@@ -38,7 +38,7 @@ export const HomePage = (props: HomePageProps) => {
             categories: loading(loadData<PostCategory[]>(`/wp-json/wp/v2/categories?parent=${parent_category}`))
         }))
 
-    return <DisplayPage slug="homepage">
+    return <DisplayContentType slug="homepage" content_type="pages">
         <LoadData loader={state.categories} updater={data => setState(s => ({ ...s, categories: data }))} />
         <section className="categories">
             {
@@ -55,5 +55,5 @@ export const HomePage = (props: HomePageProps) => {
                         () => <div className="nothing"></div>)
             }
         </section>
-    </DisplayPage>
+    </DisplayContentType>
 }
