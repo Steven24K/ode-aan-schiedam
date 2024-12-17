@@ -53,3 +53,59 @@ function my_theme_register_menus()
     );
 }
 add_action('init', 'my_theme_register_menus');
+
+
+// Register custom REST API endpoint for menu items
+add_action('rest_api_init', function () {
+    register_rest_route('custom/v1', '/menu/', [
+        'methods' => 'GET',
+        'callback' => 'get_menu_items',
+        'args' => [
+            'menu' => [
+                'required' => true,
+                'validate_callback' => function ($param, $request, $key) {
+                    return is_string($param);
+                }
+            ],
+        ],
+        'permission_callback' => '__return_true',
+    ]);
+});
+
+function get_menu_by_location($location) {
+    // Get all registered menu locations
+    $locations = get_nav_menu_locations();
+
+    // Check if the specified location exists
+    if (!isset($locations[$location])) {
+        return [];
+    }
+
+    // Get the menu object ID for the specified location
+    $menu_id = $locations[$location];
+
+    // Fetch the menu items for this menu
+    $menu_items = wp_get_nav_menu_items($menu_id);
+
+    return $menu_items;
+}
+
+/**
+ * Callback function to fetch menu items by menu name.
+ *
+ * @param WP_REST_Request $request The REST API request.
+ * @return WP_REST_Response|WP_Error
+ */
+function get_menu_items($request)
+{
+    $menu_name = $request->get_param('menu');
+
+    // Get the menu items
+    $menu_items = get_menu_by_location($menu_name);
+
+    if (empty($menu_items)) {
+        return new WP_REST_Response(['message' => 'No menu items found'], 200);
+    }
+
+    return new WP_REST_Response($menu_items, 200);
+}

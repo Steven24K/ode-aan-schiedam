@@ -24,14 +24,14 @@ export const DisplayContentType = (props: PageProps) => {
     const { children, slug, content_type} = props
     const [state, setState] = React.useState<PageState>(zeroPageState)
 
-    if (state.page.kind == 'unloaded') {
+    React.useEffect(() => {
         setState(s => ({
             ...s,
             page: loading(loadData<Option<WordPressPage>>(`/wp-json/wp/v2/${content_type}/?slug=${slug}`, {
                 parser: json => json.length > 0 ? Some(json[0]) : None()
             }))
         }))
-    }
+    }, [slug])
 
     if (state.page.kind != 'loaded') {
         return <LoadData

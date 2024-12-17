@@ -355,3 +355,150 @@ body {
     }
   }
 }
+
+$navbar-width: 300px;
+$transition-speed: 0.3s;
+$navbar-bg: #333;
+$text-color: #fff;
+$hover-color: #1a1b1b;
+
+// Wrapper
+.side-navbar-wrapper {
+  position: relative;
+}
+
+// Toggle Button
+.toggle-button {
+  position: fixed;
+  top: 1rem;
+  right: 1rem;
+  background-color: $hover-color;
+  color: $text-color;
+  border: none;
+  font-size: 1.5rem;
+  cursor: pointer;
+  padding: 1rem 1.5rem;
+  margin: 2rem 0rem;
+  border-radius: 4px;
+  z-index: 1001;
+  transition: background-color 0.2s ease;
+  transform: rotate(45deg);
+  span {
+    display: block;
+    transform: rotate(-45deg);
+  }
+  &:hover {
+    background-color: darken($hover-color, 10%);
+  }
+}
+
+// Side Navigation
+.side-navbar {
+  position: fixed;
+  padding: 5rem 0rem;
+  top: 0;
+  right: -$navbar-width; // Initially hidden
+  width: $navbar-width;
+  height: 100vh;
+  background-color: $navbar-bg;
+  box-shadow: 2px 0 5px rgba(0, 0, 0, 0.5);
+  transition: left $transition-speed ease;
+  z-index: 1000;
+
+  // Open state
+  &.side-navbar--open {
+    right: 0;
+  }
+
+  // Navigation list
+  &__list {
+    list-style: none;
+    padding: 2rem 0;
+    margin: 0;
+
+    .side-navbar__item {
+      margin: 1rem 0;
+
+      .side-navbar__link {
+        display: block;
+        color: $text-color;
+        font-size: 1.2rem;
+        padding: 0.5rem 1.5rem;
+        text-decoration: none;
+        transition: color 0.3s ease, background-color 0.3s ease;
+
+        &:hover {
+          color: $hover-color;
+          background-color: rgba(255, 255, 255, 0.1);
+        }
+      }
+    }
+  }
+}
+
+
+// Footer styling
+
+.footer {
+  background-color: #f8f9fa;
+  color: #333;
+  padding: 2rem 1rem;
+  font-size: 0.9rem;
+}
+
+.footer .container {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.footer h4 {
+  font-size: 1.2rem;
+  margin-bottom: 1rem;
+  color: #555;
+}
+
+.footer .sponsors img {
+  max-width: 140px;
+  margin-right: 1rem;
+  margin-bottom: 1rem;
+  transition: transform 0.3s ease;
+}
+
+.footer .sponsors img:hover {
+  transform: scale(1.05);
+}
+
+.footer .adres {
+  line-height: 1.6;
+  color: #555;
+}
+
+.footer a {
+  color: #0073e6;
+  text-decoration: none;
+  transition: color 0.3s;
+}
+
+.footer a:hover {
+  color: #005bb5;
+}
+
+.nav--footer .nav__list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.nav--footer .nav__item {
+  margin-bottom: 0.5rem;
+}
+
+.nav--social .nav__link {
+  margin-right: 1rem;
+  color: #333;
+  font-weight: bold;
+}
+
+.nav--social .nav__link:hover {
+  color: #0073e6;
+}

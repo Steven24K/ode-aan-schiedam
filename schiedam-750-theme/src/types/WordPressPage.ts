@@ -1,3 +1,5 @@
+import { Rendered } from "./Rendered"
+
 export type WordPressPage = {
     id: number
     date: number 
@@ -7,6 +9,3 @@ export type WordPressPage = {
     excerpt: Rendered
 }
 
-type Rendered = {
-    rendered: string
-}
