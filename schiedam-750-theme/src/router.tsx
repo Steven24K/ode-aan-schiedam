@@ -17,7 +17,7 @@ export const router = (siteInfo: SiteInfo) =>
                 <Route path="/" element={<HomePage siteInfo={siteInfo} />} />
                 <Route path="/odes/:category" element={<StoryOverviewPage />} />
                 <Route path="/:slug/ode/" element={<DisplayContentType content_type="posts" />} />
-                <Route path="/:slug*" element={<DisplayContentType content_type="pages" />} />
+                <Route path="/:slug/*" element={<DisplayContentType content_type="pages" />} />
             </Route>
         )
     )
