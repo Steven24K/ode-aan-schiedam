@@ -12,12 +12,10 @@ type HomePageProps = {
 }
 
 type HomePageState = {
-    splash: boolean
     categories: DataLoader<PostCategory[]>
 }
 
 const zeroHomePageState = (): HomePageState => ({
-    splash: true,
     categories: unloaded(),
 })
 
@@ -25,18 +23,14 @@ export const HomePage = (props: HomePageProps) => {
     const { siteInfo } = props
     const [state, setState] = React.useState<HomePageState>(zeroHomePageState)
 
-    if (state.splash) return <SplashScreen
-        siteInfo={siteInfo}
-        unSplash={() => setState(s => ({ ...s, splash: false }))}
-    />
-
     const parent_category = 7
-    if (state.categories.kind == 'unloaded')
-        setState(s =>
-        ({
+    if (state.categories.kind == 'unloaded') return <SplashScreen
+        siteInfo={siteInfo}
+        unSplash={() => setState(s => ({
             ...s,
             categories: loading(loadData<PostCategory[]>(`/wp-json/wp/v2/categories?parent=${parent_category}`))
-        }))
+        }))}
+    />
 
     return <DisplayContentType isHome content_type="pages">
         <LoadData loader={state.categories} updater={data => setState(s => ({ ...s, categories: data }))} />

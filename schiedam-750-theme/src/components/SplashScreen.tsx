@@ -1,3 +1,4 @@
+import React from "react"
 import { SiteInfo } from "../types/SiteInfo"
 
 type SplashScreenProps = {
@@ -5,19 +6,29 @@ type SplashScreenProps = {
     unSplash: () => void
 }
 
+type SplashState = {
+    animate: boolean
+}
+
 export const SplashScreen = (props: SplashScreenProps) => {
     const { siteInfo, unSplash } = props;
-    return (
-        <div className="splash-screen">
-            <div className="splash-content">
-                <h1 className="splash-title">{siteInfo.name}</h1>
-                <img
-                    alt="750 Schiedam Logo"
-                    src={siteInfo.site_icon_url}
-                    className="splash-logo"
-                />
-                <button onClick={unSplash} className="splash-button">{siteInfo.description}</button>
-            </div>
+    const [state, setState] = React.useState<SplashState>({ animate: false })
+
+    return <div className="splash-screen">
+        <div className={`splash-content ${state.animate ? 'grow-splash' : ''}`}
+            onAnimationEnd={unSplash}
+        >
+            <h1 className="splash-title">{siteInfo.name}</h1>
+            <img
+                alt="750 Schiedam Logo"
+                src={siteInfo.site_icon_url}
+                className="splash-logo"
+            />
+            <button onClick={() =>
+                setState(s => ({ ...s, animate: true }))
+            } className="splash-button">
+                {siteInfo.description}
+            </button>
         </div>
-    );
+    </div>
 };

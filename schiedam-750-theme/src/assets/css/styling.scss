@@ -7,7 +7,6 @@ $background-color: #ffffff;
 $background-color--dark: #f0ededda;
 $spacing-unit: 16px;
 
-@use "./components/loader.scss";
 
 @font-face {
   font-family: Gotham;
@@ -91,6 +90,41 @@ body {
   flex: 0 0 100%;
 }
 
+// Loader 
+/* Full-screen loader container */
+.loader-container {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: rgba(27, 27, 27, 0.35); /* Semi-transparent background */
+  z-index: 9999; /* Ensure it appears on top of everything */
+}
+
+/* The spinning loader itself */
+.spinner {
+  border: 8px solid #f3f3f3; /* Light grey background for the circle */
+  border-top: 8px solid #004085; /* Blue section for the top, adds the color */
+  border-radius: 50%;
+  width: 60px;
+  height: 60px;
+  animation: spin 1.5s linear infinite;
+}
+
+/* Animation for the spinning effect */
+@keyframes spin {
+  0% {
+      transform: rotate(0deg);
+  }
+  100% {
+      transform: rotate(360deg);
+  }
+}
+
 // Buttons
 .btn {
   display: inline-block;
@@ -143,14 +177,41 @@ body {
 }
 
 // Splash Screen Styling
+@keyframes splash {
+  from {
+    background-color: rgb(19, 18, 18);
+  }
+
+  to {
+    background-color: $primary-color;
+  }
+}
+
 .splash-screen {
   @extend .flex;
   @extend .flex-center;
   height: 100vh;
   background-color: $primary-color;
-  color: #fff;
-  text-align: center;
-  animation: fadeIn 1.5s forwards;
+  animation-name: splash;
+  animation-duration: 3s;
+}
+
+@keyframes grow-content{
+  from {
+    border-radius: 35% 65% 26% 74% / 62% 48% 52% 38% ;
+    padding: 6rem 6rem;
+    opacity: 1;
+  }
+  to {
+    border-radius: 84% 16% 77% 23% / 16% 80% 20% 84% ;
+    padding: 20rem 15rem;
+    opacity: 0;
+  }
+}
+
+.grow-splash {
+animation-name: grow-content;
+animation-duration: 3s;
 }
 
 .splash-content {
@@ -158,6 +219,11 @@ body {
   @extend .flex-column;
   @extend .flex-center;
   gap: $spacing-unit;
+  background-color: white;
+  border-radius: 35% 65% 26% 74% / 62% 48% 52% 38% ;
+  padding: 6rem 6rem;
+  box-shadow: 0 15px 6px rgba(0, 0, 0, 0.3);
+
 }
 
 .splash-title {
@@ -167,7 +233,7 @@ body {
 }
 
 .splash-logo {
-  max-width: 150px;
+  max-width: 200px;
   border-radius: 50%;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 }
@@ -183,6 +249,7 @@ body {
   0% {
     opacity: 0;
   }
+
   100% {
     opacity: 1;
   }
@@ -251,6 +318,7 @@ body {
     opacity: 0;
     transform: translateY(-10px);
   }
+
   to {
     opacity: 1;
     transform: translateY(0);
@@ -263,7 +331,7 @@ body {
   flex-direction: column;
   align-items: center;
   padding: 2rem;
-  
+
   .overview-header {
     text-align: center;
     margin-bottom: 2rem;
@@ -383,10 +451,12 @@ $hover-color: #1a1b1b;
   z-index: 1001;
   transition: background-color 0.2s ease;
   transform: rotate(45deg);
+
   span {
     display: block;
     transform: rotate(-45deg);
   }
+
   &:hover {
     background-color: scale($hover-color, 10%);
   }
