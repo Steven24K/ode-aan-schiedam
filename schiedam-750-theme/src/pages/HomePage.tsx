@@ -1,36 +1,32 @@
 import * as React from "react"
-import { SplashScreen } from "../components/SplashScreen"
-import { SiteInfo } from "../types/SiteInfo"
+import { NavLink } from "react-router-dom"
 import { DisplayContentType } from "../components/DisplayContentType"
+import { LoadData } from "../components/LoadData"
+import { SplashScreen } from "../components/SplashScreen"
 import { DataLoader, loadData, loading, unloaded } from "../types/DataLoader"
 import { PostCategory } from "../types/PostCategory"
-import { LoadData } from "../components/LoadData"
-import { NavLink } from "react-router-dom"
+import { SiteInfo } from "../types/SiteInfo"
 
-type HomePageProps = {
-    siteInfo: SiteInfo
-}
+const parent_category = 7
 
-type HomePageState = {
-    categories: DataLoader<PostCategory[]>
-}
-
+type HomePageProps = { siteInfo: SiteInfo }
+type HomePageState = { categories: DataLoader<PostCategory[]> }
 const zeroHomePageState = (): HomePageState => ({
-    categories: unloaded(),
+    categories: loading(loadData<PostCategory[]>(`/wp-json/wp/v2/categories?parent=${parent_category}`)),
 })
 
 export const HomePage = (props: HomePageProps) => {
     const { siteInfo } = props
     const [state, setState] = React.useState<HomePageState>(zeroHomePageState)
 
-    const parent_category = 7
-    if (state.categories.kind == 'unloaded') return <SplashScreen
-        siteInfo={siteInfo}
-        unSplash={() => setState(s => ({
-            ...s,
-            categories: loading(loadData<PostCategory[]>(`/wp-json/wp/v2/categories?parent=${parent_category}`))
-        }))}
-    />
+    if (state.categories.kind == 'unloaded')
+        return <SplashScreen
+            siteInfo={siteInfo}
+            unSplash={() => setState(s => ({
+                ...s,
+                categories: loading(loadData<PostCategory[]>(`/wp-json/wp/v2/categories?parent=${parent_category}`))
+            }))}
+        />
 
     return <DisplayContentType isHome content_type="pages">
         <LoadData loader={state.categories} updater={data => setState(s => ({ ...s, categories: data }))} />

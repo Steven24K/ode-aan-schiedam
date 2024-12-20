@@ -49,13 +49,36 @@ export const DisplayContentType = (props: PageProps) => {
 
     const page = state.page.v.v
 
-    return <div className="container">
-        <section className="row">
-            <div className="col-12">
-                <h1 className="flex-center">{page.title.rendered}</h1>
-                <p dangerouslySetInnerHTML={{ __html: page.content.rendered }}></p>
+    return <div>
+        <header className="hero flex flex-center flex-wrap">
+            <h1>{page.title.rendered}</h1>
+        </header>
+        <div className="counter flex flex-center">
+            <div className="diamond-purple"></div>
+            <div className="diamond-yellow"></div>
+            <div className="diamond-green"></div>
+            <div className="diamond-blue"></div>
+            <div className="diamond-orange"></div>
+            <div className="diamond-red"></div>
+            <div className="diamond-counter">
+                <span className="text">Al</span>
+                <span className="number">55</span>
+                <span className="text">Odes</span>
             </div>
-        </section>
-        {children}
+            <div className="diamond-purple"></div>
+            <div className="diamond-yellow"></div>
+            <div className="diamond-green"></div>
+            <div className="diamond-blue"></div>
+            <div className="diamond-orange"></div>
+            <div className="diamond-red"></div>
+        </div>
+        <div className="container cms-content">
+            <section className="row">
+                <div className="col-12">
+                    <p dangerouslySetInnerHTML={{ __html: page.content.rendered }}></p>
+                </div>
+            </section>
+            {children}
+        </div>
     </div>
 }

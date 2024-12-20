@@ -1,15 +1,19 @@
 $primary-color: #FDC300;
+$primary-color--hover: #fdc20093;
 $secondary-color: #E73331;
+$secondary-color--hover: #e734319c;
 $color-black: #000;
 $color-green: #95C11F;
 $color-blue: #A1DAF8;
 $color-purple: #702283;
-$color: #EF7D00;
+$color-orange: #EF7D00;
 
 $text-color: $color-black;
 $background-color: #ffffff;
-$background-color--dark: #f0ededda;
 $spacing-unit: 16px;
+
+$navbar-width: 300px;
+$transition-speed: 0.3s;
 
 @font-face {
   font-family: Nexa;
@@ -35,74 +39,35 @@ body {
 }
 
 // Flexbox Utility Classes
-.flex {
-  display: flex;
-}
-
-.flex-center {
-  @extend .flex;
-  justify-content: center;
-  align-items: center;
-}
-
-.flex-column {
-  @extend .flex;
-  flex-direction: column;
-}
-
-.flex-space-between {
-  @extend .flex;
-  justify-content: space-between;
-}
-
-.flex-wrap {
-  @extend .flex;
-  flex-wrap: wrap;
-}
+.flex { display: flex; }
+.flex-center { @extend .flex; justify-content: center; align-items: center; }
+.flex-column { @extend .flex; flex-direction: column; }
+.flex-space-between { @extend .flex; justify-content: space-between; }
+.flex-wrap { @extend .flex; flex-wrap: wrap; }
 
 // Container
-.container {
-  max-width: 1200px;
-  margin: 0 auto;
-  padding: $spacing-unit;
-}
+.container { max-width: 1200px; margin: 0 auto; padding: $spacing-unit; }
 
 // Grid System
-.row {
-  @extend .flex;
-  flex-wrap: wrap;
-}
+.row { @extend .flex; flex-wrap: wrap; }
+.col-1 { flex: 1;padding: calc($spacing-unit / 2); }
+.col-2 { flex: 0 0 16.66%; }
+.col-3 { flex: 0 0 25%; }
+.col-4 { flex: 0 0 33.33%; }
+.col-6 { flex: 0 0 50%; }
+.col-12 { flex: 0 0 100%; }
 
-.col {
-  flex: 1;
-  padding: calc($spacing-unit / 2);
-}
-
-.col-2 {
-  flex: 0 0 16.66%;
-}
-
-.col-3 {
-  flex: 0 0 25%;
-}
-
-.col-4 {
-  flex: 0 0 33.33%;
-}
-
-.col-6 {
-  flex: 0 0 50%;
-}
-
-.col-12 {
-  flex: 0 0 100%;
-}
+// Spacing Utility Classes
+.margin-sm { margin: calc($spacing-unit / 2); }
+.margin-md { margin: $spacing-unit;}
+.margin-lg { margin: calc($spacing-unit * 2); }
+.padding-sm { padding: calc($spacing-unit / 2); }
+.padding-md { padding: $spacing-unit; }
+.padding-lg { padding: calc($spacing-unit * 2); }
 
 // Loader 
 /* Full-screen loader container */
-@keyframes loader {
-  
-}
+@keyframes loader {}
 
 .loader-container {
   position: fixed;
@@ -113,27 +78,26 @@ body {
   display: flex;
   justify-content: center;
   align-items: center;
-  background-color: $primary-color; /* Semi-transparent background */
-  z-index: 9999; /* Ensure it appears on top of everything */
+  background-color: $background-color;
 }
 
 /* The spinning loader itself */
 .spinner {
-  border: 8px solid #f3f3f3; /* Light grey background for the circle */
-  border-top: 8px solid #004085; /* Blue section for the top, adds the color */
+  border: 6px solid $primary-color;
+  border-top: 6px solid $color-black;
   border-radius: 50%;
-  width: 60px;
-  height: 60px;
+  width: 40px;
+  height: 40px;
   animation: spin 1.5s linear infinite;
 }
 
 /* Animation for the spinning effect */
 @keyframes spin {
   0% {
-      transform: rotate(0deg);
+    transform: rotate(0deg);
   }
   100% {
-      transform: rotate(360deg);
+    transform: rotate(360deg);
   }
 }
 
@@ -145,13 +109,11 @@ body {
   color: #fff;
   text-decoration: none;
   border: none;
-  border-radius: 4px;
   text-align: center;
   cursor: pointer;
   transition: background-color 0.3s ease;
-
   &:hover {
-    background-color: scale($primary-color ,10%);
+    background-color: $primary-color--hover
   }
 }
 
@@ -159,41 +121,15 @@ body {
   background-color: $secondary-color;
 
   &:hover {
-    background-color: scale($secondary-color, 10%);
+    background-color: $secondary-color--hover
   }
-}
-
-// Spacing Utility Classes
-.margin-sm {
-  margin: calc($spacing-unit / 2);
-}
-
-.margin-md {
-  margin: $spacing-unit;
-}
-
-.margin-lg {
-  margin: calc($spacing-unit * 2);
-}
-
-.padding-sm {
-  padding: calc($spacing-unit / 2);
-}
-
-.padding-md {
-  padding: $spacing-unit;
-}
-
-.padding-lg {
-  padding: calc($spacing-unit * 2);
 }
 
 // Splash Screen Styling
 @keyframes splash {
   from {
-    background-color: rgb(19, 18, 18);
+    background-color: $color-black;
   }
-
   to {
     background-color: $primary-color;
   }
@@ -208,22 +144,23 @@ body {
   animation-duration: 3s;
 }
 
-@keyframes grow-content{
+@keyframes grow-content {
   from {
-    border-radius: 35% 65% 26% 74% / 62% 48% 52% 38% ;
+    border-radius: 35% 65% 26% 74% / 62% 48% 52% 38%;
     padding: 6rem 6rem;
     opacity: 1;
   }
+
   to {
-    border-radius: 84% 16% 77% 23% / 16% 80% 20% 84% ;
-    padding: 20rem 15rem;
+    border-radius: 84% 16% 77% 23% / 16% 80% 20% 84%;
+    padding: 20rem 10rem;
     opacity: 0;
   }
 }
 
 .grow-splash {
-animation-name: grow-content;
-animation-duration: 3s;
+  animation-name: grow-content;
+  animation-duration: 3s;
 }
 
 .splash-content {
@@ -232,7 +169,7 @@ animation-duration: 3s;
   @extend .flex-center;
   gap: $spacing-unit;
   background-color: white;
-  border-radius: 35% 65% 26% 74% / 62% 48% 52% 38% ;
+  border-radius: 35% 65% 26% 74% / 62% 48% 52% 38%;
   padding: 6rem 6rem;
   box-shadow: 0 15px 6px rgba(0, 0, 0, 0.3);
 
@@ -267,6 +204,105 @@ animation-duration: 3s;
   }
 }
 
+// Homepage hero
+.hero {
+  background-color: $primary-color;
+  padding: 8rem 0rem;
+}
+
+.counter {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap; /* Ensures wrapping for smaller screens */
+  gap: 0.5rem;
+  margin: -2rem 1rem;
+
+  @media (max-width: 768px) {
+    gap: 0.25rem;
+    margin: -1rem 0.5rem;
+  }
+}
+
+.diamond {
+  border: 1px solid $color-black;
+  transform: rotate(45deg);
+  height: 30px;
+  width: 30px;
+
+  @media (max-width: 768px) {
+    height: 20px;
+    width: 20px;
+  }
+}
+
+.diamond-purple {
+  @extend .diamond;
+  background-color: $color-purple;
+}
+.diamond-yellow {
+  @extend .diamond;
+  background-color: $primary-color;
+}
+.diamond-green {
+  @extend .diamond;
+  background-color: $color-green;
+}
+.diamond-blue {
+  @extend .diamond;
+  background-color: $color-blue;
+}
+.diamond-orange {
+  @extend .diamond;
+  background-color: $color-orange;
+}
+.diamond-red {
+  @extend .diamond;
+  background-color: $secondary-color;
+}
+
+.diamond-counter {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  transform: rotate(45deg);
+  height: 120px;
+  width: 120px;
+  background-color: white;
+  border: 2px solid $color-black;
+
+  @media (max-width: 768px) {
+    height: 90px;
+    width: 90px;
+  }
+
+  span {
+    display: block;
+    text-align: center;
+    transform: rotate(-45deg);
+
+    &.text {
+      font-size: 0.75rem;
+
+      @media (max-width: 768px) {
+        font-size: 0.6rem;
+      }
+    }
+
+    &.number {
+      color: $secondary-color;
+      font-size: 2.5rem;
+      font-weight: bold;
+
+      @media (max-width: 768px) {
+        font-size: 2rem;
+      }
+    }
+  }
+}
+
+
 // Categories Grid Styling
 .categories {
   display: grid;
@@ -277,7 +313,7 @@ animation-duration: 3s;
 }
 
 .category-item {
-  background-color: $background-color--dark;
+  background-color: scale($background-color, 10%);
   border-radius: 10px;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
   padding: $spacing-unit;
@@ -436,12 +472,6 @@ animation-duration: 3s;
   }
 }
 
-$navbar-width: 300px;
-$transition-speed: 0.3s;
-$navbar-bg: #333;
-$text-color: #fff;
-$hover-color: #1a1b1b;
-
 // Wrapper
 .side-navbar-wrapper {
   position: relative;
@@ -452,8 +482,8 @@ $hover-color: #1a1b1b;
   position: fixed;
   top: 1rem;
   right: 1rem;
-  background-color: $hover-color;
-  color: $text-color;
+  background-color: #1a1b1b;
+  color: white;
   border: none;
   font-size: 1.5rem;
   cursor: pointer;
@@ -470,8 +500,16 @@ $hover-color: #1a1b1b;
   }
 
   &:hover {
-    background-color: scale($hover-color, 10%);
+    background-color: scale(#1a1b1b, 10%);
   }
+}
+
+// Hanger slinger
+.hanger {
+  position: absolute;
+  top: -85; 
+  left: -10;
+  rotate: 0deg;
 }
 
 // Side Navigation
@@ -482,7 +520,7 @@ $hover-color: #1a1b1b;
   right: -$navbar-width; // Initially hidden
   width: $navbar-width;
   height: 100vh;
-  background-color: $navbar-bg;
+  background-color: $color-black;
   box-shadow: 2px 0 5px rgba(0, 0, 0, 0.5);
   transition: left $transition-speed ease;
   z-index: 1000;
@@ -503,14 +541,13 @@ $hover-color: #1a1b1b;
 
       .side-navbar__link {
         display: block;
-        color: $text-color;
+        color: white;
         font-size: 1.2rem;
         padding: 0.5rem 1.5rem;
         text-decoration: none;
         transition: color 0.3s ease, background-color 0.3s ease;
 
         &:hover {
-          color: $hover-color;
           background-color: rgba(255, 255, 255, 0.1);
         }
       }
