@@ -12,7 +12,7 @@ const parent_category = 7
 type HomePageProps = { siteInfo: SiteInfo }
 type HomePageState = { categories: DataLoader<PostCategory[]> }
 const zeroHomePageState = (): HomePageState => ({
-    categories: loading(loadData<PostCategory[]>(`/wp-json/wp/v2/categories?parent=${parent_category}`)),
+    categories: unloaded(),
 })
 
 export const HomePage = (props: HomePageProps) => {

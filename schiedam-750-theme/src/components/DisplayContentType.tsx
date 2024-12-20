@@ -61,16 +61,18 @@ export const DisplayContentType = (props: PageProps) => {
             <div className="diamond-orange"></div>
             <div className="diamond-red"></div>
             <div className="diamond-counter">
-                <span className="text">Al</span>
-                <span className="number">55</span>
-                <span className="text">Odes</span>
+                <div className="counter-content">
+                    <span className="text">Al</span>
+                    <span className="number">55</span>
+                    <span className="text">Odes</span>
+                </div>
             </div>
-            <div className="diamond-purple"></div>
-            <div className="diamond-yellow"></div>
-            <div className="diamond-green"></div>
-            <div className="diamond-blue"></div>
-            <div className="diamond-orange"></div>
             <div className="diamond-red"></div>
+            <div className="diamond-orange"></div>
+            <div className="diamond-blue"></div>
+            <div className="diamond-green"></div>
+            <div className="diamond-yellow"></div>
+            <div className="diamond-purple"></div>
         </div>
         <div className="container cms-content">
             <section className="row">
