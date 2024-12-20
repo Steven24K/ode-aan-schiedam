@@ -38,21 +38,12 @@ export const DisplayContentType = (props: PageProps) => {
         }))
     }, [slug])
 
-    if (state.page.kind != 'loaded') {
-        return <LoadData
-            loader={state.page}
-            updater={data => setState(s => ({ ...s, page: data }))}
-        />
-    }
-
-    if (state.page.v.kind == 'none') return <div>Not found</div>
-
-    const page = state.page.v.v
+    const page = state.page
 
     return <div>
-        <header className="hero flex flex-center flex-wrap">
-            <h1>{page.title.rendered}</h1>
-        </header>
+        {page.kind == 'loaded' && <header className="hero flex flex-center flex-wrap">
+            <h1>{page.v.visit(p => p.title.rendered, () => "")}</h1>
+        </header>}
         <div className="counter flex flex-center">
             <div className="diamond-purple"></div>
             <div className="diamond-yellow"></div>
@@ -75,12 +66,16 @@ export const DisplayContentType = (props: PageProps) => {
             <div className="diamond-purple"></div>
         </div>
         <div className="container cms-content">
-            <section className="row">
+            {page.kind == 'loaded' && <section className="row">
                 <div className="col-12">
-                    <p dangerouslySetInnerHTML={{ __html: page.content.rendered }}></p>
+                    <p dangerouslySetInnerHTML={{ __html: page.v.visit(p => p.content.rendered, () => "") }}></p>
                 </div>
-            </section>
+            </section>}
             {children}
+            <LoadData
+                loader={state.page}
+                updater={data => setState(s => ({ ...s, page: data }))}
+            />
         </div>
     </div>
 }

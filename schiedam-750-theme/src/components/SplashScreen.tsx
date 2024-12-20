@@ -14,10 +14,14 @@ export const SplashScreen = (props: SplashScreenProps) => {
     const { siteInfo, unSplash } = props;
     const [state, setState] = React.useState<SplashState>({ animate: false })
 
-    return <div className="splash-screen">
-        <div className={`splash-content ${state.animate ? 'grow-splash' : ''}`}
-            onAnimationEnd={unSplash}
-        >
+    return <div className={`${state.animate ? 'curtain-up' : 'splash-screen'}`}
+        onAnimationEnd={() => {
+            if (state.animate) {
+                unSplash()
+            }
+        }}
+    >
+        <div className={`splash-content ${state.animate ? 'grow-splash' : ''}`}>
             <h1 className="splash-title">{siteInfo.name}</h1>
             <img
                 alt="750 Schiedam Logo"
