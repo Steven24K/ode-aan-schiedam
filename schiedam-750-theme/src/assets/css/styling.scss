@@ -13,7 +13,6 @@ $background-color: #ffffff;
 $spacing-unit: 16px;
 
 $navbar-width: 300px;
-$transition-speed: 0.3s;
 
 @font-face {
   font-family: Nexa;
@@ -46,7 +45,7 @@ body {
 .flex-wrap { @extend .flex; flex-wrap: wrap; }
 
 // Container
-.container { max-width: 1200px; margin: 0 auto; padding: $spacing-unit; min-height: 800px}
+.container { width: 100%; min-height: 800px}
 
 // Grid System
 .row { @extend .flex; flex-wrap: wrap; }
@@ -527,6 +526,7 @@ body {
 
 // Toggle Button
 .toggle-button {
+  animation: move 1s ease;
   position: fixed;
   top: 1rem;
   right: 1rem;
@@ -540,11 +540,17 @@ body {
   border-radius: 4px;
   z-index: 1001;
   transition: background-color 0.2s ease;
+  
   transform: rotate(45deg);
+  transition: transform 0.6s ease;
 
+  &.flipped {
+    transform: rotate(-135deg); 
+  }
+  
   span {
     display: block;
-    transform: rotate(-45deg);
+    rotate: -45deg;
   }
 
   &:hover {
@@ -571,7 +577,7 @@ body {
   height: 100vh;
   background-color: $color-black;
   box-shadow: 2px 0 5px rgba(0, 0, 0, 0.5);
-  transition: left $transition-speed ease;
+  transition: right 1s ease;
   z-index: 1000;
 
   // Open state

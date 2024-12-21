@@ -37,7 +37,11 @@ export const NavBar = (props: NavBarProps) => {
             />
         </div>
 
-        <button className="toggle-button" onClick={toggleNav} aria-label="Open Navigation">
+        <button
+            className={`toggle-button ${state.isOpen ? 'flipped' : ''}`}
+            onClick={toggleNav}
+            aria-label="Open Navigation"
+        >
             <span>{state.isOpen ? "✘" : "☰"}</span>
         </button>
         <nav className={`side-navbar ${state.isOpen ? "side-navbar--open" : ""}`}>
