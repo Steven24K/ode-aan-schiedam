@@ -46,7 +46,7 @@ body {
 .flex-wrap { @extend .flex; flex-wrap: wrap; }
 
 // Container
-.container { max-width: 1200px; margin: 0 auto; padding: $spacing-unit; }
+.container { max-width: 1200px; margin: 0 auto; padding: $spacing-unit; min-height: 800px}
 
 // Grid System
 .row { @extend .flex; flex-wrap: wrap; }
