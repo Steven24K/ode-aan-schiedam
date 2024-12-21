@@ -44,7 +44,7 @@ export const DisplayContentType = (props: PageProps) => {
         {page.kind == 'loaded' && <header className="hero flex flex-center flex-wrap">
             <h1>{page.v.visit(p => p.title.rendered, () => "")}</h1>
         </header>}
-        <div className="counter flex flex-center">
+        <div className="counter">
             <div className="diamond-purple"></div>
             <div className="diamond-yellow"></div>
             <div className="diamond-green"></div>
