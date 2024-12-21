@@ -60,7 +60,7 @@ export const StoryOverviewPage = () => {
     const loaded_stories = state.stories.reduce<WordPressPage[]>((xs, x) => xs.concat(x.getValue().visit(p => p.values, () => [])), [])
     const totalPages = state.stories.reduce((_, x) => x.getValue().visit(p => p.total_pages, () => 0), 0)
 
-    return <div className="container story-overview">
+    return <div className="story-overview">
         <header className="overview-header">
             <h1>{tag.name}</h1>
             <p>{tag.description}</p>

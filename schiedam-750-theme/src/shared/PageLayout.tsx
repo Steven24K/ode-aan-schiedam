@@ -7,7 +7,7 @@ export const PageLayout = () => {
     return <>
         <NavBar location="primary-menu" />
 
-        <main className="main">
+        <main className="container">
             <Outlet />
         </main>
 

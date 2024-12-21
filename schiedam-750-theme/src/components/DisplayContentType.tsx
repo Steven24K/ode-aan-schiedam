@@ -65,7 +65,7 @@ export const DisplayContentType = (props: PageProps) => {
             <div className="diamond-yellow"></div>
             <div className="diamond-purple"></div>
         </div>
-        <div className="container cms-content">
+        <div className="cms-content">
             {page.kind == 'loaded' && <section className="row">
                 <div className="col-12">
                     <p dangerouslySetInnerHTML={{ __html: page.v.visit(p => p.content.rendered, () => "") }}></p>
