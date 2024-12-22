@@ -36,10 +36,14 @@ export const HomePage = (props: HomePageProps) => {
                     .getValue()
                     .map<React.ReactElement[]>(tags =>
                         tags.map(tag =>
-                            <div key={tag.id} className="category-item flex flex-center flex-column">
+                            <NavLink
+                                key={tag.id}
+                                className="category-item"
+                                to={`/odes/${tag.slug}`}
+                            >
                                 <h2 className="category-title">{tag.name}</h2>
-                                <NavLink to={`/odes/${tag.slug}`} className="category-button">Bekijk alle odes over {tag.name}</NavLink>
-                            </div>))
+                            </NavLink>
+                        ))
                     .visit<React.ReactNode>(
                         elememts => elememts,
                         () => <div className="nothing"></div>)

@@ -40,7 +40,7 @@ export const DisplayContentType = (props: PageProps) => {
 
     const page = state.page
 
-    return <div>
+    return <div className="content">
         {page.kind == 'loaded' && <header className="hero flex flex-center flex-wrap">
             <h1>{page.v.visit(p => p.title.rendered, () => "")}</h1>
         </header>}
