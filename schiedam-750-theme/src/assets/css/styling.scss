@@ -614,65 +614,53 @@ body {
 // Footer styling
 
 .footer {
-  background-color: #f8f9fa;
-  color: #333;
-  padding: 2rem 1rem;
-  font-size: 0.9rem;
+  background-color: $color-purple;
+  color: white;
+  width: 100%;
+  padding: 1rem;
+  text-align: center;
+  position: fixed;
+  bottom: 0;
+  left: 0;
+
+  // Ensures footer is always at the bottom
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  &__list {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-wrap: wrap; // Allows items to wrap on smaller screens
+    gap: 1rem;
+  }
+
+  &__item {
+    display: inline-block;
+  }
+
+  &__link {
+    color: white;
+    text-decoration: none;
+    font-size: 0.9rem;
+    transition: color 0.2s ease;
+
+    &:hover,
+    &.active {
+      color: $color-black;
+    }
+  }
 }
 
-.footer .container {
-  max-width: 1200px;
-  margin: 0 auto;
-}
+// Responsive adjustments for smaller screens
+@media (max-width: 768px) {
+  .footer {
+    padding: 0.5rem;
+  }
 
-.footer h4 {
-  font-size: 1.2rem;
-  margin-bottom: 1rem;
-  color: #555;
-}
-
-.footer .sponsors img {
-  max-width: 140px;
-  margin-right: 1rem;
-  margin-bottom: 1rem;
-  transition: transform 0.3s ease;
-}
-
-.footer .sponsors img:hover {
-  transform: scale(1.05);
-}
-
-.footer .adres {
-  line-height: 1.6;
-  color: #555;
-}
-
-.footer a {
-  color: #0073e6;
-  text-decoration: none;
-  transition: color 0.3s;
-}
-
-.footer a:hover {
-  color: #005bb5;
-}
-
-.nav--footer .nav__list {
-  list-style: none;
-  padding: 0;
-  margin: 0;
-}
-
-.nav--footer .nav__item {
-  margin-bottom: 0.5rem;
-}
-
-.nav--social .nav__link {
-  margin-right: 1rem;
-  color: #333;
-  font-weight: bold;
-}
-
-.nav--social .nav__link:hover {
-  color: #0073e6;
+  .footer__link {
+    font-size: 0.8rem;
+  }
 }

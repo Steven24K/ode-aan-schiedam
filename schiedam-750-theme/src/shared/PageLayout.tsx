@@ -11,6 +11,6 @@ export const PageLayout = () => {
             <Outlet />
         </main>
 
-        <Footer />
+        <Footer location="footer-menu" />
     </>
 }

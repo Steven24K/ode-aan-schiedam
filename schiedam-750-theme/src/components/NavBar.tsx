@@ -54,7 +54,12 @@ export const NavBar = (props: NavBarProps) => {
                         .getValue()
                         .visit(items => items, () => [])
                         .map(item => <li key={item.ID} className="side-navbar__item">
-                            <NavLink to={new URL(item.url).pathname} className="side-navbar__link">{item.title}</NavLink>
+                            <NavLink
+                                className="side-navbar__link"
+                                to={new URL(item.url).href}
+                            >
+                                {item.title}
+                            </NavLink>
                         </li>)
                 }
             </ul>
