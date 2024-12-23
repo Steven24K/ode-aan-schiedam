@@ -57,6 +57,7 @@ export const NavBar = (props: NavBarProps) => {
                             <NavLink
                                 className="side-navbar__link"
                                 to={new URL(item.url).href}
+                                onClick={toggleNav}
                             >
                                 {item.title}
                             </NavLink>

@@ -23,16 +23,16 @@ export const SplashScreen = (props: SplashScreenProps) => {
     >
         <div className={`splash-content ${state.animate ? 'grow-splash' : ''}`}>
             <h1 className="splash-title">{siteInfo.name}</h1>
+            <button onClick={() =>
+                setState(s => ({ ...s, animate: true }))
+            } className="btn btn-secondary">
+                {siteInfo.description}
+            </button>
             <img
                 alt="750 Schiedam Logo"
                 src={siteInfo.site_icon_url}
                 className="splash-logo"
             />
-            <button onClick={() =>
-                setState(s => ({ ...s, animate: true }))
-            } className="splash-button">
-                {siteInfo.description}
-            </button>
         </div>
     </div>
 };

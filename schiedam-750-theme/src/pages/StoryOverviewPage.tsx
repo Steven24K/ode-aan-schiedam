@@ -57,39 +57,45 @@ export const StoryOverviewPage = () => {
     if (state.category.v.kind == 'none') return <div>Not found</div>
 
     const tag = state.category.v.v
-    const loaded_stories = state.stories.reduce<WordPressPage[]>((xs, x) => xs.concat(x.getValue().visit(p => p.values, () => [])), [])
     const totalPages = state.stories.reduce((_, x) => x.getValue().visit(p => p.total_pages, () => 0), 0)
 
-    return <div className="story-overview">
-        <header className="overview-header">
+    return <div className="content">
+        <header className="hero">
             <h1>{tag.name}</h1>
             <p>{tag.description}</p>
         </header>
         <div className="overview-content">
             {
-                state.stories.map((loader, index) => <LoadData key={index}
-                    loader={loader}
-                    updater={data => {
-                        let loadedStories = state.stories
-                        loadedStories[index] = data
-                        setState((s => ({ ...s, stories: loadedStories })))
-                    }}
-                />)
+                state.stories.map((loader, index) => {
+                    if (loader.kind == 'loaded') {
+                        const stories = loader.v.values
+                        return stories.map(story => <div key={story.id} className="overview-item">
+                            <h2>{story.title.rendered}</h2>
+                            <p dangerouslySetInnerHTML={{ __html: story.excerpt.rendered }}></p>
+                            <NavLink to={`/${story.slug}/ode/`}>Lees meer</NavLink>
+                        </div>)
+                    }
+                    return <LoadData key={index}
+                        loader={loader}
+                        updater={data => {
+                            let loadedStories = state.stories
+                            loadedStories[index] = data
+                            setState((s => ({ ...s, stories: loadedStories })))
+                        }}
+                    />
+                })
             }
-            {
-                loaded_stories
-                    .map(story => <div key={story.id}>
-                        <h2>{story.title.rendered}</h2>
-                        <p dangerouslySetInnerHTML={{ __html: story.excerpt.rendered }}></p>
-                        <NavLink to={`/${story.slug}/ode/`}>Lees meer</NavLink>
-                    </div>)
-            }
+            <div className="overview-footer">
             {
                 state.nextPageToLoad <= totalPages &&
-                <button onClick={() => setState(loadNextStories(state.category))}>
+                <button 
+                className="btn btn-primary"
+                onClick={() => setState(loadNextStories(state.category))}>
                     Laad meer...
                 </button>
             }
+            </div>
+
         </div>
     </div >
 }
