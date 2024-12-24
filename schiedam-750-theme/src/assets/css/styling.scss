@@ -415,10 +415,10 @@ body {
 }
 
 .cms-content {
-  margin: 0px 10rem;
+  margin: 5rem 10rem;
 
   @media (max-width: 768px) {
-    margin: 0px 25px;
+    margin: 4rem 1rem;
   }
 }
 
@@ -505,66 +505,39 @@ body {
 
 // Story overview styling
 .overview-content {
-  // margin: 2rem 10rem 10rem 10rem;
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 2rem;
+  margin: 5rem 10rem;
 }
 
 .overview-item {
-  width: 80%;
-  max-width: 500px;
-  padding: 1.5rem;
-  background-color: #fff;
-  border-radius: 10px;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
-
-  &:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 8px 12px rgba(0, 0, 0, 0.2);
+  padding: 1rem;
+  border: 1px solid black;
+  border-radius: 20px;
+  width: 20%;
+  min-width: 340px;
+  a {
+    text-decoration: none;
   }
 
   h2 {
-    font-size: 1.5rem;
     color: $color-black;
-    margin-bottom: 0.5rem;
   }
 
   p {
-    font-size: 1rem;
-    color: #555;
-    line-height: 1.6;
-  }
-
-  a {
-    display: inline-block;
-    margin-top: 1rem;
-    font-size: 1rem;
-    color: $secondary-color;
-    text-decoration: none;
-    border-bottom: 1px solid transparent;
-    transition: border-color 0.3s;
-
-    &:hover {
-      border-color: $secondary-color--hover;
-    }
-  }
-
-  &:nth-child(odd) {
-    // margin-left: 25%;
-    transform: rotate(-2deg);
-  }
-
-  &:nth-child(even) {
-    // margin-left: 50%;
-    transform: rotate(2deg);
+    color: #414141;
   }
 }
 
 .overview-footer {
   display: flex;
   justify-content: center;
-  margin-top: 2.5rem;
-  margin-bottom: 10rem;
+  margin-top: 1rem;
+  margin-bottom: 5rem;
 }
+
 // Wrapper
 .side-navbar-wrapper {
   position: relative;
@@ -665,9 +638,10 @@ body {
   width: 100%;
   padding: 1rem;
   text-align: center;
-  position: fixed;
-  bottom: 0;
-  left: 0;
+  margin-top: 100px;
+  // position: fixed;
+  // bottom: 0;
+  // left: 0;
 
   // Ensures footer is always at the bottom
   display: flex;

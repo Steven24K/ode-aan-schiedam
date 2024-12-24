@@ -5,6 +5,7 @@ import { WordPressPage } from "../types/WordPressPage"
 import { LoadData } from "./LoadData"
 import { useParams } from "react-router-dom"
 import { CustomRouteParams } from "../router"
+import { StoryCounter } from "./StoryCounter"
 
 type ContentType = "pages" | "posts"
 
@@ -44,27 +45,7 @@ export const DisplayContentType = (props: PageProps) => {
         {page.kind == 'loaded' && <header className="hero flex flex-center flex-wrap">
             <h1>{page.v.visit(p => p.title.rendered, () => "")}</h1>
         </header>}
-        <div className="counter">
-            <div className="diamond-purple"></div>
-            <div className="diamond-yellow"></div>
-            <div className="diamond-green"></div>
-            <div className="diamond-blue"></div>
-            <div className="diamond-orange"></div>
-            <div className="diamond-red"></div>
-            <div className="diamond-counter">
-                <div className="counter-content">
-                    <span className="text">Al</span>
-                    <span className="number">55</span>
-                    <span className="text">Odes</span>
-                </div>
-            </div>
-            <div className="diamond-red"></div>
-            <div className="diamond-orange"></div>
-            <div className="diamond-blue"></div>
-            <div className="diamond-green"></div>
-            <div className="diamond-yellow"></div>
-            <div className="diamond-purple"></div>
-        </div>
+        {isHome && <StoryCounter />}
         <div className="cms-content">
             {page.kind == 'loaded' && <section className="row">
                 <div className="col-12">

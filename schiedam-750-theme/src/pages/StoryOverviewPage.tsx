@@ -69,11 +69,15 @@ export const StoryOverviewPage = () => {
                 state.stories.map((loader, index) => {
                     if (loader.kind == 'loaded') {
                         const stories = loader.v.values
-                        return stories.map(story => <div key={story.id} className="overview-item">
-                            <h2>{story.title.rendered}</h2>
-                            <p dangerouslySetInnerHTML={{ __html: story.excerpt.rendered }}></p>
-                            <NavLink to={`/${story.slug}/ode/`}>Lees meer</NavLink>
-                        </div>)
+                        return stories.map(story => <div className="overview-item">
+                            <NavLink key={story.id}
+                                to={`/${story.slug}/ode/`}
+                            >
+                                <h2>{story.title.rendered}</h2>
+                                <p dangerouslySetInnerHTML={{ __html: story.excerpt.rendered }}></p>
+                            </NavLink>
+                        </div>
+                        )
                     }
                     return <LoadData key={index}
                         loader={loader}
@@ -85,17 +89,16 @@ export const StoryOverviewPage = () => {
                     />
                 })
             }
-            <div className="overview-footer">
+        </div>
+        <div className="overview-footer">
             {
                 state.nextPageToLoad <= totalPages &&
-                <button 
-                className="btn btn-primary"
-                onClick={() => setState(loadNextStories(state.category))}>
+                <button
+                    className="btn btn-primary"
+                    onClick={() => setState(loadNextStories(state.category))}>
                     Laad meer...
                 </button>
             }
-            </div>
-
         </div>
     </div >
 }
