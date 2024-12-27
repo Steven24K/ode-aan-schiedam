@@ -6,6 +6,8 @@ import { LoadData } from "./LoadData"
 import { useParams } from "react-router-dom"
 import { CustomRouteParams } from "../router"
 import { StoryCounter } from "./StoryCounter"
+import { NavLink } from "react-router-dom"
+import { PostCategory } from "../types/PostCategory"
 
 type ContentType = "pages" | "posts"
 
@@ -17,10 +19,12 @@ type PageProps = {
 
 type PageState = {
     page: DataLoader<Option<WordPressPage>>
+    category: DataLoader<Option<PostCategory>>
 }
 
 const zeroPageState = (): PageState => ({
-    page: unloaded()
+    page: unloaded(),
+    category: unloaded(),
 })
 
 export const DisplayContentType = (props: PageProps) => {
@@ -39,6 +43,20 @@ export const DisplayContentType = (props: PageProps) => {
         }))
     }, [slug])
 
+    React.useEffect(() => {
+        if (content_type == 'posts' && state.page.kind == 'loaded') {
+            const page = state.page.v
+            if (page.kind == 'some') {
+                setState(s => ({
+                    ...s,
+                    category: loading(loadData<Option<PostCategory>>(`/wp-json/wp/v2/categories?post=${page.v.id}`, {
+                        parser: json => json.length > 0 ? Some(json[0]) : None()
+                    }))
+                }))
+            }
+        }
+    }, [state.page.kind])
+
     const page = state.page
 
     return <div className="content">
@@ -46,6 +64,11 @@ export const DisplayContentType = (props: PageProps) => {
             <h1>{page.v.visit(p => p.title.rendered, () => "")}</h1>
         </header>}
         {isHome && <StoryCounter />}
+
+        <LoadData loader={state.category} updater={data => setState(s => ({ ...s, category: data }))} />
+        {state.category.kind == 'loaded' && state.category.v.kind == 'some' &&
+            <NavLink to={`/odes/${state.category.v.v.slug}`}>Terug naar {state.category.v.v.name}</NavLink>}
+
         <div className="cms-content">
             {page.kind == 'loaded' && <section className="row">
                 <div className="col-12">

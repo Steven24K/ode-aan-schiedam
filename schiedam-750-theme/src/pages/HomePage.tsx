@@ -12,7 +12,7 @@ const parent_category = 7
 type HomePageProps = { siteInfo: SiteInfo }
 type HomePageState = { categories: DataLoader<PostCategory[]> }
 const zeroHomePageState = (): HomePageState => ({
-    categories: unloaded(),
+    categories: loading(loadData<PostCategory[]>(`/wp-json/wp/v2/categories?parent=${parent_category}`)),
 })
 
 export const HomePage = (props: HomePageProps) => {
@@ -36,13 +36,14 @@ export const HomePage = (props: HomePageProps) => {
                     .getValue()
                     .map<React.ReactElement[]>(tags =>
                         tags.map(tag =>
-                            <NavLink
-                                key={tag.id}
-                                className="category-item"
-                                to={`/odes/${tag.slug}`}
-                            >
-                                <h2 className="category-title">{tag.name}</h2>
-                            </NavLink>
+                            <div key={tag.id} className="category-item-wrapper">
+                                <NavLink
+                                    className="category-item"
+                                    to={`/odes/${tag.slug}`}
+                                >
+                                    <h2 className="category-title">{tag.name}</h2>
+                                </NavLink>
+                            </div>
                         ))
                     .visit<React.ReactNode>(
                         elememts => elememts,

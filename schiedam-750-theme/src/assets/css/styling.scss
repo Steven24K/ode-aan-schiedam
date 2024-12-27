@@ -126,8 +126,6 @@ body {
 
 // Loader 
 /* Full-screen loader container */
-@keyframes loader {}
-
 .loader-container {
   position: fixed;
   top: 0;
@@ -427,36 +425,46 @@ body {
   display: flex;
   flex-wrap: wrap;
   justify-content: space-evenly;
-  gap: 16px;
+  gap: 125px;
   margin-bottom: 10rem;
 }
 
+.category-item-wrapper {
+  background-color: $primary-color;
+  height: auto;
+  min-height: 300px;
+  width: 300px;
+  justify-content: center;
+  align-items: center;
+}
+
 .category-item {
+  margin: auto;
+  rotate: 45deg;
+  height: auto;
+  min-height: 300px;
+  width: 300px;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
+
+  background-color: $color-black;
   text-decoration: none;
-  background-color: #000;
-  background-image: url("../images/sticky-note.jpg");
-  background-repeat: no-repeat;
-  background-size: cover;
-  height: auto;
-  min-height: 250px;
-  width: 250px;
   text-align: center;
   transition: transform 0.3s ease, box-shadow 0.3s ease;
-  border-bottom-right-radius: 35%;
 
   &:hover {
     transform: translateY(-5px);
-    -webkit-box-shadow: 13px 10px 12px 0px rgba(43, 41, 43, 1);
-    -moz-box-shadow: 13px 10px 12px 0px rgba(43, 41, 43, 1);
-    box-shadow: 13px 10px 12px 0px rgba(43, 41, 43, 1);
+    box-shadow: 15px 10px 10px 1px #2b292b;
+    animation: spin 1.5s ease-in-out forwards;
+
   }
+
 }
 
 .category-title {
+  rotate: -45deg;
   font-size: 1.25rem;
   margin-bottom: 16px;
   color: $primary-color;
@@ -506,29 +514,45 @@ body {
 // Story overview styling
 .overview-content {
   display: flex;
-  justify-content: center;
   flex-wrap: wrap;
-  gap: 2rem;
-  margin: 5rem 10rem;
+  justify-content: space-evenly;
+  gap: 120px;
+  margin: 5rem auto;
 }
 
 .overview-item {
-  padding: 1rem;
-  border: 1px solid black;
-  border-radius: 20px;
-  width: 20%;
-  min-width: 340px;
+  margin: auto;
+  rotate: 45deg;
+  min-height: 300px;
+  width: 300px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
+  
+  background-color: $color-purple;
+
   a {
     text-decoration: none;
+    color: $primary-color;
   }
 
   h2 {
-    color: $color-black;
+    text-align: center;
   }
 
   p {
-    color: #414141;
+
   }
+
+}
+
+.category-description {
+  color: white;
+  position: static;
+  rotate: -45deg;
+  opacity: 0.6;
 }
 
 .overview-footer {
@@ -598,6 +622,7 @@ body {
   box-shadow: 2px 0 5px rgba(0, 0, 0, 0.5);
   transition: right 1s ease;
   z-index: 1000;
+  border-left: 5px solid #c0c0c0;
 
   // Open state
   &.side-navbar--open {

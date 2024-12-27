@@ -64,17 +64,19 @@ export const StoryOverviewPage = () => {
             <h1>{tag.name}</h1>
             <p>{tag.description}</p>
         </header>
-        <div className="overview-content">
+        <NavLink to="/"><b>&#129092;</b> Terug naar het begin</NavLink>
+        <div className="categories">
             {
                 state.stories.map((loader, index) => {
                     if (loader.kind == 'loaded') {
                         const stories = loader.v.values
-                        return stories.map(story => <div className="overview-item">
-                            <NavLink key={story.id}
+                        return stories.map(story => <div key={story.id} className="category-item-wrapper">
+                            <NavLink
+                                className="category-item"
                                 to={`/${story.slug}/ode/`}
                             >
-                                <h2>{story.title.rendered}</h2>
-                                <p dangerouslySetInnerHTML={{ __html: story.excerpt.rendered }}></p>
+                                <h2 className="category-title">{story.title.rendered}</h2>
+                                <p className="category-description" dangerouslySetInnerHTML={{ __html: story.excerpt.rendered }}></p>
                             </NavLink>
                         </div>
                         )
