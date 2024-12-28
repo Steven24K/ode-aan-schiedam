@@ -1,18 +1,18 @@
 import * as React from "react"
-import { NavLink } from "react-router-dom"
 import { DisplayContentType } from "../components/DisplayContentType"
 import { LoadData } from "../components/LoadData"
 import { SplashScreen } from "../components/SplashScreen"
 import { DataLoader, loadData, loading, unloaded } from "../types/DataLoader"
 import { PostCategory } from "../types/PostCategory"
 import { SiteInfo } from "../types/SiteInfo"
+import { Grid } from "../components/Grid"
 
 const parent_category = 7
 
 type HomePageProps = { siteInfo: SiteInfo }
 type HomePageState = { categories: DataLoader<PostCategory[]> }
 const zeroHomePageState = (): HomePageState => ({
-    categories: loading(loadData<PostCategory[]>(`/wp-json/wp/v2/categories?parent=${parent_category}`)),
+    categories: unloaded()
 })
 
 export const HomePage = (props: HomePageProps) => {
@@ -30,25 +30,21 @@ export const HomePage = (props: HomePageProps) => {
 
     return <DisplayContentType isHome content_type="pages">
         <LoadData loader={state.categories} updater={data => setState(s => ({ ...s, categories: data }))} />
-        <section className="categories">
-            {
-                state.categories
-                    .getValue()
-                    .map<React.ReactElement[]>(tags =>
-                        tags.map(tag =>
-                            <div key={tag.id} className="category-item-wrapper">
-                                <NavLink
-                                    className="category-item"
-                                    to={`/odes/${tag.slug}`}
-                                >
-                                    <h2 className="category-title">{tag.name}</h2>
-                                </NavLink>
-                            </div>
-                        ))
-                    .visit<React.ReactNode>(
-                        elememts => elememts,
-                        () => <div className="nothing"></div>)
+
+        <Grid
+            primary_color="yellow"
+            secondary_color="black"
+            text_color="yellow"
+            items={state
+                .categories
+                .getValue()
+                .map(tags => tags.map(tag => ({
+                    id: tag.id,
+                    title: tag.name,
+                    url: `/odes/${tag.slug}`
+                })))
+                .visit(items => items, () => [])
             }
-        </section>
+        />
     </DisplayContentType>
 }

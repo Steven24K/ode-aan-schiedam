@@ -8,6 +8,67 @@ $color-blue: #A1DAF8;
 $color-purple: #702283;
 $color-orange: #EF7D00;
 
+.yellow-bg {
+  background-color: $primary-color;
+}
+.red-bg {
+  background-color: $secondary-color;
+}
+.purple-bg {
+  background-color: $color-purple;
+}
+
+.yellow-bg {
+  background-color: $primary-color;
+}
+
+.green-bg {
+  background-color: $color-green;
+}
+
+.blue-bg {
+  background-color: $color-blue;
+}
+
+.orange-bg {
+  background-color: $color-orange;
+}
+
+.black-bg {
+  background-color: $color-black;
+}
+
+.red-bg {
+  background-color: $secondary-color;
+}
+.yellow-text {
+  color: $primary-color;
+}
+
+.red-text {
+  color: $secondary-color;
+}
+
+.purple-text {
+  color: $color-purple;
+}
+
+.green-text {
+  color: $color-green;
+}
+
+.blue-text {
+  color: $color-blue;
+}
+
+.orange-text {
+  color: $color-orange;
+}
+
+.black-text {
+  color: $color-black;
+}
+
 $text-color: $color-black;
 $background-color: #ffffff;
 
@@ -307,6 +368,7 @@ body {
   }
 }
 
+// Counter styling
 .counter {
   display: flex;
   align-items: center;
@@ -420,8 +482,8 @@ body {
   }
 }
 
-// Categories Grid Styling
-.categories {
+// Grid Styling
+.diamond-grid {
   display: flex;
   flex-wrap: wrap;
   justify-content: space-evenly;
@@ -429,8 +491,7 @@ body {
   margin-bottom: 10rem;
 }
 
-.category-item-wrapper {
-  background-color: $primary-color;
+.diamond-wrapper {
   height: auto;
   min-height: 300px;
   width: 300px;
@@ -438,7 +499,7 @@ body {
   align-items: center;
 }
 
-.category-item {
+.diamond-item {
   margin: auto;
   rotate: 45deg;
   height: auto;
@@ -449,7 +510,6 @@ body {
   justify-content: center;
   align-items: center;
 
-  background-color: $color-black;
   text-decoration: none;
   text-align: center;
   transition: transform 0.3s ease, box-shadow 0.3s ease;
@@ -460,17 +520,22 @@ body {
     animation: spin 1.5s ease-in-out forwards;
 
   }
-
 }
 
-.category-title {
+.diamond-title {
   rotate: -45deg;
   font-size: 1.25rem;
   margin-bottom: 16px;
-  color: $primary-color;
 }
 
-.category-button {
+.diamond-description {
+  opacity: 0.2;
+  position: absolute;
+  rotate: -45deg;
+  font-size: 1rem;
+}
+
+.diamond-button {
   @extend .btn;
   background-color: $secondary-color;
   margin-top: 16px;
@@ -480,8 +545,14 @@ body {
   }
 }
 
-// Styling for Alert Error Component
+.overview-footer {
+  display: flex;
+  justify-content: center;
+  // margin-top: 1rem;
+  margin-bottom: 5rem;
+}
 
+// Styling for Alert Error Component
 .alert-error {
   background-color: #f8d7da; // Light red background
   color: #842029; // Dark red text for contrast
@@ -509,57 +580,6 @@ body {
     opacity: 1;
     transform: translateY(0);
   }
-}
-
-// Story overview styling
-.overview-content {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: space-evenly;
-  gap: 120px;
-  margin: 5rem auto;
-}
-
-.overview-item {
-  margin: auto;
-  rotate: 45deg;
-  min-height: 300px;
-  width: 300px;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  overflow: hidden;
-  
-  background-color: $color-purple;
-
-  a {
-    text-decoration: none;
-    color: $primary-color;
-  }
-
-  h2 {
-    text-align: center;
-  }
-
-  p {
-
-  }
-
-}
-
-.category-description {
-  color: white;
-  position: static;
-  rotate: -45deg;
-  opacity: 0.6;
-}
-
-.overview-footer {
-  display: flex;
-  justify-content: center;
-  margin-top: 1rem;
-  margin-bottom: 5rem;
 }
 
 // Wrapper

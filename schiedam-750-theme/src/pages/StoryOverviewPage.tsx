@@ -7,6 +7,7 @@ import { None, Option, Some } from "../types/Option"
 import { LoadData } from "../components/LoadData"
 import { WordPressPage } from "../types/WordPressPage"
 import { _paginate, Paginated } from "../types/Paginated"
+import { Grid } from "../components/Grid"
 
 type OverviewState = {
     category: DataLoader<Option<PostCategory>>
@@ -19,7 +20,7 @@ const zeroOverviewState = (): OverviewState => ({
     category: unloaded(),
     stories: [],
     nextPageToLoad: 1,
-    pageSize: 5,
+    pageSize: 20,
 })
 
 const loadStories = (_tag_id: number, _current_page: number, _page_size: number): DataLoader<Paginated<WordPressPage>> =>
@@ -57,41 +58,46 @@ export const StoryOverviewPage = () => {
     if (state.category.v.kind == 'none') return <div>Not found</div>
 
     const tag = state.category.v.v
-    const totalPages = state.stories.reduce((_, x) => x.getValue().visit(p => p.total_pages, () => 0), 0)
+    const totalPages = state.stories.reduce((_, x) => x.getValue().visit(p => p.total_pages, () => 0), 1)
+
+    const stories = state.stories.flatMap(loader => loader.getValue().visit(p => p.values, () => []))
 
     return <div className="content">
         <header className="hero">
             <h1>{tag.name}</h1>
             <p>{tag.description}</p>
+            <NavLink to="/"><b>&#129092;</b> Terug naar het begin</NavLink>
         </header>
-        <NavLink to="/"><b>&#129092;</b> Terug naar het begin</NavLink>
-        <div className="categories">
+
+        <main className="cms-content">
             {
-                state.stories.map((loader, index) => {
-                    if (loader.kind == 'loaded') {
-                        const stories = loader.v.values
-                        return stories.map(story => <div key={story.id} className="category-item-wrapper">
-                            <NavLink
-                                className="category-item"
-                                to={`/${story.slug}/ode/`}
-                            >
-                                <h2 className="category-title">{story.title.rendered}</h2>
-                                <p className="category-description" dangerouslySetInnerHTML={{ __html: story.excerpt.rendered }}></p>
-                            </NavLink>
-                        </div>
-                        )
-                    }
-                    return <LoadData key={index}
+                <Grid
+                    primary_color="black"
+                    secondary_color="yellow"
+                    text_color="black"
+                    items={stories.map(s => ({
+                        id: s.id,
+                        title: s.title.rendered,
+                        description: s.excerpt.rendered,
+                        url: `/${s.slug}/ode/`
+                    }))}
+                />
+            }
+
+            {
+                state.stories
+                    .map((loader, index) => <LoadData key={index}
                         loader={loader}
                         updater={data => {
                             let loadedStories = state.stories
                             loadedStories[index] = data
                             setState((s => ({ ...s, stories: loadedStories })))
                         }}
-                    />
-                })
+                    />)
             }
-        </div>
+        </main>
+
+
         <div className="overview-footer">
             {
                 state.nextPageToLoad <= totalPages &&
