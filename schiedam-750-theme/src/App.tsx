@@ -4,9 +4,11 @@ import { SiteInfo } from "./types/SiteInfo"
 import { LoadData } from "./components/LoadData"
 import { RouterProvider } from "react-router-dom"
 import { router } from "./router"
+import { SplashScreen } from "./components/SplashScreen"
 
 export interface AppState {
     siteInfo: DataLoader<SiteInfo>
+    showSplash: boolean
 }
 
 interface AppProps {
@@ -17,7 +19,8 @@ export default class App extends React.Component<AppProps, AppState> {
     constructor(props: AppProps) {
         super(props)
         this.state = {
-            siteInfo: unloaded()
+            siteInfo: unloaded(),
+            showSplash: document.location.pathname == '/'
         }
     }
 
@@ -33,7 +36,14 @@ export default class App extends React.Component<AppProps, AppState> {
                 updater={data => this.setState(s => ({ ...s, siteInfo: data }))}
             />
         }
-        
-        return <RouterProvider router={router(this.state.siteInfo.v)} />
+
+        if (this.state.showSplash) {
+            return <SplashScreen
+                siteInfo={this.state.siteInfo.v}
+                unSplash={() => this.setState(s => ({ ...s, showSplash: false }))}
+            />
+        }
+
+        return <RouterProvider router={router()} />
     }
 }

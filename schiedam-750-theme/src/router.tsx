@@ -1,7 +1,6 @@
 import { createBrowserRouter, createRoutesFromElements, Route } from "react-router-dom";
 import { PageLayout } from "./shared/PageLayout";
 import { HomePage } from "./pages/HomePage";
-import { SiteInfo } from "./types/SiteInfo";
 import { StoryOverviewPage } from "./pages/StoryOverviewPage";
 import { DisplayContentType } from "./components/DisplayContentType";
 
@@ -10,11 +9,11 @@ export type CustomRouteParams = {
     category: string
 }
 
-export const router = (siteInfo: SiteInfo) =>
+export const router = () =>
     createBrowserRouter(
         createRoutesFromElements(
             <Route path="/" element={<PageLayout />}>
-                <Route path="/" element={<HomePage siteInfo={siteInfo} />} />
+                <Route path="/" element={<HomePage />} />
                 <Route path="/odes/:category" element={<StoryOverviewPage />} />
                 <Route path="/:slug/ode/" element={<DisplayContentType content_type="posts" />} />
                 <Route path="/:slug/*" element={<DisplayContentType content_type="pages" />} />

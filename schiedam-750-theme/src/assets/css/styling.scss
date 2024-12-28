@@ -291,12 +291,12 @@ body {
 
 @keyframes grow-content {
   from {
-    padding: 8rem 1rem;
+    padding: 8rem 2rem;
     opacity: 1;
   }
 
   to {
-    padding: 32rem 4rem;
+    padding: 32rem 8rem;
     opacity: 0;
   }
 }
@@ -313,7 +313,7 @@ body {
   text-align: center;
   background-color: white;
   border-radius: 1% 1% 50% 50%;
-  padding: 8rem 1rem;
+  padding: 8rem 2rem;
   box-shadow: 0 15px 6px rgba(0, 0, 0, 0.3);
 
   @media (max-width: 768px) {
