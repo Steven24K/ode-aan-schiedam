@@ -31,7 +31,7 @@ export const NavBar = (props: NavBarProps) => {
 
     return <div className="side-navbar-wrapper">
         <div className="hanger">
-            <img src="/wp-content/themes/schiedam-750-theme/assets/images/750-schiedam-slinger-alpha.png"
+            <img src="/wp-content/themes/schiedam-750-theme/assets/images/SDAM750-hart_RGB.png"
                 height={230}
                 width={'auto'}
             />
