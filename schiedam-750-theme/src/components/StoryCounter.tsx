@@ -8,7 +8,7 @@ export const StoryCounter = () => {
         <div className="diamond-red"></div>
         <div className="diamond-counter">
             <div className="counter-content">
-                <span className="text">Al</span>
+                <span className="text">Verzamelde</span>
                 <span className="number">55</span>
                 <span className="text">Odes</span>
             </div>
