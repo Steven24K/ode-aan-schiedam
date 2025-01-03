@@ -60,16 +60,20 @@ export const DisplayContentType = (props: PageProps) => {
     const page = state.page
 
     return <div className="content">
-        {page.kind == 'loaded' && <header className="hero flex flex-center flex-wrap">
+        {page.kind == 'loaded' && <header className="hero">
             <h1>{page.v.visit(p => p.title.rendered, () => "")}</h1>
+            {
+                state.category.kind == 'loaded' && state.category.v.kind == 'some' &&
+                <NavLink to={`/odes/${state.category.v.v.slug}`}>
+                    Terug naar {state.category.v.v.name}
+                </NavLink>
+            }
         </header>}
         {isHome && <StoryCounter />}
 
         <LoadData loader={state.category} updater={data => setState(s => ({ ...s, category: data }))} />
-        {state.category.kind == 'loaded' && state.category.v.kind == 'some' &&
-            <NavLink to={`/odes/${state.category.v.v.slug}`}>Terug naar {state.category.v.v.name}</NavLink>}
 
-        <div className="cms-content">
+        <div className={`cms-content ${content_type}`}>
             {page.kind == 'loaded' && <section className="row">
                 <div className="col-12">
                     <p dangerouslySetInnerHTML={{ __html: page.v.visit(p => p.content.rendered, () => "") }}></p>
