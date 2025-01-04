@@ -1,0 +1,288 @@
+@use "tailwindcss/base";
+@use "tailwindcss/components";
+@use "tailwindcss/utilities";
+
+// Color palette
+$sunny-yellow: #FDC300;
+$sunny-yellow--light: #FFE37E;
+
+$fiery-red: #851328;
+$fiery-red--light: #E73331;
+
+$leafy-green: #2EAC66;
+$leafy-green--light: #95C11F;
+
+$sky-blue: #1960AB;
+$sky-blue--light: #A1DAF8;
+
+$royal-purple: #6F6BAF;
+$royal-purple--light: #702283;
+
+$sunset-orange: #E9531D;
+$sunset-orange--light: #EF7D00;
+
+$just-black: #000000;
+$just-white: #ffffff;
+
+$mobile-width: 700px;
+
+// Use for Headers
+@font-face {
+    font-family: Gotham-Black;
+    src: url('/fonts/Gotham/Gotham-Black.ttf');
+    font-weight: normal;
+    font-style: normal;
+}
+
+// Use for normal text
+@font-face {
+    font-family: Gotham-Book;
+    src: url('/fonts/Gotham/Gotham-Book.ttf');
+    font-weight: normal;
+    font-style: normal;
+}
+
+// Use for higlighted text
+@font-face {
+    font-family: Gotham-Bold;
+    src: url('/fonts/CustomFont-Bold.ttf');
+    font-weight: bold;
+    font-style: normal;
+}
+
+* {
+    margin: 0;
+    box-sizing: border-box;
+    padding: 0;
+}
+
+.sidebar {
+    z-index: 1;
+    position: fixed;
+    right: 0;
+    top: 0;
+    height: 100%;
+    width: 50vw;
+    background-color: $just-black;
+    transform: translateX(100%);
+    transition: transform 0.3s ease-in-out;
+
+    &.open {
+        transform: translateX(0);
+    }
+
+    @media (max-width: $mobile-width) {
+        width: 80vw;
+    }
+}
+
+.menu-button {
+    z-index: 2;
+    position: absolute;
+    top: 30;
+    right: 30;
+    z-index: 2;
+    width: 80px;
+    height: 80px;
+    background-color: $just-white;
+    color: $just-black;
+    border: none;
+    transform: rotate(45deg);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+
+    :hover {
+        transition: color 0.3s ease-in-out;
+        color: $sunny-yellow;
+    }
+
+    &>span {
+        font-size: 2em;
+        transform: rotate(-45deg);
+    }
+}
+
+.menu-list {
+    list-style: none;
+    padding: 0;
+    margin: 150px 3rem;
+
+    &.open {
+        display: block;
+    }
+
+    li {
+        margin: 20px 0;
+
+        a {
+            font-family: 'Gotham-Black';
+            font-size: xx-large;
+            text-transform: uppercase;
+            color: white;
+            text-decoration: none;
+
+            &:hover,
+            &:active {
+                color: $sunny-yellow;
+            }
+        }
+    }
+}
+
+.footer {
+    height: auto;
+    min-height: 40vh;
+    background: linear-gradient(to left, $royal-purple, $royal-purple--light);
+    color: $just-white;
+}
+
+// Splash Screen Styling
+.splash-screen {
+    height: 100vh;
+    background: linear-gradient(to left, $sunny-yellow, $sunny-yellow--light);
+}
+
+@keyframes curtain-up {
+    from {
+        background: linear-gradient(to left, $sunny-yellow, $sunny-yellow--light);
+        height: 100vh;
+    }
+
+    to {
+        background: $sunny-yellow;
+        height: 10vh;
+    }
+}
+
+@keyframes curtain-down {
+    from {
+        height: 10vh;
+    }
+
+    to {
+        height: 40vh;
+    }
+}
+
+.curtain-up {
+    height: 40vh;
+    background-color: $sunny-yellow;
+    animation-name: curtain-up;
+    animation-duration: 4s;
+}
+
+@keyframes animate-splash {
+    from {
+        height: 650px;
+        opacity: 1;
+    }
+
+    to {
+        height: 0;
+        opacity: 0;
+    }
+}
+
+.animate-splash {
+    animation: animate-splash 3s ease-out forwards;
+}
+
+.splash-shield {
+    overflow: hidden;
+    background-color: $just-white;
+    border-radius: 0% 0% 50% 50%;
+    margin: 100px 25px 0 25px;
+    box-shadow: 0 15px 6px rgba(0, 0, 0, 0.3);
+    height: 650px;
+    max-width: 600px;
+
+}
+
+.splash-title {
+    color: $just-black;
+    font-family: 'Gotham-Black';
+    margin: 1rem 0;
+    padding: 1rem 0;
+    font-size: 2rem;
+    font-weight: bold;
+}
+
+.splash-logo {
+    width: 50%;
+    height: auto;
+}
+
+.hero {
+    height: 40vh;
+    background-color: $sunny-yellow;
+    animation: curtain-down 2s ease-in-out forwards;
+
+    h1 {
+        padding: 1px;
+        font-family: 'Gotham-Black';
+        color: $just-black;
+        animation-delay: 3s;
+        animation: slide-in-top 2s ease-out forwards;
+    }
+}
+
+.hart {
+    position: absolute;
+    left: 30px;
+    top: -10px;
+    max-width: 250px;
+    width: 30%;
+    height: auto;
+    clip-path: polygon(0% 0%, 100% 0%, 100% 60%, 50% 100%, 0% 60%);
+    background-color: $sunny-yellow--light;
+    animation-delay: 3s;
+    animation: slide-in-top 2s ease-out forwards;
+}
+
+@keyframes slide-in-top {
+    from {
+        transform: translateY(-200%);
+        opacity: 0;
+    }
+
+    to {
+        transform: translateY(0);
+        opacity: 1;
+    }
+}
+
+
+@keyframes fadeIn {
+    0% {
+        opacity: 0;
+    }
+
+    100% {
+        opacity: 1;
+    }
+}
+
+.page-content {
+    min-height: 50vh;
+    animation-delay: 4s;
+    animation: fadeIn 2s ease-in forwards;
+
+    h1,
+    h2,
+    h3,
+    h4,
+    h5,
+    h6 {
+        font-family: 'Gotham-Black';
+    }
+
+    p,
+    a,
+    span,
+    button,
+    li {
+        font-family: 'Gotham-Book';
+    }
+}
