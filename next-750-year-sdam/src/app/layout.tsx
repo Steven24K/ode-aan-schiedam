@@ -14,12 +14,10 @@ export default function RootLayout({
 
         <NavBar />
 
-        <main>
-          {children}
-        </main>
+        {children}
 
         <Footer />
-        
+
       </body>
     </html>
   );

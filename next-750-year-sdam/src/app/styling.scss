@@ -79,8 +79,8 @@ $mobile-width: 700px;
 .menu-button {
     z-index: 2;
     position: absolute;
-    top: 30;
-    right: 30;
+    top: 30px;
+    right: 30px;
     z-index: 2;
     width: 80px;
     height: 80px;
@@ -139,6 +139,10 @@ $mobile-width: 700px;
 }
 
 // Splash Screen Styling
+.splash-wrapper {
+    height: 100vh;
+}
+
 .splash-screen {
     height: 100vh;
     background: linear-gradient(to left, $sunny-yellow, $sunny-yellow--light);
@@ -238,7 +242,7 @@ $mobile-width: 700px;
     clip-path: polygon(0% 0%, 100% 0%, 100% 60%, 50% 100%, 0% 60%);
     background-color: $sunny-yellow--light;
     animation-delay: 3s;
-    animation: slide-in-top 2s ease-out forwards;
+    animation: slide-in-top 4s ease-out forwards;
 }
 
 @keyframes slide-in-top {
@@ -265,7 +269,6 @@ $mobile-width: 700px;
 }
 
 .page-content {
-    min-height: 50vh;
     animation-delay: 4s;
     animation: fadeIn 2s ease-in forwards;
 
@@ -286,3 +289,77 @@ $mobile-width: 700px;
         font-family: 'Gotham-Book';
     }
 }
+
+.grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    place-items: center;
+    margin-top: 100px;
+    margin-bottom: 50px;
+    gap: 8rem;
+}
+
+.grid__item_wrapper {
+    background-color: $sunny-yellow;
+    height: 300px;
+    width: 300px;
+}
+
+.grid__item {
+    height: 300px;
+    width: 300px;
+    rotate: 45deg;
+    color: $sunny-yellow;
+    text-align: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: transform 1s ease-in-out;
+
+    &:hover {
+        transform: rotate(360deg);
+    }
+
+    h1 {
+        rotate: -45deg;
+        font-size: 2em;
+    }
+}
+
+.grid__item--black {
+    @extend .grid__item;
+    background-color: $just-black;
+}
+.grid__item--white {
+    @extend .grid__item;
+    background-color: $just-white;
+}
+.grid__item--fiery-red {
+    @extend .grid__item;
+    background-color: $fiery-red;
+}
+
+.grid__item--leafy-green {
+    @extend .grid__item;
+    background-color: $leafy-green;
+}
+
+.grid__item--sky-blue {
+    @extend .grid__item;
+    background-color: $sky-blue;
+}
+.grid__item--sunny-yellow {
+    @extend .grid__item;
+    background-color: $sunny-yellow;
+}
+
+.grid__item--royal-purple {
+    @extend .grid__item;
+    background-color: $royal-purple;
+}
+
+.grid__item--sunset-orange {
+    @extend .grid__item;
+    background-color: $sunset-orange;
+}
+
