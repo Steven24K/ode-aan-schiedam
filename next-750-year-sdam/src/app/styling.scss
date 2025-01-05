@@ -50,12 +50,14 @@ $mobile-width: 700px;
     font-style: normal;
 }
 
+// Basic resets
 * {
     margin: 0;
     box-sizing: border-box;
     padding: 0;
 }
 
+// Site main navigation
 .sidebar {
     z-index: 1;
     position: fixed;
@@ -139,6 +141,7 @@ $mobile-width: 700px;
     color: $sunny-yellow !important;
 }
 
+// Site footer
 .footer {
     height: auto;
     min-height: 40vh;
@@ -146,7 +149,7 @@ $mobile-width: 700px;
     color: $just-white;
 }
 
-// Splash Screen Styling
+// Splash Screen
 .splash-wrapper {
     height: 100vh;
 }
@@ -227,6 +230,7 @@ $mobile-width: 700px;
     height: auto;
 }
 
+// Main hero
 .hero {
     height: 40vh;
     background-color: $sunny-yellow;
@@ -289,6 +293,7 @@ $mobile-width: 700px;
     }
 }
 
+// Page content for CMS data
 .page-content {
     min-height: 50vh;
     animation-delay: 4s;
@@ -312,6 +317,7 @@ $mobile-width: 700px;
     }
 }
 
+// Main Grid
 .grid {
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
@@ -386,4 +392,141 @@ $mobile-width: 700px;
 .grid__item--sunset-orange {
     @extend .grid__item;
     background-color: $sunset-orange;
+}
+
+// Counter
+.counter {
+    background-color: $fiery-red--light;
+    border: 1px solid brown;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
+    gap: 1rem;
+    animation-delay: 3s;
+    animation: slide-in-top 3s ease-out forwards;
+
+    @media (max-width: $mobile-width) {
+        gap: 0.3rem;
+    }
+}
+
+.diamond-counter {
+    z-index: 1;
+    transform: rotate(45deg);
+    margin-bottom: 50px;
+    background-color: $just-white;
+    height: 250px;
+    width: 250px;
+
+    @media (max-width: $mobile-width) {
+        height: 200px;
+        width: 200px;
+    }
+
+    span {
+        display: block;
+        text-align: center;
+
+        &.text {
+            font-size: 1.5rem;
+        }
+
+        &.number {
+            color: $fiery-red--light;
+            font-size: 3rem;
+            font-weight: bold;
+        }
+    }
+}
+
+.counter-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    transform: rotate(-45deg);
+    height: 250px;
+    width: 250px;
+
+    @media (max-width: $mobile-width) {
+        height: 200px;
+        width: 200px;
+    }
+}
+
+.diamond-wrapper {
+    display: flex;
+    gap: 10px;
+    margin: 0 10px;
+
+    @media (max-width: 780px) {
+        display: block;
+        margin: auto;
+
+        .diamond {
+            margin-top: 15px;
+            padding: 10px;
+        }
+    }
+}
+
+@keyframes sparkle {
+
+    0%,
+    100% {
+        transform: scale(1) rotate(45deg);
+    }
+
+    50% {
+        transform: scale(0.8) rotate(45deg);
+    }
+}
+
+.diamond {
+    animation: sparkle 1s infinite;
+    transform: rotate(45deg);
+    height: 30px;
+    width: 30px;
+
+    @media (max-width: $mobile-width) {
+        height: 15px;
+        width: 15px;
+    }
+}
+
+.diamond-purple {
+    @extend .diamond;
+    animation-delay: 0.5s;
+    background-color: $royal-purple;
+}
+
+.diamond-yellow {
+    @extend .diamond;
+    animation-delay: 0.3s;
+    background-color: $sunny-yellow;
+}
+
+.diamond-green {
+    @extend .diamond;
+    animation-delay: 0.2s;
+    background-color: $leafy-green;
+}
+
+.diamond-blue {
+    @extend .diamond;
+    animation-delay: 0.4s;
+    background-color: $sky-blue;
+}
+
+.diamond-orange {
+    @extend .diamond;
+    animation-delay: 0.1s;
+    background-color: $sunset-orange;
+}
+
+.diamond-red {
+    @extend .diamond;
+    animation-delay: 0s;
+    background-color: $fiery-red;
 }

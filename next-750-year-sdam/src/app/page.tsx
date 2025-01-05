@@ -4,6 +4,7 @@ import { Hero } from "@/components/Hero"
 import { DisplayContent } from "@/components/DisplayContent"
 import { Grid, GridItem } from "@/components/Grid"
 import { redirect, useSearchParams } from "next/navigation"
+import { StoryCounter } from "@/components/StoryCounter"
 
 
 const stringToBool = (v: string | null): boolean => {
@@ -29,6 +30,7 @@ export default function Home() {
 
   return <main>
     <Hero title={'750 jaar Schiedam in Odes'} />
+    <StoryCounter />
     <DisplayContent>
       <h1 className="text-4xl">Schiedam viert de toekomst</h1>
       <p>
