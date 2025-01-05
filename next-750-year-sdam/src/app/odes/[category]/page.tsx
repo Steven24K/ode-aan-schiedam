@@ -13,37 +13,37 @@ export default async function StoryOverview(props: StoryOverviewProps) {
     if (!category) return <div>Category not found</div>
 
     return <main>
-        <Hero title={category}
+        <Hero title={Promise.resolve(category)}
             description="Een krachtig gedicht voor de stad"
             cta={{ text: "Terug naar het overzicht", to: '/?splashed=true' }}
         />
         <DisplayContent>
-            <Grid items={[
+            <Grid items={Promise.resolve([
                 {
                     id: 1,
                     title: "Whispers of the Wind",
-                    color: "black",
+                    color: "just-black",
                     slug: "/ode/whispers-of-the-wind/"
                 },
                 {
                     id: 2,
                     title: "Echoes of Time",
-                    color: "black",
+                    color: "just-black",
                     slug: "/ode/echoes-of-time/"
                 },
                 {
                     id: 3,
                     title: "Silent Reflections",
-                    color: "black",
+                    color: "just-black",
                     slug: "/ode/silent-reflections/"
                 },
                 {
                     id: 4,
                     title: "Dreams of the Past",
-                    color: "black",
+                    color: "just-black",
                     slug: "/ode/dreams-of-the-past/"
                 }
-            ]} />
+            ])} />
         </DisplayContent>
     </main>
 }

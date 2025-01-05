@@ -13,7 +13,7 @@ export default async function StoryPage(props: StoryProps) {
 
     const title = slug.replace(/^\w|-\w/g, (match) => match.replace('-', ' ').toUpperCase())
     return <main>
-        <Hero title={title}
+        <Hero title={Promise.resolve(title)}
             description="Door: William Shakespeare"
             cta={{ text: "Terug naar Poëzie", to: '/odes/poezie' }}
         />

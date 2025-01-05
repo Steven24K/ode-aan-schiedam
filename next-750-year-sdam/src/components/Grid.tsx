@@ -1,5 +1,6 @@
 import { Color } from "@/types/Color"
 import Link from "next/link"
+import { use } from "react"
 
 export type GridItem = {
     id: number
@@ -9,15 +10,17 @@ export type GridItem = {
 }
 
 export type GridProps = {
-    items: GridItem[]
+    items: Promise<GridItem[]>
 }
 
 export const Grid = (props: GridProps) => {
     const { items } = props
 
+    const _items = use(items)
+
     return <section className="grid">
         {
-            items.map((item) => {
+            _items.map((item) => {
                 return (
                     <div key={item.id} className="grid__item_wrapper">
                         <Link href={`${item.slug}`}>

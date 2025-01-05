@@ -1,1 +1,1 @@
-type ColorPalette = 'yellow' | 'red' | 'black' | 'blue' | 'green' | 'purple' | 'orange'
+type ColorPalette = 'yellow' | 'red' | 'black' | 'blue' | 'green' | 'purple' | 'orange' | 'white'

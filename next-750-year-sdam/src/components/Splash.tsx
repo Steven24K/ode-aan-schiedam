@@ -1,43 +1,49 @@
 "use client"
-import { useState } from "react";
+import { use, useState } from "react";
 import Image from "next/image";
+import { redirect } from "next/navigation";
 
 type SplashScreenProps = {
-    // siteInfo: SiteInfo
-    unSplash: () => void
+    title: Promise<string>
+    slogan: Promise<string>
+    logo: Promise<string>
 }
 
 type SplashState = {
     animate: boolean
 }
 
-export const Splash = (props: SplashScreenProps) => {
-    const { unSplash } = props;
+export function Splash(props: SplashScreenProps) {
+    const { title, slogan, logo } = props;
     const [state, setState] = useState<SplashState>({ animate: false })
 
     const onDone = () => {
         if (state.animate) {
-            unSplash()
+            redirect('/?splashed=true')
         }
     }
 
     const animate = () => setState(s => ({ ...s, animate: true }))
 
+    const _title = use(title)
+    const _slogan = use(slogan)
+    const _logo = use(logo)
+
     return <div className="splash-wrapper">
         <div onAnimationEnd={onDone} className={`${state.animate ? 'curtain-up' : 'splash-screen'} flex flex-col items-center justify-center h-full text-center`} >
             <div className={`splash-shield ${state.animate ? 'animate-splash' : ''} flex flex-col items-center justify-center`}>
 
-                <h1 className="splash-title">{'750 jaar Schiedam in Odes'}</h1>
+                <h1 className="splash-title">{_title}</h1>
 
-                <button onClick={animate} className="bg-red-500 hover:bg-red-700 text-white font-bold py-4 px-8 mt-4">
-                    {'Ontdek de verhalen van de stad'}
+                <button onClick={animate} className="bg-red-500 hover:bg-red-700 text-white font-bold py-4 px-8">
+                    {_slogan}
                 </button>
 
                 <Image
                     className="splash-logo mt-4"
                     width={4320}
                     height={4320}
-                    src={'/img/logos/SDAM750-label_RGB.png'}
+                    src={_logo}
                     alt="750 Schiedam Logo"
                 />
 

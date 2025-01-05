@@ -12,7 +12,7 @@ export default async function CMSPage(props: PageProps) {
     if (!slug) return <div>Page not found</div>
 
     return <main>
-        <Hero title={"CMS content page"} />
+        <Hero title={Promise.resolve("CMS content page")} />
         
         <DisplayContent>
             <h1>This is supposed to be a page from the cms</h1>

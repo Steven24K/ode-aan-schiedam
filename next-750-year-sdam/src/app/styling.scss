@@ -226,7 +226,7 @@ $mobile-width: 700px;
 }
 
 .splash-logo {
-    width: 50%;
+    width: 75%;
     height: auto;
 }
 
@@ -354,12 +354,12 @@ $mobile-width: 700px;
     }
 }
 
-.grid__item--black {
+.grid__item--just-black {
     @extend .grid__item;
     background-color: $just-black;
 }
 
-.grid__item--white {
+.grid__item--just-white {
     @extend .grid__item;
     background-color: $just-white;
 }
@@ -381,7 +381,7 @@ $mobile-width: 700px;
 
 .grid__item--sunny-yellow {
     @extend .grid__item;
-    background-color: $sunny-yellow;
+    background-color: $sunny-yellow--light;
 }
 
 .grid__item--royal-purple {

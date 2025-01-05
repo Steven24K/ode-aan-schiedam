@@ -1,8 +1,9 @@
 import Image from "next/image"
 import Link from "next/link"
+import { use } from "react"
 
 type HeroProps = {
-    title: string
+    title: Promise<string>
     description?: string
     cta?: {
         text: string
@@ -13,6 +14,8 @@ type HeroProps = {
 export const Hero = (props: HeroProps) => {
     const { title, description, cta } = props
 
+    const _title = use(title)
+
     return <header className="hero">
         <Image
             className="hart"
@@ -22,7 +25,7 @@ export const Hero = (props: HeroProps) => {
             alt="750 Schiedam Logo"
         />
         <div className="hero-content flex flex-col justify-center items-center h-full space-y-4">
-            <h1 className="text-center text-4xl p-1">{title}</h1>
+            <h1 className="text-center text-4xl p-1">{_title}</h1>
             {
                 description &&
                 <p className="text-center">{description}</p>

@@ -1,46 +1,48 @@
-"use client"
+"use server"
 import { Splash } from "@/components/Splash"
 import { Hero } from "@/components/Hero"
 import { DisplayContent } from "@/components/DisplayContent"
-import { Grid, GridItem } from "@/components/Grid"
-import { redirect, useSearchParams } from "next/navigation"
+import { Grid } from "@/components/Grid"
 import { StoryCounter } from "@/components/StoryCounter"
+import { Suspense } from "react"
+import { Params, SearchParams } from "@/types/Params"
+import { getCategoriesGrid, getHomePageContent, getHomePageTitle, getLogo, getPoemCounter, getSiteInfo, getSlogan, getTitle } from "./api/GetSiteInfo"
 
 
-const stringToBool = (v: string | null): boolean => {
+const stringToBool = (v: string | undefined): boolean => {
   if (v === 'false') return false
   if (v === 'true') return true
   return false
 }
 
-export default function Home() {
-  const searchParams = useSearchParams()
-  const splashed = searchParams.get('splashed')
+type HomeProps = {
+  params: Promise<Partial<Params>>
+  searchParams: Promise<Partial<SearchParams>>
+}
+
+export default async function Home(props: HomeProps) {
+  const { searchParams } = props
+  const { splashed } = await searchParams
+
+  const siteInfo = getSiteInfo()
 
   if (!stringToBool(splashed)) { // if not splashed, only splash onces
-    return <Splash unSplash={() => redirect('/?splashed=true')} />
+    return <Suspense fallback={<div>Loading...</div>}>
+      <Splash
+        title={getTitle(siteInfo)}
+        slogan={getSlogan(siteInfo)}
+        logo={getLogo(siteInfo)}
+      />
+    </Suspense>
   }
 
-  const categories: GridItem[] = [
-    { id: 1, title: "Poëzie", color: "black", slug: "/odes/poezie/" },
-    { id: 2, title: "Uit de stad", color: "royal-purple", slug: "/odes/uit-de-stad/" },
-    { id: 3, title: "Liefde", color: "fiery-red", slug: "/liefde/odes/" },
-    { id: 4, title: "Gedachtenspinsels", color: "sky-blue", slug: "/odes/gedachtenspinsels/" }
-  ];
-
   return <main>
-    <Hero title={'750 jaar Schiedam in Odes'} />
-    <StoryCounter />
-    <DisplayContent>
-      <h1 className="text-4xl">Schiedam viert de toekomst</h1>
-      <p>
-        Schiedam viert in 2025 haar 750-jarig bestaan. Dat is een feest voor iedereen. Inwoners, ondernemers, verenigingen, scholen en instellingen.
-        Samen maken we er een onvergetelijk feest van. Een feest dat Schiedam op de kaart zet. Een feest dat Schiedam verbindt.
-      </p>
-
-      <h1 className="text-4xl my-4 px-4">Thema's</h1>
-
-      <Grid items={categories} />
-    </DisplayContent>
+    <Suspense fallback={<div>Loading...</div>}>
+      <Hero title={getHomePageTitle(siteInfo)} />
+      <StoryCounter count={getPoemCounter(siteInfo)} />
+      <DisplayContent content={getHomePageContent(siteInfo)}>
+        <Grid items={getCategoriesGrid(siteInfo)} />
+      </DisplayContent>
+    </Suspense>
   </main>
 }

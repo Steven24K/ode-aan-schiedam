@@ -1,1 +1,1 @@
-export type Color = "white" | "black" | "fiery-red" | "leafy-green" | "sky-blue" | "royal-purple" | "sunset-orange" | "sunny-yellow" 
+export type Color = "just-black" | "just-white" | "fiery-red" | "leafy-green" | "sky-blue" | "sunny-yellow" | "royal-purple" | "sunset-orange";
