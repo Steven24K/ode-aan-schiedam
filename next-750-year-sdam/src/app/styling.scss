@@ -269,6 +269,7 @@ $mobile-width: 700px;
 }
 
 .page-content {
+    min-height: 50vh;
     animation-delay: 4s;
     animation: fadeIn 2s ease-in forwards;
 

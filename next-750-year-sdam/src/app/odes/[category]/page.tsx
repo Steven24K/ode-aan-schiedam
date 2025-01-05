@@ -1,3 +1,4 @@
+import { DisplayContent } from "@/components/DisplayContent"
 import { Grid } from "@/components/Grid"
 import { Hero } from "@/components/Hero"
 import { Params } from "@/types/Params"
@@ -13,7 +14,7 @@ export default async function StoryOverview(props: StoryOverviewProps) {
 
     return <main>
         <Hero title={category} />
-        <div className="page-content container mx-auto my-2 p-5">
+        <DisplayContent>
             <Grid items={[
                 {
                     id: 1,
@@ -40,7 +41,6 @@ export default async function StoryOverview(props: StoryOverviewProps) {
                     slug: "/ode/dreams-of-the-past/"
                 }
             ]} />
-        </div>
-
+        </DisplayContent>
     </main>
 }
