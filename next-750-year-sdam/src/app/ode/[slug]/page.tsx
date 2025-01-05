@@ -11,8 +11,12 @@ export default async function StoryPage(props: StoryProps) {
     const { slug } = await params
     if (!slug) return <div>Story not found</div>
 
+    const title = slug.replace(/^\w|-\w/g, (match) => match.replace('-', ' ').toUpperCase())
     return <main>
-        <Hero title={slug.replace(/^\w|-\w/g, (match) => match.replace('-', ' ').toUpperCase())} />
+        <Hero title={title}
+            description="Door: William Shakespeare"
+            cta={{ text: "Terug naar Poëzie", to: '/odes/poezie' }}
+        />
         <DisplayContent>
             <p>
                 Roses are red, violets are blue,

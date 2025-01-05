@@ -1,19 +1,23 @@
 "use client"
-import { useState } from "react"
 import { Splash } from "@/components/Splash"
 import { Hero } from "@/components/Hero"
 import { DisplayContent } from "@/components/DisplayContent"
 import { Grid, GridItem } from "@/components/Grid"
+import { redirect, useSearchParams } from "next/navigation"
 
-type HomeState = {
-  splash: boolean
+
+const stringToBool = (v: string | null): boolean => {
+  if (v === 'false') return false
+  if (v === 'true') return true
+  return false
 }
 
 export default function Home() {
-  const [state, setState] = useState<HomeState>({ splash: true })
+  const searchParams = useSearchParams()
+  const splashed = searchParams.get('splashed')
 
-  if (state.splash) {
-    return <Splash unSplash={() => setState(s => ({ ...s, splash: false }))} />
+  if (!stringToBool(splashed)) { // if not splashed, only splash onces
+    return <Splash unSplash={() => redirect('/?splashed=true')} />
   }
 
   const categories: GridItem[] = [

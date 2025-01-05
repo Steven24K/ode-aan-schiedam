@@ -13,7 +13,10 @@ export default async function StoryOverview(props: StoryOverviewProps) {
     if (!category) return <div>Category not found</div>
 
     return <main>
-        <Hero title={category} />
+        <Hero title={category}
+            description="Een krachtig gedicht voor de stad"
+            cta={{ text: "Terug naar het overzicht", to: '/?splashed=true' }}
+        />
         <DisplayContent>
             <Grid items={[
                 {

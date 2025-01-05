@@ -102,6 +102,11 @@ $mobile-width: 700px;
         font-size: 2em;
         transform: rotate(-45deg);
     }
+
+    @media (max-width: $mobile-width) {
+        width: 60px;
+        height: 60px;
+    }
 }
 
 .menu-list {
@@ -123,12 +128,15 @@ $mobile-width: 700px;
             color: white;
             text-decoration: none;
 
-            &:hover,
-            &:active {
+            &:hover {
                 color: $sunny-yellow;
             }
         }
     }
+}
+
+.active {
+    color: $sunny-yellow !important;
 }
 
 .footer {
@@ -200,6 +208,7 @@ $mobile-width: 700px;
     margin: 100px 25px 0 25px;
     box-shadow: 0 15px 6px rgba(0, 0, 0, 0.3);
     height: 650px;
+    min-height: 400px;
     max-width: 600px;
 
 }
@@ -223,12 +232,20 @@ $mobile-width: 700px;
     background-color: $sunny-yellow;
     animation: curtain-down 2s ease-in-out forwards;
 
-    h1 {
-        padding: 1px;
-        font-family: 'Gotham-Black';
-        color: $just-black;
-        animation-delay: 3s;
-        animation: slide-in-top 2s ease-out forwards;
+    .hero-content {
+        opacity: 0;
+        animation: slide-in-top 2s ease-in-out forwards;
+        animation-delay: 0.5s;
+
+        h1 {
+            font-family: 'Gotham-Black';
+            color: $just-black;
+        }
+
+        p,
+        a {
+            font-family: 'Gotham-Book';
+        }
     }
 }
 
@@ -246,12 +263,16 @@ $mobile-width: 700px;
 }
 
 @keyframes slide-in-top {
-    from {
-        transform: translateY(-200%);
+    0% {
+        transform: translateY(-100%);
         opacity: 0;
     }
 
-    to {
+    50% {
+        opacity: 0.5;
+    }
+
+    100% {
         transform: translateY(0);
         opacity: 1;
     }
@@ -331,10 +352,12 @@ $mobile-width: 700px;
     @extend .grid__item;
     background-color: $just-black;
 }
+
 .grid__item--white {
     @extend .grid__item;
     background-color: $just-white;
 }
+
 .grid__item--fiery-red {
     @extend .grid__item;
     background-color: $fiery-red;
@@ -349,6 +372,7 @@ $mobile-width: 700px;
     @extend .grid__item;
     background-color: $sky-blue;
 }
+
 .grid__item--sunny-yellow {
     @extend .grid__item;
     background-color: $sunny-yellow;
@@ -363,4 +387,3 @@ $mobile-width: 700px;
     @extend .grid__item;
     background-color: $sunset-orange;
 }
-
