@@ -1,15 +1,14 @@
 "use server"
+import { Suspense } from "react"
 import { Splash } from "@/components/Splash"
 import { Hero } from "@/components/Hero"
 import { DisplayContent } from "@/components/DisplayContent"
 import { Grid, GridItem } from "@/components/Grid"
 import { StoryCounter } from "@/components/StoryCounter"
-import { Suspense } from "react"
 import { Params, SearchParams } from "@/types/Params"
 import { getLogo, getPoemCounter, getSiteInfo, getSlogan, getTitle } from "./api/GetSiteInfo"
 import { GetHomePage, GetHomePageBlocks, GetHomePageDescription, GetHomePageTitle } from "./api/GetHomePage"
 import { GetCategories } from "./api/GetCategories"
-
 
 const stringToBool = (v: string | undefined): boolean => {
   if (v === 'false') return false
@@ -17,10 +16,7 @@ const stringToBool = (v: string | undefined): boolean => {
   return false
 }
 
-type HomeProps = {
-  params: Promise<Partial<Params>>
-  searchParams: Promise<Partial<SearchParams>>
-}
+type HomeProps = { searchParams: Promise<Partial<SearchParams>> }
 
 export default async function Home(props: HomeProps) {
   const { searchParams } = props
