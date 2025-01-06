@@ -1,31 +1,19 @@
-import { GridItem } from "@/components/Grid"
 import { SiteInfo } from "@/types/SiteInfo"
+import { StrapiData } from "@/types/StrapiData"
+import { StrapiImage } from "@/types/StrapiImage"
 
-export const getSiteInfo = async (): Promise<SiteInfo> => {
-  const response = await fetch(`http://localhost:8080/wp-json/custom/v1/site-info`)
+export const getSiteInfo = async (): Promise<StrapiData<SiteInfo>> => {
+  const response = await fetch(`http://localhost:1337/api/site-info?populate=*`)
   if (response.ok) return await response.json()
   return Promise.reject(`Error while fetching SiteInfo ${response.statusText}`)
 }
 
-export const getTitle = (_siteInfo: Promise<SiteInfo>): Promise<string> => _siteInfo.then(info => info.title)
+export const getTitle = (_siteInfo: Promise<StrapiData<SiteInfo>>): Promise<string> => _siteInfo.then(info => info.data.SiteName)
 
-export const getSlogan = (_siteInfo: Promise<SiteInfo>): Promise<string> => _siteInfo.then(info => info.slogan)
+export const getSlogan = (_siteInfo: Promise<StrapiData<SiteInfo>>): Promise<string> => _siteInfo.then(info => info.data.Slogan)
 
-export const getLogo = (_siteInfo: Promise<SiteInfo>): Promise<string> => _siteInfo.then(info => info.logo)
+export const getLogo = (_siteInfo: Promise<StrapiData<SiteInfo>>): Promise<StrapiImage> => _siteInfo.then(info => info.data.Logo)
 
-export const getPoemCounter = (_siteInfo: Promise<SiteInfo>): Promise<number> => _siteInfo.then(info => info.poem_count)
+export const getIcon = (_siteInfo: Promise<StrapiData<SiteInfo>>): Promise<StrapiImage> => _siteInfo.then(info => info.data.Icon)
 
-export const getIcon = (_siteInfo: Promise<SiteInfo>): Promise<string> => _siteInfo.then(info => info.icon)
-
-export const getCategoriesGrid = (_siteInfo: Promise<SiteInfo>): Promise<GridItem[]> =>
-  _siteInfo.then(info => info.categories
-    .map<GridItem>(cat => ({
-      id: cat.term_id,
-      title: cat.name,
-      slug: `/odes/${cat.slug}/`,
-      color: cat.color,
-    }))
-  )
-
-export const getHomePageTitle = (_siteInfo: Promise<SiteInfo>): Promise<string> => _siteInfo.then(info => info.home_page.title)
-export const getHomePageContent = (_siteInfo: Promise<SiteInfo>): Promise<string> => _siteInfo.then(info => info.home_page.content)
+export const getPoemCounter = (_siteInfo: Promise<StrapiData<SiteInfo>>): Promise<number> => _siteInfo.then(info => 69)

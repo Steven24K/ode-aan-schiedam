@@ -2,11 +2,12 @@
 import { use, useState } from "react";
 import Image from "next/image";
 import { redirect } from "next/navigation";
+import { StrapiImage } from "@/types/StrapiImage";
 
 type SplashScreenProps = {
     title: Promise<string>
     slogan: Promise<string>
-    logo: Promise<string>
+    logo: Promise<StrapiImage>
 }
 
 type SplashState = {
@@ -41,10 +42,10 @@ export function Splash(props: SplashScreenProps) {
 
                 <Image
                     className="splash-logo mt-4"
-                    width={4320}
-                    height={4320}
-                    src={_logo}
-                    alt="750 Schiedam Logo"
+                    width={_logo.formats.large.width}
+                    height={_logo.formats.large.height}
+                    src={`http://localhost:1337${_logo.formats.large.url}`}
+                    alt={_logo.formats.large.name}
                 />
 
             </div>

@@ -2,11 +2,13 @@
 import { Splash } from "@/components/Splash"
 import { Hero } from "@/components/Hero"
 import { DisplayContent } from "@/components/DisplayContent"
-import { Grid } from "@/components/Grid"
+import { Grid, GridItem } from "@/components/Grid"
 import { StoryCounter } from "@/components/StoryCounter"
 import { Suspense } from "react"
 import { Params, SearchParams } from "@/types/Params"
-import { getCategoriesGrid, getHomePageContent, getHomePageTitle, getLogo, getPoemCounter, getSiteInfo, getSlogan, getTitle } from "./api/GetSiteInfo"
+import { getLogo, getPoemCounter, getSiteInfo, getSlogan, getTitle } from "./api/GetSiteInfo"
+import { GetHomePage, GetHomePageBlocks, GetHomePageDescription, GetHomePageTitle } from "./api/GetHomePage"
+import { GetCategories } from "./api/GetCategories"
 
 
 const stringToBool = (v: string | undefined): boolean => {
@@ -36,12 +38,19 @@ export default async function Home(props: HomeProps) {
     </Suspense>
   }
 
+  const homepage = GetHomePage()
+
   return <main>
     <Suspense fallback={<div>Loading...</div>}>
-      <Hero title={getHomePageTitle(siteInfo)} />
+      <Hero title={GetHomePageTitle(homepage)} description={GetHomePageDescription(homepage)} />
       <StoryCounter count={getPoemCounter(siteInfo)} />
-      <DisplayContent content={getHomePageContent(siteInfo)}>
-        <Grid items={getCategoriesGrid(siteInfo)} />
+      <DisplayContent blocks={GetHomePageBlocks(homepage)}>
+        <Grid items={GetCategories().then(d => d.data.map<GridItem>(cat => ({
+          id: cat.id,
+          title: cat.Title,
+          slug: `/odes/${cat.slug}/`,
+          color: cat.Color,
+        })))} />
       </DisplayContent>
     </Suspense>
   </main>

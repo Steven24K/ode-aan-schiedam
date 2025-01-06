@@ -14,7 +14,7 @@ export default async function StoryOverview(props: StoryOverviewProps) {
 
     return <main>
         <Hero title={Promise.resolve(category)}
-            description="Een krachtig gedicht voor de stad"
+            description={Promise.resolve("Een krachtig gedicht voor de stad")}
             cta={{ text: "Terug naar het overzicht", to: '/?splashed=true' }}
         />
         <DisplayContent>

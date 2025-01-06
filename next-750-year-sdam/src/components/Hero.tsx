@@ -4,7 +4,7 @@ import { use } from "react"
 
 type HeroProps = {
     title: Promise<string>
-    description?: string
+    description?: Promise<string | undefined>
     cta?: {
         text: string
         to: string
@@ -15,6 +15,7 @@ export const Hero = (props: HeroProps) => {
     const { title, description, cta } = props
 
     const _title = use(title)
+    const _description = description ? use(description) : null
 
     return <header className="hero">
         <Image
@@ -27,8 +28,8 @@ export const Hero = (props: HeroProps) => {
         <div className="hero-content flex flex-col justify-center items-center h-full space-y-4">
             <h1 className="text-center text-4xl p-1">{_title}</h1>
             {
-                description &&
-                <p className="text-center">{description}</p>
+                _description &&
+                <p className="text-center">{_description}</p>
             }
             {
                 cta &&

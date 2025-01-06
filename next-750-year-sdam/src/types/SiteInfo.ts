@@ -1,12 +1,8 @@
-import { PostCategory } from "./PostCategory"
-import { WpHomePage } from "./WpHomePage"
+import { StrapiImage } from "./StrapiImage"
 
 export type SiteInfo = {
-    title: string
-    slogan: string
-    icon: string
-    logo: string
-    poem_count: number
-    categories: PostCategory[]
-    home_page: WpHomePage
+    SiteName: string
+    Slogan: string
+    Logo: StrapiImage
+    Icon: StrapiImage
 }

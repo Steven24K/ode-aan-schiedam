@@ -13,12 +13,13 @@ export default function RootLayout(props: Readonly<LayoutProps>) {
 
   const siteInfo = getSiteInfo()
 
-  const _favicon = getIcon(siteInfo)
+  const favicon = getIcon(siteInfo)
+  const _favicon = use(favicon)
 
   return (
     <html lang="en">
       <head>
-        <link rel="icon" href={use(_favicon)} type="image/x-icon" />
+        <link rel="icon" href={`http://localhost:1337${_favicon.formats.small.url}`} type="image/x-icon" />
         <link rel='stylesheet' id='wp-block-library-css' href='http://localhost:8080/wp-includes/css/dist/block-library/style.min.css?ver=6.7.1' type='text/css' media='all' />
       </head>
       <body>
