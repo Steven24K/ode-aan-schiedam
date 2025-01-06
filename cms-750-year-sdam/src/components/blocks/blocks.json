@@ -1,0 +1,40 @@
+{
+  "collectionName": "components_blocks_blocks",
+  "info": {
+    "displayName": "Blocks",
+    "icon": "apps"
+  },
+  "options": {},
+  "attributes": {
+    "Type": {
+      "type": "enumeration",
+      "enum": [
+        "text",
+        "text-image",
+        "cta"
+      ],
+      "default": "text",
+      "required": false
+    },
+    "Title": {
+      "type": "string"
+    },
+    "Content": {
+      "type": "richtext"
+    },
+    "Image": {
+      "allowedTypes": [
+        "images",
+        "files"
+      ],
+      "type": "media",
+      "multiple": false
+    },
+    "Button": {
+      "type": "component",
+      "repeatable": true,
+      "component": "clickables.button",
+      "max": 2
+    }
+  }
+}
