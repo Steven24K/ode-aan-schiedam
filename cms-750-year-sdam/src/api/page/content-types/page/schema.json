@@ -1,10 +1,10 @@
 {
-  "kind": "singleType",
-  "collectionName": "homepages",
+  "kind": "collectionType",
+  "collectionName": "pages",
   "info": {
-    "singularName": "homepage",
-    "pluralName": "homepages",
-    "displayName": "Homepage",
+    "singularName": "page",
+    "pluralName": "pages",
+    "displayName": "Pages",
     "description": ""
   },
   "options": {
@@ -14,6 +14,11 @@
   "attributes": {
     "Title": {
       "type": "string",
+      "required": true
+    },
+    "slug": {
+      "type": "uid",
+      "targetField": "Title",
       "required": true
     },
     "Description": {
@@ -26,8 +31,8 @@
         "blocks.text-image",
         "blocks.call-to-action-cta"
       ],
-      "min": 1,
-      "required": true
+      "required": true,
+      "min": 1
     }
   }
 }

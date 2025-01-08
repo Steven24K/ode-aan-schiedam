@@ -2,15 +2,18 @@
   "collectionName": "components_clickables_buttons",
   "info": {
     "displayName": "Button",
-    "icon": "cursor"
+    "icon": "cursor",
+    "description": ""
   },
   "options": {},
   "attributes": {
     "Title": {
-      "type": "string"
+      "type": "string",
+      "required": true
     },
     "URL": {
-      "type": "string"
+      "type": "string",
+      "required": true
     }
   }
 }

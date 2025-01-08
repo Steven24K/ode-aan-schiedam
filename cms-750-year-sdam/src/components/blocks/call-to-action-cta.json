@@ -1,31 +1,24 @@
 {
-  "collectionName": "components_blocks_blocks",
+  "collectionName": "components_blocks_call_to_action_cta_s",
   "info": {
-    "displayName": "Blocks",
+    "displayName": "Call To Action (CTA)",
     "icon": "apps"
   },
   "options": {},
   "attributes": {
-    "Type": {
-      "type": "enumeration",
-      "enum": [
-        "text",
-        "text-image",
-        "cta"
-      ],
-      "default": "text",
-      "required": false
-    },
     "Title": {
       "type": "string"
     },
-    "Content": {
-      "type": "richtext"
+    "Description": {
+      "type": "richtext",
+      "required": true
     },
     "Image": {
       "allowedTypes": [
         "images",
-        "files"
+        "files",
+        "videos",
+        "audios"
       ],
       "type": "media",
       "multiple": false
