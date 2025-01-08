@@ -4,7 +4,8 @@
   "info": {
     "singularName": "site-info",
     "pluralName": "site-infos",
-    "displayName": "SiteInfo"
+    "displayName": "SiteInfo",
+    "description": ""
   },
   "options": {
     "draftAndPublish": true
@@ -19,25 +20,14 @@
       "type": "string",
       "required": true
     },
-    "Logo": {
-      "allowedTypes": [
-        "images",
-        "files",
-        "videos",
-        "audios"
-      ],
+    "Icon": {
       "type": "media",
       "multiple": false,
-      "required": true
-    },
-    "Icon": {
+      "required": true,
       "allowedTypes": [
         "images",
         "files"
-      ],
-      "type": "media",
-      "multiple": false,
-      "required": true
+      ]
     }
   }
 }

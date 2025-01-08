@@ -17,7 +17,7 @@
       "required": true
     },
     "Description": {
-      "type": "text"
+      "type": "string"
     },
     "Blocks": {
       "type": "dynamiczone",
@@ -28,6 +28,15 @@
       ],
       "min": 1,
       "required": true
+    },
+    "Logo": {
+      "type": "media",
+      "multiple": false,
+      "required": true,
+      "allowedTypes": [
+        "images",
+        "files"
+      ]
     }
   }
 }

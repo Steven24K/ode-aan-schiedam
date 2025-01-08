@@ -12,8 +12,7 @@ export const getTitle = (_siteInfo: Promise<StrapiData<SiteInfo>>): Promise<stri
 
 export const getSlogan = (_siteInfo: Promise<StrapiData<SiteInfo>>): Promise<string> => _siteInfo.then(info => info.data.Slogan)
 
-export const getLogo = (_siteInfo: Promise<StrapiData<SiteInfo>>): Promise<StrapiImage> => _siteInfo.then(info => info.data.Logo)
-
 export const getIcon = (_siteInfo: Promise<StrapiData<SiteInfo>>): Promise<StrapiImage> => _siteInfo.then(info => info.data.Icon)
 
-export const getPoemCounter = (_siteInfo: Promise<StrapiData<SiteInfo>>): Promise<number> => _siteInfo.then(info => 69)
+
+export const getPoemCounter = (): Promise<number> => Promise.resolve(69)

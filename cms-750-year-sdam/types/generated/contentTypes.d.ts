@@ -439,13 +439,15 @@ export interface ApiHomepageHomepage extends Struct.SingleTypeSchema {
     createdAt: Schema.Attribute.DateTime;
     createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
-    Description: Schema.Attribute.Text;
+    Description: Schema.Attribute.String;
     locale: Schema.Attribute.String & Schema.Attribute.Private;
     localizations: Schema.Attribute.Relation<
       'oneToMany',
       'api::homepage.homepage'
     > &
       Schema.Attribute.Private;
+    Logo: Schema.Attribute.Media<'images' | 'files'> &
+      Schema.Attribute.Required;
     publishedAt: Schema.Attribute.DateTime;
     Title: Schema.Attribute.String & Schema.Attribute.Required;
     updatedAt: Schema.Attribute.DateTime;
@@ -524,6 +526,7 @@ export interface ApiPoemPoem extends Struct.CollectionTypeSchema {
 export interface ApiSiteInfoSiteInfo extends Struct.SingleTypeSchema {
   collectionName: 'site_infos';
   info: {
+    description: '';
     displayName: 'SiteInfo';
     pluralName: 'site-infos';
     singularName: 'site-info';
@@ -543,8 +546,6 @@ export interface ApiSiteInfoSiteInfo extends Struct.SingleTypeSchema {
       'api::site-info.site-info'
     > &
       Schema.Attribute.Private;
-    Logo: Schema.Attribute.Media<'images' | 'files' | 'videos' | 'audios'> &
-      Schema.Attribute.Required;
     publishedAt: Schema.Attribute.DateTime;
     SiteName: Schema.Attribute.String & Schema.Attribute.Required;
     Slogan: Schema.Attribute.String & Schema.Attribute.Required;

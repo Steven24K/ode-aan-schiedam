@@ -2,10 +2,10 @@ import { use } from "react"
 import Markdown from 'react-markdown'
 import Image from "next/image"
 import Link from "next/link"
-import { Block } from "@/types/StrapiHomePage"
+import { PageBlock } from "@/types/PageBlock"
 
 type DisplayContentProps = {
-    blocks?: Promise<Block[]>
+    blocks?: Promise<PageBlock[]>
     children?: React.ReactNode
 }
 
@@ -21,57 +21,50 @@ export const DisplayContent = (props: DisplayContentProps) => {
 
         {
             _blocks.map(block => {
-                const id = block.id
-                const type = block.Type
-                const title = block.Title
-                const Content = block.Content
-                const BlockImage = block.Image
-                const Actions = block.Button
-
-                switch (type) {
-                    case 'text':
+                switch (block.__component) {
+                    case 'blocks.text':
                         return (
-                            <div key={id} className="text-block my-4">
-                                <h2 className="text-2xl font-bold mb-2">{title}</h2>
-                                {Content && <Markdown className="text-base">{Content}</Markdown>}
+                            <div key={`${block.__component}_${block.id}`} className="text-block my-4">
+                                {block.Title && <h2 className="text-2xl font-bold mb-2">{block.Title}</h2>}
+                                {block.Description && <Markdown className="text-base">{block.Description}</Markdown>}
                             </div>
                         )
-                    case 'text-image':
+                    case 'blocks.text-image':
                         return (
-                            <div key={id} className="image-block flex items-center my-4">
+                            <div key={block.id} className="image-block flex items-center my-4">
                                 <div className="text w-1/2">
-                                    <h2 className="text-2xl font-bold mb-2">{title}</h2>
-                                    {Content && <Markdown className="text-base">{Content}</Markdown>}
+                                    {block.Title && <h2 className="text-2xl font-bold mb-2">{block.Title}</h2>}
+                                    {block.Description && <Markdown className="text-base">{block.Description}</Markdown>}
                                 </div>
                                 <div className="image w-1/2">
-                                    {BlockImage && (
+                                    {block.Image && (
                                         <Image
-                                            src={`http://localhost:1337${BlockImage.formats.large.url}`}
-                                            alt={BlockImage.formats.large.name}
-                                            height={BlockImage.formats.large.height}
-                                            width={BlockImage.formats.large.width}
+                                            src={`http://localhost:1337${block.Image.formats.large.url}`}
+                                            alt={block.Image.formats.large.name}
+                                            height={block.Image.formats.large.height}
+                                            width={block.Image.formats.large.width}
                                         />
                                     )}
                                 </div>
                             </div>
                         )
-                    case 'cta':
+                    case 'blocks.call-to-action-cta':
                         return (
-                            <div key={id} className="cta-block my-4 p-4 border rounded-lg shadow-md text-center">
-                                {BlockImage && (
+                            <div key={block.id} className="cta-block my-4 p-4 border rounded-lg shadow-md text-center">
+                                {block.Image && (
                                     <Image
-                                        src={`http://localhost:1337${BlockImage.formats.large.url}`}
-                                        alt={BlockImage.formats.large.name}
-                                        height={BlockImage.formats.large.height}
-                                        width={BlockImage.formats.large.width}
+                                        src={`http://localhost:1337${block.Image.formats.large.url}`}
+                                        alt={block.Image.formats.large.name}
+                                        height={block.Image.formats.large.height}
+                                        width={block.Image.formats.large.width}
                                         className="mb-4 mx-auto"
                                     />
                                 )}
-                                <h2 className="text-2xl font-bold mb-2">{title}</h2>
-                                {Content && <Markdown className="text-base mb-4">{Content}</Markdown>}
+                                {block.Title && <h2 className="text-2xl font-bold mb-2">{block.Title}</h2>}
+                                {block.Description && <Markdown className="text-base mb-4">{block.Description}</Markdown>}
                                 <div className="actions">
-                                    {Actions && Actions.map(btn => (
-                                        <Link key={btn.id} href={btn.URL}>
+                                    {block.Button && block.Button.map(btn => (
+                                        <Link key={`cta_button_${btn.id}`} href={btn.URL}>
                                             {btn.Title}
                                         </Link>
                                     ))}
@@ -79,7 +72,7 @@ export const DisplayContent = (props: DisplayContentProps) => {
                             </div>
                         )
                     default:
-                        return <div>Block does not exist {type}</div>
+                        return <div>Block does not exist</div>
                 }
             })
         }
