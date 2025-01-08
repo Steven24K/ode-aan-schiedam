@@ -1,0 +1,21 @@
+{
+  "kind": "singleType",
+  "collectionName": "menu_items",
+  "info": {
+    "singularName": "menu-item",
+    "pluralName": "menu-items",
+    "displayName": "Main Menu",
+    "description": ""
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "Item": {
+      "type": "component",
+      "repeatable": true,
+      "component": "clickables.menu-item"
+    }
+  }
+}

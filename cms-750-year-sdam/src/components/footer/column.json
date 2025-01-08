@@ -1,0 +1,19 @@
+{
+  "collectionName": "components_footer_columns",
+  "info": {
+    "displayName": "Column",
+    "icon": "apps"
+  },
+  "options": {},
+  "attributes": {
+    "Title": {
+      "type": "string",
+      "required": true
+    },
+    "Items": {
+      "type": "component",
+      "repeatable": true,
+      "component": "clickables.menu-item"
+    }
+  }
+}

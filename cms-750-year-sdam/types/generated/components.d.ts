@@ -59,6 +59,30 @@ export interface ClickablesButton extends Struct.ComponentSchema {
   };
 }
 
+export interface ClickablesMenuItem extends Struct.ComponentSchema {
+  collectionName: 'components_clickables_menu_items';
+  info: {
+    displayName: 'Menu Item';
+    icon: 'arrowRight';
+  };
+  attributes: {
+    Title: Schema.Attribute.String & Schema.Attribute.Required;
+    URL: Schema.Attribute.String & Schema.Attribute.Required;
+  };
+}
+
+export interface FooterColumn extends Struct.ComponentSchema {
+  collectionName: 'components_footer_columns';
+  info: {
+    displayName: 'Column';
+    icon: 'apps';
+  };
+  attributes: {
+    Items: Schema.Attribute.Component<'clickables.menu-item', true>;
+    Title: Schema.Attribute.String & Schema.Attribute.Required;
+  };
+}
+
 declare module '@strapi/strapi' {
   export module Public {
     export interface ComponentSchemas {
@@ -66,6 +90,8 @@ declare module '@strapi/strapi' {
       'blocks.text': BlocksText;
       'blocks.text-image': BlocksTextImage;
       'clickables.button': ClickablesButton;
+      'clickables.menu-item': ClickablesMenuItem;
+      'footer.column': FooterColumn;
     }
   }
 }
