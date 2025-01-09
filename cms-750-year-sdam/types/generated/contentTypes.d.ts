@@ -492,13 +492,12 @@ export interface ApiHomepageHomepage extends Struct.SingleTypeSchema {
   };
 }
 
-export interface ApiMenuItemMenuItem extends Struct.SingleTypeSchema {
-  collectionName: 'menu_items';
+export interface ApiMainMenuMainMenu extends Struct.SingleTypeSchema {
+  collectionName: 'main_menus';
   info: {
-    description: '';
     displayName: 'Main Menu';
-    pluralName: 'menu-items';
-    singularName: 'menu-item';
+    pluralName: 'main-menus';
+    singularName: 'main-menu';
   };
   options: {
     draftAndPublish: true;
@@ -511,7 +510,7 @@ export interface ApiMenuItemMenuItem extends Struct.SingleTypeSchema {
     locale: Schema.Attribute.String & Schema.Attribute.Private;
     localizations: Schema.Attribute.Relation<
       'oneToMany',
-      'api::menu-item.menu-item'
+      'api::main-menu.main-menu'
     > &
       Schema.Attribute.Private;
     publishedAt: Schema.Attribute.DateTime;
@@ -1132,7 +1131,7 @@ declare module '@strapi/strapi' {
       'api::category.category': ApiCategoryCategory;
       'api::footer-menu.footer-menu': ApiFooterMenuFooterMenu;
       'api::homepage.homepage': ApiHomepageHomepage;
-      'api::menu-item.menu-item': ApiMenuItemMenuItem;
+      'api::main-menu.main-menu': ApiMainMenuMainMenu;
       'api::page.page': ApiPagePage;
       'api::poem.poem': ApiPoemPoem;
       'api::site-info.site-info': ApiSiteInfoSiteInfo;

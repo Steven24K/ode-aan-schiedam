@@ -1,11 +1,10 @@
 {
   "kind": "singleType",
-  "collectionName": "menu_items",
+  "collectionName": "main_menus",
   "info": {
-    "singularName": "menu-item",
-    "pluralName": "menu-items",
-    "displayName": "Main Menu",
-    "description": ""
+    "singularName": "main-menu",
+    "pluralName": "main-menus",
+    "displayName": "Main Menu"
   },
   "options": {
     "draftAndPublish": true

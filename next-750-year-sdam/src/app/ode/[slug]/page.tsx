@@ -1,6 +1,8 @@
 import { DisplayContent } from "@/components/DisplayContent"
 import { Hero } from "@/components/Hero"
+import { StrapiCMSService } from "@/services/StrapiCMSService"
 import { Params } from "@/types/Params"
+import Markdown from "react-markdown"
 
 type StoryProps = {
     params: Promise<Partial<Params>>
@@ -9,21 +11,21 @@ type StoryProps = {
 export default async function StoryPage(props: StoryProps) {
     const { params } = props
     const { slug } = await params
-    if (!slug) return <div>Story not found</div>
 
-    const title = slug.replace(/^\w|-\w/g, (match) => match.replace('-', ' ').toUpperCase())
+    const strapi = new StrapiCMSService()
+    const poem = strapi.GetPoem(slug || 'null')
+
+    const _category = await StrapiCMSService.GetPoemCategory(poem)
+    const _content = await StrapiCMSService.GetPoemContent(poem)
     return <main>
-        <Hero title={Promise.resolve(title)}
-            description="Door: William Shakespeare"
-            cta={{ text: "Terug naar Poëzie", to: '/odes/poezie' }}
+        <Hero title={StrapiCMSService.GetPoemTitle(poem)}
+            description={StrapiCMSService.GetPoemAuthor(poem)}
+            cta={{ text: "Terug naar Poëzie", to: `/odes/${_category.slug}` }}
         />
         <DisplayContent>
-            <p>
-                Roses are red, violets are blue,
-                Sugar is sweet, and so are you.
-                The sun shines bright, the sky is clear,
-                In this lovely town, there's nothing to fear.
-            </p>
+            <Markdown>
+                {_content}
+            </Markdown>
         </DisplayContent>
     </main>
 } 

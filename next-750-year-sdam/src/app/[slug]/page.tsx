@@ -1,5 +1,6 @@
 import { DisplayContent } from "@/components/DisplayContent";
 import { Hero } from "@/components/Hero";
+import { StrapiCMSService } from "@/services/StrapiCMSService";
 import { Params } from "@/types/Params";
 
 type PageProps = {
@@ -9,16 +10,16 @@ type PageProps = {
 export default async function CMSPage(props: PageProps) {
     const { params } = props
     const { slug } = await params
-    if (!slug) return <div>Page not found</div>
+
+    const strapi = new StrapiCMSService()
+    const page = strapi.GetPage(slug || '')
+    
 
     return <main>
-        <Hero title={Promise.resolve("CMS content page")} />
-        
-        <DisplayContent>
-            <h1>This is supposed to be a page from the cms</h1>
-            <p>
-                Lorum ipsum dolor sit amet, consectetur adipiscing elit. Nullam nec
-            </p>
+        <Hero title={StrapiCMSService.GetPageTitle(page)} description={StrapiCMSService.GetPageDescription(page)} />
+
+        <DisplayContent blocks={StrapiCMSService.GetPageBlocks(page)}>
+
         </DisplayContent>
     </main>
 }

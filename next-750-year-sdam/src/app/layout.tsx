@@ -1,19 +1,28 @@
 import { NavBar } from "@/components/NavBar";
 import { Footer } from "@/components/Footer";
 import "./styling.scss";
-import { getIcon, getSiteInfo, getSlogan, getTitle } from "./api/GetSiteInfo";
 import { use } from "react";
+import { StrapiCMSService } from "@/services/StrapiCMSService";
 
 type LayoutProps = { children: React.ReactNode; }
 
 export default function RootLayout(props: Readonly<LayoutProps>) {
   const { children } = props
 
-  const siteInfo = getSiteInfo()
+  const strapi = new StrapiCMSService()
+  const siteInfo = strapi.getSiteInfo()
 
-  const _title = use(getTitle(siteInfo))
-  const _slogan = use(getSlogan(siteInfo))
-  const _icon = use(getIcon(siteInfo))
+  const title = StrapiCMSService.getTitle(siteInfo)
+  const _title = use(title)
+
+  const slogan = StrapiCMSService.getSlogan(siteInfo)
+  const _slogan = use(slogan)
+
+  const icon = StrapiCMSService.getIcon(siteInfo)
+  const _icon = use(icon)
+
+  const main_menu_item = strapi.GetMainMenu().then(data => data.data.Item)
+  const footer_columns = strapi.GetFooterMenu().then(data => data.data)
 
   return (
     <html lang="en">
@@ -30,16 +39,16 @@ export default function RootLayout(props: Readonly<LayoutProps>) {
         <meta name="twitter:image" content={`http://localhost:1337${_icon.formats.small.url}`} />
         <meta name="robots" content="index, follow" />
         <meta name="googlebot" content="index, follow" />
-        
+
         <link rel="icon" href={`http://localhost:1337${_icon.formats.small.url}`} type="image/png" />
       </head>
       <body>
 
-        <NavBar />
+        <NavBar items={main_menu_item} />
 
         {children}
 
-        <Footer />
+        <Footer columns={footer_columns} />
 
       </body>
     </html>

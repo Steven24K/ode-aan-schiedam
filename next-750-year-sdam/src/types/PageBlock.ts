@@ -31,3 +31,5 @@ type Button = {
     Title: string
     URL: string
 }
+
+export type MenuItem = Button

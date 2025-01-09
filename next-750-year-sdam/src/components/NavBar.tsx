@@ -1,9 +1,14 @@
 "use client";
-import { useState } from "react";
+import { use, useState } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
+import { MenuItem } from "@/types/PageBlock";
 
-export const NavBar = () => {
+interface NavBarProps {
+    items: Promise< MenuItem[]>
+}
+
+export const NavBar = (props: NavBarProps) => {
     const [isMenuOpen, setIsMenuOpen] = useState(false);
     const pathName = usePathname();
 
@@ -17,11 +22,7 @@ export const NavBar = () => {
         return ''
     }
 
-    const menu = [
-        { text: "Home", to: "/?splashed=true" },
-        { text: "About Us", to: "/about" },
-        { text: "Contact Us", to: "/contact" },
-    ]
+    const _menu = use(props.items)
 
     return <nav>
         <button className={`menu-button`} onClick={toggleMenu}>
@@ -31,9 +32,9 @@ export const NavBar = () => {
             <nav>
                 <ul className={`menu-list`}>
                     {
-                        menu.map(item => <li key={item.to}>
-                            <Link className={isActive(item.to)} onClick={toggleMenu} href={item.to}>
-                                {item.text}
+                        _menu.map(item => <li key={item.id}>
+                            <Link className={isActive(item.URL)} onClick={toggleMenu} href={item.URL}>
+                                {item.Title}
                             </Link>
                         </li>)
                     }
