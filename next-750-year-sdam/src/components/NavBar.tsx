@@ -1,11 +1,12 @@
 "use client";
+import * as React from "react"
 import { use, useState } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { MenuItem } from "@/types/PageBlock";
 
 interface NavBarProps {
-    items: Promise< MenuItem[]>
+    items: Promise<MenuItem[]>
 }
 
 export const NavBar = (props: NavBarProps) => {

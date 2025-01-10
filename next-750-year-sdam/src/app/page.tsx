@@ -7,6 +7,7 @@ import { Grid, GridItem } from "@/components/Grid"
 import { StoryCounter } from "@/components/StoryCounter"
 import { SearchParams } from "@/types/Params"
 import { StrapiCMSService } from "@/services/StrapiCMSService"
+import { Loader } from "@/components/Loader"
 
 const stringToBool = (v: string | undefined): boolean => {
   if (v === 'false') return false
@@ -24,21 +25,27 @@ export default async function Home(props: HomeProps) {
 
   const homepage = strapi.GetHomePage()
 
+  const title = homepage.then(home => home.data.Title)
+  const description = homepage.then(home => home.data.Description)
+  const logo = homepage.then(home => home.data.Logo)
+  const blocks = homepage.then(home => home.data.Blocks)
+
+
   if (!stringToBool(splashed)) { // if not splashed, only splash onces
-    return <Suspense fallback={<div>Loading...</div>}>
+    return <Suspense fallback={<Loader />}>
       <Splash
-        title={StrapiCMSService.GetHomePageTitle(homepage)}
-        slogan={StrapiCMSService.GetHomePageTitle(homepage)}
-        logo={StrapiCMSService.GetLogo(homepage)}
+        title={title}
+        slogan={description}
+        logo={logo}
       />
     </Suspense>
   }
 
   return <main>
-    <Suspense fallback={<div>Loading...</div>}>
-      <Hero title={StrapiCMSService.GetHomePageTitle(homepage)} description={StrapiCMSService.GetHomePageDescription(homepage)} />
-      <StoryCounter count={strapi.getPoemCounter()} />
-      <DisplayContent blocks={StrapiCMSService.GetHomePageBlocks(homepage)}>
+    <Hero title={title} description={description} />
+    <StoryCounter count={strapi.getPoemCounter()} />
+    <Suspense fallback={<Loader />}>
+      <DisplayContent blocks={blocks}>
         <Grid items={strapi.GetCategories().then(d => d.data.map<GridItem>(cat => ({
           id: cat.id,
           title: cat.Title,

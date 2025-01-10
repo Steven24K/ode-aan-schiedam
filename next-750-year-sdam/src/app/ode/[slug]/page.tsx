@@ -14,13 +14,17 @@ export default async function StoryPage(props: StoryProps) {
 
     const strapi = new StrapiCMSService()
     const poem = strapi.GetPoem(slug || 'null')
+    const _poem = await poem
 
-    const _category = await StrapiCMSService.GetPoemCategory(poem)
-    const _content = await StrapiCMSService.GetPoemContent(poem)
+    const title = poem.then(p => p?.Title || '')
+    const author = poem.then(p => p?.Author || '')
+    const _category = _poem?.category
+    const _content = _poem?.Content || ""
+
     return <main>
-        <Hero title={StrapiCMSService.GetPoemTitle(poem)}
-            description={StrapiCMSService.GetPoemAuthor(poem)}
-            cta={{ text: "Terug naar Poëzie", to: `/odes/${_category.slug}` }}
+        <Hero title={title}
+            description={author}
+            cta={{ text: `Terug naar ${_category ? _category.Title : 'het begin'}`, to: _category ? `/odes/${_category.slug}` : '/?splashed=true' }}
         />
         <DisplayContent>
             <Markdown>

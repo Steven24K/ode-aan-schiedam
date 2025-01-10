@@ -57,6 +57,36 @@ $mobile-width: 700px;
     padding: 0;
 }
 
+// Loader 
+/* HTML: <div class="loader"></div> */
+.loader {
+    width: 40px;
+    aspect-ratio: 1;
+    background:
+        linear-gradient($sunny-yellow 0 0),
+        linear-gradient($just-black 0 0),
+        $sunny-yellow;
+    background-repeat: no-repeat;
+    animation: loading 1.5s infinite;
+    rotate: 45deg;
+}
+
+@keyframes loading {
+    0% {
+        background-size: 100% 0, 0 100%
+    }
+
+    30%,
+    50% {
+        background-size: 100% 0, 100% 100%
+    }
+
+    80%,
+    100% {
+        background-size: 100% 100%, 100% 100%
+    }
+}
+
 // Site main navigation
 .sidebar {
     z-index: 1;

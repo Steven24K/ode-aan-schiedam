@@ -1,25 +1,19 @@
 import { NavBar } from "@/components/NavBar";
 import { Footer } from "@/components/Footer";
-import "./styling.scss";
-import { use } from "react";
 import { StrapiCMSService } from "@/services/StrapiCMSService";
+import "./styling.scss";
 
 type LayoutProps = { children: React.ReactNode; }
 
-export default function RootLayout(props: Readonly<LayoutProps>) {
+export default async function RootLayout(props: Readonly<LayoutProps>) {
   const { children } = props
 
   const strapi = new StrapiCMSService()
-  const siteInfo = strapi.getSiteInfo()
+  const siteInfo = await strapi.getSiteInfo()
 
-  const title = StrapiCMSService.getTitle(siteInfo)
-  const _title = use(title)
-
-  const slogan = StrapiCMSService.getSlogan(siteInfo)
-  const _slogan = use(slogan)
-
-  const icon = StrapiCMSService.getIcon(siteInfo)
-  const _icon = use(icon)
+  const _title = siteInfo.data.SiteName
+  const _slogan = siteInfo.data.Slogan
+  const _icon = siteInfo.data.Icon
 
   const main_menu_item = strapi.GetMainMenu().then(data => data.data.Item)
   const footer_columns = strapi.GetFooterMenu().then(data => data.data)

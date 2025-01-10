@@ -4,7 +4,7 @@ import { StrapiCMSService } from "@/services/StrapiCMSService";
 import { Params } from "@/types/Params";
 
 type PageProps = {
-    params: Promise<Partial<Params>>
+    params: Promise<Params>
 }
 
 export default async function CMSPage(props: PageProps) {
@@ -12,14 +12,16 @@ export default async function CMSPage(props: PageProps) {
     const { slug } = await params
 
     const strapi = new StrapiCMSService()
-    const page = strapi.GetPage(slug || '')
-    
+    const page = strapi.GetPage(slug)
+
+    const title = page.then(p => p.Title)
+    const description = page.then(p => p.Description)
+    const blocks = page.then(p => p.Blocks)
 
     return <main>
-        <Hero title={StrapiCMSService.GetPageTitle(page)} description={StrapiCMSService.GetPageDescription(page)} />
+        <Hero title={title} description={description} />
 
-        <DisplayContent blocks={StrapiCMSService.GetPageBlocks(page)}>
-
+        <DisplayContent blocks={blocks}>
         </DisplayContent>
     </main>
 }
