@@ -28,8 +28,8 @@ export const CounterAnimation = (props: CounterProps) => {
                 setState({
                     ...state,
                     counter: newCounter,
-                    incrementor: state.incrementor++,
-                    timeout: state.timeout--
+                    incrementor: state.incrementor + 1,
+                    timeout: state.timeout - 1
                 })
             }, state.timeout)
         }
