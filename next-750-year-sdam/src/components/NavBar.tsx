@@ -25,22 +25,20 @@ export const NavBar = (props: NavBarProps) => {
 
     const _menu = use(props.items)
 
-    return <nav>
+    return <>
         <button className={`menu-button`} onClick={toggleMenu}>
             <span>{isMenuOpen ? "✘" : "☰"}</span>
         </button>
-        <div className={`sidebar ${isMenuOpen ? "open" : ""}`}>
-            <nav>
-                <ul className={`menu-list`}>
-                    {
-                        _menu.map(item => <li key={item.id}>
-                            <Link className={isActive(item.URL)} onClick={toggleMenu} href={item.URL}>
-                                {item.Title}
-                            </Link>
-                        </li>)
-                    }
-                </ul>
-            </nav>
-        </div>
-    </nav>
+        <nav className={`sidebar ${isMenuOpen ? "open" : ""}`}>
+            <ul className={`menu-list`}>
+                {
+                    _menu.map(item => <li key={item.id}>
+                        <Link className={isActive(item.URL)} onClick={toggleMenu} href={item.URL}>
+                            {item.Title}
+                        </Link>
+                    </li>)
+                }
+            </ul>
+        </nav>
+    </>
 }

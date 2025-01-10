@@ -1,13 +1,11 @@
-import { FooterMenu } from "@/types/Footer"
+import { StrapiCMSService } from "@/services/StrapiCMSService"
 import Link from "next/link"
-import { use } from "react"
 
-interface FooterProps {
-    columns: Promise<FooterMenu>
-}
+export async function Footer() {
 
-export const Footer = (props: FooterProps) => {
-    const _columns = use(props.columns)
+    const strapi = new StrapiCMSService()
+    const footer = await strapi.GetFooterMenu()
+    const _columns = footer.data
 
     return <footer className="footer py-8">
         <div className="container mx-auto px-4">
