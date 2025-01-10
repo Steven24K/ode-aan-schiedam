@@ -1,12 +1,13 @@
-import { use } from "react"
+import { StrapiCMSService } from "@/services/StrapiCMSService"
+import { Suspense } from "react"
+import { CounterAnimation } from "./CounterAnimation"
 
-type CounterProps = {
-    count: Promise<number>
-}
 
-export const StoryCounter = (props: CounterProps) => {
-    const { count } = props
-    const _count = use(count)
+
+export const StoryCounter = () => {
+    const strapi = new StrapiCMSService()
+
+    const poem_count = strapi.getPoemCounter()
 
     return <div className="counter">
         <div className="diamond-wrapper">
@@ -20,7 +21,9 @@ export const StoryCounter = (props: CounterProps) => {
         <div className="diamond-counter">
             <div className="counter-content">
                 <span className="text">Verzamelde</span>
-                <span className="number">{_count}</span>
+                <Suspense fallback={<span className="number">0</span>}>
+                    <CounterAnimation count={poem_count} />
+                </Suspense>
                 <span className="text">Odes</span>
             </div>
         </div>
@@ -34,3 +37,5 @@ export const StoryCounter = (props: CounterProps) => {
         </div>
     </div>
 }
+
+

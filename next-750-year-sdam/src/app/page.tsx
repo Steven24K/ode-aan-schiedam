@@ -43,7 +43,7 @@ export default async function Home(props: HomeProps) {
 
   return <main>
     <Hero title={title} description={description} />
-    <StoryCounter count={strapi.getPoemCounter()} />
+    <StoryCounter />
     <Suspense fallback={<Loader />}>
       <DisplayContent blocks={blocks}>
         <Grid items={strapi.GetCategories().then(d => d.data.map<GridItem>(cat => ({

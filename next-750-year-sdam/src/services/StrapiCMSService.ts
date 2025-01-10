@@ -36,8 +36,8 @@ export class StrapiCMSService {
         const _populate = populate == undefined ? "populate=*&" : populate.reduce((xs, x, i) => `${xs}populate[${i}]=${x}&`, "")
         const response = await fetch(`${this.STRAPI_CMS_URL}/api/${end_point}/?${_populate}${_filters}`)
         console.log(response.url)
-        if (response.ok) return await response.json()
         if (response.status == 404) return notFound()
+        if (response.ok) return await response.json()
         const error = `Error while fetching ${end_point} -> ${_populate}: ${response.statusText}: URL: ${response.url}`
         console.error(error)
         return Promise.reject(error)
@@ -47,7 +47,7 @@ export class StrapiCMSService {
         this.StrapiGet('site-info');
 
     public getPoemCounter = (): Promise<number> =>
-        Promise.resolve(69)
+        this.StrapiGet<StrapiPoem[]>('poems').then(res => res.data.length)
 
     public GetHomePage = async (): Promise<StrapiData<StrapiHomePage>> =>
         this.StrapiGet('homepage', { populate: ['Blocks', 'Blocks.Button', 'Blocks.Image', 'Logo'] })
@@ -69,7 +69,7 @@ export class StrapiCMSService {
         })
             .then(pages => {
                 if (pages.data.length == 0) return notFound()
-                    return pages.data[0]
+                return pages.data[0]
             })
 
     public GetPoem = async (slug: string): Promise<StrapiPoem | undefined> =>
