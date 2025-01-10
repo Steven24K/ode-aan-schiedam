@@ -1,15 +1,16 @@
 import { NavBarWrapper } from "@/components/NavBarWrapper";
 import { Footer } from "@/components/Footer";
 import "./styling.scss";
+import ErrorBoundary from "../components/ErrorBoundary";
 
 type LayoutProps = { children: React.ReactNode; }
 
 export default async function RootLayout(props: Readonly<LayoutProps>) {
   const { children } = props
 
-  const _title = "Ode aan Schiedam" 
-  const _slogan = "Ontdek de verhalen van de stad" 
-  const _icon = "/uploads/small_SDAM_750_label_RGB_1a11940a09.png" 
+  const _title = "Ode aan Schiedam"
+  const _slogan = "Ontdek de verhalen van de stad"
+  const _icon = "/uploads/small_SDAM_750_label_RGB_1a11940a09.png"
 
   return (
     <html lang="en">
@@ -30,13 +31,13 @@ export default async function RootLayout(props: Readonly<LayoutProps>) {
         <link rel="icon" href={`http://localhost:1337${_icon}`} type="image/png" />
       </head>
       <body>
-    
-        <NavBarWrapper />
+        <ErrorBoundary>
+          <NavBarWrapper />
 
-        {children}
+          {children}
 
-        <Footer />
-
+          <Footer />
+        </ErrorBoundary>
       </body>
     </html>
   );
