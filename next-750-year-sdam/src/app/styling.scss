@@ -349,9 +349,9 @@ $mobile-width: 700px;
 
 // Main Grid
 .grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-    place-items: center;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
     margin-top: 100px;
     margin-bottom: 50px;
     gap: 8rem;
