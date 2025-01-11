@@ -44,15 +44,15 @@ export default async function Home(props: HomeProps) {
   return <main>
     <Hero title={title} description={description} />
     <StoryCounter />
-    <Suspense fallback={<Loader />}>
-      <DisplayContent blocks={blocks}>
+    <DisplayContent blocks={blocks}>
+      <Suspense fallback={<Loader />}>
         <Grid items={strapi.GetCategories().then(d => d.data.map<GridItem>(cat => ({
           id: cat.id,
           title: cat.Title,
           slug: `/odes/${cat.slug}/`,
           color: cat.Color,
         })))} />
-      </DisplayContent>
-    </Suspense>
+      </Suspense>
+    </DisplayContent>
   </main>
 }
