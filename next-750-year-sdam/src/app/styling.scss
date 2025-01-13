@@ -702,9 +702,21 @@ $mobile-width: 700px;
 }
 
 // Poem styling
+@keyframes slide-in-right {
+    0% {
+        transform: translateX(100%);
+        opacity: 0;
+    }
+    100% {
+        transform: translateX(0);
+        opacity: 1;
+    }
+}
 
 .poem {
-    margin: 0 2rem;
+    overflow: hidden;
+    min-width: 60;
+    animation: slide-in-right 2.5s ease-out forwards;
     font-size: 1.5em;
     border-bottom: 2px solid $fiery-red;
     padding-bottom: 100px;
