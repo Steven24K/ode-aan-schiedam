@@ -24,7 +24,7 @@ export const StoryCounter = () => {
                 <Suspense fallback={<span className="number">0</span>}>
                     <CounterAnimation count={poem_count}/>
                 </Suspense>
-                <span className="text">Odes</span>
+                <span className="text">Verhalen</span>
             </div>
         </div>
         <div className="diamond-wrapper">
