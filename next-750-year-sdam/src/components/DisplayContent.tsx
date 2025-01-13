@@ -17,7 +17,7 @@ export const DisplayContent = (props: DisplayContentProps) => {
 
     const _blocks = blocks ? use(blocks) : []
 
-    return <div className="page-content container mx-auto my-2 p-5">
+    return <div className="page-content container mx-auto m-10 p-10">
 
         {
             _blocks.map(block => {

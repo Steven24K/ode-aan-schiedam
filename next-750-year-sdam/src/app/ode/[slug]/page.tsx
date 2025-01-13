@@ -20,7 +20,7 @@ export default async function StoryPage(props: StoryProps) {
     const author = poem.then(p => p.Author)
     const _category = _poem.category
     const _content = _poem.Content
-
+    console.log(_content)
     return <main>
         <Hero title={title}
             description={author}
@@ -28,9 +28,11 @@ export default async function StoryPage(props: StoryProps) {
             cta={{ text: `Terug naar ${_category.Title}`, to: `/odes/${_category.slug}` }}
         />
         <DisplayContent>
-            <Markdown>
-                {_content}
-            </Markdown>
+            <div className="poem">
+                <Markdown>
+                    {_content}
+                </Markdown>
+            </div>
         </DisplayContent>
     </main>
 } 

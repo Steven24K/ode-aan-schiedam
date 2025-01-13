@@ -700,3 +700,19 @@ $mobile-width: 700px;
         }
     }
 }
+
+// Poem styling
+
+.poem {
+    margin: 0 2rem;
+    font-size: 1.5em;
+    border-bottom: 2px solid $fiery-red;
+    padding-bottom: 100px;
+    p:first-child::first-letter {
+        padding-left: 25px;
+        font-size: 4em;
+        font-family: 'Brush Script MT', cursive;
+        font-weight: bold;
+        color: $fiery-red;
+    }
+}
