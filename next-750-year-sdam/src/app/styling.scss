@@ -57,6 +57,78 @@ $mobile-width: 700px;
     padding: 0;
 }
 
+// Basic backgrounds 
+.bg-sunny-yellow {
+    background-color: $sunny-yellow;
+    color: $just-black;
+}
+
+.bg-sunny-yellow--light {
+    background-color: $sunny-yellow--light;
+}
+
+.bg-fiery-red {
+    background-color: $fiery-red;
+    color: $sunny-yellow;
+}
+
+.bg-fiery-red--light {
+    background-color: $fiery-red--light;
+}
+
+.bg-leafy-green {
+    background-color: $leafy-green;
+    color: $sunny-yellow;
+}
+
+.bg-leafy-green--light {
+    background-color: $leafy-green--light;
+}
+
+.bg-sky-blue {
+    background-color: $sky-blue;
+    color: $sunny-yellow;
+}
+
+.bg-sky-blue--light {
+    background-color: $sky-blue--light;
+}
+
+.bg-royal-purple {
+    background-color: $royal-purple;
+    color: $sunny-yellow;
+}
+
+.bg-royal-purple--light {
+    background-color: $royal-purple--light;
+}
+
+.bg-sunset-orange {
+    background-color: $sunset-orange;
+}
+
+.bg-sunset-orange--light {
+    background-color: $sunset-orange--light;
+}
+
+.bg-just-black {
+    background-color: $just-black;
+    color: $sunny-yellow;
+}
+
+.bg-just-black--light {
+    background-color: $sunny-yellow--light;
+}
+
+.bg-just-white {
+    background-color: $just-white;
+    color: $just-black;
+}
+
+.bg-just-white--light {
+    background-color: $just-black;
+}
+
 // Loader 
 /* HTML: <div class="loader"></div> */
 .loader {
@@ -263,7 +335,6 @@ $mobile-width: 700px;
 // Main hero
 .hero {
     height: 40vh;
-    background-color: $sunny-yellow;
     animation: curtain-down 2s ease-in-out forwards;
 
     .hero-content {
@@ -273,12 +344,20 @@ $mobile-width: 700px;
 
         h1 {
             font-family: 'Gotham-Black';
-            color: $just-black;
         }
 
-        p,
+        p {
+            font-family: 'Gotham-Book';
+        }
+
         a {
             font-family: 'Gotham-Book';
+            background-color: $fiery-red--light;
+            color: $just-white;
+        }
+
+        a:hover{
+            background-color: $fiery-red;
         }
     }
 }
@@ -291,7 +370,6 @@ $mobile-width: 700px;
     width: 30%;
     height: auto;
     clip-path: polygon(0% 0%, 100% 0%, 100% 60%, 50% 100%, 0% 60%);
-    background-color: $sunny-yellow--light;
     animation-delay: 3s;
     animation: slide-in-top 4s ease-out forwards;
 }
@@ -412,6 +490,7 @@ $mobile-width: 700px;
 .grid__item--sunny-yellow {
     @extend .grid__item;
     background-color: $sunny-yellow--light;
+    color: $just-black;
 }
 
 .grid__item--royal-purple {
@@ -527,38 +606,38 @@ $mobile-width: 700px;
 
 .diamond-purple {
     @extend .diamond;
+    @extend .bg-royal-purple;
     animation-delay: 0.5s;
-    background-color: $royal-purple;
 }
 
 .diamond-yellow {
     @extend .diamond;
+    @extend .bg-sunny-yellow;
     animation-delay: 0.3s;
-    background-color: $sunny-yellow;
 }
 
 .diamond-green {
     @extend .diamond;
+    @extend .bg-leafy-green;
     animation-delay: 0.2s;
-    background-color: $leafy-green;
 }
 
 .diamond-blue {
     @extend .diamond;
+    @extend .bg-sky-blue;
     animation-delay: 0.4s;
-    background-color: $sky-blue;
 }
 
 .diamond-orange {
     @extend .diamond;
+    @extend .bg-sunset-orange;
     animation-delay: 0.1s;
-    background-color: $sunset-orange;
 }
 
 .diamond-red {
     @extend .diamond;
+    @extend .bg-fiery-red;
     animation-delay: 0s;
-    background-color: $fiery-red;
 }
 
 // CTA Block

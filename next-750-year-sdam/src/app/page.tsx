@@ -42,7 +42,7 @@ export default async function Home(props: HomeProps) {
   }
 
   return <main>
-    <Hero title={title} description={description} />
+    <Hero title={title} description={description} color="sunny-yellow" />
     <StoryCounter />
     <DisplayContent blocks={blocks}>
       <Suspense fallback={<Loader />}>

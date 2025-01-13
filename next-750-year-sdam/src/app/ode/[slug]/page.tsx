@@ -16,15 +16,16 @@ export default async function StoryPage(props: StoryProps) {
     const poem = strapi.GetPoem(slug || 'null')
     const _poem = await poem
 
-    const title = poem.then(p => p?.Title || '')
-    const author = poem.then(p => p?.Author || '')
-    const _category = _poem?.category
-    const _content = _poem?.Content || ""
+    const title = poem.then(p => p.Title)
+    const author = poem.then(p => p.Author)
+    const _category = _poem.category
+    const _content = _poem.Content
 
     return <main>
         <Hero title={title}
             description={author}
-            cta={{ text: `Terug naar ${_category ? _category.Title : 'het begin'}`, to: _category ? `/odes/${_category.slug}` : '/?splashed=true' }}
+            color={_category.Color}
+            cta={{ text: `Terug naar ${_category.Title}`, to: `/odes/${_category.slug}` }}
         />
         <DisplayContent>
             <Markdown>

@@ -18,6 +18,7 @@ export default async function StoryOverview(props: StoryOverviewProps) {
     const strapi = new StrapiCMSService()
 
     const categoryInfo = strapi.GetCategoryBySlug(category)
+    const _categoryInfo = await categoryInfo
     const poems = strapi.GetPoemsByCategory(category).then(res => res.data)
     const _poems = await poems
 
@@ -27,6 +28,7 @@ export default async function StoryOverview(props: StoryOverviewProps) {
     return <main>
         <Hero title={title}
             description={description}
+            color={_categoryInfo.Color}
             cta={{ text: "Terug naar het overzicht", to: '/?splashed=true' }}
         />
         <DisplayContent>

@@ -1,3 +1,4 @@
+import { Color } from "@/types/Color"
 import Image from "next/image"
 import Link from "next/link"
 import { use } from "react"
@@ -5,6 +6,7 @@ import { use } from "react"
 type HeroProps = {
     title: Promise<string>
     description?: Promise<string | undefined>
+    color: Color
     cta?: {
         text: string
         to: string
@@ -12,14 +14,14 @@ type HeroProps = {
 }
 
 export const Hero = (props: HeroProps) => {
-    const { title, description, cta } = props
+    const { title, description, cta, color } = props
 
     const _title = use(title)
     const _description = description ? use(description) : null
 
-    return <header className="hero">
+    return <header className={`hero bg-${color}`}>
         <Image
-            className="hart"
+            className={`hart bg-${color}--light`}
             width={2382}
             height={2382}
             src={'/img/logos/SDAM750-hart_RGB.png'}
@@ -33,7 +35,7 @@ export const Hero = (props: HeroProps) => {
             }
             {
                 cta &&
-                <Link href={cta.to} className="text-center text-white bg-blue-500 py-4 px-8 hover:bg-blue-700">
+                <Link href={cta.to} className="text-center py-4 px-8">
                     {cta.text}
                 </Link>
             }

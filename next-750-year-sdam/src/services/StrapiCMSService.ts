@@ -72,7 +72,7 @@ export class StrapiCMSService {
                 return pages.data[0]
             })
 
-    public GetPoem = async (slug: string): Promise<StrapiPoem | undefined> =>
+    public GetPoem = async (slug: string): Promise<StrapiPoem> =>
         this.StrapiGet<StrapiPoem[]>('poems', { filters: [{ field: 'slug', operator: '$eq', value: slug }] })
             .then(pages => {
                 if (pages.data.length == 0) return notFound()
