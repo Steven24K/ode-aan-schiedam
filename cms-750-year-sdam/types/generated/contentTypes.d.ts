@@ -533,7 +533,12 @@ export interface ApiPagePage extends Struct.CollectionTypeSchema {
   };
   attributes: {
     Blocks: Schema.Attribute.DynamicZone<
-      ['blocks.text', 'blocks.text-image', 'blocks.call-to-action-cta']
+      [
+        'blocks.text',
+        'blocks.text-image',
+        'blocks.call-to-action-cta',
+        'blocks.poem-form',
+      ]
     > &
       Schema.Attribute.Required &
       Schema.Attribute.SetMinMax<

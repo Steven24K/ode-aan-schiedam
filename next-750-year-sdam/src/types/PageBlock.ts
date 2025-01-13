@@ -1,6 +1,10 @@
 import { StrapiImage } from "./StrapiImage"
 
-export type PageBlock = TextBlockProps | TextWithImageBlockProps | CallToActionBlockProps
+export type PageBlock =
+    TextBlockProps |
+    TextWithImageBlockProps |
+    CallToActionBlockProps |
+    PoemFormBlockProps
 
 export type TextBlockProps = {
     __component: "blocks.text"
@@ -24,6 +28,13 @@ export type CallToActionBlockProps = {
     Description: string
     Image?: StrapiImage
     Button: Button[]
+}
+
+export type PoemFormBlockProps = {
+    __component: "blocks.poem-form"
+    id: number
+    Title?: string
+    Description?: string
 }
 
 type Button = {

@@ -20,6 +20,17 @@ export interface BlocksCallToActionCta extends Struct.ComponentSchema {
   };
 }
 
+export interface BlocksPoemForm extends Struct.ComponentSchema {
+  collectionName: 'components_blocks_poem_forms';
+  info: {
+    displayName: 'Poem Form';
+  };
+  attributes: {
+    Description: Schema.Attribute.Text;
+    Title: Schema.Attribute.String;
+  };
+}
+
 export interface BlocksText extends Struct.ComponentSchema {
   collectionName: 'components_blocks_texts';
   info: {
@@ -87,6 +98,7 @@ declare module '@strapi/strapi' {
   export module Public {
     export interface ComponentSchemas {
       'blocks.call-to-action-cta': BlocksCallToActionCta;
+      'blocks.poem-form': BlocksPoemForm;
       'blocks.text': BlocksText;
       'blocks.text-image': BlocksTextImage;
       'clickables.button': ClickablesButton;

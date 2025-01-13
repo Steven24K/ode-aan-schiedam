@@ -3,6 +3,7 @@ import { PageBlock } from "@/types/PageBlock"
 import { TextBlock } from "./Blocks/Text"
 import { TextWithImageBlock } from "./Blocks/TextWithImage"
 import { CallToActionBlock } from "./Blocks/CallToAction"
+import { PoemFormBlock } from "./Blocks/PoemForm"
 
 type DisplayContentProps = {
     blocks?: Promise<PageBlock[]>
@@ -28,8 +29,10 @@ export const DisplayContent = (props: DisplayContentProps) => {
                         return <TextWithImageBlock key={`${block.__component}_${block.id}`} {...block} />
                     case 'blocks.call-to-action-cta':
                         return <CallToActionBlock key={`${block.__component}_${block.id}`} {...block} />
+                    case 'blocks.poem-form':
+                        return <PoemFormBlock key={`${block.__component}_${block.id}`} {...block} />
                     default:
-                        return <div>Block does not exist</div>
+                        return <div key={JSON.stringify(block)}>Block does not exist {JSON.stringify(block)}</div>
                 }
             })
         }

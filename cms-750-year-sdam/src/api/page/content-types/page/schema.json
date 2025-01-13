@@ -29,7 +29,8 @@
       "components": [
         "blocks.text",
         "blocks.text-image",
-        "blocks.call-to-action-cta"
+        "blocks.call-to-action-cta",
+        "blocks.poem-form"
       ],
       "required": true,
       "min": 1

@@ -1,0 +1,15 @@
+{
+  "collectionName": "components_blocks_poem_forms",
+  "info": {
+    "displayName": "Poem Form"
+  },
+  "options": {},
+  "attributes": {
+    "Title": {
+      "type": "string"
+    },
+    "Description": {
+      "type": "text"
+    }
+  }
+}
