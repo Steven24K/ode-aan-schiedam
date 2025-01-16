@@ -219,7 +219,7 @@ export function FormBuilder<T>(props: FormBuilderProps<T>) {
                     />
                 )
             }
-            {!noSubmit && <button disabled={isDisabled} type="submit" className="btn btn-primary">{submitText || 'Verstuur'}</button>}
+            {!noSubmit && <button disabled={isDisabled} type="submit" className="px-20 py-4 mx-auto font-bold bg-sky-blue">{submitText || 'Verstuur'}</button>}
         </form>
     </div>
 }

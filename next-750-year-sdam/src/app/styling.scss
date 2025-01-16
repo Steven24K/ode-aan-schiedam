@@ -728,3 +728,46 @@ $mobile-width: 700px;
         color: $fiery-red;
     }
 }
+
+
+// Form
+
+.form-card {
+    margin: 2rem auto;
+    animation: slide-in-right 2s ease-out forwards;
+    background-color: $just-white;
+    padding: 2rem;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    max-width: 600px;
+}
+
+.form-group {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+}
+
+.input-group {
+    display: flex;
+    flex-direction: column;
+}
+
+.form-label {
+    font-family: 'Gotham-Black';
+    margin-bottom: 0.5rem;
+    color: $just-black;
+}
+
+.form-field {
+    padding: 0.75rem;
+    border: 1px solid $just-black;
+    font-family: 'Gotham-Book';
+    font-size: 1rem;
+    color: $just-black;
+}
+
+.form-field:focus {
+    outline: none;
+    border-color: $sunny-yellow;
+    box-shadow: 0 0 5px $sunny-yellow;
+}
