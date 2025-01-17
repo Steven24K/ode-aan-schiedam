@@ -5,8 +5,12 @@ import { SiteInfo } from "@/types/SiteInfo"
 import { StrapiData } from "@/types/StrapiData"
 import { StrapiHomePage } from "@/types/StrapiHomePage"
 import { StrapiPage } from "@/types/StrapiPage"
-import { StrapiPoem } from "@/types/StrapiPoem"
+import { StrapiPoem, StrapiPoemBody } from "@/types/StrapiPoem"
 import { notFound } from "next/navigation"
+
+type Either<a, b> = { kind: 'left', v: a } | { kind: 'right', v: b }
+
+type CreateResponse = Either<true, string>
 
 type EndPoint = "site-info" | "homepage" | "categories" | "pages" | "poems" | "main-menu" | "footer-menu"
 
@@ -21,7 +25,8 @@ type Filter = {
 type StrapiOptions = Partial<{
     populate: Populate[]
     filters: Filter[]
-
+    method: 'GET' | 'POST'
+    body: string
 }>
 
 export class StrapiCMSService {
@@ -30,11 +35,22 @@ export class StrapiCMSService {
         this.STRAPI_CMS_URL = process.env.STRAPI_CMS_URL != undefined ? process.env.STRAPI_CMS_URL : ""
     }
 
-    private async StrapiGet<T>(end_point: EndPoint, options: StrapiOptions = {}): Promise<StrapiData<T>> {
-        const { populate, filters } = options
+    private async StrapiFetch<T>(end_point: EndPoint, options: StrapiOptions = {}): Promise<StrapiData<T>> {
+        const { populate, filters, method, body } = options
         const _filters = filters ? filters.reduce((xs, x) => `${xs}filters[${x.field}][${x.operator}]=${x.value}`, "") : ''
         const _populate = populate == undefined ? "populate=*&" : populate.reduce((xs, x, i) => `${xs}populate[${i}]=${x}&`, "")
-        const response = await fetch(`${this.STRAPI_CMS_URL}/api/${end_point}/?${_populate}${_filters}`)
+
+        let _url = `${this.STRAPI_CMS_URL}/api/${end_point}/?${_populate}${_filters}`
+        if (method == 'POST')
+            _url = _url + 'status=draft'
+
+        const response = await fetch(_url,
+            {
+                headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+                method: method,
+                body: body
+            })
+
         console.log(response.url)
         if (response.status == 404) return notFound()
         if (response.ok) return await response.json()
@@ -44,26 +60,26 @@ export class StrapiCMSService {
     }
 
     public getSiteInfo = async (): Promise<StrapiData<SiteInfo>> =>
-        this.StrapiGet('site-info');
+        this.StrapiFetch('site-info');
 
     public getPoemCounter = (): Promise<number> =>
-        this.StrapiGet<StrapiPoem[]>('poems').then(res => res.data.length)
+        this.StrapiFetch<StrapiPoem[]>('poems').then(res => res.data.length)
 
     public GetHomePage = async (): Promise<StrapiData<StrapiHomePage>> =>
-        this.StrapiGet('homepage', { populate: ['Blocks', 'Blocks.Button', 'Blocks.Image', 'Logo'] })
+        this.StrapiFetch('homepage', { populate: ['Blocks', 'Blocks.Button', 'Blocks.Image', 'Logo'] })
 
     public GetCategories = async (): Promise<StrapiData<PostCategory[]>> =>
-        this.StrapiGet('categories')
+        this.StrapiFetch('categories')
 
     public GetCategoryBySlug = async (slug: string): Promise<PostCategory> =>
-        this.StrapiGet<PostCategory[]>('categories', { filters: [{ field: 'slug', operator: '$eq', value: slug }] })
+        this.StrapiFetch<PostCategory[]>('categories', { filters: [{ field: 'slug', operator: '$eq', value: slug }] })
             .then(categories => {
                 if (categories.data.length == 0) return notFound()
                 return categories.data[0]
             })
 
     public GetPage = async (slug: string): Promise<StrapiPage> =>
-        this.StrapiGet<StrapiPage[]>('pages', {
+        this.StrapiFetch<StrapiPage[]>('pages', {
             populate: ['Blocks', 'Blocks.Button', 'Blocks.Image'],
             filters: [{ field: 'slug', operator: '$eq', value: slug }]
         })
@@ -73,19 +89,27 @@ export class StrapiCMSService {
             })
 
     public GetPoem = async (slug: string): Promise<StrapiPoem> =>
-        this.StrapiGet<StrapiPoem[]>('poems', { filters: [{ field: 'slug', operator: '$eq', value: slug }] })
+        this.StrapiFetch<StrapiPoem[]>('poems', { filters: [{ field: 'slug', operator: '$eq', value: slug }] })
             .then(pages => {
                 if (pages.data.length == 0) return notFound()
                 return pages.data[0]
             })
 
+    public CreatePoem = async (_body: StrapiData<StrapiPoemBody>): Promise<CreateResponse> =>
+        this.StrapiFetch(`poems`, {
+            method: 'POST',
+            body: JSON.stringify(_body)
+        })
+            .then(() => ({ kind: 'left', v: true } as CreateResponse))
+            .catch((reason) => ({ kind: 'right', v: reason } as CreateResponse))
+
     public GetPoemsByCategory = (category: string): Promise<StrapiData<StrapiPoem[]>> =>
-        this.StrapiGet('poems', { filters: [{ field: "category][slug", operator: '$eq', value: category }] })
+        this.StrapiFetch('poems', { filters: [{ field: "category][slug", operator: '$eq', value: category }] })
 
     public GetMainMenu = async (): Promise<StrapiData<MainMenu>> =>
-        this.StrapiGet('main-menu')
+        this.StrapiFetch('main-menu')
 
     public GetFooterMenu = async (): Promise<StrapiData<FooterMenu>> =>
-        this.StrapiGet('footer-menu', { populate: ["Columns.Items"] })
+        this.StrapiFetch('footer-menu', { populate: ["Columns.Items"] })
 
 }

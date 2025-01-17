@@ -5,18 +5,11 @@ const nextConfig: NextConfig = {
   images: {
     remotePatterns: [
       {
-        protocol: 'http', 
-        hostname: 'localhost',
-        port: '1337', 
-        pathname: '/uploads/**', 
-        search: ''
-      },
-      {
         protocol: 'http',
         hostname: 'localhost',
-        port: '8080',
-        pathname: '/wp-content/uploads/**',
-        search: '',
+        port: '1337',
+        pathname: '/uploads/**',
+        search: ''
       },
       {
         protocol: 'https',
@@ -26,6 +19,14 @@ const nextConfig: NextConfig = {
         search: '',
       },
     ],
+  },
+  async rewrites() {
+    return [
+      {
+        source: '/api/:path*',
+        destination: process.env.STRAPI_CMS_URL + '/api/:path*',
+      },
+    ]
   },
 
 };

@@ -8,3 +8,9 @@ export type StrapiPoem = {
     Author: string
     category: PostCategory
 }
+
+export type StrapiPoemBody = Omit<StrapiPoem, ('id' | 'category')> & {
+    category: {
+        connect: [string]
+    }
+}

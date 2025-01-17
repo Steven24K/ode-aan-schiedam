@@ -205,7 +205,7 @@ interface FormBuilderProps<T> {
 export function FormBuilder<T>(props: FormBuilderProps<T>) {
     const { fields, defaultObject, isDisabled, handleChange, handleSubmit, noSubmit, submitText, formTitle } = props
     return <div className='form-card'>
-        {formTitle && <h2>{formTitle}</h2>}
+        {formTitle && <h2 className="text-2xl py-4">{formTitle}</h2>}
         <form className='form-group' onSubmit={e => {
             e.preventDefault()
             handleSubmit()
