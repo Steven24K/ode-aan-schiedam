@@ -12,6 +12,19 @@ type PoemFormState = {
     error?: string
 }
 
+const zeroPoemFormState = (): PoemFormState => ({
+    categories: 'loading',
+    formData: {
+        Title: '',
+        slug: '',
+        Author: '',
+        category: {
+            connect: [""]
+        },
+        Content: ''
+    }
+})
+
 const slugify = (text: string): string => {
     return text
         .toString()
@@ -24,18 +37,7 @@ const slugify = (text: string): string => {
 
 export const PoemFormBlock = (props: PoemFormBlockProps) => {
     const { Description, Title } = props
-    const [state, setState] = React.useState<PoemFormState>({
-        categories: 'loading',
-        formData: {
-            Title: '',
-            slug: '',
-            Author: '',
-            category: {
-                connect: [""]
-            },
-            Content: ''
-        }
-    })
+    const [state, setState] = React.useState<PoemFormState>(zeroPoemFormState)
 
     React.useEffect(() => {
         if (state.formData != 'submitted')
@@ -88,6 +90,15 @@ export const PoemFormBlock = (props: PoemFormBlockProps) => {
     }
 
 
-    return <div className="bg-gray-100 rounded p-10 my-5 text-2xl">{Description}</div>
+    return <div className="bg-gray-100 rounded p-10 my-5 text-2xl">
+        <p>
+            {Description}
+        </p>
+        <button className="bg-blue-400 hover:bg-blue-800 text-white px-8 py-4 my-5"
+            onClick={() => setState(zeroPoemFormState)}
+        >
+            Stuur nog een ode in
+        </button>
+    </div>
 
 }

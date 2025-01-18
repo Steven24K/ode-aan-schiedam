@@ -2,7 +2,8 @@
   "collectionName": "components_blocks_text_images",
   "info": {
     "displayName": "Text + Image",
-    "icon": "apps"
+    "icon": "apps",
+    "description": ""
   },
   "options": {},
   "attributes": {
@@ -14,14 +15,23 @@
       "required": true
     },
     "Image": {
+      "type": "media",
+      "multiple": false,
+      "required": true,
       "allowedTypes": [
         "images",
         "files",
         "videos",
         "audios"
+      ]
+    },
+    "Direction": {
+      "type": "enumeration",
+      "enum": [
+        "Left",
+        "Right"
       ],
-      "type": "media",
-      "multiple": false,
+      "default": "Left",
       "required": true
     }
   }

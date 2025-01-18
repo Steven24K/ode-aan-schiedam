@@ -19,6 +19,7 @@ export type TextWithImageBlockProps = {
     Title?: string
     Description: string
     Image: StrapiImage
+    Direction: "Left" | "Right"
 }
 
 export type CallToActionBlockProps = {

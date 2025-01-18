@@ -46,11 +46,15 @@ export interface BlocksText extends Struct.ComponentSchema {
 export interface BlocksTextImage extends Struct.ComponentSchema {
   collectionName: 'components_blocks_text_images';
   info: {
+    description: '';
     displayName: 'Text + Image';
     icon: 'apps';
   };
   attributes: {
     Description: Schema.Attribute.RichText & Schema.Attribute.Required;
+    Direction: Schema.Attribute.Enumeration<['Left', 'Right']> &
+      Schema.Attribute.Required &
+      Schema.Attribute.DefaultTo<'Left'>;
     Image: Schema.Attribute.Media<'images' | 'files' | 'videos' | 'audios'> &
       Schema.Attribute.Required;
     Title: Schema.Attribute.String;

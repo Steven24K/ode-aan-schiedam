@@ -4,7 +4,7 @@ import Link from "next/link"
 import Markdown from "react-markdown"
 
 export const CallToActionBlock = (block: CallToActionBlockProps) => {
-    return <div key={block.id} className="cta-block my-4 p-4 border rounded-lg shadow-md text-center">
+    return <div key={block.id} className="cta-block my-2 border rounded-lg shadow-md text-center">
         {block.Image && (
             <Image
                 src={`http://localhost:1337${block.Image.formats.large.url}`}
@@ -15,8 +15,8 @@ export const CallToActionBlock = (block: CallToActionBlockProps) => {
             />
         )}
         {block.Title && <h2 className="text-2xl font-bold mb-2">{block.Title}</h2>}
-        {block.Description && <Markdown className="text-base mb-4">{block.Description}</Markdown>}
-        <div className="actions">
+        {block.Description && <Markdown className="text-base">{block.Description}</Markdown>}
+        <div className="actions flex justify-center gap-8">
             {block.Button && block.Button.map(btn => (
                 <Link key={`cta_button_${btn.id}`} href={btn.URL}>
                     {btn.Title}
