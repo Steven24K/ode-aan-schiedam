@@ -7,7 +7,7 @@ export const TextWithImageBlock = (block: TextWithImageBlockProps) => {
         {block.Direction == 'Left' && <div className="lg:w-1/2">
             {block.Image && (
                 <Image
-                    src={`http://localhost:1337${block.Image.formats.large.url}`}
+                    src={`${block.Image.formats.large.url}`}
                     alt={block.Image.formats.large.name}
                     height={block.Image.formats.large.height}
                     width={block.Image.formats.large.width}
@@ -21,7 +21,7 @@ export const TextWithImageBlock = (block: TextWithImageBlockProps) => {
         {block.Direction == "Right" && <div className="lg:w-1/2">
             {block.Image && (
                 <Image
-                    src={`http://localhost:1337${block.Image.formats.large.url}`}
+                    src={`${block.Image.formats.large.url}`}
                     alt={block.Image.formats.large.name}
                     height={block.Image.formats.large.height}
                     width={block.Image.formats.large.width}

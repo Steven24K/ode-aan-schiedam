@@ -14,15 +14,15 @@ export async function SiteMetaData() {
         <meta name="description" content={_slogan} />
         <meta property="og:title" content={_title} />
         <meta property="og:description" content={_slogan} />
-        <meta property="og:image" content={`http://localhost:1337${_icon}`} />
+        <meta property="og:image" content={`${_icon}`} />
         <meta property="og:type" content="website" />
         <meta name="twitter:card" content="summary_large_image" />
         <meta name="twitter:title" content={_title} />
         <meta name="twitter:description" content={_slogan} />
-        <meta name="twitter:image" content={`http://localhost:1337${_icon}`} />
+        <meta name="twitter:image" content={`${_icon}`} />
         <meta name="robots" content="index, follow" />
         <meta name="googlebot" content="index, follow" />
 
-        <link rel="icon" href={`http://localhost:1337${_icon}`} type="image/png" />
+        <link rel="icon" href={`${_icon}`} type="image/png" />
     </>
 }

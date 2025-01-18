@@ -7,7 +7,7 @@ export const CallToActionBlock = (block: CallToActionBlockProps) => {
     return <div key={block.id} className="cta-block my-2 border rounded-lg shadow-md text-center">
         {block.Image && (
             <Image
-                src={`http://localhost:1337${block.Image.formats.large.url}`}
+                src={`${block.Image.formats.large.url}`}
                 alt={block.Image.formats.large.name}
                 height={block.Image.formats.large.height}
                 width={block.Image.formats.large.width}

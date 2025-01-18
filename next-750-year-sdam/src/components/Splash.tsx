@@ -44,7 +44,7 @@ export function Splash(props: SplashScreenProps) {
                     className="splash-logo mt-4"
                     width={_logo.formats.large.width}
                     height={_logo.formats.large.height}
-                    src={`http://localhost:1337${_logo.formats.large.url}`}
+                    src={`${_logo.formats.large.url}`}
                     alt={_logo.formats.large.name}
                 />
 
