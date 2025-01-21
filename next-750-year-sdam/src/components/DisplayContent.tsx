@@ -6,6 +6,7 @@ import { CallToActionBlock } from "./Blocks/CallToAction"
 import { PoemFormBlock } from "./Blocks/PoemForm"
 
 type DisplayContentProps = {
+    className?: string
     blocks?: Promise<PageBlock[]>
     children?: React.ReactNode
 }
@@ -14,12 +15,11 @@ type DisplayContentProps = {
 
 // Component responsible for displaying the content of the page from the CMS
 export const DisplayContent = (props: DisplayContentProps) => {
-    const { children, blocks } = props
+    const { children, blocks, className } = props
 
     const _blocks = blocks ? use(blocks) : []
 
-    return <div className="page-content container mx-auto m-10 p-10">
-
+    return <main className={`page-content container mx-auto p-5 ${className}`}>
         {
             _blocks.map(block => {
                 switch (block.__component) {
@@ -36,7 +36,6 @@ export const DisplayContent = (props: DisplayContentProps) => {
                 }
             })
         }
-
         {children}
-    </div>
+    </main>
 }

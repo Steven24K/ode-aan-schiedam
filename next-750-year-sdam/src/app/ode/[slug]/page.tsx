@@ -1,5 +1,6 @@
 import { DisplayContent } from "@/components/DisplayContent"
 import { Hero } from "@/components/Hero"
+import { SocialButtons } from "@/components/SocialButtons"
 import { StrapiCMSService } from "@/services/StrapiCMSService"
 import { Params } from "@/types/Params"
 import Markdown from "react-markdown"
@@ -20,19 +21,19 @@ export default async function StoryPage(props: StoryProps) {
     const author = poem.then(p => p.Author)
     const _category = _poem.category
     const _content = _poem.Content
-    console.log(_content)
-    return <main>
+    return <>
         <Hero title={title}
             description={author}
             color={_category.Color}
             cta={{ text: `Terug naar ${_category.Title}`, to: `/odes/${_category.slug}` }}
         />
-        <DisplayContent>
+        <DisplayContent className="flex justify-center">
             <div className="poem">
-                <Markdown>
+                <Markdown className="text-base">
                     {_content}
                 </Markdown>
             </div>
+            <SocialButtons />
         </DisplayContent>
-    </main>
+    </>
 } 

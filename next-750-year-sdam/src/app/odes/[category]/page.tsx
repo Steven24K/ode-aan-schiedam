@@ -25,7 +25,7 @@ export default async function StoryOverview(props: StoryOverviewProps) {
     const title = categoryInfo.then(cat => cat.Title)
     const description = categoryInfo.then(cat => cat.Description)
 
-    return <main>
+    return <>
         <Hero title={title}
             description={description}
             color={_categoryInfo.Color}
@@ -45,5 +45,5 @@ export default async function StoryOverview(props: StoryOverviewProps) {
                 <Grid items={poems.then(res => res.map<GridItem>(r => ({ id: r.id, color: r.category.Color, slug: `/ode/${r.slug}`, title: r.Title })))} />
             </Suspense>
         </DisplayContent>
-    </main>
+    </>
 }

@@ -206,11 +206,6 @@ $mobile-width: 700px;
         font-size: 2em;
         transform: rotate(-45deg);
     }
-
-    @media (max-width: $mobile-width) {
-        width: 60px;
-        height: 60px;
-    }
 }
 
 .menu-list {
@@ -356,7 +351,7 @@ $mobile-width: 700px;
             color: $just-white;
         }
 
-        a:hover{
+        a:hover {
             background-color: $fiery-red;
         }
     }
@@ -406,6 +401,10 @@ $mobile-width: 700px;
     min-height: 50vh;
     animation-delay: 4s;
     animation: fadeIn 2s ease-in forwards;
+
+    @media (max-width: $mobile-width) {
+        min-height: 80vh;
+    }
 
     h1,
     h2,
@@ -701,7 +700,16 @@ $mobile-width: 700px;
 
 // Text Block
 .text-base {
-    p, h1, h2, h3, h4, h5, h6, ul, ol {
+
+    p,
+    h1,
+    h2,
+    h3,
+    h4,
+    h5,
+    h6,
+    ul,
+    ol {
         padding: 10px 0;
     }
 }
@@ -712,6 +720,7 @@ $mobile-width: 700px;
         transform: translateX(100%);
         opacity: 0;
     }
+
     100% {
         transform: translateX(0);
         opacity: 1;
@@ -719,14 +728,23 @@ $mobile-width: 700px;
 }
 
 .poem {
+    background-color: $sunny-yellow--light;
+    box-shadow: 0px 0px 15px 5px $sunny-yellow; // x, y, blur, spread
+    padding: 2em;
     overflow: hidden;
-    min-width: 60;
-    animation: slide-in-right 2.5s ease-out forwards;
-    font-size: 1.5em;
-    border-bottom: 2px solid $fiery-red;
-    padding-bottom: 100px;
+    animation: slide-in-right 2.5s ease forwards;
+
+    @media (max-width: $mobile-width) {
+        padding: 2em 50px 2em 5px;
+
+    }
+
+    .text-base {
+        font-size: 1.5em;
+    }
+
     p:first-child::first-letter {
-        padding-left: 25px;
+        padding-left: 5px;
         font-size: 4em;
         font-family: 'Brush Script MT', cursive;
         font-weight: bold;
@@ -775,4 +793,84 @@ $mobile-width: 700px;
     outline: none;
     border-color: $sunny-yellow;
     box-shadow: 0 0 5px $sunny-yellow;
+}
+
+// Socials 
+.socials {
+    @media (max-width: $mobile-width) {
+        position: absolute;
+        right: 0px;
+    }
+}
+
+.svg-inline--fa {
+    margin: 0px 10px;
+    padding: 0.4rem;
+    width: 50px;
+    height: 50px;
+    text-decoration: none;
+}
+
+.svg-inline--fa:hover {
+    opacity: 0.7;
+}
+
+.fa-facebook {
+    background: #1877F2;
+    color: white;
+}
+
+.fa-x-twitter {
+    background: #000000;
+    color: white;
+}
+
+.fa-whatsapp {
+    background: #25D366;
+    color: white;
+}
+
+.fa-linkedin {
+    background: #007bb5;
+    color: white;
+}
+
+.fa-instagram {
+    background: linear-gradient(#f9ce34, #ee2a7b, #6228d7);
+    color: white;
+}
+
+.fa-reddit {
+    background: #ff5700;
+    color: white;
+}
+
+.fa-bluesky {
+    background: #87CEEB;
+    color: white;
+}
+
+.fa-signal-messenger {
+    background: #1877F2;
+    color: white;
+}
+
+.fa-telegram {
+    background: #0088cc;
+    color: white;
+}
+
+.fa-envelope {
+    background: #cc165c;
+    color: white;
+}
+
+.fa-copy {
+    background: #6228d7;
+    color: white;
+}
+
+.fa-camera {
+    background: #2b78dd;
+    color: white;
 }

@@ -18,10 +18,9 @@ export default async function CMSPage(props: PageProps) {
     const description = page.then(p => p.Description)
     const blocks = page.then(p => p.Blocks)
 
-    return <main>
+    return <>
         <Hero title={title} description={description} color="sunny-yellow" />
 
-        <DisplayContent blocks={blocks}>
-        </DisplayContent>
-    </main>
+        <DisplayContent blocks={blocks} />
+    </>
 }
