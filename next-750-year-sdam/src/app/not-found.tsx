@@ -4,7 +4,7 @@ import Link from 'next/link';
 
 export default function NotFound() {
     return <main>
-        <Hero title={Promise.resolve('Pagina niet gevonden')} color='sunny-yellow' />
+        <Hero title={Promise.resolve('Pagina niet gevonden')} color={Promise.resolve('sunny-yellow')} />
         <DisplayContent>
             <div className="flex items-center justify-center h-96">
                 <div className="text-center">
