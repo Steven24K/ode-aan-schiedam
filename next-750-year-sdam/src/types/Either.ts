@@ -1,0 +1,1 @@
+export type Either<a, b> = { type: 'left', value: a } | { type: 'right', value: b }

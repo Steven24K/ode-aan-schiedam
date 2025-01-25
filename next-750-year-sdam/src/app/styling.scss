@@ -735,6 +735,7 @@ $mobile-width: 700px;
     padding: 2em;
     overflow: hidden;
     animation: slide-in-right 2.5s ease forwards;
+    height: fit-content;
 
     @media (max-width: $mobile-width) {
         padding: 2em 50px 2em 5px;
@@ -799,6 +800,8 @@ $mobile-width: 700px;
 
 // Socials 
 .socials {
+    display: flex;
+    flex-direction: column;
     @media (max-width: $mobile-width) {
         position: absolute;
         right: 0px;
@@ -807,10 +810,9 @@ $mobile-width: 700px;
 
 .svg-inline--fa {
     margin: 0px 10px;
-    padding: 0.4rem;
-    width: 50px;
-    height: 50px;
-    text-decoration: none;
+    font-size: 3rem;
+    padding: 0.5rem;
+    width: 45px;
 }
 
 .svg-inline--fa:hover {
