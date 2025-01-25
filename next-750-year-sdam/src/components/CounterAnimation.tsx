@@ -25,11 +25,13 @@ export const CounterAnimation = (props: CounterProps) => {
             setTimeout(() => {
                 let newCounter = state.counter + state.incrementor
                 if (newCounter >= count_up_to) newCounter = count_up_to
+                let newTimeout = state.timeout - 1
+                if (newTimeout < 10) newTimeout = 10
                 setState({
                     ...state,
                     counter: newCounter,
                     incrementor: state.incrementor + 1,
-                    timeout: state.timeout - 1
+                    timeout: newTimeout
                 })
             }, state.timeout)
         }
