@@ -7,6 +7,8 @@ export type StrapiPoem = {
     Content: string
     Author: string
     category: PostCategory
+    Email: string 
+    Phone: string
 }
 
 export type StrapiPoemBody = Omit<StrapiPoem, ('id' | 'category')> & {

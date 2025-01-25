@@ -566,6 +566,7 @@ export interface ApiPagePage extends Struct.CollectionTypeSchema {
 export interface ApiPoemPoem extends Struct.CollectionTypeSchema {
   collectionName: 'poems';
   info: {
+    description: '';
     displayName: 'Poems';
     pluralName: 'poems';
     singularName: 'poem';
@@ -580,9 +581,11 @@ export interface ApiPoemPoem extends Struct.CollectionTypeSchema {
     createdAt: Schema.Attribute.DateTime;
     createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
+    Email: Schema.Attribute.String & Schema.Attribute.Private;
     locale: Schema.Attribute.String & Schema.Attribute.Private;
     localizations: Schema.Attribute.Relation<'oneToMany', 'api::poem.poem'> &
       Schema.Attribute.Private;
+    Phone: Schema.Attribute.String & Schema.Attribute.Private;
     publishedAt: Schema.Attribute.DateTime;
     slug: Schema.Attribute.UID<'Title'> & Schema.Attribute.Required;
     Title: Schema.Attribute.String & Schema.Attribute.Required;

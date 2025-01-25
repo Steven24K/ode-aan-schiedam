@@ -4,7 +4,8 @@
   "info": {
     "singularName": "poem",
     "pluralName": "poems",
-    "displayName": "Poems"
+    "displayName": "Poems",
+    "description": ""
   },
   "options": {
     "draftAndPublish": true
@@ -31,6 +32,14 @@
       "type": "relation",
       "relation": "oneToOne",
       "target": "api::category.category"
+    },
+    "Email": {
+      "type": "string",
+      "private": true
+    },
+    "Phone": {
+      "type": "string",
+      "private": true
     }
   }
 }
