@@ -648,6 +648,8 @@ $mobile-width: 700px;
     text-align: center;
     box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
     transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+    width: fit-content;
+    margin: 0 auto;
 
     &:hover {
         transform: translateY(-10px);
