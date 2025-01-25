@@ -1,4 +1,4 @@
-import { NavBarWrapper } from "@/components/NavBarWrapper";
+import { NavBar } from "@/components/NavBarWrapper";
 import { Footer } from "@/components/Footer";
 import ErrorBoundary from "../components/Error/ErrorBoundary";
 
@@ -18,7 +18,7 @@ export default function RootLayout(props: Readonly<LayoutProps>) {
           <SiteMetaData />
         </head>
         <body>
-          <NavBarWrapper />
+          <NavBar />
 
           {children}
 

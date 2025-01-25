@@ -9,7 +9,7 @@ interface NavBarProps {
     items: Promise<MenuItem[]>
 }
 
-export const NavBar = (props: NavBarProps) => {
+export const NavBarContent = (props: NavBarProps) => {
     const [isMenuOpen, setIsMenuOpen] = useState(false);
     const pathName = usePathname();
 

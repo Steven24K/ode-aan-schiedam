@@ -1,9 +1,9 @@
 import { StrapiCMSService } from "@/services/StrapiCMSService";
-import { NavBar } from "./NavBar";
+import { NavBarContent } from "./NavBar";
 
-export function NavBarWrapper() {
+export function NavBar() {
     const strapi = new StrapiCMSService()
     const menu = strapi.GetMainMenu().then(res => res.data.Item)
 
-    return <NavBar items={menu} />
+    return <NavBarContent items={menu} />
 }
