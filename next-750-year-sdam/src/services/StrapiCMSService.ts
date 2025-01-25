@@ -103,6 +103,9 @@ export class StrapiCMSService {
             .then(() => ({ kind: 'left', v: true } as CreateResponse))
             .catch((reason) => ({ kind: 'right', v: reason } as CreateResponse))
 
+    public GetAllPoems = async (): Promise<StrapiData<StrapiPoem[]>> =>
+        this.StrapiFetch('poems')
+
     public GetPoemsByCategory = (category: string): Promise<StrapiData<StrapiPoem[]>> =>
         this.StrapiFetch('poems', { filters: [{ field: "category][slug", operator: '$eq', value: category }] })
 
