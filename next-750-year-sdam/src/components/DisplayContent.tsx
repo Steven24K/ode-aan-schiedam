@@ -9,17 +9,19 @@ type DisplayContentProps = {
     className?: string
     blocks?: Promise<PageBlock[]>
     children?: React.ReactNode
+    childPositon?: 'top' | 'bottom'
 }
 
 
 
 // Component responsible for displaying the content of the page from the CMS
 export const DisplayContent = (props: DisplayContentProps) => {
-    const { children, blocks, className } = props
+    const { children, blocks, className, childPositon } = props
 
     const _blocks = blocks ? use(blocks) : []
 
     return <main className={`page-content container mx-auto p-5 ${className}`}>
+        {childPositon == 'top' && children}
         {
             _blocks.map(block => {
                 switch (block.__component) {
@@ -36,6 +38,6 @@ export const DisplayContent = (props: DisplayContentProps) => {
                 }
             })
         }
-        {children}
+        {(childPositon == undefined || childPositon == 'bottom') && children}
     </main>
 }

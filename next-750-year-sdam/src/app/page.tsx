@@ -44,7 +44,7 @@ export default async function Home(props: HomeProps) {
   return <main>
     <Hero title={title} description={description} color="sunny-yellow" />
     <StoryCounter />
-    <DisplayContent blocks={blocks}>
+    <DisplayContent blocks={blocks} childPositon="top">
       <Suspense fallback={<Loader />}>
         <Grid items={strapi.GetCategories().then(d => d.data.map<GridItem>(cat => ({
           id: cat.id,
