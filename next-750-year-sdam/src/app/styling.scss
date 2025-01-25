@@ -50,6 +50,107 @@ $mobile-width: 700px;
     font-style: normal;
 }
 
+// Animations 
+@keyframes loading {
+    0% {
+        background-size: 100% 0, 0 100%
+    }
+
+    30%,
+    50% {
+        background-size: 100% 0, 100% 100%
+    }
+
+    80%,
+    100% {
+        background-size: 100% 100%, 100% 100%
+    }
+}
+
+@keyframes curtain-up {
+    from {
+        background: linear-gradient(to left, $sunny-yellow, $sunny-yellow--light);
+        height: 100vh;
+    }
+
+    to {
+        background: $sunny-yellow;
+        height: 10vh;
+    }
+}
+
+@keyframes curtain-down {
+    from {
+        height: 10vh;
+    }
+
+    to {
+        height: 40vh;
+    }
+}
+
+@keyframes animate-splash {
+    from {
+        height: 650px;
+        opacity: 1;
+    }
+
+    to {
+        height: 0;
+        opacity: 0;
+    }
+}
+
+@keyframes fadeIn {
+    0% {
+        opacity: 0;
+    }
+
+    100% {
+        opacity: 1;
+    }
+}
+
+@keyframes slide-in-top {
+    0% {
+        transform: translateY(-100%);
+        opacity: 0;
+    }
+
+    50% {
+        opacity: 0.5;
+    }
+
+    100% {
+        transform: translateY(0);
+        opacity: 1;
+    }
+}
+
+@keyframes sparkle {
+
+    0%,
+    100% {
+        transform: scale(1) rotate(45deg);
+    }
+
+    50% {
+        transform: scale(0.8) rotate(45deg);
+    }
+}
+
+@keyframes slide-in-right {
+    0% {
+        transform: translateX(100%);
+        opacity: 0;
+    }
+
+    100% {
+        transform: translateX(0);
+        opacity: 1;
+    }
+}
+
 // Basic resets
 * {
     margin: 0;
@@ -143,22 +244,6 @@ $mobile-width: 700px;
     rotate: 45deg;
 }
 
-@keyframes loading {
-    0% {
-        background-size: 100% 0, 0 100%
-    }
-
-    30%,
-    50% {
-        background-size: 100% 0, 100% 100%
-    }
-
-    80%,
-    100% {
-        background-size: 100% 100%, 100% 100%
-    }
-}
-
 // Site main navigation
 .sidebar {
     z-index: 1;
@@ -241,7 +326,6 @@ $mobile-width: 700px;
 // Site footer
 .footer {
     height: auto;
-    min-height: 40vh;
     background: linear-gradient(to left, $royal-purple, $royal-purple--light);
     color: $just-white;
 }
@@ -256,45 +340,11 @@ $mobile-width: 700px;
     background: linear-gradient(to left, $sunny-yellow, $sunny-yellow--light);
 }
 
-@keyframes curtain-up {
-    from {
-        background: linear-gradient(to left, $sunny-yellow, $sunny-yellow--light);
-        height: 100vh;
-    }
-
-    to {
-        background: $sunny-yellow;
-        height: 10vh;
-    }
-}
-
-@keyframes curtain-down {
-    from {
-        height: 10vh;
-    }
-
-    to {
-        height: 40vh;
-    }
-}
-
 .curtain-up {
     height: 40vh;
     background-color: $sunny-yellow;
     animation-name: curtain-up;
     animation-duration: 4s;
-}
-
-@keyframes animate-splash {
-    from {
-        height: 650px;
-        opacity: 1;
-    }
-
-    to {
-        height: 0;
-        opacity: 0;
-    }
 }
 
 .animate-splash {
@@ -367,33 +417,6 @@ $mobile-width: 700px;
     clip-path: polygon(0% 0%, 100% 0%, 100% 60%, 50% 100%, 0% 60%);
     animation-delay: 3s;
     animation: slide-in-top 4s ease-out forwards;
-}
-
-@keyframes slide-in-top {
-    0% {
-        transform: translateY(-100%);
-        opacity: 0;
-    }
-
-    50% {
-        opacity: 0.5;
-    }
-
-    100% {
-        transform: translateY(0);
-        opacity: 1;
-    }
-}
-
-
-@keyframes fadeIn {
-    0% {
-        opacity: 0;
-    }
-
-    100% {
-        opacity: 1;
-    }
 }
 
 // Page content for CMS data
@@ -503,6 +526,19 @@ $mobile-width: 700px;
     background-color: $sunset-orange;
 }
 
+.grid__item--random {
+    @extend .grid__item;
+    color: $just-white;
+    background: radial-gradient($royal-purple,
+            $sky-blue,
+            $leafy-green,
+            $sunny-yellow,
+            $sunset-orange,
+            $fiery-red,
+
+        );
+}
+
 // Counter
 .counter {
     background-color: $fiery-red--light;
@@ -580,18 +616,6 @@ $mobile-width: 700px;
     }
 }
 
-@keyframes sparkle {
-
-    0%,
-    100% {
-        transform: scale(1) rotate(45deg);
-    }
-
-    50% {
-        transform: scale(0.8) rotate(45deg);
-    }
-}
-
 .diamond {
     animation: sparkle 1s infinite;
     transform: rotate(45deg);
@@ -641,7 +665,6 @@ $mobile-width: 700px;
 }
 
 // CTA Block
-
 .cta-block {
     background: linear-gradient(to right, $royal-purple, $royal-purple--light);
     color: $just-white;
@@ -718,33 +741,23 @@ $mobile-width: 700px;
 }
 
 // Poem styling
-@keyframes slide-in-right {
-    0% {
-        transform: translateX(100%);
-        opacity: 0;
-    }
-
-    100% {
-        transform: translateX(0);
-        opacity: 1;
-    }
-}
-
 .poem {
+    animation: slide-in-right 2.5s ease forwards;
     background-color: $sunny-yellow--light;
     box-shadow: 0px 0px 15px 5px $sunny-yellow; // x, y, blur, spread
-    padding: 2em;
+
     overflow: hidden;
-    animation: slide-in-right 2.5s ease forwards;
+    padding: 2em;
     height: fit-content;
+    width: 75%;
 
     @media (max-width: $mobile-width) {
         padding: 2em 50px 2em 5px;
-
+        width: 100%;
     }
 
     .text-base {
-        font-size: 1.5em;
+        font-size: 1.4em;
     }
 
     p:first-child::first-letter {
@@ -756,9 +769,7 @@ $mobile-width: 700px;
     }
 }
 
-
 // Form
-
 .form-card {
     margin: 2rem auto;
     animation: slide-in-right 2s ease-out forwards;
@@ -801,12 +812,12 @@ $mobile-width: 700px;
 
 // Socials 
 .socials {
+    z-index: 1;
     display: flex;
     flex-direction: column;
-    @media (max-width: $mobile-width) {
-        position: absolute;
-        right: 0px;
-    }
+    position: absolute;
+    right: 0px;
+    top: 25%
 }
 
 .svg-inline--fa {

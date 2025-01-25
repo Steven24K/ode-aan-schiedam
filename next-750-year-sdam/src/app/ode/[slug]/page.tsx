@@ -3,6 +3,7 @@ import { Hero } from "@/components/Hero"
 import { SocialButtons } from "@/components/SocialButtons"
 import { StrapiCMSService } from "@/services/StrapiCMSService"
 import { Params } from "@/types/Params"
+import Link from "next/link"
 import Markdown from "react-markdown"
 
 type StoryProps = {
@@ -19,21 +20,37 @@ export default async function StoryPage(props: StoryProps) {
 
     const title = poem.then(p => p.Title)
     const author = poem.then(p => p.Author)
+    const color = poem.then(p => p.category.Color)
+
     const _category = _poem.category
     const _content = _poem.Content
+
     return <>
         <Hero title={title}
             description={author}
-            color={_category.Color}
+            color={color}
             cta={{ text: `Terug naar ${_category.Title}`, to: `/odes/${_category.slug}` }}
         />
-        <DisplayContent className="flex justify-center">
-            <div className="poem">
-                <Markdown className="text-base">
-                    {_content}
-                </Markdown>
-            </div>
+        <DisplayContent>
             <SocialButtons />
+            <section className="flex justify-center">
+                <div className="poem">
+                    <Markdown className="text-base">
+                        {_content}
+                    </Markdown>
+                </div>
+            </section>
+            <section className="flex justify-center my-20">
+                <div className="grid__item_wrapper">
+                    <Link href={`/willekeurig`}>
+                        <div className="grid__item--random">
+                            <h1>Willekeurige Ode</h1>
+                        </div>
+                    </Link>
+                </div>
+            </section>
         </DisplayContent>
+
+
     </>
 } 

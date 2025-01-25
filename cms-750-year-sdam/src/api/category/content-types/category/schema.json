@@ -39,6 +39,15 @@
       "type": "uid",
       "targetField": "Title",
       "required": true
+    },
+    "Blocks": {
+      "type": "dynamiczone",
+      "components": [
+        "blocks.text",
+        "blocks.text-image",
+        "blocks.poem-form",
+        "blocks.call-to-action-cta"
+      ]
     }
   }
 }

@@ -30,6 +30,12 @@ export default async function Home(props: HomeProps) {
   const logo = homepage.then(home => home.data.Logo)
   const blocks = homepage.then(home => home.data.Blocks)
 
+  const category_grid = strapi.GetCategories().then(d => d.data.map<GridItem>(cat => ({
+    id: cat.id,
+    title: cat.Title,
+    slug: `/odes/${cat.slug}/`,
+    color: cat.Color,
+  })))
 
   if (!stringToBool(splashed)) { // if not splashed, only splash onces
     return <Suspense fallback={<Loader />}>
@@ -42,16 +48,11 @@ export default async function Home(props: HomeProps) {
   }
 
   return <main>
-    <Hero title={title} description={description} color="sunny-yellow" />
+    <Hero title={title} description={description} color={Promise.resolve("sunny-yellow")} />
     <StoryCounter />
     <DisplayContent blocks={blocks} childPositon="top">
       <Suspense fallback={<Loader />}>
-        <Grid items={strapi.GetCategories().then(d => d.data.map<GridItem>(cat => ({
-          id: cat.id,
-          title: cat.Title,
-          slug: `/odes/${cat.slug}/`,
-          color: cat.Color,
-        })))} />
+        <Grid items={category_grid} />
       </Suspense>
     </DisplayContent>
   </main>

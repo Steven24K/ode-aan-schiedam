@@ -381,6 +381,14 @@ export interface ApiCategoryCategory extends Struct.CollectionTypeSchema {
     draftAndPublish: true;
   };
   attributes: {
+    Blocks: Schema.Attribute.DynamicZone<
+      [
+        'blocks.text',
+        'blocks.text-image',
+        'blocks.poem-form',
+        'blocks.call-to-action-cta',
+      ]
+    >;
     Color: Schema.Attribute.Enumeration<
       [
         'just-black',

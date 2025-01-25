@@ -1,4 +1,5 @@
 import { Color } from "./Color"
+import { PageBlock } from "./PageBlock"
 
 export type PostCategory = {
     documentId: string
@@ -7,4 +8,5 @@ export type PostCategory = {
     Description: string
     Color: Color
     slug: string
+    Blocks: PageBlock[]
 }

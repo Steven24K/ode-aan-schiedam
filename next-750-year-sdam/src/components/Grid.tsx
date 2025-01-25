@@ -19,6 +19,12 @@ export const Grid = (props: GridProps) => {
     const _items = use(items)
 
     return <section className="grid">
+
+        {_items.length === 0 && (
+            <div className="text-lg border-2 border-gray-200 p-4 m-2">
+                <p>Er is geen content gevonden. Kom later terug voor meer!</p>
+            </div>
+        )}
         {
             _items.map((item) => {
                 return (

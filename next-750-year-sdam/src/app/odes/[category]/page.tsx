@@ -1,4 +1,3 @@
-import { CallToActionBlock } from "@/components/Blocks/CallToAction"
 import { DisplayContent } from "@/components/DisplayContent"
 import { Grid, GridItem } from "@/components/Grid"
 import { Hero } from "@/components/Hero"
@@ -18,31 +17,23 @@ export default async function StoryOverview(props: StoryOverviewProps) {
     const strapi = new StrapiCMSService()
 
     const categoryInfo = strapi.GetCategoryBySlug(category)
-    const _categoryInfo = await categoryInfo
     const poems = strapi.GetPoemsByCategory(category).then(res => res.data)
-    const _poems = await poems
 
     const title = categoryInfo.then(cat => cat.Title)
     const description = categoryInfo.then(cat => cat.Description)
+    const color = categoryInfo.then(cat => cat.Color)
+    const blocks = categoryInfo.then(cat => cat.Blocks)
+    const poem_grid = poems.then(res => res.map<GridItem>(r => ({ id: r.id, color: r.category.Color, slug: `/ode/${r.slug}`, title: r.Title })))
 
     return <>
         <Hero title={title}
             description={description}
-            color={_categoryInfo.Color}
+            color={color}
             cta={{ text: "Terug naar het overzicht", to: '/?splashed=true' }}
         />
-        <DisplayContent>
+        <DisplayContent childPositon="bottom" blocks={blocks} >
             <Suspense fallback={<Loader />}>
-                {
-                    _poems.length == 0 &&
-                    <CallToActionBlock
-                        id={1}
-                        __component="blocks.call-to-action-cta"
-                        Description="Geen odes gevonden voor deze categorie"
-                        Button={[{ id: 1, Title: "Schrijf je eigen ode", URL: '/' }]}
-                    />
-                }
-                <Grid items={poems.then(res => res.map<GridItem>(r => ({ id: r.id, color: r.category.Color, slug: `/ode/${r.slug}`, title: r.Title })))} />
+                <Grid items={poem_grid} />
             </Suspense>
         </DisplayContent>
     </>

@@ -6,7 +6,7 @@ import { use } from "react"
 type HeroProps = {
     title: Promise<string>
     description?: Promise<string | undefined>
-    color: Color
+    color: Promise<Color>
     cta?: {
         text: string
         to: string
@@ -18,10 +18,11 @@ export const Hero = (props: HeroProps) => {
 
     const _title = use(title)
     const _description = description ? use(description) : null
+    const _color = use(color)
 
-    return <header className={`hero bg-${color}`}>
+    return <header className={`hero bg-${_color}`}>
         <Image
-            className={`hart bg-${color}--light`}
+            className={`hart bg-${_color}--light`}
             width={2382}
             height={2382}
             src={'/img/logos/SDAM750-hart_RGB.png'}
