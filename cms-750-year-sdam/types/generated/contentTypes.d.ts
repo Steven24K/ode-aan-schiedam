@@ -458,6 +458,44 @@ export interface ApiFooterMenuFooterMenu extends Struct.SingleTypeSchema {
   };
 }
 
+export interface ApiFormForm extends Struct.CollectionTypeSchema {
+  collectionName: 'forms';
+  info: {
+    description: '';
+    displayName: 'Forms';
+    pluralName: 'forms';
+    singularName: 'form';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    createdAt: Schema.Attribute.DateTime;
+    createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+    Fields: Schema.Attribute.DynamicZone<
+      [
+        'form-fields.textarea',
+        'form-fields.text',
+        'form-fields.password',
+        'form-fields.email',
+        'form-fields.checkbox',
+        'form-fields.categories-dropdown',
+      ]
+    >;
+    locale: Schema.Attribute.String & Schema.Attribute.Private;
+    localizations: Schema.Attribute.Relation<'oneToMany', 'api::form.form'> &
+      Schema.Attribute.Private;
+    publishedAt: Schema.Attribute.DateTime;
+    SubmissionText: Schema.Attribute.Text;
+    submit_url: Schema.Attribute.String & Schema.Attribute.Required;
+    Title: Schema.Attribute.String;
+    updatedAt: Schema.Attribute.DateTime;
+    updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+  };
+}
+
 export interface ApiHomepageHomepage extends Struct.SingleTypeSchema {
   collectionName: 'homepages';
   info: {
@@ -546,6 +584,7 @@ export interface ApiPagePage extends Struct.CollectionTypeSchema {
         'blocks.text-image',
         'blocks.call-to-action-cta',
         'blocks.poem-form',
+        'blocks.form',
       ]
     > &
       Schema.Attribute.Required &
@@ -1146,6 +1185,7 @@ declare module '@strapi/strapi' {
       'admin::user': AdminUser;
       'api::category.category': ApiCategoryCategory;
       'api::footer-menu.footer-menu': ApiFooterMenuFooterMenu;
+      'api::form.form': ApiFormForm;
       'api::homepage.homepage': ApiHomepageHomepage;
       'api::main-menu.main-menu': ApiMainMenuMainMenu;
       'api::page.page': ApiPagePage;

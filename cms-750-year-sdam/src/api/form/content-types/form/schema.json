@@ -1,0 +1,37 @@
+{
+  "kind": "collectionType",
+  "collectionName": "forms",
+  "info": {
+    "singularName": "form",
+    "pluralName": "forms",
+    "displayName": "Forms",
+    "description": ""
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "Title": {
+      "type": "string"
+    },
+    "SubmissionText": {
+      "type": "text"
+    },
+    "Fields": {
+      "type": "dynamiczone",
+      "components": [
+        "form-fields.textarea",
+        "form-fields.text",
+        "form-fields.password",
+        "form-fields.email",
+        "form-fields.checkbox",
+        "form-fields.categories-dropdown"
+      ]
+    },
+    "submit_url": {
+      "type": "string",
+      "required": true
+    }
+  }
+}

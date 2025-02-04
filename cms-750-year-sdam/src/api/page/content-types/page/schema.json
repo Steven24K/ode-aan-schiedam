@@ -30,7 +30,8 @@
         "blocks.text",
         "blocks.text-image",
         "blocks.call-to-action-cta",
-        "blocks.poem-form"
+        "blocks.poem-form",
+        "blocks.form"
       ],
       "required": true,
       "min": 1

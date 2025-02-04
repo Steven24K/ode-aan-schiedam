@@ -1,0 +1,25 @@
+{
+  "collectionName": "components_form_fields_categories_dropdowns",
+  "info": {
+    "displayName": "Categories Dropdown"
+  },
+  "options": {},
+  "attributes": {
+    "label": {
+      "type": "string"
+    },
+    "name": {
+      "type": "string",
+      "required": true,
+      "unique": true
+    },
+    "required": {
+      "type": "boolean"
+    },
+    "categories": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::category.category"
+    }
+  }
+}

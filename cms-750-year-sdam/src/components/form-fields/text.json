@@ -1,0 +1,21 @@
+{
+  "collectionName": "components_form_fields_texts",
+  "info": {
+    "displayName": "Text",
+    "description": ""
+  },
+  "options": {},
+  "attributes": {
+    "label": {
+      "type": "string"
+    },
+    "required": {
+      "type": "boolean"
+    },
+    "name": {
+      "type": "string",
+      "required": true,
+      "unique": true
+    }
+  }
+}

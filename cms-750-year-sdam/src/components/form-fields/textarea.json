@@ -1,0 +1,21 @@
+{
+  "collectionName": "components_form_fields_textareas",
+  "info": {
+    "displayName": "Textarea"
+  },
+  "options": {},
+  "attributes": {
+    "label": {
+      "type": "string"
+    },
+    "name": {
+      "type": "string",
+      "unique": true,
+      "required": true
+    },
+    "required": {
+      "type": "boolean",
+      "default": false
+    }
+  }
+}

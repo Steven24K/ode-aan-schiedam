@@ -1,0 +1,14 @@
+{
+  "collectionName": "components_blocks_forms",
+  "info": {
+    "displayName": "Form"
+  },
+  "options": {},
+  "attributes": {
+    "form": {
+      "type": "relation",
+      "relation": "oneToOne",
+      "target": "api::form.form"
+    }
+  }
+}

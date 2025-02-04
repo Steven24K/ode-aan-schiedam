@@ -20,6 +20,16 @@ export interface BlocksCallToActionCta extends Struct.ComponentSchema {
   };
 }
 
+export interface BlocksForm extends Struct.ComponentSchema {
+  collectionName: 'components_blocks_forms';
+  info: {
+    displayName: 'Form';
+  };
+  attributes: {
+    form: Schema.Attribute.Relation<'oneToOne', 'api::form.form'>;
+  };
+}
+
 export interface BlocksPoemForm extends Struct.ComponentSchema {
   collectionName: 'components_blocks_poem_forms';
   info: {
@@ -98,16 +108,112 @@ export interface FooterColumn extends Struct.ComponentSchema {
   };
 }
 
+export interface FormFieldsCategoriesDropdown extends Struct.ComponentSchema {
+  collectionName: 'components_form_fields_categories_dropdowns';
+  info: {
+    displayName: 'Categories Dropdown';
+  };
+  attributes: {
+    categories: Schema.Attribute.Relation<
+      'oneToMany',
+      'api::category.category'
+    >;
+    label: Schema.Attribute.String;
+    name: Schema.Attribute.String &
+      Schema.Attribute.Required &
+      Schema.Attribute.Unique;
+    required: Schema.Attribute.Boolean;
+  };
+}
+
+export interface FormFieldsCheckbox extends Struct.ComponentSchema {
+  collectionName: 'components_form_fields_checkboxes';
+  info: {
+    displayName: 'Checkbox';
+  };
+  attributes: {
+    label: Schema.Attribute.String;
+    name: Schema.Attribute.String &
+      Schema.Attribute.Required &
+      Schema.Attribute.Unique;
+    required: Schema.Attribute.Boolean;
+  };
+}
+
+export interface FormFieldsEmail extends Struct.ComponentSchema {
+  collectionName: 'components_form_fields_emails';
+  info: {
+    displayName: 'Email';
+  };
+  attributes: {
+    label: Schema.Attribute.String;
+    name: Schema.Attribute.String &
+      Schema.Attribute.Required &
+      Schema.Attribute.Unique;
+    required: Schema.Attribute.Boolean;
+  };
+}
+
+export interface FormFieldsPassword extends Struct.ComponentSchema {
+  collectionName: 'components_form_fields_passwords';
+  info: {
+    displayName: 'Password';
+  };
+  attributes: {
+    label: Schema.Attribute.String;
+    name: Schema.Attribute.String &
+      Schema.Attribute.Required &
+      Schema.Attribute.Unique;
+    required: Schema.Attribute.Boolean & Schema.Attribute.DefaultTo<false>;
+  };
+}
+
+export interface FormFieldsText extends Struct.ComponentSchema {
+  collectionName: 'components_form_fields_texts';
+  info: {
+    description: '';
+    displayName: 'Text';
+  };
+  attributes: {
+    label: Schema.Attribute.String;
+    name: Schema.Attribute.String &
+      Schema.Attribute.Required &
+      Schema.Attribute.Unique;
+    required: Schema.Attribute.Boolean;
+  };
+}
+
+export interface FormFieldsTextarea extends Struct.ComponentSchema {
+  collectionName: 'components_form_fields_textareas';
+  info: {
+    displayName: 'Textarea';
+  };
+  attributes: {
+    label: Schema.Attribute.String;
+    name: Schema.Attribute.String &
+      Schema.Attribute.Required &
+      Schema.Attribute.Unique;
+    required: Schema.Attribute.Boolean & Schema.Attribute.DefaultTo<false>;
+  };
+}
+
 declare module '@strapi/strapi' {
   export module Public {
     export interface ComponentSchemas {
       'blocks.call-to-action-cta': BlocksCallToActionCta;
+      'blocks.form': BlocksForm;
       'blocks.poem-form': BlocksPoemForm;
       'blocks.text': BlocksText;
       'blocks.text-image': BlocksTextImage;
       'clickables.button': ClickablesButton;
       'clickables.menu-item': ClickablesMenuItem;
       'footer.column': FooterColumn;
+      'form-fields.categories-dropdown': FormFieldsCategoriesDropdown;
+      'form-fields.checkbox': FormFieldsCheckbox;
+      'form-fields.email': FormFieldsEmail;
+      'form-fields.password': FormFieldsPassword;
+      'form-fields.text': FormFieldsText;
+      'form-fields.textarea': FormFieldsTextarea;
     }
   }
 }
