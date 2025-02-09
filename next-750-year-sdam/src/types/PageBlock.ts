@@ -1,3 +1,4 @@
+import { EndPoint } from "@/services/StrapiCMSService"
 import { StrapiImage } from "./StrapiImage"
 
 export type PageBlock =
@@ -44,15 +45,16 @@ export type FormBlockProps = {
     id: number
     form: {
         id: number
+        documentId: string
         Title: string
         SubmissionText: string
-        submit_url: string
+        submit_url: EndPoint
         Fields: StrapiFormField[]
     }
 }
 
 export type StrapiFormField = {
-    __component: "form-fields.text" | "form-fields.email" | "form-fields.textarea" | "form-fields.checkbox" | "form-fields.password"
+    __component: "form-fields.text" | "form-fields.email" | "form-fields.textarea" | "form-fields.checkbox" | "form-fields.password" | "form-fields.number"
     label: string 
     required: boolean
     name: string

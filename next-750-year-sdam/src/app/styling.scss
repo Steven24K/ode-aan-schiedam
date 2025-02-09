@@ -804,6 +804,11 @@ $mobile-width: 700px;
     color: $just-black;
 }
 
+.form-field[type="checkbox"] {
+    width: 15px;
+    height: 15px;
+}
+
 .form-field:focus {
     outline: none;
     border-color: $sunny-yellow;

@@ -481,6 +481,7 @@ export interface ApiFormForm extends Struct.CollectionTypeSchema {
         'form-fields.email',
         'form-fields.checkbox',
         'form-fields.categories-dropdown',
+        'form-fields.number',
       ]
     >;
     locale: Schema.Attribute.String & Schema.Attribute.Private;
@@ -668,6 +669,36 @@ export interface ApiSiteInfoSiteInfo extends Struct.SingleTypeSchema {
     publishedAt: Schema.Attribute.DateTime;
     SiteName: Schema.Attribute.String & Schema.Attribute.Required;
     Slogan: Schema.Attribute.String & Schema.Attribute.Required;
+    updatedAt: Schema.Attribute.DateTime;
+    updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+  };
+}
+
+export interface ApiSubmissionSubmission extends Struct.CollectionTypeSchema {
+  collectionName: 'submissions';
+  info: {
+    description: '';
+    displayName: 'Submissions';
+    pluralName: 'submissions';
+    singularName: 'submission';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    createdAt: Schema.Attribute.DateTime;
+    createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+    data: Schema.Attribute.JSON;
+    form: Schema.Attribute.Relation<'oneToOne', 'api::form.form'>;
+    locale: Schema.Attribute.String & Schema.Attribute.Private;
+    localizations: Schema.Attribute.Relation<
+      'oneToMany',
+      'api::submission.submission'
+    > &
+      Schema.Attribute.Private;
+    publishedAt: Schema.Attribute.DateTime;
     updatedAt: Schema.Attribute.DateTime;
     updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
@@ -1191,6 +1222,7 @@ declare module '@strapi/strapi' {
       'api::page.page': ApiPagePage;
       'api::poem.poem': ApiPoemPoem;
       'api::site-info.site-info': ApiSiteInfoSiteInfo;
+      'api::submission.submission': ApiSubmissionSubmission;
       'plugin::content-releases.release': PluginContentReleasesRelease;
       'plugin::content-releases.release-action': PluginContentReleasesReleaseAction;
       'plugin::i18n.locale': PluginI18NLocale;

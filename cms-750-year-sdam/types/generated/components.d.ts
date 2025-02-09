@@ -154,6 +154,22 @@ export interface FormFieldsEmail extends Struct.ComponentSchema {
   };
 }
 
+export interface FormFieldsNumber extends Struct.ComponentSchema {
+  collectionName: 'components_form_fields_numbers';
+  info: {
+    displayName: 'Number';
+  };
+  attributes: {
+    label: Schema.Attribute.String & Schema.Attribute.Required;
+    name: Schema.Attribute.String &
+      Schema.Attribute.Required &
+      Schema.Attribute.Unique;
+    required: Schema.Attribute.Boolean &
+      Schema.Attribute.Required &
+      Schema.Attribute.DefaultTo<false>;
+  };
+}
+
 export interface FormFieldsPassword extends Struct.ComponentSchema {
   collectionName: 'components_form_fields_passwords';
   info: {
@@ -211,6 +227,7 @@ declare module '@strapi/strapi' {
       'form-fields.categories-dropdown': FormFieldsCategoriesDropdown;
       'form-fields.checkbox': FormFieldsCheckbox;
       'form-fields.email': FormFieldsEmail;
+      'form-fields.number': FormFieldsNumber;
       'form-fields.password': FormFieldsPassword;
       'form-fields.text': FormFieldsText;
       'form-fields.textarea': FormFieldsTextarea;

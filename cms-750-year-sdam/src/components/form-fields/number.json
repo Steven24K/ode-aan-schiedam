@@ -1,0 +1,23 @@
+{
+  "collectionName": "components_form_fields_numbers",
+  "info": {
+    "displayName": "Number"
+  },
+  "options": {},
+  "attributes": {
+    "label": {
+      "type": "string",
+      "required": true
+    },
+    "name": {
+      "type": "string",
+      "required": true,
+      "unique": true
+    },
+    "required": {
+      "type": "boolean",
+      "default": false,
+      "required": true
+    }
+  }
+}

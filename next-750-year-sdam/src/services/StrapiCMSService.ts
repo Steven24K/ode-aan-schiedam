@@ -12,7 +12,7 @@ type Either<a, b> = { kind: 'left', v: a } | { kind: 'right', v: b }
 
 type CreateResponse = Either<true, string>
 
-type EndPoint = "site-info" | "homepage" | "categories" | "pages" | "poems" | "main-menu" | "footer-menu"
+export type EndPoint = "site-info" | "homepage" | "categories" | "pages" | "poems" | "main-menu" | "footer-menu" | "submissions"
 
 type Populate = "Blocks" | "Blocks.Button" | "Blocks.Image" | "Logo" | "Columns.Items" | "Blocks.form" | "Blocks.form.Fields"
 
@@ -94,6 +94,14 @@ export class StrapiCMSService {
                 if (pages.data.length == 0) return notFound()
                 return pages.data[0]
             })
+
+    public CreateFormSubmission = async <T>(end_point: EndPoint, _body: StrapiData<T>): Promise<CreateResponse> =>
+        this.StrapiFetch(end_point, {
+            method: 'POST',
+            body: JSON.stringify(_body)
+        })
+            .then(() => ({ kind: 'left', v: true } as CreateResponse))
+            .catch((reason) => ({ kind: 'right', v: reason } as CreateResponse))
 
     public CreatePoem = async (_body: StrapiData<StrapiPoemBody>): Promise<CreateResponse> =>
         this.StrapiFetch(`poems`, {

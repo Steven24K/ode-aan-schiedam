@@ -57,7 +57,7 @@ export function FieldRenderer<T>(props: FieldRendererProps<T>) {
         case 'password':
         case 'email':
             return <div className="input-group">
-                {(!field.hide_label || field.hide_label == undefined) && <label className="form-label">{field.label}:</label>}
+                {(!field.hide_label || field.hide_label == undefined) && <label className="form-label">{field.label}: {field.required ? "*" : ''}</label>}
                 <input onChange={e => {
                     e.persist()
                     handleChange(field.name, e.currentTarget.value)
@@ -71,7 +71,7 @@ export function FieldRenderer<T>(props: FieldRendererProps<T>) {
             </div>
         case 'checkbox':
             return <div className="input-group">
-                {(!field.hide_label || field.hide_label == undefined) && <label className="form-label">{field.label}:</label>}
+                {(!field.hide_label || field.hide_label == undefined) && <label className="form-label">{field.label}: {field.required ? "*" : ''}</label>}
                 <input onChange={e => {
                     e.persist()
                     handleChange(field.name, !Boolean(defaultObject[field.name]))
@@ -85,7 +85,7 @@ export function FieldRenderer<T>(props: FieldRendererProps<T>) {
             </div>
         case 'number':
             return <div className="input-group">
-                {(!field.hide_label || field.hide_label == undefined) && <label className="form-label">{field.label}:</label>}
+                {(!field.hide_label || field.hide_label == undefined) && <label className="form-label">{field.label}: {field.required ? "*" : ''}</label>}
                 <input onChange={e => {
                     e.persist()
                     handleChange(field.name, Number(e.currentTarget.value))
@@ -102,7 +102,7 @@ export function FieldRenderer<T>(props: FieldRendererProps<T>) {
             </div>
         case 'textarea':
             return <div className="input-group">
-                {(!field.hide_label || field.hide_label == undefined) && <label className="form-label">{field.label}:</label>}
+                {(!field.hide_label || field.hide_label == undefined) && <label className="form-label">{field.label}: {field.required ? "*" : ''}</label>}
                 <textarea className="form-field"
                     cols={40}
                     rows={10}
@@ -117,7 +117,7 @@ export function FieldRenderer<T>(props: FieldRendererProps<T>) {
             </div>
         case 'dropdown':
             return <div className="input-group">
-                {(!field.hide_label || field.hide_label == undefined) && <label className="form-label">{field.label}:</label>}
+                {(!field.hide_label || field.hide_label == undefined) && <label className="form-label">{field.label}: {field.required ? "*" : ''}</label>}
                 {field.options.length == 0 && <p><i>Niet beschikbaar</i></p>}
                 {field.options.length > 0 && <select className="form-field"
                     value={String(defaultObject[field.name])}

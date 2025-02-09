@@ -26,7 +26,8 @@
         "form-fields.password",
         "form-fields.email",
         "form-fields.checkbox",
-        "form-fields.categories-dropdown"
+        "form-fields.categories-dropdown",
+        "form-fields.number"
       ]
     },
     "submit_url": {
