@@ -1,11 +1,12 @@
 import { EndPoint } from "@/services/StrapiCMSService"
 import { StrapiImage } from "./StrapiImage"
+import { PostCategory } from "./PostCategory"
 
 export type PageBlock =
     TextBlockProps |
     TextWithImageBlockProps |
     CallToActionBlockProps |
-    PoemFormBlockProps | 
+    PoemFormBlockProps |
     FormBlockProps
 
 export type TextBlockProps = {
@@ -53,11 +54,38 @@ export type FormBlockProps = {
     }
 }
 
-export type StrapiFormField = {
-    __component: "form-fields.text" | "form-fields.email" | "form-fields.textarea" | "form-fields.checkbox" | "form-fields.password" | "form-fields.number"
-    label: string 
+export type StrapiFormField = StandardFormField | CategoriesDropDown | InfoText | DropDown
+
+type StandardFormField = {
+    __component: "form-fields.text" | "form-fields.email" | "form-fields.textarea" | "form-fields.checkbox" | "form-fields.password" | "form-fields.number" | "form-fields.date-picker" | "form-fields.time-select"
+    label: string
     required: boolean
     name: string
+}
+
+type CategoriesDropDown = {
+    __component: "form-fields.categories-dropdown"
+    label: string
+    name: string
+    required: boolean
+    categories: PostCategory[]
+}
+
+type DropDown = {
+    __component: "form-fields.dropdown"
+    label: string
+    name: string
+    required: boolean
+    Options: DropDownOption[]
+}
+
+type DropDownOption = {
+    Name: string 
+    Value: string
+}
+type InfoText = {
+    __component: "form-fields.info-text"
+    Message: string
 }
 
 type Button = {

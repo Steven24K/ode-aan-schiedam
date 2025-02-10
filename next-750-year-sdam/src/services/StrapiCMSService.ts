@@ -5,7 +5,7 @@ import { SiteInfo } from "@/types/SiteInfo"
 import { StrapiData } from "@/types/StrapiData"
 import { StrapiHomePage } from "@/types/StrapiHomePage"
 import { StrapiPage } from "@/types/StrapiPage"
-import { StrapiPoem, StrapiPoemBody } from "@/types/StrapiPoem"
+import { StrapiPoem } from "@/types/StrapiPoem"
 import { notFound } from "next/navigation"
 
 type Either<a, b> = { kind: 'left', v: a } | { kind: 'right', v: b }
@@ -14,7 +14,7 @@ type CreateResponse = Either<true, string>
 
 export type EndPoint = "site-info" | "homepage" | "categories" | "pages" | "poems" | "main-menu" | "footer-menu" | "submissions"
 
-type Populate = "Blocks" | "Blocks.Button" | "Blocks.Image" | "Logo" | "Columns.Items" | "Blocks.form" | "Blocks.form.Fields"
+type Populate = "Blocks" | "Blocks.Button" | "Blocks.Image" | "Logo" | "Columns.Items" | "Blocks.form" | "Blocks.form.Fields" | "Blocks.form.Fields.categories" | "Blocks.form.Fields.Options"
 
 type Filter = {
     field: "slug" | "category][slug"
@@ -80,7 +80,7 @@ export class StrapiCMSService {
 
     public GetPage = async (slug: string): Promise<StrapiPage> =>
         this.StrapiFetch<StrapiPage[]>('pages', {
-            populate: ['Blocks', 'Blocks.Button', 'Blocks.Image', 'Blocks.form', 'Blocks.form.Fields'],
+            populate: ['Blocks', 'Blocks.Button', 'Blocks.Image', 'Blocks.form', 'Blocks.form.Fields', 'Blocks.form.Fields.categories', 'Blocks.form.Fields.Options'],
             filters: [{ field: 'slug', operator: '$eq', value: slug }]
         })
             .then(pages => {
@@ -95,16 +95,8 @@ export class StrapiCMSService {
                 return pages.data[0]
             })
 
-    public CreateFormSubmission = async <T>(end_point: EndPoint, _body: StrapiData<T>): Promise<CreateResponse> =>
+    public SubmitFormBody = async <T>(end_point: EndPoint, _body: StrapiData<T>): Promise<CreateResponse> =>
         this.StrapiFetch(end_point, {
-            method: 'POST',
-            body: JSON.stringify(_body)
-        })
-            .then(() => ({ kind: 'left', v: true } as CreateResponse))
-            .catch((reason) => ({ kind: 'right', v: reason } as CreateResponse))
-
-    public CreatePoem = async (_body: StrapiData<StrapiPoemBody>): Promise<CreateResponse> =>
-        this.StrapiFetch(`poems`, {
             method: 'POST',
             body: JSON.stringify(_body)
         })

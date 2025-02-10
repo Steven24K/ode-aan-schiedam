@@ -1,0 +1,30 @@
+{
+  "collectionName": "components_form_fields_dropdowns",
+  "info": {
+    "displayName": "Dropdown"
+  },
+  "options": {},
+  "attributes": {
+    "label": {
+      "type": "string",
+      "required": true
+    },
+    "name": {
+      "type": "string",
+      "required": true
+    },
+    "required": {
+      "type": "boolean",
+      "default": false,
+      "required": true
+    },
+    "Options": {
+      "displayName": "DropdownOption",
+      "type": "component",
+      "repeatable": true,
+      "component": "dropdown-options.dropdown-option",
+      "min": 1,
+      "required": true
+    }
+  }
+}

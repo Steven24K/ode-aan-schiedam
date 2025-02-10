@@ -3,7 +3,6 @@ import { PageBlock } from "@/types/PageBlock"
 import { TextBlock } from "./Blocks/Text"
 import { TextWithImageBlock } from "./Blocks/TextWithImage"
 import { CallToActionBlock } from "./Blocks/CallToAction"
-import { PoemFormBlock } from "./Blocks/PoemForm"
 import { FormBlock } from "./Blocks/FormBlock"
 
 type DisplayContentProps = {
@@ -32,8 +31,6 @@ export const DisplayContent = (props: DisplayContentProps) => {
                         return <TextWithImageBlock key={`${block.__component}_${block.id}`} {...block} />
                     case 'blocks.call-to-action-cta':
                         return <CallToActionBlock key={`${block.__component}_${block.id}`} {...block} />
-                    case 'blocks.poem-form':
-                        return <PoemFormBlock key={`${block.__component}_${block.id}`} {...block} />
                     case 'blocks.form':
                         return <FormBlock key={`${block.__component}_${block.id}`} {...block} />
                     default:

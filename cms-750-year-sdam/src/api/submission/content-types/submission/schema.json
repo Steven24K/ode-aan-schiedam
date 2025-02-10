@@ -17,8 +17,17 @@
       "relation": "oneToOne",
       "target": "api::form.form"
     },
-    "data": {
-      "type": "json"
+    "name": {
+      "type": "string"
+    },
+    "email": {
+      "type": "string"
+    },
+    "message": {
+      "type": "text"
+    },
+    "accept": {
+      "type": "boolean"
     }
   }
 }

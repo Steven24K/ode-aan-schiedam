@@ -1,0 +1,12 @@
+{
+  "collectionName": "components_form_fields_info_texts",
+  "info": {
+    "displayName": "Info Text"
+  },
+  "options": {},
+  "attributes": {
+    "Message": {
+      "type": "text"
+    }
+  }
+}

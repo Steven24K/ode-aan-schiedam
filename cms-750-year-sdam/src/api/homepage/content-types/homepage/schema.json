@@ -24,7 +24,8 @@
       "components": [
         "blocks.text",
         "blocks.text-image",
-        "blocks.call-to-action-cta"
+        "blocks.call-to-action-cta",
+        "blocks.form"
       ],
       "min": 1,
       "required": true

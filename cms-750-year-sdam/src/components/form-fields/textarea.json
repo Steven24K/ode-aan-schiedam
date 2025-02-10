@@ -1,7 +1,8 @@
 {
   "collectionName": "components_form_fields_textareas",
   "info": {
-    "displayName": "Textarea"
+    "displayName": "Textarea",
+    "description": ""
   },
   "options": {},
   "attributes": {
@@ -10,7 +11,7 @@
     },
     "name": {
       "type": "string",
-      "unique": true,
+      "unique": false,
       "required": true
     },
     "required": {

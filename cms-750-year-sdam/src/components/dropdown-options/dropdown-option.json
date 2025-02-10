@@ -1,0 +1,17 @@
+{
+  "collectionName": "components_dropdown_options_dropdown_options",
+  "info": {
+    "displayName": "DropdownOption"
+  },
+  "options": {},
+  "attributes": {
+    "Name": {
+      "type": "string",
+      "required": true
+    },
+    "Value": {
+      "type": "string",
+      "required": true
+    }
+  }
+}

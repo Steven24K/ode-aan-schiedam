@@ -30,17 +30,6 @@ export interface BlocksForm extends Struct.ComponentSchema {
   };
 }
 
-export interface BlocksPoemForm extends Struct.ComponentSchema {
-  collectionName: 'components_blocks_poem_forms';
-  info: {
-    displayName: 'Poem Form';
-  };
-  attributes: {
-    Description: Schema.Attribute.Text;
-    Title: Schema.Attribute.String;
-  };
-}
-
 export interface BlocksText extends Struct.ComponentSchema {
   collectionName: 'components_blocks_texts';
   info: {
@@ -96,6 +85,17 @@ export interface ClickablesMenuItem extends Struct.ComponentSchema {
   };
 }
 
+export interface DropdownOptionsDropdownOption extends Struct.ComponentSchema {
+  collectionName: 'components_dropdown_options_dropdown_options';
+  info: {
+    displayName: 'DropdownOption';
+  };
+  attributes: {
+    Name: Schema.Attribute.String & Schema.Attribute.Required;
+    Value: Schema.Attribute.String & Schema.Attribute.Required;
+  };
+}
+
 export interface FooterColumn extends Struct.ComponentSchema {
   collectionName: 'components_footer_columns';
   info: {
@@ -111,6 +111,7 @@ export interface FooterColumn extends Struct.ComponentSchema {
 export interface FormFieldsCategoriesDropdown extends Struct.ComponentSchema {
   collectionName: 'components_form_fields_categories_dropdowns';
   info: {
+    description: '';
     displayName: 'Categories Dropdown';
   };
   attributes: {
@@ -119,9 +120,7 @@ export interface FormFieldsCategoriesDropdown extends Struct.ComponentSchema {
       'api::category.category'
     >;
     label: Schema.Attribute.String;
-    name: Schema.Attribute.String &
-      Schema.Attribute.Required &
-      Schema.Attribute.Unique;
+    name: Schema.Attribute.String & Schema.Attribute.Required;
     required: Schema.Attribute.Boolean;
   };
 }
@@ -129,41 +128,87 @@ export interface FormFieldsCategoriesDropdown extends Struct.ComponentSchema {
 export interface FormFieldsCheckbox extends Struct.ComponentSchema {
   collectionName: 'components_form_fields_checkboxes';
   info: {
+    description: '';
     displayName: 'Checkbox';
   };
   attributes: {
     label: Schema.Attribute.String;
-    name: Schema.Attribute.String &
-      Schema.Attribute.Required &
-      Schema.Attribute.Unique;
+    name: Schema.Attribute.String & Schema.Attribute.Required;
     required: Schema.Attribute.Boolean;
+  };
+}
+
+export interface FormFieldsDatePicker extends Struct.ComponentSchema {
+  collectionName: 'components_form_fields_date_pickers';
+  info: {
+    displayName: 'DatePicker';
+  };
+  attributes: {
+    label: Schema.Attribute.String & Schema.Attribute.Required;
+    name: Schema.Attribute.String & Schema.Attribute.Required;
+    required: Schema.Attribute.Boolean &
+      Schema.Attribute.Required &
+      Schema.Attribute.DefaultTo<false>;
+  };
+}
+
+export interface FormFieldsDropdown extends Struct.ComponentSchema {
+  collectionName: 'components_form_fields_dropdowns';
+  info: {
+    displayName: 'Dropdown';
+  };
+  attributes: {
+    label: Schema.Attribute.String & Schema.Attribute.Required;
+    name: Schema.Attribute.String & Schema.Attribute.Required;
+    Options: Schema.Attribute.Component<
+      'dropdown-options.dropdown-option',
+      true
+    > &
+      Schema.Attribute.Required &
+      Schema.Attribute.SetMinMax<
+        {
+          min: 1;
+        },
+        number
+      >;
+    required: Schema.Attribute.Boolean &
+      Schema.Attribute.Required &
+      Schema.Attribute.DefaultTo<false>;
   };
 }
 
 export interface FormFieldsEmail extends Struct.ComponentSchema {
   collectionName: 'components_form_fields_emails';
   info: {
+    description: '';
     displayName: 'Email';
   };
   attributes: {
     label: Schema.Attribute.String;
-    name: Schema.Attribute.String &
-      Schema.Attribute.Required &
-      Schema.Attribute.Unique;
+    name: Schema.Attribute.String & Schema.Attribute.Required;
     required: Schema.Attribute.Boolean;
+  };
+}
+
+export interface FormFieldsInfoText extends Struct.ComponentSchema {
+  collectionName: 'components_form_fields_info_texts';
+  info: {
+    displayName: 'Info Text';
+  };
+  attributes: {
+    Message: Schema.Attribute.Text;
   };
 }
 
 export interface FormFieldsNumber extends Struct.ComponentSchema {
   collectionName: 'components_form_fields_numbers';
   info: {
+    description: '';
     displayName: 'Number';
   };
   attributes: {
     label: Schema.Attribute.String & Schema.Attribute.Required;
-    name: Schema.Attribute.String &
-      Schema.Attribute.Required &
-      Schema.Attribute.Unique;
+    name: Schema.Attribute.String & Schema.Attribute.Required;
     required: Schema.Attribute.Boolean &
       Schema.Attribute.Required &
       Schema.Attribute.DefaultTo<false>;
@@ -173,13 +218,12 @@ export interface FormFieldsNumber extends Struct.ComponentSchema {
 export interface FormFieldsPassword extends Struct.ComponentSchema {
   collectionName: 'components_form_fields_passwords';
   info: {
+    description: '';
     displayName: 'Password';
   };
   attributes: {
     label: Schema.Attribute.String;
-    name: Schema.Attribute.String &
-      Schema.Attribute.Required &
-      Schema.Attribute.Unique;
+    name: Schema.Attribute.String & Schema.Attribute.Required;
     required: Schema.Attribute.Boolean & Schema.Attribute.DefaultTo<false>;
   };
 }
@@ -192,9 +236,7 @@ export interface FormFieldsText extends Struct.ComponentSchema {
   };
   attributes: {
     label: Schema.Attribute.String;
-    name: Schema.Attribute.String &
-      Schema.Attribute.Required &
-      Schema.Attribute.Unique;
+    name: Schema.Attribute.String & Schema.Attribute.Required;
     required: Schema.Attribute.Boolean;
   };
 }
@@ -202,14 +244,27 @@ export interface FormFieldsText extends Struct.ComponentSchema {
 export interface FormFieldsTextarea extends Struct.ComponentSchema {
   collectionName: 'components_form_fields_textareas';
   info: {
+    description: '';
     displayName: 'Textarea';
   };
   attributes: {
     label: Schema.Attribute.String;
-    name: Schema.Attribute.String &
-      Schema.Attribute.Required &
-      Schema.Attribute.Unique;
+    name: Schema.Attribute.String & Schema.Attribute.Required;
     required: Schema.Attribute.Boolean & Schema.Attribute.DefaultTo<false>;
+  };
+}
+
+export interface FormFieldsTimeSelect extends Struct.ComponentSchema {
+  collectionName: 'components_form_fields_time_selects';
+  info: {
+    displayName: 'TimeSelect';
+  };
+  attributes: {
+    label: Schema.Attribute.String & Schema.Attribute.Required;
+    name: Schema.Attribute.String & Schema.Attribute.Required;
+    required: Schema.Attribute.Boolean &
+      Schema.Attribute.Required &
+      Schema.Attribute.DefaultTo<false>;
   };
 }
 
@@ -218,19 +273,23 @@ declare module '@strapi/strapi' {
     export interface ComponentSchemas {
       'blocks.call-to-action-cta': BlocksCallToActionCta;
       'blocks.form': BlocksForm;
-      'blocks.poem-form': BlocksPoemForm;
       'blocks.text': BlocksText;
       'blocks.text-image': BlocksTextImage;
       'clickables.button': ClickablesButton;
       'clickables.menu-item': ClickablesMenuItem;
+      'dropdown-options.dropdown-option': DropdownOptionsDropdownOption;
       'footer.column': FooterColumn;
       'form-fields.categories-dropdown': FormFieldsCategoriesDropdown;
       'form-fields.checkbox': FormFieldsCheckbox;
+      'form-fields.date-picker': FormFieldsDatePicker;
+      'form-fields.dropdown': FormFieldsDropdown;
       'form-fields.email': FormFieldsEmail;
+      'form-fields.info-text': FormFieldsInfoText;
       'form-fields.number': FormFieldsNumber;
       'form-fields.password': FormFieldsPassword;
       'form-fields.text': FormFieldsText;
       'form-fields.textarea': FormFieldsTextarea;
+      'form-fields.time-select': FormFieldsTimeSelect;
     }
   }
 }

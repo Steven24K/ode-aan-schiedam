@@ -10,9 +10,3 @@ export type StrapiPoem = {
     Email: string 
     Phone: string
 }
-
-export type StrapiPoemBody = Omit<StrapiPoem, ('id' | 'category')> & {
-    category: {
-        connect: [string]
-    }
-}

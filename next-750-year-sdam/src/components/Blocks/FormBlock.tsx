@@ -6,6 +6,7 @@ import { StrapiCMSService } from "@/services/StrapiCMSService"
 
 type FormState = {
     defaultObject: any
+    error?: string
     submitted: boolean
 }
 
@@ -19,22 +20,47 @@ export const FormBlock = (props: FormBlockProps) => {
     const defaultObject = fieldsToDefaultObject(Fields)
     const [state, setState] = useState<FormState>(zeroFormState(defaultObject))
 
-    const strapi = new StrapiCMSService()
+    if (state.submitted) {
+        return <div className="bg-gray-100 rounded p-10 my-5 text-2xl">
+            <p>
+                {SubmissionText}
+            </p>
+            <button className="bg-blue-400 hover:bg-blue-800 text-white px-8 py-4 my-5"
+                onClick={() => setState(zeroFormState(defaultObject))}
+            >
+                Verstuur nog een keer
+            </button>
+        </div>
+    }
 
+    const strapi = new StrapiCMSService()
     return <>
         <FormBuilder<any>
             formTitle={Title}
             defaultObject={state.defaultObject}
             fields={Fields.map(mapStrapiFieldsfield)}
             handleChange={(key, value) => setState(s => ({ ...s, defaultObject: { ...s.defaultObject, [key]: value } }))}
-            // Make sure to only pass defaultObject that matches the content type
-            handleSubmit={() => strapi.CreateFormSubmission(submit_url, { data: { data: state.defaultObject, form: documentId } })}
+            handleSubmit={() =>
+                strapi.SubmitFormBody(submit_url, { data: { ...state.defaultObject, form: documentId } })
+                    .then(res => {
+                        if (res.kind == 'left')
+                            setState(s => ({ ...s, submitted: true }))
+                        else
+                            setState({ ...state, error: res.v })
+                    })
+            }
         />
+        {state.error && <div className="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded relative" role="alert">
+            {state.error}
+        </div>}
     </>
 }
 
 const fieldsToDefaultObject = (fields: StrapiFormField[]): any =>
-    fields.reduce((xs, x) => ({ ...xs, [x.name]: fieldToDefaultValue(x) }), {})
+    fields.reduce((xs, x) => {
+        if (x.__component == 'form-fields.info-text') return xs
+        return ({ ...xs, [x.name]: fieldToDefaultValue(x) })
+    }, {})
 
 const fieldToDefaultValue = (field: StrapiFormField): string | number | boolean => {
     if (field.__component == 'form-fields.checkbox') return false
@@ -56,6 +82,10 @@ const StrapiFieldType2FormFieldType = (strapi_type: StrapiFormField['__component
             return 'checkbox'
         case 'form-fields.number':
             return 'number'
+        case 'form-fields.date-picker':
+            return 'date'
+        case 'form-fields.time-select':
+            return 'time'
         default:
             return 'info'
     }
@@ -69,8 +99,16 @@ function mapStrapiFieldsfield<T>(field: StrapiFormField, index: number): FormFie
         case 'form-fields.textarea':
         case 'form-fields.password':
         case 'form-fields.number':
+        case 'form-fields.date-picker':
+        case 'form-fields.time-select':
             return ({ kind: StrapiFieldType2FormFieldType(field.__component), label: field.label, name: field.name, weight: index, required: field.required }) as FormField<T>
+        case 'form-fields.dropdown':
+            return ({ kind: 'dropdown', label: field.label, name: field.name, weight: index, required: field.required, options: field.Options.map(v => ({ name: v.Name, value: v.Value })) }) as FormField<T>
+        case 'form-fields.categories-dropdown':
+            return ({ kind: 'dropdown', label: field.label, name: field.name, weight: index, required: field.required, options: field.categories.map(v => ({ name: v.Title, value: v.documentId })) }) as FormField<T>
+        case 'form-fields.info-text':
+            return ({ kind: 'info', name: field.Message, weight: index })
         default:
-            return ({ kind: 'info', name: `${field.__component} does not exist.`, weight: index })
+            return ({ kind: 'info', name: JSON.stringify(field), weight: index })
     }
 }

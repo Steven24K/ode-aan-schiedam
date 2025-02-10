@@ -27,7 +27,11 @@
         "form-fields.email",
         "form-fields.checkbox",
         "form-fields.categories-dropdown",
-        "form-fields.number"
+        "form-fields.number",
+        "form-fields.time-select",
+        "form-fields.info-text",
+        "form-fields.dropdown",
+        "form-fields.date-picker"
       ]
     },
     "submit_url": {

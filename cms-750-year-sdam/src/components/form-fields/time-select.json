@@ -1,8 +1,7 @@
 {
-  "collectionName": "components_form_fields_numbers",
+  "collectionName": "components_form_fields_time_selects",
   "info": {
-    "displayName": "Number",
-    "description": ""
+    "displayName": "TimeSelect"
   },
   "options": {},
   "attributes": {
@@ -12,8 +11,7 @@
     },
     "name": {
       "type": "string",
-      "required": true,
-      "unique": false
+      "required": true
     },
     "required": {
       "type": "boolean",

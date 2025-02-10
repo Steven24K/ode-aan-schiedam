@@ -45,8 +45,8 @@
       "components": [
         "blocks.text",
         "blocks.text-image",
-        "blocks.poem-form",
-        "blocks.call-to-action-cta"
+        "blocks.call-to-action-cta",
+        "blocks.form"
       ]
     }
   }

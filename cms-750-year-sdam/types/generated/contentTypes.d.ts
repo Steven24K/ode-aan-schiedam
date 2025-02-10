@@ -385,8 +385,8 @@ export interface ApiCategoryCategory extends Struct.CollectionTypeSchema {
       [
         'blocks.text',
         'blocks.text-image',
-        'blocks.poem-form',
         'blocks.call-to-action-cta',
+        'blocks.form',
       ]
     >;
     Color: Schema.Attribute.Enumeration<
@@ -482,6 +482,10 @@ export interface ApiFormForm extends Struct.CollectionTypeSchema {
         'form-fields.checkbox',
         'form-fields.categories-dropdown',
         'form-fields.number',
+        'form-fields.time-select',
+        'form-fields.info-text',
+        'form-fields.dropdown',
+        'form-fields.date-picker',
       ]
     >;
     locale: Schema.Attribute.String & Schema.Attribute.Private;
@@ -510,7 +514,12 @@ export interface ApiHomepageHomepage extends Struct.SingleTypeSchema {
   };
   attributes: {
     Blocks: Schema.Attribute.DynamicZone<
-      ['blocks.text', 'blocks.text-image', 'blocks.call-to-action-cta']
+      [
+        'blocks.text',
+        'blocks.text-image',
+        'blocks.call-to-action-cta',
+        'blocks.form',
+      ]
     > &
       Schema.Attribute.Required &
       Schema.Attribute.SetMinMax<
@@ -584,7 +593,6 @@ export interface ApiPagePage extends Struct.CollectionTypeSchema {
         'blocks.text',
         'blocks.text-image',
         'blocks.call-to-action-cta',
-        'blocks.poem-form',
         'blocks.form',
       ]
     > &
@@ -630,6 +638,8 @@ export interface ApiPoemPoem extends Struct.CollectionTypeSchema {
     createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
     Email: Schema.Attribute.String & Schema.Attribute.Private;
+    form: Schema.Attribute.Relation<'oneToOne', 'api::form.form'> &
+      Schema.Attribute.Private;
     locale: Schema.Attribute.String & Schema.Attribute.Private;
     localizations: Schema.Attribute.Relation<'oneToMany', 'api::poem.poem'> &
       Schema.Attribute.Private;
@@ -687,10 +697,11 @@ export interface ApiSubmissionSubmission extends Struct.CollectionTypeSchema {
     draftAndPublish: true;
   };
   attributes: {
+    accept: Schema.Attribute.Boolean;
     createdAt: Schema.Attribute.DateTime;
     createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
-    data: Schema.Attribute.JSON;
+    email: Schema.Attribute.String;
     form: Schema.Attribute.Relation<'oneToOne', 'api::form.form'>;
     locale: Schema.Attribute.String & Schema.Attribute.Private;
     localizations: Schema.Attribute.Relation<
@@ -698,6 +709,8 @@ export interface ApiSubmissionSubmission extends Struct.CollectionTypeSchema {
       'api::submission.submission'
     > &
       Schema.Attribute.Private;
+    message: Schema.Attribute.Text;
+    name: Schema.Attribute.String;
     publishedAt: Schema.Attribute.DateTime;
     updatedAt: Schema.Attribute.DateTime;
     updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &

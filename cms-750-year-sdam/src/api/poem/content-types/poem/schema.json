@@ -40,6 +40,12 @@
     "Phone": {
       "type": "string",
       "private": true
+    },
+    "form": {
+      "type": "relation",
+      "relation": "oneToOne",
+      "target": "api::form.form",
+      "private": true
     }
   }
 }
