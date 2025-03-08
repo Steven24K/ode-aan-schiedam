@@ -1,0 +1,50 @@
+version: '3.8'
+
+services:
+  nextjs:
+    build: ./next-750-year-sdam
+    container_name: nextjs_app
+    restart: always
+    ports:
+      - "3000:3000"
+    environment:
+      - NODE_ENV=production
+      - STRAPI_CMS_URL=http://localhost:1337
+    depends_on:
+      - strapi
+
+  strapi:
+    build: ./cms-750-year-sdam
+    container_name: strapi_cms
+    restart: always
+    ports:
+      - "1337:1337"
+    environment:
+      - NODE_ENV=production
+      - HOST=0.0.0.0
+      - PORT=1337
+
+      - APP_KEYS=NwAhp1aVqwmkUmHZo0xoAQ==,jJyib7TJi1sHQpwAteYSQg==,1UouFOEYsp7kgXOXyCNxSQ==,JwoDuYozYZ8eRkZY8H9fPQ==
+      - API_TOKEN_SALT=u2r21j6zV3i7wT+iK3Bn0Q==
+      - ADMIN_JWT_SECRET=fxTJ5nlz0GxVNUdQ+wwKQQ==
+      - TRANSFER_TOKEN_SALT=aDzc3IOMpz14RrgYINYGDw==
+
+      - DATABASE_CLIENT=sqlite
+      - DATABASE_SSL=false
+      - DATABASE_FILENAME=.tmp/data.db
+      - JWT_SECRET=b/QdnEtNH4rnuK24KaAhgQ==
+    volumes:
+      - ./strapi-cms:/srv/app
+      - ./strapi-cms/.tmp:/srv/app/.tmp
+
+  nginx:
+    image: nginx:latest
+    container_name: nginx_proxy
+    restart: always
+    ports:
+      - "80:80"
+    volumes:
+      - ./nginx.conf:/etc/nginx/nginx.conf:ro
+    depends_on:
+      - nextjs
+      - strapi
