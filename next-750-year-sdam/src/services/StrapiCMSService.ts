@@ -32,7 +32,7 @@ type StrapiOptions = Partial<{
 export class StrapiCMSService {
     private STRAPI_CMS_URL: string
     constructor() {
-        this.STRAPI_CMS_URL = process.env.STRAPI_CMS_URL != undefined ? process.env.STRAPI_CMS_URL : ""
+        this.STRAPI_CMS_URL = process.env.STRAPI_CMS_URL != undefined ? process.env.STRAPI_CMS_URL : "http://localhost:1337"
     }
 
     private async StrapiFetch<T>(end_point: EndPoint, options: StrapiOptions = {}): Promise<StrapiData<T>> {
@@ -46,7 +46,11 @@ export class StrapiCMSService {
 
         const response = await fetch(_url,
             {
-                headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+                headers: { 
+                    'Content-Type': 'application/json', 
+                    'Accept': 'application/json',
+                    'Authorization': 'bearer ' + process.env.STRAPI_API_TOKEN
+                },
                 method: method,
                 body: body
             })
