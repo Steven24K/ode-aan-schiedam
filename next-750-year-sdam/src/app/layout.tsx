@@ -13,18 +13,18 @@ export default function RootLayout(props: Readonly<LayoutProps>) {
 
   return (
     <html lang="en">
-      <ErrorBoundary dev fallBack={<GeneralError />}>
-        <head>
-          <SiteMetaData />
-        </head>
-        <body>
+      <head>
+        <SiteMetaData />
+      </head>
+      <body>
+        <ErrorBoundary dev fallBack={<GeneralError />}>
           <NavBar />
 
           {children}
 
           <Footer />
-        </body>
-      </ErrorBoundary>
+        </ErrorBoundary>
+      </body>
     </html >
   );
 }

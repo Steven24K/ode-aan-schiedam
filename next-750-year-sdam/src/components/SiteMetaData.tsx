@@ -3,12 +3,16 @@ import { StrapiCMSService } from "@/services/StrapiCMSService"
 export async function SiteMetaData() {
     const strapi = new StrapiCMSService()
 
-    const siteInfo = await strapi.getSiteInfo().then(res => res.data)
+    const siteInfo = await strapi.getSiteInfo()
+        .then(res => res.data)
+        .catch(() => null)
 
-    const _title = siteInfo.SiteName 
+    if (siteInfo == null) return null
+
+    const _title = siteInfo.SiteName
     const _slogan = siteInfo.Slogan
     const _icon = siteInfo.Icon.formats.small.url
-    
+
     return <>
         <title>{_title}</title>
         <meta name="description" content={_slogan} />

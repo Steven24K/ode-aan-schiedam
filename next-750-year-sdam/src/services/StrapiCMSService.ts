@@ -58,7 +58,7 @@ export class StrapiCMSService {
         console.log(response.url)
         if (response.status == 404) return notFound()
         if (response.ok) return await response.json()
-        const error = `Error while fetching ${end_point} -> ${_populate}: ${response.statusText}: URL: ${response.url}`
+        const error = `Error while fetching ${end_point} -> ${_populate}: ${response.status} ${response.statusText}: URL: ${response.url}`
         console.error(error)
         return Promise.reject(error)
     }
