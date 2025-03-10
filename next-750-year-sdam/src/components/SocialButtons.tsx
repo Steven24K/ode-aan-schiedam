@@ -29,7 +29,7 @@ export const SocialButtons = () => {
         { ...faEnvelope, shareAction: { type: 'left', value: `mailto:?subject=Ode aan Schiedam&body=Een verhaal van Ode Aan Schiedam: ${document.location.href}` } },
         { ...faCopy, shareAction: { type: 'right', value: () => navigator.clipboard.writeText(document.location.href) } },
         { ...faCamera, shareAction: { type: 'right', value: () => window.print() } },
-        { ...faInstagram, shareAction: { type: 'left', value: `https://instagram.com/hello_world_my_name_is_steven` } },
+        { ...faInstagram, shareAction: { type: 'left', value: `https://www.instagram.com/poezie750/` } },
         { ...faFacebook, shareAction: { type: 'left', value: `https://www.facebook.com/sharer/sharer.php?u=${document.location.href}` } },
         { ...faWhatsapp, shareAction: { type: 'left', value: `https://wa.me/?text=Een verhaal van Ode aan Schiedam: ${document.location.href}` } },
         { ...faXTwitter, shareAction: { type: 'left', value: `https://x.com/share?text=Een verhaal van Ode aan Schiedam&url=${document.location.href}&hashtags=schiedam,odeaanschiedam,poezie` } },

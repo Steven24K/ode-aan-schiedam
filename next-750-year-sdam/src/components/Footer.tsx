@@ -28,7 +28,7 @@ export async function Footer() {
             </div>
 
             <div className="mt-8 text-center">
-                <p className="mb-4">Volg ons op <Link href={'https://instagram.com'} className="hover:underline">Instagram</Link></p>
+                <p className="mb-4">Volg ons op <Link href={'https://www.instagram.com/poezie750/'} className="hover:underline">Instagram</Link></p>
                 <p>© {new Date().getFullYear()} Ode aan Schiedam</p>
             </div>
         </div>
