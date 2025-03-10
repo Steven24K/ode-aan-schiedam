@@ -91,7 +91,7 @@ $mobile-width: 700px;
 
 @keyframes animate-splash {
     from {
-        height: 650px;
+        height: 400px;
         opacity: 1;
     }
 
@@ -291,6 +291,14 @@ $mobile-width: 700px;
         font-size: 2em;
         transform: rotate(-45deg);
     }
+
+    @media (max-width: $mobile-width) {
+        width: 60px;
+        height: 60px;
+        &>span {
+            font-size: 1.8em;
+        }
+    }
 }
 
 .menu-list {
@@ -355,11 +363,9 @@ $mobile-width: 700px;
     overflow: hidden;
     background-color: $just-white;
     border-radius: 0% 0% 50% 50%;
-    margin: 100px 25px 0 25px;
     box-shadow: 0 15px 6px rgba(0, 0, 0, 0.3);
-    height: 650px;
-    min-height: 400px;
-    max-width: 600px;
+    height: 400px;
+    max-width: 350px;
 
 }
 
@@ -367,7 +373,6 @@ $mobile-width: 700px;
     color: $just-black;
     font-family: 'Gotham-Black';
     margin: 1rem 0;
-    padding: 1rem 0;
     font-size: 2rem;
     font-weight: bold;
 }
@@ -666,10 +671,9 @@ $mobile-width: 700px;
 
 // CTA Block
 .cta-block {
-    background: linear-gradient(to right, $royal-purple, $royal-purple--light);
+    background: linear-gradient(to left, $royal-purple, $royal-purple--light);
     color: $just-white;
     border-radius: 10px;
-    text-align: center;
     box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
     transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
     width: fit-content;
