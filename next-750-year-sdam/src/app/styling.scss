@@ -751,6 +751,14 @@ $mobile-width: 700px;
         color: $sky-blue;
     }
 
+    ul {
+        list-style-type: disc;
+    }
+
+    ol {
+        list-style: decimal;
+    }
+
     p,
     h1,
     h2,
