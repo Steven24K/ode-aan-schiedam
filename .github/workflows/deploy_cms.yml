@@ -1,9 +1,9 @@
-name: Deploy Ode aan Schiedam Website + CMS
+name: Deploy Ode aan Schiedam + CMS
 
 on:
   push:
-    branches:
-      - main
+    paths:
+      - 'cms-750-year-sdam/**'
 
 jobs:
   deploy-cms:
@@ -21,7 +21,7 @@ jobs:
           cd ~/ode-aan-schiedam
           git pull origin main
           cd cms-750-year-sdam
-          echo "${{ secrets.ENV_FILE }}" > .env
+          echo "${{ secrets.ENV_FILE_CMS }}" > .env
           npm install
           npm run build
           pm2 restart strapi
