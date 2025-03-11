@@ -85,7 +85,7 @@ $mobile-width: 700px;
     }
 
     to {
-        height: 40vh;
+        height: 45vh;
     }
 }
 
@@ -218,7 +218,7 @@ $mobile-width: 700px;
 }
 
 .bg-just-black--light {
-    background-color: $sunny-yellow--light;
+    background-color: $just-white;
 }
 
 .bg-just-white {
@@ -395,11 +395,11 @@ $mobile-width: 700px;
 
 // Main hero
 .hero {
-    height: 40vh;
     animation: curtain-down 2s ease-in-out forwards;
-
+    
     .hero-content {
         opacity: 0;
+        padding: 100px 10px 10px 10px;
         animation: slide-in-top 2s ease-in-out forwards;
         animation-delay: 0.5s;
 
@@ -409,6 +409,7 @@ $mobile-width: 700px;
 
         p {
             font-family: 'Gotham-Book';
+            max-width: 400px;
         }
 
         a {
@@ -425,9 +426,10 @@ $mobile-width: 700px;
 
 .hart {
     position: absolute;
-    left: 30px;
-    top: -10px;
-    max-width: 250px;
+    left: 10px;
+    top: -20px;
+    max-width: 200px;
+    min-width: 150px;
     width: 30%;
     height: auto;
     clip-path: polygon(0% 0%, 100% 0%, 100% 60%, 50% 100%, 0% 60%);
@@ -753,12 +755,12 @@ $mobile-width: 700px;
 
     ul {
         list-style-type: disc;
-        margin-left: 10px;
+        margin-left: 25px;
     }
 
     ol {
         list-style: decimal;
-        margin-left: 10px;
+        margin-left: 25px;
     }
 
     p,

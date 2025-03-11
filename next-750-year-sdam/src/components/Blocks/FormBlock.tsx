@@ -2,7 +2,8 @@
 import { FormBlockProps, StrapiFormField } from "@/types/PageBlock"
 import { FormBuilder, FormField } from "../FormBuilder"
 import { useState } from "react"
-import { StrapiCMSService } from "@/services/StrapiCMSService"
+import { EndPoint } from "@/services/StrapiCMSService"
+import { StrapiData } from "@/types/StrapiData"
 
 type FormState = {
     defaultObject: any
@@ -15,13 +16,25 @@ const zeroFormState = (_default: any): FormState => ({
     submitted: false,
 })
 
+const submitForm = async (endpoint: EndPoint, body: StrapiData<any>): Promise<boolean> => {
+    const response = await fetch(`/api/submitform/${endpoint}`, {
+        method: 'POST',
+        body: JSON.stringify(body),
+        headers: {
+            'Content-Type': 'application/json'
+        }
+    })
+    if (response.ok) return true
+    return false
+}
+
 export const FormBlock = (props: FormBlockProps) => {
     const { Fields, SubmissionText, Title, submit_url, documentId } = props.form
     const defaultObject = fieldsToDefaultObject(Fields)
     const [state, setState] = useState<FormState>(zeroFormState(defaultObject))
 
     if (state.submitted) {
-        return <div className="bg-gray-100 rounded p-10 my-5 text-2xl">
+        return <div className="bg-gray-100 rounded p-10 my-5 text-xl">
             <p>
                 {SubmissionText}
             </p>
@@ -33,7 +46,6 @@ export const FormBlock = (props: FormBlockProps) => {
         </div>
     }
 
-    const strapi = new StrapiCMSService()
     return <>
         <FormBuilder<any>
             formTitle={Title}
@@ -41,16 +53,16 @@ export const FormBlock = (props: FormBlockProps) => {
             fields={Fields.map(mapStrapiFieldsfield)}
             handleChange={(key, value) => setState(s => ({ ...s, defaultObject: { ...s.defaultObject, [key]: value } }))}
             handleSubmit={() =>
-                strapi.SubmitFormBody(submit_url, { data: { ...state.defaultObject, form: documentId } })
+                submitForm(submit_url, { data: { ...state.defaultObject, form: documentId } })
                     .then(res => {
-                        if (res.kind == 'left')
+                        if (res)
                             setState(s => ({ ...s, submitted: true }))
                         else
-                            setState({ ...state, error: res.v })
+                            setState({ ...state, error: 'Het versturen van het formulier is mislukt, probeer het opnieuw of op een later moment nogmaals.' })
                     })
             }
         />
-        {state.error && <div className="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded relative" role="alert">
+        {state.error && <div className="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded relative max-w-96" role="alert">
             {state.error}
         </div>}
     </>
