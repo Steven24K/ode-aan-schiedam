@@ -39,10 +39,10 @@ export function Splash(props: SplashScreenProps) {
 
                 <Image
                     className="splash-logo"
-                    width={logo.formats.small.width}
-                    height={logo.formats.small.height}
-                    src={`${logo.formats.small.url}`}
-                    alt={logo.formats.small.name}
+                    width={logo.width}
+                    height={logo.height}
+                    src={`${logo.url}`}
+                    alt={logo.name}
                 />
             </div>
         </div>

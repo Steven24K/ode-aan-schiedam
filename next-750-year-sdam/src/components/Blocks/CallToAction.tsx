@@ -7,10 +7,10 @@ export const CallToActionBlock = (block: CallToActionBlockProps) => {
     return <div key={block.id} className="cta-block my-2 border rounded-lg shadow-md text-center">
         {block.Image && (
             <Image
-                src={`${block.Image.formats.large.url}`}
-                alt={block.Image.formats.large.name}
-                height={block.Image.formats.large.height}
-                width={block.Image.formats.large.width}
+                src={`${block.Image.url}`}
+                alt={block.Image.name}
+                height={block.Image.height}
+                width={block.Image.width}
                 className="mb-4 mx-auto"
             />
         )}

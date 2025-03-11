@@ -3,14 +3,15 @@ import Image from "next/image";
 import Markdown from "react-markdown";
 
 export const TextWithImageBlock = (block: TextWithImageBlockProps) => {
+    console.log(block.Image)
     return <div key={block.id} className="lg:flex items-center my-4 gap-8">
         {block.Direction == 'Left' && <div className="lg:w-1/2">
             {block.Image && (
                 <Image
-                    src={`${block.Image.formats.large.url}`}
-                    alt={block.Image.formats.large.name}
-                    height={block.Image.formats.large.height}
-                    width={block.Image.formats.large.width}
+                    src={`${block.Image.url}`}
+                    alt={block.Image.name}
+                    height={block.Image.height}
+                    width={block.Image.width}
                 />
             )}
         </div>}
@@ -21,10 +22,10 @@ export const TextWithImageBlock = (block: TextWithImageBlockProps) => {
         {block.Direction == "Right" && <div className="lg:w-1/2">
             {block.Image && (
                 <Image
-                    src={`${block.Image.formats.large.url}`}
-                    alt={block.Image.formats.large.name}
-                    height={block.Image.formats.large.height}
-                    width={block.Image.formats.large.width}
+                    src={`${block.Image.url}`}
+                    alt={block.Image.name}
+                    height={block.Image.height}
+                    width={block.Image.width}
                 />
             )}
         </div>}

@@ -10,7 +10,7 @@ export async function SiteMetaData() {
 
     const _title = siteInfo.data.SiteName
     const _slogan = siteInfo.data.Slogan
-    const _icon = siteInfo.data.Icon.formats.small.url
+    const _icon = siteInfo.data.Icon.url
 
     return <>
         <title>{_title}</title>
