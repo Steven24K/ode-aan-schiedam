@@ -108,7 +108,7 @@ export class StrapiCMSService {
             })
             .catch(err => ApiError(err))
 
-    public SubmitFormBody = async <T>(end_point: EndPoint, _body: ApiResult<T>): Promise<CreateResponse> =>
+    public SubmitFormBody = async <T>(end_point: EndPoint, _body: StrapiData<T>): Promise<CreateResponse> =>
         this.StrapiFetch(end_point, {
             method: 'POST',
             body: JSON.stringify(_body)
