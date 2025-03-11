@@ -22,7 +22,7 @@ export const Grid = (props: GridProps) => {
 
         {_items.length === 0 && (
             <div className="text-lg border-2 border-gray-200 p-4 m-2">
-                <p>Er is geen content gevonden. Kom later terug voor meer!</p>
+                <p>Er is geen content gevonden. Kom later terug voor meer.</p>
             </div>
         )}
         {
