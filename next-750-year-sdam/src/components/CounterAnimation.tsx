@@ -1,8 +1,8 @@
 "use client"
-import React, { use, useEffect } from "react"
+import React, { useEffect } from "react"
 
 type CounterProps = {
-    count: Promise<number>
+    count: number
     debug?: true
 }
 
@@ -18,7 +18,7 @@ export const CounterAnimation = (props: CounterProps) => {
         incrementor: 1,
         timeout: 50
     })
-    const count_up_to = use(props.count)
+    const count_up_to = props.count
 
     useEffect(() => {
         if (state.counter < count_up_to) {

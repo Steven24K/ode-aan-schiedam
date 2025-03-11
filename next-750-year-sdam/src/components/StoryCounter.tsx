@@ -4,10 +4,10 @@ import { CounterAnimation } from "./CounterAnimation"
 
 
 
-export const StoryCounter = () => {
+export const StoryCounter = async () => {
     const strapi = new StrapiCMSService()
 
-    const poem_count = strapi.getPoemCounter()
+    const poem_count = await strapi.getPoemCounter().then(res => res.kind == 'ok' ? res.data : 0)
 
     return <div className="counter">
         <div className="diamond-wrapper">
@@ -22,7 +22,7 @@ export const StoryCounter = () => {
             <div className="counter-content">
                 <span className="text">Verzamelde</span>
                 <Suspense fallback={<span className="number">0</span>}>
-                    <CounterAnimation count={poem_count}/>
+                    <CounterAnimation count={poem_count} />
                 </Suspense>
                 <span className="text">Verhalen</span>
             </div>
