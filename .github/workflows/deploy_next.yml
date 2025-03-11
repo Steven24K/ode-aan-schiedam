@@ -1,4 +1,4 @@
-name: Deploy Ode aan Schiedam Website
+name: Deploy NextJS
 
 on:
   push:

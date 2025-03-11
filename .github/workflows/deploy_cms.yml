@@ -1,4 +1,4 @@
-name: Deploy Ode aan Schiedam + CMS
+name: Deploy Strapi CMS
 
 on:
   push:
