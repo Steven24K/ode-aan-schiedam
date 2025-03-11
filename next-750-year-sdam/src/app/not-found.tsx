@@ -7,7 +7,7 @@ export default function NotFound() {
         <Hero title={Promise.resolve('Pagina niet gevonden')} color={Promise.resolve('sunny-yellow')} />
         <DisplayContent>
             <div className="flex items-center justify-center h-96">
-                <div className="text-center">
+                <div className="text-left">
                     <h1 className="text-6xl font-bold text-gray-800">404</h1>
                     <p className="text-2xl text-gray-600 mt-4">Dat is een error</p>
                     <p className="text-gray-500 mt-2">Sorry, de pagina waar je naar zoekt bestaat niet meer of is verplaatst.</p>
