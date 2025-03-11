@@ -4,6 +4,7 @@ import { SocialButtons } from "@/components/SocialButtons"
 import { StrapiCMSService } from "@/services/StrapiCMSService"
 import { Params } from "@/types/Params"
 import Link from "next/link"
+import { notFound } from "next/navigation"
 import Markdown from "react-markdown"
 
 type StoryProps = {
@@ -15,28 +16,28 @@ export default async function StoryPage(props: StoryProps) {
     const { slug } = await params
 
     const strapi = new StrapiCMSService()
-    const poem = strapi.GetPoem(slug || 'null')
-    const _poem = await poem
+    const poem = await strapi.GetPoem(slug || 'null')
 
-    const title = poem.then(p => p.Title)
-    const author = poem.then(p => p.Author)
-    const color = poem.then(p => p.category.Color)
+    if (poem.kind == 'error') return notFound()
 
-    const _category = _poem.category
-    const _content = _poem.Content
+    const title = poem.data.Title
+    const author = poem.data.Author
+
+    const category = poem.data.category
+    const content = poem.data.Content
 
     return <>
         <Hero title={title}
             description={author}
-            color={color}
-            cta={{ text: `Terug naar ${_category.Title}`, to: `/odes/${_category.slug}` }}
+            color={category.Color}
+            cta={{ text: `Terug naar ${category.Title}`, to: `/odes/${category.slug}` }}
         />
         <DisplayContent>
             <SocialButtons />
             <section className="flex justify-center">
                 <div className="poem">
                     <Markdown className="text-base">
-                        {_content}
+                        {content}
                     </Markdown>
                 </div>
             </section>

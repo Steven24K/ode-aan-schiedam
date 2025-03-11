@@ -3,8 +3,8 @@ import { Hero } from '@/components/Hero';
 import Link from 'next/link';
 
 export default function NotFound() {
-    return <main>
-        <Hero title={Promise.resolve('Pagina niet gevonden')} color={Promise.resolve('sunny-yellow')} />
+    return <>
+        <Hero title={'Pagina niet gevonden'} color={'sunny-yellow'} />
         <DisplayContent>
             <div className="flex items-center justify-center h-96">
                 <div className="text-left">
@@ -18,6 +18,5 @@ export default function NotFound() {
                 </div>
             </div>
         </DisplayContent>
-    </main>
-
+    </>
 }

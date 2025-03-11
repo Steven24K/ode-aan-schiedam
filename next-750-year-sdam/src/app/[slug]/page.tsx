@@ -2,6 +2,7 @@ import { DisplayContent } from "@/components/DisplayContent";
 import { Hero } from "@/components/Hero";
 import { StrapiCMSService } from "@/services/StrapiCMSService";
 import { Params } from "@/types/Params";
+import { notFound } from "next/navigation";
 
 type PageProps = {
     params: Promise<Params>
@@ -12,14 +13,16 @@ export default async function CMSPage(props: PageProps) {
     const { slug } = await params
 
     const strapi = new StrapiCMSService()
-    const page = strapi.GetPage(slug)
+    const page = await strapi.GetPage(slug)
 
-    const title = page.then(p => p.Title)
-    const description = page.then(p => p.Description)
-    const blocks = page.then(p => p.Blocks)
+    if (page.kind == 'error') return notFound()
+
+    const title = page.data.Title
+    const description = page.data.Description
+    const blocks = page.data.Blocks
 
     return <>
-        <Hero title={title} description={description} color={Promise.resolve("sunny-yellow")} />
+        <Hero title={title} description={description} color={"sunny-yellow"} />
 
         <DisplayContent blocks={blocks} />
     </>

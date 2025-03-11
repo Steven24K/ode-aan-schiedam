@@ -2,11 +2,10 @@ import { FooterMenu } from "@/types/Footer"
 import { MainMenu } from "@/types/MainMenu"
 import { PostCategory } from "@/types/PostCategory"
 import { SiteInfo } from "@/types/SiteInfo"
-import { StrapiData } from "@/types/StrapiData"
+import { OkResult, ApiResult, StrapiData, ApiError } from "@/types/StrapiData"
 import { StrapiHomePage } from "@/types/StrapiHomePage"
 import { StrapiPage } from "@/types/StrapiPage"
 import { StrapiPoem } from "@/types/StrapiPoem"
-import { notFound } from "next/navigation"
 
 type Either<a, b> = { kind: 'left', v: a } | { kind: 'right', v: b }
 
@@ -46,8 +45,8 @@ export class StrapiCMSService {
 
         const response = await fetch(_url,
             {
-                headers: { 
-                    'Content-Type': 'application/json', 
+                headers: {
+                    'Content-Type': 'application/json',
                     'Accept': 'application/json',
                     'Authorization': 'bearer ' + process.env.STRAPI_API_TOKEN
                 },
@@ -56,50 +55,60 @@ export class StrapiCMSService {
             })
 
         console.log(response.url)
-        if (response.status == 404) return notFound()
         if (response.ok) return await response.json()
         const error = `Error while fetching ${end_point} -> ${_populate}: ${response.status} ${response.statusText}: URL: ${response.url}`
         console.error(error)
         return Promise.reject(error)
     }
 
-    public getSiteInfo = async (): Promise<StrapiData<SiteInfo>> =>
-        this.StrapiFetch('site-info');
+    public getSiteInfo = async (): Promise<ApiResult<SiteInfo>> =>
+        this.StrapiFetch<SiteInfo>('site-info')
+            .then(res => OkResult(res.data))
+            .catch(err => ApiError(err))
 
-    public getPoemCounter = (): Promise<number> =>
-        this.StrapiFetch<StrapiPoem[]>('poems').then(res => res.data.length)
+    public getPoemCounter = (): Promise<ApiResult<number>> =>
+        this.StrapiFetch<StrapiPoem[]>('poems')
+            .then(res => OkResult(res.data.length))
+            .catch(err => ApiError(err))
 
-    public GetHomePage = async (): Promise<StrapiData<StrapiHomePage>> =>
-        this.StrapiFetch('homepage', { populate: ['Blocks', 'Blocks.Button', 'Blocks.Image', 'Logo'] })
+    public GetHomePage = async (): Promise<ApiResult<StrapiHomePage>> =>
+        this.StrapiFetch<StrapiHomePage>('homepage', { populate: ['Blocks', 'Blocks.Button', 'Blocks.Image', 'Logo'] })
+            .then(res => OkResult(res.data))
+            .catch(err => ApiError(err))
 
-    public GetCategories = async (): Promise<StrapiData<PostCategory[]>> =>
-        this.StrapiFetch('categories')
+    public GetCategories = async (): Promise<ApiResult<PostCategory[]>> =>
+        this.StrapiFetch<PostCategory[]>('categories')
+            .then(res => OkResult(res.data))
+            .catch(err => ApiError(err))
 
-    public GetCategoryBySlug = async (slug: string): Promise<PostCategory> =>
+    public GetCategoryBySlug = async (slug: string): Promise<ApiResult<PostCategory>> =>
         this.StrapiFetch<PostCategory[]>('categories', { filters: [{ field: 'slug', operator: '$eq', value: slug }] })
             .then(categories => {
-                if (categories.data.length == 0) return notFound()
-                return categories.data[0]
+                if (categories.data.length == 0) return Promise.reject('Category not found')
+                return OkResult(categories.data[0])
             })
+            .catch(err => ApiError(err))
 
-    public GetPage = async (slug: string): Promise<StrapiPage> =>
+    public GetPage = async (slug: string): Promise<ApiResult<StrapiPage>> =>
         this.StrapiFetch<StrapiPage[]>('pages', {
             populate: ['Blocks', 'Blocks.Button', 'Blocks.Image', 'Blocks.form', 'Blocks.form.Fields', 'Blocks.form.Fields.categories', 'Blocks.form.Fields.Options'],
             filters: [{ field: 'slug', operator: '$eq', value: slug }]
         })
             .then(pages => {
-                if (pages.data.length == 0) return notFound()
-                return pages.data[0]
+                if (pages.data.length == 0) return Promise.reject('Page not found')
+                return OkResult(pages.data[0])
             })
+            .catch(err => ApiError(err))
 
-    public GetPoem = async (slug: string): Promise<StrapiPoem> =>
+    public GetPoem = async (slug: string): Promise<ApiResult<StrapiPoem>> =>
         this.StrapiFetch<StrapiPoem[]>('poems', { filters: [{ field: 'slug', operator: '$eq', value: slug }] })
             .then(pages => {
-                if (pages.data.length == 0) return notFound()
-                return pages.data[0]
+                if (pages.data.length == 0) return Promise.reject('Poem not found')
+                return OkResult(pages.data[0])
             })
+            .catch(err => ApiError(err))
 
-    public SubmitFormBody = async <T>(end_point: EndPoint, _body: StrapiData<T>): Promise<CreateResponse> =>
+    public SubmitFormBody = async <T>(end_point: EndPoint, _body: ApiResult<T>): Promise<CreateResponse> =>
         this.StrapiFetch(end_point, {
             method: 'POST',
             body: JSON.stringify(_body)
@@ -107,16 +116,24 @@ export class StrapiCMSService {
             .then(() => ({ kind: 'left', v: true } as CreateResponse))
             .catch((reason) => ({ kind: 'right', v: reason } as CreateResponse))
 
-    public GetAllPoems = async (): Promise<StrapiData<StrapiPoem[]>> =>
-        this.StrapiFetch('poems')
+    public GetAllPoems = async (): Promise<ApiResult<StrapiPoem[]>> =>
+        this.StrapiFetch<StrapiPoem[]>('poems')
+            .then(res => OkResult(res.data))
+            .catch(err => ApiError(err))
 
-    public GetPoemsByCategory = (category: string): Promise<StrapiData<StrapiPoem[]>> =>
-        this.StrapiFetch('poems', { filters: [{ field: "category][slug", operator: '$eq', value: category }] })
+    public GetPoemsByCategory = (category: string): Promise<ApiResult<StrapiPoem[]>> =>
+        this.StrapiFetch<StrapiPoem[]>('poems', { filters: [{ field: "category][slug", operator: '$eq', value: category }] })
+            .then(res => OkResult(res.data))
+            .catch(err => ApiError(err))
 
-    public GetMainMenu = async (): Promise<StrapiData<MainMenu>> =>
-        this.StrapiFetch('main-menu')
+    public GetMainMenu = async (): Promise<ApiResult<MainMenu>> =>
+        this.StrapiFetch<MainMenu>('main-menu')
+            .then(res => OkResult(res.data))
+            .catch(err => ApiError(err))
 
-    public GetFooterMenu = async (): Promise<StrapiData<FooterMenu>> =>
-        this.StrapiFetch('footer-menu', { populate: ["Columns.Items"] })
+    public GetFooterMenu = async (): Promise<ApiResult<FooterMenu>> =>
+        this.StrapiFetch<FooterMenu>('footer-menu', { populate: ["Columns.Items"] })
+            .then(res => OkResult(res.data))
+            .catch(err => ApiError(err))
 
 }

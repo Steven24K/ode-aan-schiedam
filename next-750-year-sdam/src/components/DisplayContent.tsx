@@ -1,4 +1,3 @@
-import { use } from "react"
 import { PageBlock } from "@/types/PageBlock"
 import { TextBlock } from "./Blocks/Text"
 import { TextWithImageBlock } from "./Blocks/TextWithImage"
@@ -7,7 +6,7 @@ import { FormBlock } from "./Blocks/FormBlock"
 
 type DisplayContentProps = {
     className?: string
-    blocks?: Promise<PageBlock[]>
+    blocks?: PageBlock[]
     children?: React.ReactNode
     childPositon?: 'top' | 'bottom'
 }
@@ -18,12 +17,12 @@ type DisplayContentProps = {
 export const DisplayContent = (props: DisplayContentProps) => {
     const { children, blocks, className, childPositon } = props
 
-    const _blocks = blocks ? use(blocks) : []
+
 
     return <div className={`page-content container mx-auto p-5 ${className || ''}`}>
         {childPositon == 'top' && children}
         {
-            _blocks.map(block => {
+            blocks && blocks.map(block => {
                 switch (block.__component) {
                     case 'blocks.text':
                         return <TextBlock key={`${block.__component}_${block.id}`} {...block} />

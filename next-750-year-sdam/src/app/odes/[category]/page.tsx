@@ -4,6 +4,7 @@ import { Hero } from "@/components/Hero"
 import { Loader } from "@/components/Loader"
 import { StrapiCMSService } from "@/services/StrapiCMSService"
 import { Params } from "@/types/Params"
+import { notFound } from "next/navigation"
 import { Suspense } from "react"
 
 type StoryOverviewProps = {
@@ -16,13 +17,16 @@ export default async function StoryOverview(props: StoryOverviewProps) {
 
     const strapi = new StrapiCMSService()
 
-    const categoryInfo = strapi.GetCategoryBySlug(category)
-    const poems = strapi.GetPoemsByCategory(category).then(res => res.data)
+    const categoryInfo = await strapi.GetCategoryBySlug(category)
+    if (categoryInfo.kind == 'error') return notFound()
 
-    const title = categoryInfo.then(cat => cat.Title)
-    const description = categoryInfo.then(cat => cat.Description)
-    const color = categoryInfo.then(cat => cat.Color)
-    const blocks = categoryInfo.then(cat => cat.Blocks)
+    const poems = strapi.GetPoemsByCategory(category).then(res => res.kind == 'ok' ? res.data : [])
+
+    const title = categoryInfo.data.Title
+    const description = categoryInfo.data.Description
+    const color = categoryInfo.data.Color
+    const blocks = categoryInfo.data.Blocks
+
     const poem_grid = poems.then(res => res.map<GridItem>(r => ({ id: r.id, color: r.category.Color, slug: `/ode/${r.slug}`, title: r.Title })))
 
     return <>

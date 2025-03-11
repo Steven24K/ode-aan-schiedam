@@ -8,6 +8,7 @@ import { StoryCounter } from "@/components/StoryCounter"
 import { SearchParams } from "@/types/Params"
 import { StrapiCMSService } from "@/services/StrapiCMSService"
 import { Loader } from "@/components/Loader"
+import { notFound } from "next/navigation"
 
 const stringToBool = (v: string | undefined): boolean => {
   if (v === 'false') return false
@@ -23,19 +24,14 @@ export default async function Home(props: HomeProps) {
 
   const strapi = new StrapiCMSService()
 
-  const homepage = strapi.GetHomePage()
+  const homepage = await strapi.GetHomePage()
 
-  const title = homepage.then(home => home.data.Title)
-  const description = homepage.then(home => home.data.Description)
-  const logo = homepage.then(home => home.data.Logo)
-  const blocks = homepage.then(home => home.data.Blocks)
+  if (homepage.kind == 'error') return notFound()
 
-  const category_grid = strapi.GetCategories().then(d => d.data.map<GridItem>(cat => ({
-    id: cat.id,
-    title: cat.Title,
-    slug: `/odes/${cat.slug}/`,
-    color: cat.Color,
-  })))
+  const title = homepage.data.Title
+  const description = homepage.data.Description
+  const logo = homepage.data.Logo
+  const blocks = homepage.data.Blocks
 
   if (!stringToBool(splashed)) { // if not splashed, only splash onces
     return <Suspense fallback={<Loader />}>
@@ -47,13 +43,21 @@ export default async function Home(props: HomeProps) {
     </Suspense>
   }
 
-  return <main>
-    <Hero title={title} description={description} color={Promise.resolve("sunny-yellow")} />
+  const getCategories = strapi.GetCategories().then(res => res.kind == 'ok' ? res.data : [])
+  const category_grid = getCategories.then(categories => categories.map<GridItem>(cat => ({
+    id: cat.id,
+    title: cat.Title,
+    slug: `/odes/${cat.slug}/`,
+    color: cat.Color,
+  })))
+
+  return <>
+    <Hero title={title} description={description} color={"sunny-yellow"} />
     <StoryCounter />
     <DisplayContent blocks={blocks} childPositon="top">
       <Suspense fallback={<Loader />}>
         <Grid items={category_grid} />
       </Suspense>
     </DisplayContent>
-  </main>
+  </>
 }

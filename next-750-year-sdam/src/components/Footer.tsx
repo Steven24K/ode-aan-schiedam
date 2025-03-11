@@ -4,8 +4,8 @@ import Link from "next/link"
 export async function Footer() {
 
     const strapi = new StrapiCMSService()
-    const footer = await strapi.GetFooterMenu()
-    const _columns = footer.data
+    const footer = await strapi.GetFooterMenu().then(res => res.kind == 'ok' ? res.data : ({ Columns: [] }))
+    const _columns = footer
 
     return <footer className="footer py-8">
         <div className="container mx-auto px-4">

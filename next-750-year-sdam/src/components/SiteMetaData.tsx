@@ -4,14 +4,13 @@ export async function SiteMetaData() {
     const strapi = new StrapiCMSService()
 
     const siteInfo = await strapi.getSiteInfo()
-        .then(res => res.data)
-        .catch(() => null)
 
-    if (siteInfo == null) return null
 
-    const _title = siteInfo.SiteName
-    const _slogan = siteInfo.Slogan
-    const _icon = siteInfo.Icon.formats.small.url
+    if (siteInfo.kind != 'ok') return <title>{siteInfo.error}</title>
+
+    const _title = siteInfo.data.SiteName
+    const _slogan = siteInfo.data.Slogan
+    const _icon = siteInfo.data.Icon.formats.small.url
 
     return <>
         <title>{_title}</title>

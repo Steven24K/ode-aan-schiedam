@@ -20,7 +20,9 @@ export default function RootLayout(props: Readonly<LayoutProps>) {
         <ErrorBoundary dev fallBack={<GeneralError />}>
           <NavBar />
 
-          {children}
+          <main>
+            {children}
+          </main>
 
           <Footer />
         </ErrorBoundary>
