@@ -36,7 +36,7 @@ export function Splash(props: SplashScreenProps) {
 
                 <h1 className="splash-title">{_title}</h1>
 
-                <button onClick={animate} className="bg-red-500 hover:bg-red-700 text-white font-bold py-4 px-4">
+                <button onClick={animate} className="bg-red-500 hover:bg-red-700 text-white font-bold py-4 px-4 mx-4">
                     {_slogan}
                 </button>
 
