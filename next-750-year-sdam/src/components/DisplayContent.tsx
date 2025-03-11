@@ -20,7 +20,7 @@ export const DisplayContent = (props: DisplayContentProps) => {
 
     const _blocks = blocks ? use(blocks) : []
 
-    return <main className={`page-content container mx-auto p-5 ${className}`}>
+    return <div className={`page-content container mx-auto p-5 ${className || ''}`}>
         {childPositon == 'top' && children}
         {
             _blocks.map(block => {
@@ -39,5 +39,5 @@ export const DisplayContent = (props: DisplayContentProps) => {
             })
         }
         {(childPositon == undefined || childPositon == 'bottom') && children}
-    </main>
+    </div>
 }
