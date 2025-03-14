@@ -14,14 +14,16 @@ export const CallToActionBlock = (block: CallToActionBlockProps) => {
                 className="mb-4 mx-auto"
             />
         )}
-        {block.Title && <h2 className="text-2xl font-bold mb-2">{block.Title}</h2>}
-        {block.Description && <Markdown className="text-base">{block.Description}</Markdown>}
-        <div className="actions flex justify-center gap-8">
-            {block.Button && block.Button.map(btn => (
-                <Link key={`cta_button_${btn.id}`} href={btn.URL}>
-                    {btn.Title}
-                </Link>
-            ))}
+        <div className="cta-content">
+            {block.Title && <h2 className="text-2xl font-bold mb-2">{block.Title}</h2>}
+            {block.Description && <Markdown className="text-base">{block.Description}</Markdown>}
+            <div className="actions flex justify-center gap-4">
+                {block.Button && block.Button.map(btn => (
+                    <Link key={`cta_button_${btn.id}`} href={btn.URL}>
+                        {btn.Title}
+                    </Link>
+                ))}
+            </div>
         </div>
     </div>
 }

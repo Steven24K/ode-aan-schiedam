@@ -19,7 +19,7 @@ export const DisplayContent = (props: DisplayContentProps) => {
 
 
 
-    return <div className={`page-content container mx-auto p-5 ${className || ''}`}>
+    return <div className={`page-content container mx-auto ${className || ''}`}>
         {childPositon == 'top' && children}
         {
             blocks && blocks.map(block => {

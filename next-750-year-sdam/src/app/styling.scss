@@ -355,14 +355,14 @@ $mobile-width: 700px;
 }
 
 .curtain-up {
-    height: 40vh;
+    height: 10vh;
     background-color: $sunny-yellow;
     animation-name: curtain-up;
-    animation-duration: 4s;
+    animation-duration: 3s;
 }
 
 .animate-splash {
-    animation: animate-splash 3s ease-out forwards;
+    animation: animate-splash 2s ease-out forwards;
 }
 
 .splash-shield {
@@ -395,13 +395,13 @@ $mobile-width: 700px;
 
 // Main hero
 .hero {
-    animation: curtain-down 2s ease-in-out forwards;
-    
+    animation: curtain-down 1.5s ease-in-out forwards;
+
     .hero-content {
         opacity: 0;
         padding: 100px 10px 10px 10px;
         animation: slide-in-top 2s ease-in-out forwards;
-        animation-delay: 0.5s;
+        animation-delay: 0.2s;
 
         h1 {
             font-family: 'Gotham-Black';
@@ -439,10 +439,18 @@ $mobile-width: 700px;
 
 // Page content for CMS data
 .page-content {
+    margin-top: 25px;
     min-height: 80vh;
-    max-width: 1250px;
+    width: 60vw;
+    min-width: 350px;
+    max-width: 1200px;
     animation-delay: 4s;
     animation: fadeIn 2s ease-in forwards;
+
+    @media (max-width: $mobile-width) {
+        width: 100vw;
+        padding: 10px;
+    }
 
     h1,
     h2,
@@ -464,11 +472,11 @@ $mobile-width: 700px;
 
 // Main Grid
 .grid {
-    overflow: hidden;
     display: flex;
     flex-wrap: wrap;
+    overflow: hidden;
+    padding: 4rem 0;
     justify-content: center;
-    margin: 10px 0;
     gap: 8rem;
 }
 
@@ -696,7 +704,12 @@ $mobile-width: 700px;
     box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
     transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
     width: fit-content;
-    margin: 0 auto;
+    max-width: 800px;
+    margin: 15px auto;
+
+    .cta-content {
+        padding: 1rem;
+    }
 
     &:hover {
         transform: translateY(-10px);
@@ -721,11 +734,11 @@ $mobile-width: 700px;
             padding: 0.75rem 1.5rem;
             margin: 0 0 2.5rem 0;
             text-decoration: none;
-            font-family: 'Gotham-Book';
+            font-family: 'Gotham-Black';
             transition: background-color 0.3s ease-in-out, color 0.3s ease-in-out;
 
             &:first-child {
-                background-color: $sunny-yellow;
+                background-image: linear-gradient(to right, $sunny-yellow, $sunny-yellow--light);
                 color: $just-black;
 
                 &:hover {
@@ -735,11 +748,11 @@ $mobile-width: 700px;
             }
 
             &:nth-child(2) {
-                background-color: $fiery-red;
+                background-image: linear-gradient(to left, $sky-blue, $sky-blue--light);
                 color: $just-white;
 
                 &:hover {
-                    background-color: $fiery-red--light;
+                    background-color: $fiery-red;
                     color: $just-black;
                 }
             }
@@ -807,12 +820,12 @@ $mobile-width: 700px;
 
 // Form
 .form-card {
-    margin: 2rem 0;
+    margin: 1.5rem 0;
     animation: slide-in-right 2s ease-out forwards;
     background-color: $just-white;
-    padding: 2rem;
+    padding: 2rem 1rem;
     box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
-    max-width: 600px;
+    max-width: 1000px;
 }
 
 .form-group {

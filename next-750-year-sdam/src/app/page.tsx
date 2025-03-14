@@ -54,10 +54,9 @@ export default async function Home(props: HomeProps) {
   return <>
     <Hero title={title} description={description} color={"sunny-yellow"} />
     <StoryCounter />
-    <DisplayContent blocks={blocks} childPositon="top">
-      <Suspense fallback={<Loader />}>
+    <Suspense fallback={<Loader />}>
         <Grid items={category_grid} />
       </Suspense>
-    </DisplayContent>
+    <DisplayContent blocks={blocks} childPositon="top" />
   </>
 }
