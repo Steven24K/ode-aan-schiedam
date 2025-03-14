@@ -37,13 +37,13 @@ export function Splash(props: SplashScreenProps) {
                     {slogan}
                 </button>
 
-                <Image
+                {logo && <Image
                     className="splash-logo"
                     width={logo.width}
                     height={logo.height}
                     src={`${logo.url}`}
                     alt={logo.name}
-                />
+                />}
             </div>
         </div>
     </div>
