@@ -30,6 +30,20 @@ export interface BlocksForm extends Struct.ComponentSchema {
   };
 }
 
+export interface BlocksImage extends Struct.ComponentSchema {
+  collectionName: 'components_blocks_images';
+  info: {
+    displayName: 'Image';
+  };
+  attributes: {
+    Caption: Schema.Attribute.String &
+      Schema.Attribute.SetMinMaxLength<{
+        maxLength: 100;
+      }>;
+    Media: Schema.Attribute.Media<'images'> & Schema.Attribute.Required;
+  };
+}
+
 export interface BlocksText extends Struct.ComponentSchema {
   collectionName: 'components_blocks_texts';
   info: {
@@ -273,6 +287,7 @@ declare module '@strapi/strapi' {
     export interface ComponentSchemas {
       'blocks.call-to-action-cta': BlocksCallToActionCta;
       'blocks.form': BlocksForm;
+      'blocks.image': BlocksImage;
       'blocks.text': BlocksText;
       'blocks.text-image': BlocksTextImage;
       'clickables.button': ClickablesButton;

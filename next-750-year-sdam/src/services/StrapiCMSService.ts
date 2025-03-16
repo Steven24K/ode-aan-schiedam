@@ -13,7 +13,15 @@ type CreateResponse = Either<true, string>
 
 export type EndPoint = "site-info" | "homepage" | "categories" | "pages" | "poems" | "main-menu" | "footer-menu" | "submissions"
 
-type Populate = "Blocks" | "Blocks.Button" | "Blocks.Image" | "Logo" | "Columns.Items" | "Blocks.form" | "Blocks.form.Fields" | "Blocks.form.Fields.categories" | "Blocks.form.Fields.Options"
+type Populate = "Blocks" |
+    "Blocks.Button" |
+    "Blocks.Image" |
+    "Logo" | "Columns.Items" |
+    "Blocks.form" |
+    "Blocks.form.Fields" |
+    "Blocks.form.Fields.categories" |
+    "Blocks.form.Fields.Options" |
+    "Blocks.Media"
 
 type Filter = {
     field: "slug" | "category][slug"
@@ -91,7 +99,16 @@ export class StrapiCMSService {
 
     public GetPage = async (slug: string): Promise<ApiResult<StrapiPage>> =>
         this.StrapiFetch<StrapiPage[]>('pages', {
-            populate: ['Blocks', 'Blocks.Button', 'Blocks.Image', 'Blocks.form', 'Blocks.form.Fields', 'Blocks.form.Fields.categories', 'Blocks.form.Fields.Options'],
+            populate: [
+                'Blocks',
+                'Blocks.Button',
+                'Blocks.Image',
+                'Blocks.form',
+                'Blocks.form.Fields',
+                'Blocks.form.Fields.categories',
+                'Blocks.form.Fields.Options',
+                'Blocks.Media'
+            ],
             filters: [{ field: 'slug', operator: '$eq', value: slug }]
         })
             .then(pages => {

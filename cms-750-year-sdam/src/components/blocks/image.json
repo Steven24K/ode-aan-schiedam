@@ -1,0 +1,21 @@
+{
+  "collectionName": "components_blocks_images",
+  "info": {
+    "displayName": "Image"
+  },
+  "options": {},
+  "attributes": {
+    "Media": {
+      "allowedTypes": [
+        "images"
+      ],
+      "type": "media",
+      "multiple": false,
+      "required": true
+    },
+    "Caption": {
+      "type": "string",
+      "maxLength": 100
+    }
+  }
+}

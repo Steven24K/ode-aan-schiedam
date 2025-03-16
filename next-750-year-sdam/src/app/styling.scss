@@ -448,7 +448,7 @@ $mobile-width: 700px;
     animation: fadeIn 2s ease-in forwards;
 
     @media (max-width: $mobile-width) {
-        width: 100vw;
+        width: 90vw;
         padding: 10px;
     }
 
@@ -758,6 +758,22 @@ $mobile-width: 700px;
             }
         }
     }
+}
+
+// Image Block
+.image-block {
+    img {
+        width: 100%;
+        height: auto;
+    }
+
+    figcaption {
+        font-family: 'Gotham-book';
+    }
+}
+
+.mirror {
+    direction: rtl;
 }
 
 // Text Block

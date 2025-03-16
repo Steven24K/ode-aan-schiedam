@@ -6,8 +6,8 @@ export type PageBlock =
     TextBlockProps |
     TextWithImageBlockProps |
     CallToActionBlockProps |
-    PoemFormBlockProps |
-    FormBlockProps
+    FormBlockProps | 
+    ImageBlockProps
 
 export type TextBlockProps = {
     __component: "blocks.text"
@@ -34,13 +34,6 @@ export type CallToActionBlockProps = {
     Button: Button[]
 }
 
-export type PoemFormBlockProps = {
-    __component: "blocks.poem-form"
-    id: number
-    Title?: string
-    Description?: string
-}
-
 export type FormBlockProps = {
     __component: "blocks.form"
     id: number
@@ -53,6 +46,14 @@ export type FormBlockProps = {
         Fields: StrapiFormField[]
     }
 }
+
+export type ImageBlockProps = {
+    __component: "blocks.image"
+    id: number
+    Caption: string
+    Media: StrapiImage
+}
+
 
 export type StrapiFormField = StandardFormField | CategoriesDropDown | InfoText | DropDown
 
@@ -80,7 +81,7 @@ type DropDown = {
 }
 
 type DropDownOption = {
-    Name: string 
+    Name: string
     Value: string
 }
 type InfoText = {

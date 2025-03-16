@@ -387,6 +387,7 @@ export interface ApiCategoryCategory extends Struct.CollectionTypeSchema {
         'blocks.text-image',
         'blocks.call-to-action-cta',
         'blocks.form',
+        'blocks.image',
       ]
     >;
     Color: Schema.Attribute.Enumeration<
@@ -519,6 +520,7 @@ export interface ApiHomepageHomepage extends Struct.SingleTypeSchema {
         'blocks.text-image',
         'blocks.call-to-action-cta',
         'blocks.form',
+        'blocks.image',
       ]
     > &
       Schema.Attribute.Required &
@@ -594,6 +596,7 @@ export interface ApiPagePage extends Struct.CollectionTypeSchema {
         'blocks.text-image',
         'blocks.call-to-action-cta',
         'blocks.form',
+        'blocks.image',
       ]
     > &
       Schema.Attribute.Required &
