@@ -3,6 +3,7 @@ import type { Schema, Struct } from '@strapi/strapi';
 export interface BlocksCallToActionCta extends Struct.ComponentSchema {
   collectionName: 'components_blocks_call_to_action_cta_s';
   info: {
+    description: '';
     displayName: 'Call To Action (CTA)';
     icon: 'apps';
   };
@@ -14,6 +15,18 @@ export interface BlocksCallToActionCta extends Struct.ComponentSchema {
         },
         number
       >;
+    Color: Schema.Attribute.Enumeration<
+      [
+        'sunny-yellow',
+        'fiery-red',
+        'leafy-green',
+        'sky-blue',
+        'royal-purple',
+        'sunset-orange',
+      ]
+    > &
+      Schema.Attribute.Required &
+      Schema.Attribute.DefaultTo<'sunny-yellow'>;
     Description: Schema.Attribute.RichText & Schema.Attribute.Required;
     Image: Schema.Attribute.Media<'images' | 'files' | 'videos' | 'audios'>;
     Title: Schema.Attribute.String;

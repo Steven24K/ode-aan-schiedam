@@ -32,6 +32,7 @@ export type CallToActionBlockProps = {
     Description: string
     Image?: StrapiImage
     Button: Button[]
+    Color: 'sunny-yellow' | 'fiery-red' | 'leafy-green' | 'sky-blue' | 'royal-purple' | 'sunset-orange'
 }
 
 export type FormBlockProps = {

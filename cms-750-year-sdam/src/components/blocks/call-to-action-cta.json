@@ -2,7 +2,8 @@
   "collectionName": "components_blocks_call_to_action_cta_s",
   "info": {
     "displayName": "Call To Action (CTA)",
-    "icon": "apps"
+    "icon": "apps",
+    "description": ""
   },
   "options": {},
   "attributes": {
@@ -14,20 +15,34 @@
       "required": true
     },
     "Image": {
+      "type": "media",
+      "multiple": false,
+      "required": false,
       "allowedTypes": [
         "images",
         "files",
         "videos",
         "audios"
-      ],
-      "type": "media",
-      "multiple": false
+      ]
     },
     "Button": {
       "type": "component",
       "repeatable": true,
       "component": "clickables.button",
       "max": 2
+    },
+    "Color": {
+      "type": "enumeration",
+      "enum": [
+        "sunny-yellow",
+        "fiery-red",
+        "leafy-green",
+        "sky-blue",
+        "royal-purple",
+        "sunset-orange"
+      ],
+      "required": true,
+      "default": "sunny-yellow"
     }
   }
 }

@@ -4,7 +4,7 @@ import Link from "next/link"
 import Markdown from "react-markdown"
 
 export const CallToActionBlock = (block: CallToActionBlockProps) => {
-    return <div key={block.id} className="cta-block my-2 border rounded-lg shadow-md text-center">
+    return <div key={block.id} className={`cta-block my-2 border rounded-lg shadow-md text-center cta-bg--${block.Color}`}>
         {block.Image && (
             <Image
                 src={`${block.Image.url}`}

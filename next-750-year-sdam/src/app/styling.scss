@@ -697,8 +697,35 @@ $mobile-width: 700px;
 }
 
 // CTA Block
-.cta-block {
+.cta-bg--sunny-yellow {
+    background: linear-gradient(to left, $sunny-yellow, $sunny-yellow--light);
+
+    .cta-content {
+        color: $just-black;
+    }
+}
+
+.cta-bg--fiery-red {
+    background: linear-gradient(to left, $fiery-red, $fiery-red--light);
+}
+
+.cta-bg--leafy-green {
+    background: linear-gradient(to left, $leafy-green, $leafy-green--light);
+}
+
+.cta-bg--sky-blue {
+    background: linear-gradient(to left, $sky-blue, $sky-blue--light);
+}
+
+.cta-bg--royal-purple {
     background: linear-gradient(to left, $royal-purple, $royal-purple--light);
+}
+
+.cta-bg--sunset-orange {
+    background: linear-gradient(to left, $sunset-orange, $sunset-orange--light);
+}
+
+.cta-block {
     color: $just-white;
     border-radius: 10px;
     box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
@@ -748,7 +775,7 @@ $mobile-width: 700px;
             }
 
             &:nth-child(2) {
-                background-image: linear-gradient(to left, $sky-blue, $sky-blue--light);
+                background-image: linear-gradient(to right, $sky-blue, $sky-blue--light);
                 color: $just-white;
 
                 &:hover {
