@@ -11,7 +11,7 @@ type Either<a, b> = { kind: 'left', v: a } | { kind: 'right', v: b }
 
 type CreateResponse = Either<true, string>
 
-export type EndPoint = "site-info" | "homepage" | "categories" | "pages" | "poems" | "main-menu" | "footer-menu" | "submissions"
+export type EndPoint = "site-info" | "homepage" | "categories" | "pages" | "poems" | "main-menu" | "footer-menu"
 
 type Populate = "Blocks" |
     "Blocks.Button" |

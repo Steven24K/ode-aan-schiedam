@@ -17,7 +17,7 @@ const zeroFormState = (_default: any): FormState => ({
 })
 
 const submitForm = async (endpoint: EndPoint, body: StrapiData<any>): Promise<boolean> => {
-    const response = await fetch(`/api/submitform/${endpoint}`, {
+    const response = await fetch(endpoint, {
         method: 'POST',
         body: JSON.stringify(body),
         headers: {

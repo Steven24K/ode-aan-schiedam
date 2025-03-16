@@ -13,7 +13,7 @@ export async function POST(request: Request): Promise<Response> {
 
   if (response.kind == 'right') return Response.error()
 
-  // TODO: Send email that form is submitted 
+  // TODO: Send email that form is submitted
   
   return Response.json(response.v)
 }
