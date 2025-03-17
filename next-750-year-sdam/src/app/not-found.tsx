@@ -13,7 +13,7 @@ export default function NotFound() {
                     <p className="text-gray-500 mt-2">Sorry, de pagina waar je naar zoekt bestaat niet meer of is verplaatst.</p>
 
                     <Link className="text-blue-500 hover:underline mt-4 block" href="/">
-                        Ga terug naar het begin
+                        Ga terug naar de homepage
                     </Link>
                 </div>
             </div>
