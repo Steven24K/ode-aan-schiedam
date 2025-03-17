@@ -22,6 +22,6 @@ jobs:
           git pull origin main
           cd cms-750-year-sdam
           echo "${{ secrets.ENV_FILE_CMS }}" > .env
-          ~/.nvm/versions/node/v18.20.7/bin/yarn install
-          ~/.nvm/versions/node/v18.20.7/bin/yarn build
-          ~/.nvm/versions/node/v18.20.7/bin/pm2 restart strapi
+          yarn install
+          yarn build
+          pm2 restart strapi
