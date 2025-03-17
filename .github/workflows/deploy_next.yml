@@ -25,6 +25,6 @@ jobs:
           git pull origin main
           cd next-750-year-sdam
           echo "${{ secrets.ENV_FILE_NEXT }}" > .env
-          npm install
-          npm run build
+          yarn install
+          yarn build
           pm2 restart next
