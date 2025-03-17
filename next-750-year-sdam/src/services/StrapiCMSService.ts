@@ -16,12 +16,26 @@ export type EndPoint = "site-info" | "homepage" | "categories" | "pages" | "poem
 type Populate = "Blocks" |
     "Blocks.Button" |
     "Blocks.Image" |
-    "Logo" | "Columns.Items" |
     "Blocks.form" |
     "Blocks.form.Fields" |
     "Blocks.form.Fields.categories" |
     "Blocks.form.Fields.Options" |
-    "Blocks.Media"
+    "Blocks.Media" |
+    "Columns.Items" |
+    "Logo"
+
+const populator: Populate[] = [
+    'Blocks',
+    'Blocks.Button',
+    'Blocks.Image',
+    'Blocks.form',
+    'Blocks.form.Fields',
+    'Blocks.form.Fields.categories',
+    'Blocks.form.Fields.Options',
+    'Blocks.Media',
+    "Columns.Items",
+    "Logo"
+]
 
 type Filter = {
     field: "slug" | "category][slug"
@@ -80,7 +94,7 @@ export class StrapiCMSService {
             .catch(err => ApiError(err))
 
     public GetHomePage = async (): Promise<ApiResult<StrapiHomePage>> =>
-        this.StrapiFetch<StrapiHomePage>('homepage', { populate: ['Blocks', 'Blocks.Button', 'Blocks.Image', 'Logo'] })
+        this.StrapiFetch<StrapiHomePage>('homepage', { populate: populator })
             .then(res => OkResult(res.data))
             .catch(err => ApiError(err))
 
@@ -90,7 +104,10 @@ export class StrapiCMSService {
             .catch(err => ApiError(err))
 
     public GetCategoryBySlug = async (slug: string): Promise<ApiResult<PostCategory>> =>
-        this.StrapiFetch<PostCategory[]>('categories', { filters: [{ field: 'slug', operator: '$eq', value: slug }] })
+        this.StrapiFetch<PostCategory[]>('categories', {
+            populate: populator,
+            filters: [{ field: 'slug', operator: '$eq', value: slug }]
+        })
             .then(categories => {
                 if (categories.data.length == 0) return Promise.reject('Category not found')
                 return OkResult(categories.data[0])
@@ -99,16 +116,7 @@ export class StrapiCMSService {
 
     public GetPage = async (slug: string): Promise<ApiResult<StrapiPage>> =>
         this.StrapiFetch<StrapiPage[]>('pages', {
-            populate: [
-                'Blocks',
-                'Blocks.Button',
-                'Blocks.Image',
-                'Blocks.form',
-                'Blocks.form.Fields',
-                'Blocks.form.Fields.categories',
-                'Blocks.form.Fields.Options',
-                'Blocks.Media'
-            ],
+            populate: populator,
             filters: [{ field: 'slug', operator: '$eq', value: slug }]
         })
             .then(pages => {
@@ -118,7 +126,9 @@ export class StrapiCMSService {
             .catch(err => ApiError(err))
 
     public GetPoem = async (slug: string): Promise<ApiResult<StrapiPoem>> =>
-        this.StrapiFetch<StrapiPoem[]>('poems', { filters: [{ field: 'slug', operator: '$eq', value: slug }] })
+        this.StrapiFetch<StrapiPoem[]>('poems', {
+            filters: [{ field: 'slug', operator: '$eq', value: slug }]
+        })
             .then(pages => {
                 if (pages.data.length == 0) return Promise.reject('Poem not found')
                 return OkResult(pages.data[0])
@@ -139,7 +149,9 @@ export class StrapiCMSService {
             .catch(err => ApiError(err))
 
     public GetPoemsByCategory = (category: string): Promise<ApiResult<StrapiPoem[]>> =>
-        this.StrapiFetch<StrapiPoem[]>('poems', { filters: [{ field: "category][slug", operator: '$eq', value: category }] })
+        this.StrapiFetch<StrapiPoem[]>('poems', {
+            filters: [{ field: "category][slug", operator: '$eq', value: category }]
+        })
             .then(res => OkResult(res.data))
             .catch(err => ApiError(err))
 
@@ -149,7 +161,9 @@ export class StrapiCMSService {
             .catch(err => ApiError(err))
 
     public GetFooterMenu = async (): Promise<ApiResult<FooterMenu>> =>
-        this.StrapiFetch<FooterMenu>('footer-menu', { populate: ["Columns.Items"] })
+        this.StrapiFetch<FooterMenu>('footer-menu', {
+            populate: ["Columns.Items"]
+        })
             .then(res => OkResult(res.data))
             .catch(err => ApiError(err))
 
