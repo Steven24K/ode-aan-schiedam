@@ -33,8 +33,6 @@ const populator: Populate[] = [
     'Blocks.form.Fields.categories',
     'Blocks.form.Fields.Options',
     'Blocks.Media',
-    "Columns.Items",
-    "Logo"
 ]
 
 type Filter = {
@@ -94,7 +92,7 @@ export class StrapiCMSService {
             .catch(err => ApiError(err))
 
     public GetHomePage = async (): Promise<ApiResult<StrapiHomePage>> =>
-        this.StrapiFetch<StrapiHomePage>('homepage', { populate: populator })
+        this.StrapiFetch<StrapiHomePage>('homepage', { populate: populator.concat(['Logo']) })
             .then(res => OkResult(res.data))
             .catch(err => ApiError(err))
 
