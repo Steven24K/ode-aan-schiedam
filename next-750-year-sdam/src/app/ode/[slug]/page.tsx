@@ -41,7 +41,7 @@ export default async function StoryPage(props: StoryProps) {
                     </Markdown>
                 </div>
             </section>
-            <section className="flex justify-center my-20">
+            <section className="grid">
                 <div className="grid__item_wrapper">
                     <Link href={`/willekeurig`}>
                         <div className="grid__item--random">
