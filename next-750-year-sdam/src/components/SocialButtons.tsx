@@ -6,9 +6,6 @@ import {
     faWhatsapp,
     faXTwitter,
     faLinkedin,
-    // faInstagram,
-    // faReddit,
-    // faBluesky,
 } from "@fortawesome/free-brands-svg-icons"
 import {
     faEnvelope,
@@ -16,6 +13,7 @@ import {
     faCamera
 } from "@fortawesome/free-solid-svg-icons"
 import { Either } from '@/types/Either'
+import { useEffect, useState } from 'react'
 
 type ShareIcon = IconDefinition & {
     shareAction: Either<string, () => void>
@@ -25,7 +23,9 @@ type ShareIcon = IconDefinition & {
 
 export const SocialButtons = () => {
 
-    const icons: ShareIcon[] = [
+    const [icons, setIcons] = useState<ShareIcon[]>([])
+
+    useEffect(() => setIcons([
         { ...faWhatsapp, shareAction: { type: 'left', value: `https://wa.me/?text=Een verhaal van Ode aan Schiedam: ${document.location.href}` } },
         { ...faFacebook, shareAction: { type: 'left', value: `https://www.facebook.com/sharer/sharer.php?u=${document.location.href}` } },
         { ...faEnvelope, shareAction: { type: 'left', value: `mailto:?subject=Ode aan Schiedam&body=Een verhaal van Ode Aan Schiedam: ${document.location.href}` } },
@@ -33,11 +33,7 @@ export const SocialButtons = () => {
         { ...faCamera, shareAction: { type: 'right', value: () => window.print() } },
         { ...faXTwitter, shareAction: { type: 'left', value: `https://x.com/share?text=Een verhaal van Ode aan Schiedam&url=${document.location.href}&hashtags=schiedam,odeaanschiedam,poezie` } },
         { ...faLinkedin, shareAction: { type: 'left', value: `https://www.linkedin.com/sharing/share-offsite/?text=Een verhaal van Ode aan Schiedam: ${document.location.href}` } },
-        
-        // { ...faInstagram, shareAction: { type: 'left', value: `https://www.instagram.com/poezie750/` } },
-        // { ...faBluesky, shareAction: { type: 'left', value: `https://bsky.app/intent/compose?text=Een verhaal van Ode Aan Schiedam: ${document.location.href}` } },
-        // { ...faReddit, shareAction: { type: 'left', value: `https://www.reddit.com/submit?url=${document.location.href}` } },
-    ]
+    ]), [])
 
     library.add(icons)
 
