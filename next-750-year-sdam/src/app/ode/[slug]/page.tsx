@@ -46,7 +46,7 @@ export default async function StoryPage(props: StoryProps) {
             </section>
             <section className="grid">
                 <div className="grid__item_wrapper">
-                    <Link href={`/willekeurig`}>
+                    <Link href={`/willekeurig?current=${slug}`}>
                         <div className="grid__item--random">
                             <h1>Willekeurige Ode</h1>
                         </div>
