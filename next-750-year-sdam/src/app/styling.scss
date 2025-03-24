@@ -846,8 +846,7 @@ $mobile-width: 700px;
 
 // Poem styling
 .poem {
-    width: max-content;
-    min-width: 385px;
+    width: 100%;
     box-shadow:-5px 5px 10px 1px $just-black; // x, y, blur, spread
     padding: 10px;
     .text-base {
@@ -862,10 +861,6 @@ $mobile-width: 700px;
         font-weight: bold;
         font-size: 3em;
         padding-left: 1px;
-    }
-
-    @media (max-width: $mobile-width) {
-        width: 100%;
     }
 }
 
@@ -919,7 +914,6 @@ $mobile-width: 700px;
 // Socials 
 .socials {
     z-index: 1;
-    display: flex;
 }
 
 .svg-inline--fa {
