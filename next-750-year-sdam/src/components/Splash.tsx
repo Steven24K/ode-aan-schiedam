@@ -3,6 +3,7 @@ import { useState } from "react";
 import Image from "next/image";
 import { redirect } from "next/navigation";
 import { StrapiImage } from "@/types/StrapiImage";
+import { setCookie_clientside } from "@/utils";
 
 type SplashScreenProps = {
     title: string
@@ -20,7 +21,8 @@ export function Splash(props: SplashScreenProps) {
 
     const onDone = () => {
         if (state.animate) {
-            redirect('/?splashed=true')
+            setCookie_clientside('splashed', 'true', 365)
+            redirect('/')
         }
     }
 
