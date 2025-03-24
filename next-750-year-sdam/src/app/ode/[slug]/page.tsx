@@ -33,13 +33,16 @@ export default async function StoryPage(props: StoryProps) {
             cta={{ text: `Terug naar ${category.Title}`, to: `/odes/${category.slug}` }}
         />
         <DisplayContent>
-            <SocialButtons />
             <section className="flex justify-center">
                 <div className="poem">
                     <Markdown className="text-base">
                         {content}
                     </Markdown>
                 </div>
+            </section>
+            <section className="my-8">
+                <h2 className="text-2xl">Deel deze ode:</h2>
+                <SocialButtons />
             </section>
             <section className="grid">
                 <div className="grid__item_wrapper">

@@ -3,12 +3,12 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { library, IconDefinition } from '@fortawesome/fontawesome-svg-core'
 import {
     faFacebook,
-    faInstagram,
-    faXTwitter,
     faWhatsapp,
+    faXTwitter,
     faLinkedin,
-    faReddit,
-    faBluesky,
+    // faInstagram,
+    // faReddit,
+    // faBluesky,
 } from "@fortawesome/free-brands-svg-icons"
 import {
     faEnvelope,
@@ -26,16 +26,17 @@ type ShareIcon = IconDefinition & {
 export const SocialButtons = () => {
 
     const icons: ShareIcon[] = [
+        { ...faWhatsapp, shareAction: { type: 'left', value: `https://wa.me/?text=Een verhaal van Ode aan Schiedam: ${document.location.href}` } },
+        { ...faFacebook, shareAction: { type: 'left', value: `https://www.facebook.com/sharer/sharer.php?u=${document.location.href}` } },
         { ...faEnvelope, shareAction: { type: 'left', value: `mailto:?subject=Ode aan Schiedam&body=Een verhaal van Ode Aan Schiedam: ${document.location.href}` } },
         { ...faCopy, shareAction: { type: 'right', value: () => navigator.clipboard.writeText(document.location.href) } },
         { ...faCamera, shareAction: { type: 'right', value: () => window.print() } },
-        { ...faInstagram, shareAction: { type: 'left', value: `https://www.instagram.com/poezie750/` } },
-        { ...faFacebook, shareAction: { type: 'left', value: `https://www.facebook.com/sharer/sharer.php?u=${document.location.href}` } },
-        { ...faWhatsapp, shareAction: { type: 'left', value: `https://wa.me/?text=Een verhaal van Ode aan Schiedam: ${document.location.href}` } },
         { ...faXTwitter, shareAction: { type: 'left', value: `https://x.com/share?text=Een verhaal van Ode aan Schiedam&url=${document.location.href}&hashtags=schiedam,odeaanschiedam,poezie` } },
         { ...faLinkedin, shareAction: { type: 'left', value: `https://www.linkedin.com/sharing/share-offsite/?text=Een verhaal van Ode aan Schiedam: ${document.location.href}` } },
-        { ...faBluesky, shareAction: { type: 'left', value: `https://bsky.app/intent/compose?text=Een verhaal van Ode Aan Schiedam: ${document.location.href}` } },
-        { ...faReddit, shareAction: { type: 'left', value: `https://www.reddit.com/submit?url=${document.location.href}` } },
+        
+        // { ...faInstagram, shareAction: { type: 'left', value: `https://www.instagram.com/poezie750/` } },
+        // { ...faBluesky, shareAction: { type: 'left', value: `https://bsky.app/intent/compose?text=Een verhaal van Ode Aan Schiedam: ${document.location.href}` } },
+        // { ...faReddit, shareAction: { type: 'left', value: `https://www.reddit.com/submit?url=${document.location.href}` } },
     ]
 
     library.add(icons)
