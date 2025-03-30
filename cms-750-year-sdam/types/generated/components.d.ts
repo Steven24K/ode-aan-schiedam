@@ -57,6 +57,17 @@ export interface BlocksImage extends Struct.ComponentSchema {
   };
 }
 
+export interface BlocksImageSlider extends Struct.ComponentSchema {
+  collectionName: 'components_blocks_image_sliders';
+  info: {
+    displayName: 'Image Slider';
+  };
+  attributes: {
+    Images: Schema.Attribute.Media<'images' | 'files', true> &
+      Schema.Attribute.Required;
+  };
+}
+
 export interface BlocksText extends Struct.ComponentSchema {
   collectionName: 'components_blocks_texts';
   info: {
@@ -301,6 +312,7 @@ declare module '@strapi/strapi' {
       'blocks.call-to-action-cta': BlocksCallToActionCta;
       'blocks.form': BlocksForm;
       'blocks.image': BlocksImage;
+      'blocks.image-slider': BlocksImageSlider;
       'blocks.text': BlocksText;
       'blocks.text-image': BlocksTextImage;
       'clickables.button': ClickablesButton;

@@ -26,7 +26,8 @@
         "blocks.text-image",
         "blocks.call-to-action-cta",
         "blocks.form",
-        "blocks.image"
+        "blocks.image",
+        "blocks.image-slider"
       ],
       "min": 1,
       "required": true

@@ -6,8 +6,9 @@ export type PageBlock =
     TextBlockProps |
     TextWithImageBlockProps |
     CallToActionBlockProps |
-    FormBlockProps | 
-    ImageBlockProps
+    FormBlockProps |
+    ImageBlockProps |
+    ImageSliderBlockProps
 
 export type TextBlockProps = {
     __component: "blocks.text"
@@ -53,6 +54,12 @@ export type ImageBlockProps = {
     id: number
     Caption: string
     Media: StrapiImage
+}
+
+export type ImageSliderBlockProps = {
+    __component: "blocks.image-slider"
+    id: number
+    Images: StrapiImage[]
 }
 
 
