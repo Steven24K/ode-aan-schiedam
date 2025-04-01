@@ -1,17 +1,19 @@
 {
   "collectionName": "components_blocks_images",
   "info": {
-    "displayName": "Image"
+    "displayName": "Image",
+    "icon": "picture",
+    "description": ""
   },
   "options": {},
   "attributes": {
     "Media": {
-      "allowedTypes": [
-        "images"
-      ],
       "type": "media",
       "multiple": false,
-      "required": true
+      "required": true,
+      "allowedTypes": [
+        "images"
+      ]
     },
     "Caption": {
       "type": "string",

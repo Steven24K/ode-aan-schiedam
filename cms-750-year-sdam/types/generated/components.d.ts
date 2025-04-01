@@ -5,7 +5,7 @@ export interface BlocksCallToActionCta extends Struct.ComponentSchema {
   info: {
     description: '';
     displayName: 'Call To Action (CTA)';
-    icon: 'apps';
+    icon: 'stack';
   };
   attributes: {
     Button: Schema.Attribute.Component<'clickables.button', true> &
@@ -36,7 +36,9 @@ export interface BlocksCallToActionCta extends Struct.ComponentSchema {
 export interface BlocksForm extends Struct.ComponentSchema {
   collectionName: 'components_blocks_forms';
   info: {
+    description: '';
     displayName: 'Form';
+    icon: 'apps';
   };
   attributes: {
     form: Schema.Attribute.Relation<'oneToOne', 'api::form.form'>;
@@ -46,7 +48,9 @@ export interface BlocksForm extends Struct.ComponentSchema {
 export interface BlocksImage extends Struct.ComponentSchema {
   collectionName: 'components_blocks_images';
   info: {
+    description: '';
     displayName: 'Image';
+    icon: 'picture';
   };
   attributes: {
     Caption: Schema.Attribute.String &
@@ -60,7 +64,9 @@ export interface BlocksImage extends Struct.ComponentSchema {
 export interface BlocksImageSlider extends Struct.ComponentSchema {
   collectionName: 'components_blocks_image_sliders';
   info: {
+    description: '';
     displayName: 'Image Slider';
+    icon: 'landscape';
   };
   attributes: {
     Images: Schema.Attribute.Media<'images' | 'files', true> &
@@ -71,8 +77,9 @@ export interface BlocksImageSlider extends Struct.ComponentSchema {
 export interface BlocksText extends Struct.ComponentSchema {
   collectionName: 'components_blocks_texts';
   info: {
+    description: '';
     displayName: 'Text';
-    icon: 'apps';
+    icon: 'feather';
   };
   attributes: {
     Description: Schema.Attribute.RichText & Schema.Attribute.Required;
@@ -85,7 +92,7 @@ export interface BlocksTextImage extends Struct.ComponentSchema {
   info: {
     description: '';
     displayName: 'Text + Image';
-    icon: 'apps';
+    icon: 'layer';
   };
   attributes: {
     Description: Schema.Attribute.RichText & Schema.Attribute.Required;

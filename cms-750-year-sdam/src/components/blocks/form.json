@@ -1,7 +1,9 @@
 {
   "collectionName": "components_blocks_forms",
   "info": {
-    "displayName": "Form"
+    "displayName": "Form",
+    "icon": "apps",
+    "description": ""
   },
   "options": {},
   "attributes": {
