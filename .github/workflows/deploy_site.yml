@@ -3,8 +3,8 @@ name: Deploy Website
 on:
   push:
     paths:
-      - 'cms-750-year-sdam/**'
-      - 'next-750-year-sdam/**'
+      - "cms-750-year-sdam/**"
+      - "next-750-year-sdam/**"
 
 jobs:
   deploy:
