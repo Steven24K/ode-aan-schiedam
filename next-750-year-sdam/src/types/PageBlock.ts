@@ -8,7 +8,8 @@ export type PageBlock =
     CallToActionBlockProps |
     FormBlockProps |
     ImageBlockProps |
-    ImageSliderBlockProps
+    ImageSliderBlockProps | 
+    YouTubeVideoBlockProps
 
 export type TextBlockProps = {
     __component: "blocks.text"
@@ -62,6 +63,11 @@ export type ImageSliderBlockProps = {
     Images: StrapiImage[]
 }
 
+export type YouTubeVideoBlockProps = {
+    __component: "blocks.you-tube-video"
+    id: number
+    url: string
+}
 
 export type StrapiFormField = StandardFormField | CategoriesDropDown | InfoText | DropDown
 

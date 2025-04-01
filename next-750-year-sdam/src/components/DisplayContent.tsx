@@ -5,6 +5,7 @@ import { CallToActionBlock } from "./Blocks/CallToAction"
 import { FormBlock } from "./Blocks/FormBlock"
 import { ImageBlock } from "./Blocks/ImageBlock"
 import { ImageSlider } from "./Blocks/ImageSlider"
+import { YouTubeVideoBlock } from "./Blocks/YouTubeVideo"
 
 type DisplayContentProps = {
     className?: string
@@ -38,6 +39,8 @@ export const DisplayContent = (props: DisplayContentProps) => {
                         return <ImageBlock key={`${block.__component}_${block.id}`} {...block} />
                     case 'blocks.image-slider':
                         return <ImageSlider key={`${block.__component}_${block.id}`} {...block} />
+                    case 'blocks.you-tube-video':
+                        return <YouTubeVideoBlock key={`${block.__component}_${block.id}`} {...block} />
                     default:
                         return <div key={JSON.stringify(block)}>Block does not exist {JSON.stringify(block)}</div>
                 }
