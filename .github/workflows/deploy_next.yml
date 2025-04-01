@@ -1,0 +1,59 @@
+name: Deploy NextJS
+
+on:
+  push:
+    paths:
+      - 'next-750-year-sdam/**'
+
+jobs:
+  deploy-website:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v2
+
+    - name: Pull latest code
+      uses: appleboy/ssh-action@master
+      with:
+        host: ${{ secrets.HOST }}
+        username: ${{ secrets.USERNAME }}
+        key: ${{ secrets.PRIVATE_KEY }}
+        port: 22
+        script: |
+          cd ~/ode-aan-schiedam
+          git pull origin main
+
+    - name: Setup environment
+      uses: appleboy/ssh-action@master
+      with:
+        host: ${{ secrets.HOST }}
+        username: ${{ secrets.USERNAME }}
+        key: ${{ secrets.PRIVATE_KEY }}
+        port: 22
+        script: |
+          cd ~/ode-aan-schiedam/next-750-year-sdam
+          echo "${{ secrets.ENV_FILE_NEXT }}" > .env
+
+    - name: Build application
+      uses: appleboy/ssh-action@master
+      with:
+        host: ${{ secrets.HOST }}
+        username: ${{ secrets.USERNAME }}
+        key: ${{ secrets.PRIVATE_KEY }}
+        port: 22
+        script: |
+          cd ~/ode-aan-schiedam/next-750-year-sdam
+          yarn install
+          yarn build
+
+    - name: Deploy application
+      uses: appleboy/ssh-action@master
+      with:
+        host: ${{ secrets.HOST }}
+        username: ${{ secrets.USERNAME }}
+        key: ${{ secrets.PRIVATE_KEY }}
+        port: 22
+        script: |
+          cd ~/ode-aan-schiedam/next-750-year-sdam
+          pm2 restart next
