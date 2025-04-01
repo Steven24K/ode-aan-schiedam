@@ -1,0 +1,61 @@
+name: Deploy NextJS
+
+on:
+  push:
+    paths:
+      - 'cms-750-year-sdam/**'
+      - 'next-750-year-sdam/**'
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        project: [cms-750-year-sdam, next-750-year-sdam]
+    if: contains(join(github.event.commits.*.modified, ' '), matrix.project + '/')
+
+    steps:
+    - name: Pull latest changes
+      uses: appleboy/ssh-action@master
+      with:
+        host: ${{ secrets.HOST }}
+        username: ${{ secrets.USERNAME }}
+        key: ${{ secrets.PRIVATE_KEY }}
+        port: 22
+        script: |
+          cd ~/ode-aan-schiedam
+          git pull origin main
+
+    - name: Setup environment
+      uses: appleboy/ssh-action@master
+      with:
+        host: ${{ secrets.HOST }}
+        username: ${{ secrets.USERNAME }}
+        key: ${{ secrets.PRIVATE_KEY }}
+        port: 22
+        script: |
+          cd ~/ode-aan-schiedam/${{ matrix.project }}
+          echo "${{ secrets['ENV_FILE_' + (matrix.project == 'cms-750-year-sdam' ? 'CMS' : 'NEXT')] }}" > .env
+
+    - name: Build project
+      uses: appleboy/ssh-action@master
+      with:
+        host: ${{ secrets.HOST }}
+        username: ${{ secrets.USERNAME }}
+        key: ${{ secrets.PRIVATE_KEY }}
+        port: 22
+        script: |
+          cd ~/ode-aan-schiedam/${{ matrix.project }}
+          yarn install
+          yarn build
+
+    - name: Deploy project
+      uses: appleboy/ssh-action@master
+      with:
+        host: ${{ secrets.HOST }}
+        username: ${{ secrets.USERNAME }}
+        key: ${{ secrets.PRIVATE_KEY }}
+        port: 22
+        script: |
+          cd ~/ode-aan-schiedam/${{ matrix.project }}
+          pm2 restart ${{ matrix.project == 'cms-750-year-sdam' ? 'strapi' : 'next' }}
