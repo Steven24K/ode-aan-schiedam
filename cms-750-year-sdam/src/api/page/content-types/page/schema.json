@@ -32,7 +32,8 @@
         "blocks.call-to-action-cta",
         "blocks.form",
         "blocks.image",
-        "blocks.image-slider"
+        "blocks.image-slider",
+        "blocks.you-tube-video"
       ],
       "required": true,
       "min": 1

@@ -1,0 +1,14 @@
+{
+  "collectionName": "components_blocks_you_tube_videos",
+  "info": {
+    "displayName": "YouTube Video",
+    "icon": "play"
+  },
+  "options": {},
+  "attributes": {
+    "url": {
+      "type": "string",
+      "required": true
+    }
+  }
+}

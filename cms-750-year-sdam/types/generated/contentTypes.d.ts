@@ -389,6 +389,7 @@ export interface ApiCategoryCategory extends Struct.CollectionTypeSchema {
         'blocks.form',
         'blocks.image',
         'blocks.image-slider',
+        'blocks.you-tube-video',
       ]
     >;
     Color: Schema.Attribute.Enumeration<
@@ -523,6 +524,7 @@ export interface ApiHomepageHomepage extends Struct.SingleTypeSchema {
         'blocks.form',
         'blocks.image',
         'blocks.image-slider',
+        'blocks.you-tube-video',
       ]
     > &
       Schema.Attribute.Required &
@@ -600,6 +602,7 @@ export interface ApiPagePage extends Struct.CollectionTypeSchema {
         'blocks.form',
         'blocks.image',
         'blocks.image-slider',
+        'blocks.you-tube-video',
       ]
     > &
       Schema.Attribute.Required &

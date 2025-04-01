@@ -98,6 +98,17 @@ export interface BlocksTextImage extends Struct.ComponentSchema {
   };
 }
 
+export interface BlocksYouTubeVideo extends Struct.ComponentSchema {
+  collectionName: 'components_blocks_you_tube_videos';
+  info: {
+    displayName: 'YouTube Video';
+    icon: 'play';
+  };
+  attributes: {
+    url: Schema.Attribute.String & Schema.Attribute.Required;
+  };
+}
+
 export interface ClickablesButton extends Struct.ComponentSchema {
   collectionName: 'components_clickables_buttons';
   info: {
@@ -315,6 +326,7 @@ declare module '@strapi/strapi' {
       'blocks.image-slider': BlocksImageSlider;
       'blocks.text': BlocksText;
       'blocks.text-image': BlocksTextImage;
+      'blocks.you-tube-video': BlocksYouTubeVideo;
       'clickables.button': ClickablesButton;
       'clickables.menu-item': ClickablesMenuItem;
       'dropdown-options.dropdown-option': DropdownOptionsDropdownOption;
