@@ -33,7 +33,7 @@ export default async function StoryOverview(props: StoryOverviewProps) {
         <Hero title={title}
             description={description}
             color={color}
-            cta={{ text: "Terug naar het overzicht", to: '/?splashed=true' }}
+            cta={{ text: "Terug naar het overzicht", to: '/' }}
         />
         <DisplayContent childPositon="bottom" blocks={blocks} >
             <Suspense fallback={<Loader />}>
