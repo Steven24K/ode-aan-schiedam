@@ -10,7 +10,7 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-    - name: Pull latest changes
+    - name: Deploy using SSH
       uses: appleboy/ssh-action@master
       with:
         host: ${{ secrets.HOST }}
@@ -20,37 +20,9 @@ jobs:
         script: |
           cd ~/ode-aan-schiedam
           git pull origin main
-
-    - name: Setup environment file
-      uses: appleboy/ssh-action@master
-      with:
-        host: ${{ secrets.HOST }}
-        username: ${{ secrets.USERNAME }}
-        key: ${{ secrets.PRIVATE_KEY }}
-        port: 22
-        script: |
-          cd ~/ode-aan-schiedam/cms-750-year-sdam
+          cd cms-750-year-sdam
           echo "${{ secrets.ENV_FILE_CMS }}" > .env
-
-    - name: Build application
-      uses: appleboy/ssh-action@master
-      with:
-        host: ${{ secrets.HOST }}
-        username: ${{ secrets.USERNAME }}
-        key: ${{ secrets.PRIVATE_KEY }}
-        port: 22
-        script: |
-          cd ~/ode-aan-schiedam/cms-750-year-sdam
           yarn install
           yarn build
-
-    - name: Deploy application
-      uses: appleboy/ssh-action@master
-      with:
-        host: ${{ secrets.HOST }}
-        username: ${{ secrets.USERNAME }}
-        key: ${{ secrets.PRIVATE_KEY }}
-        port: 22
-        script: |
-          cd ~/ode-aan-schiedam/cms-750-year-sdam
           pm2 restart strapi
+          
