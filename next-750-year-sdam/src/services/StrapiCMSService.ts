@@ -11,7 +11,15 @@ type Either<a, b> = { kind: 'left', v: a } | { kind: 'right', v: b }
 
 type CreateResponse = Either<true, string>
 
-export type EndPoint = "site-info" | "homepage" | "categories" | "pages" | "poems" | "main-menu" | "footer-menu"
+export type EndPoint = "site-info" |
+    "homepage" |
+    "categories" |
+    "pages" |
+    "poems" |
+    "main-menu" |
+    "footer-menu" |
+    "podcast" |
+    "podcast-episodes"
 
 type Populate = "Blocks" |
     "Blocks.Button" |
@@ -22,8 +30,10 @@ type Populate = "Blocks" |
     "Blocks.form.Fields.Options" |
     "Blocks.Media" |
     "Columns.Items" |
-    "Logo" | 
-    "Blocks.Images"
+    "Logo" |
+    "Blocks.Images" |
+    'Audio' | 
+    'Thumbnail'
 
 const populator: Populate[] = [
     'Blocks',
@@ -82,6 +92,14 @@ export class StrapiCMSService {
         console.error(error)
         return Promise.reject(error)
     }
+
+    public getPodcastEpisodes = async (): Promise<ApiResult<object>> =>
+        this.StrapiFetch<object>('podcast')
+            .then(podcastInfo => 
+                this.StrapiFetch<object>('podcast-episodes', { populate: ['Audio', 'Thumbnail'] })
+                .then(episodes => OkResult({ podcastInfo: podcastInfo.data, episodes: episodes.data }))
+            )
+            .catch(err => ApiError(err))
 
     public getSiteInfo = async (): Promise<ApiResult<SiteInfo>> =>
         this.StrapiFetch<SiteInfo>('site-info')
