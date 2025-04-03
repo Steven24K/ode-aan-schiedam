@@ -1,5 +1,6 @@
 import { FooterMenu } from "@/types/Footer"
 import { MainMenu } from "@/types/MainMenu"
+import { PodcastData, PodcastEpisode, PodcastInfo } from "@/types/Podcast"
 import { PostCategory } from "@/types/PostCategory"
 import { SiteInfo } from "@/types/SiteInfo"
 import { OkResult, ApiResult, StrapiData, ApiError } from "@/types/StrapiData"
@@ -93,10 +94,10 @@ export class StrapiCMSService {
         return Promise.reject(error)
     }
 
-    public getPodcastEpisodes = async (): Promise<ApiResult<object>> =>
-        this.StrapiFetch<object>('podcast')
+    public getPodcastEpisodes = async (): Promise<ApiResult<PodcastData>> =>
+        this.StrapiFetch<PodcastInfo>('podcast')
             .then(podcastInfo => 
-                this.StrapiFetch<object>('podcast-episodes', { populate: ['Audio', 'Thumbnail'] })
+                this.StrapiFetch<PodcastEpisode[]>('podcast-episodes', { populate: ['Audio', 'Thumbnail'] })
                 .then(episodes => OkResult({ podcastInfo: podcastInfo.data, episodes: episodes.data }))
             )
             .catch(err => ApiError(err))
