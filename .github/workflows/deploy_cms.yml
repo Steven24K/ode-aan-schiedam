@@ -1,7 +1,7 @@
-name: Deploy Strapi CMS
-
 on:
   push:
+    branches:
+      - main
     paths:
       - 'cms-750-year-sdam/**'
 

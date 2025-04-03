@@ -2,6 +2,8 @@
 
 # on:
 #   push:
+#     branches:
+#       - main
 #     paths:
 #       - 'next-750-year-sdam/**'
 
