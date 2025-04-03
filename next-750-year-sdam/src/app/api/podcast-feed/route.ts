@@ -55,7 +55,7 @@ export async function GET(request: Request): Promise<Response> {
 
     return new NextResponse(rssFeed, {
         headers: {
-            'Content-Type': 'application/rss+xml',
+            'Content-Type': 'text/xml',
         },
     })
 }
