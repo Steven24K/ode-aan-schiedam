@@ -10,13 +10,15 @@ export async function GET(request: Request): Promise<Response> {
     const { podcastInfo, episodes } = data.data
     const url = new URL(request.url)
 
+    const APP_URL = process.env.APP_URL || 'http://localhost:3000'
+
     const rssFeed = `<?xml version='1.0' encoding='UTF-8'?>
     <rss version="2.0" xmlns:itunes="http://www.itunes.com/dtds/podcast-1.0.dtd" xmlns:atom="http://www.w3.org/2005/Atom">
             <channel>
-                <atom:link href="${url.href}" rel="self" type="application/rss+xml" />
-                <atom:link href="${url.origin}/podcast-feed" rel="next" type="application/rss+xml" />
+                <atom:link href="${APP_URL}${url.pathname}" rel="self" type="application/rss+xml" />
+                <atom:link href="${APP_URL}/${url.pathname}" rel="next" type="application/rss+xml" />
                 <title>${podcastInfo.Title}</title>
-                <link>${url.origin}</link>
+                <link>${APP_URL}</link>
                 <pubDate>${podcastInfo.publishedAt}</pubDate>
                 <lastBuildDate>${podcastInfo.updatedAt}</lastBuildDate>
                 <ttl>60</ttl>
@@ -30,24 +32,24 @@ export async function GET(request: Request): Promise<Response> {
                 </itunes:owner>
                 <itunes:author>${podcastInfo.Creator}</itunes:author>
                 <itunes:explicit>no</itunes:explicit>
-                <itunes:image href="${url.origin}${podcastInfo.Logo.url}" />
+                <itunes:image href="${APP_URL}${podcastInfo.Logo.url}" />
                 <image>
-                    <url>${url.origin}${podcastInfo.Logo.url}</url>
+                    <url>${APP_URL}${podcastInfo.Logo.url}</url>
                     <title>${podcastInfo.Title}</title>
-                    <link>${url.origin}</link>
+                    <link>${APP_URL}</link>
                 </image>
                 <itunes:category text="${podcastInfo.Category}" />
                 ${episodes.map(episode => `<item>
                     <guid isPermaLink="false">${episode.documentId}</guid>
                     <title>${episode.Title}</title>
                     <pubDate>${episode.publishedAt}</pubDate>
-                    <link>${url.origin}/podcast/${episode.slug}</link>
+                    <link>${APP_URL}/podcast/${episode.slug}</link>
                     <itunes:author>${podcastInfo.Creator}</itunes:author>
                     <itunes:explicit>no</itunes:explicit>
                     <itunes:summary>${episode.Description}</itunes:summary>
                     <description>${episode.Description}</description>
-                    <enclosure type="audio/mpeg" url="${url.origin}${episode.Audio.url}" />
-                    <itunes:image href="${url.origin}${episode.Thumbnail.url || podcastInfo.Logo.url}" />
+                    <enclosure type="audio/mpeg" url="${APP_URL}${episode.Audio.url}" />
+                    <itunes:image href="${APP_URL}${episode.Thumbnail.url || podcastInfo.Logo.url}" />
                 </item>`).join('')}
             </channel>
         </rss>`
