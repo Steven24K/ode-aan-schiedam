@@ -36,7 +36,7 @@ export async function GET(request: Request): Promise<Response> {
                     <title>${podcastInfo.Title}</title>
                     <link>${url.origin}</link>
                 </image>
-                <itunes:category text="${podcastInfo.Category}">
+                <itunes:category text="${podcastInfo.Category}" />
                 ${episodes.map(episode => `<item>
                     <guid isPermaLink="false">${episode.documentId}</guid>
                     <title>${episode.Title}</title>
