@@ -11,7 +11,7 @@ export async function GET(request: Request): Promise<Response> {
     const url = new URL(request.url)
 
     const rssFeed = `<?xml version='1.0' encoding='UTF-8'?>
-    <rss version="2.0" version="2.0" xmlns:itunes="http://www.itunes.com/dtds/podcast-1.0.dtd" xmlns:atom="http://www.w3.org/2005/Atom">
+    <rss version="2.0" xmlns:itunes="http://www.itunes.com/dtds/podcast-1.0.dtd" xmlns:atom="http://www.w3.org/2005/Atom">
             <channel>
                 <atom:link href="${url.href}" rel="self" type="application/rss+xml" />
                 <atom:link href="${url.origin}/podcast-feed" rel="next" type="application/rss+xml" />
