@@ -16,7 +16,7 @@ export async function GET(request: Request): Promise<Response> {
     <rss version="2.0" xmlns:itunes="http://www.itunes.com/dtds/podcast-1.0.dtd" xmlns:atom="http://www.w3.org/2005/Atom">
             <channel>
                 <atom:link href="${APP_URL}${url.pathname}" rel="self" type="application/rss+xml" />
-                <atom:link href="${APP_URL}/${url.pathname}" rel="next" type="application/rss+xml" />
+                <atom:link href="${APP_URL}${url.pathname}" rel="next" type="application/rss+xml" />
                 <title>${podcastInfo.Title}</title>
                 <link>${APP_URL}</link>
                 <pubDate>${podcastInfo.publishedAt}</pubDate>
