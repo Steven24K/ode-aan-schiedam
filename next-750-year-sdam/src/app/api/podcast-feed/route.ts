@@ -24,7 +24,7 @@ export async function GET(request: Request): Promise<Response> {
                 <ttl>60</ttl>
                 <language>nl</language>
                 <copyright>All rights reserved</copyright>
-                <webmaster>${podcastInfo.Contact}</webmaster>
+                <webMaster>${podcastInfo.Contact}</webMaster>
                 <description>${podcastInfo.Description}</description>
                 <itunes:owner>
                     <itunes:name>${podcastInfo.Creator}</itunes:name>
