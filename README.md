@@ -36,3 +36,24 @@ If you setup Strapi locally you don't need one.
 - `yarn install` or `yarn npm run install`
 - `yarn dev` or `npm run dev`
 
+
+# Deploy 
+*(incase you need to start a new process: `pm2 start yarn --name "<PROCESS NAME>" -- start`)*
+
+Make sure the `.env` file is created for both CMS and NextJS App.
+
+## Strapi CMS
+- SSH into server
+- `cd ode-aan-schiedam`
+- `git pull`
+- `cd cms-750-year-sdam`
+- `yarn install`
+- `yarn build`
+- `pm2 restart strapi` 
+
+## NextJS App
+- `cd ..`
+- `cd next-750-year-sdam`
+- `yarn install`
+- `yarn build`
+- `pm2 restart next` 
