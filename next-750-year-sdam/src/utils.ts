@@ -18,3 +18,18 @@ export const getCookie_clientside = (name: string) => {
     }
     return null;
 };
+
+export const FormatDate = (date: string): string => {
+    let weekdays = ['zondag', 'maandag', 'dinsdag', 'woensdag', 'donderdag', 'vrijdag', 'zaterdag']
+    let months = ['januari', 'februari', 'maart', 'april', 'mei', 'juni', 'juli', 'augustus', 'september', 'oktober', 'november', 'december']
+
+    let milliseconds = Date.parse(date)
+    let new_date = new Date(milliseconds)
+
+    let weekday = new_date.getUTCDay()
+    let monthday = new_date.getUTCDate()
+    let month = new_date.getUTCMonth()
+    let year = new_date.getUTCFullYear()
+
+    return `${weekdays[weekday]} ${monthday} ${months[month]} ${year}`
+}

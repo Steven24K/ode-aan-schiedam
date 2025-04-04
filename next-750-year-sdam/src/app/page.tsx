@@ -9,6 +9,7 @@ import { StrapiCMSService } from "@/services/StrapiCMSService"
 import { Loader } from "@/components/Loader"
 import { notFound } from "next/navigation"
 import { cookies } from "next/headers"
+import { PodcastGrid } from "@/components/PodcastGrid"
 
 const stringToBool = (v: string | undefined): boolean => {
   if (v === 'false') return false
@@ -53,6 +54,7 @@ export default async function Home() {
   return <>
     <Hero title={title} description={description} color={"sunny-yellow"} />
     <StoryCounter />
+    <PodcastGrid />
     <Suspense fallback={<Loader />}>
         <Grid items={category_grid} />
       </Suspense>

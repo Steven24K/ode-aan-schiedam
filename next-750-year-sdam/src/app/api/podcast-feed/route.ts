@@ -11,6 +11,8 @@ export async function GET(request: Request): Promise<Response> {
     const url = new URL(request.url)
 
     const APP_URL = process.env.APP_URL || 'http://localhost:3000'
+    const parsedURL = new URL(APP_URL)
+    const host = parsedURL.host
 
     const rssFeed = `<?xml version='1.0' encoding='UTF-8'?>
     <rss version="2.0" xmlns:itunes="http://www.itunes.com/dtds/podcast-1.0.dtd" xmlns:atom="http://www.w3.org/2005/Atom">
@@ -38,6 +40,7 @@ export async function GET(request: Request): Promise<Response> {
                     <title>${podcastInfo.Title}</title>
                     <link>${APP_URL}</link>
                 </image>
+                <category domain="${host}">${podcastInfo.Category}</category>
                 <itunes:category text="${podcastInfo.Category}" />
                 ${episodes.map(episode => `<item>
                     <guid isPermaLink="false">${episode.documentId}</guid>
