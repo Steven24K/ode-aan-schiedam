@@ -5,6 +5,11 @@ export interface PodcastData {
     episodes: PodcastEpisode[]
 }
 
+export interface SinglePodcast {
+    podcastInfo: PodcastInfo
+    episode: PodcastEpisode
+}
+
 export interface PodcastInfo {
     id: number
     Title: string

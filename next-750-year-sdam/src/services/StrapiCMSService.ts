@@ -1,6 +1,6 @@
 import { FooterMenu } from "@/types/Footer"
 import { MainMenu } from "@/types/MainMenu"
-import { PodcastData, PodcastEpisode, PodcastInfo } from "@/types/Podcast"
+import { PodcastData, PodcastEpisode, PodcastInfo, SinglePodcast } from "@/types/Podcast"
 import { PostCategory } from "@/types/PostCategory"
 import { SiteInfo } from "@/types/SiteInfo"
 import { OkResult, ApiResult, StrapiData, ApiError } from "@/types/StrapiData"
@@ -33,7 +33,7 @@ type Populate = "Blocks" |
     "Columns.Items" |
     "Logo" |
     "Blocks.Images" |
-    'Audio' | 
+    'Audio' |
     'Thumbnail'
 
 const populator: Populate[] = [
@@ -96,11 +96,25 @@ export class StrapiCMSService {
 
     public getPodcastEpisodes = async (): Promise<ApiResult<PodcastData>> =>
         this.StrapiFetch<PodcastInfo>('podcast')
-            .then(podcastInfo => 
+            .then(podcastInfo =>
                 this.StrapiFetch<PodcastEpisode[]>('podcast-episodes', { populate: ['Audio', 'Thumbnail'] })
-                .then(episodes => OkResult({ podcastInfo: podcastInfo.data, episodes: episodes.data }))
+                    .then(episodes => OkResult({ podcastInfo: podcastInfo.data, episodes: episodes.data }))
             )
             .catch(err => ApiError(err))
+
+    public getPodcastBySlug = async (slug: string): Promise<ApiResult<SinglePodcast>> =>
+        this.StrapiFetch<PodcastInfo>('podcast')
+            .then(podcastInfo =>
+                this.StrapiFetch<PodcastEpisode[]>('podcast-episodes', {
+                    filters: [{ field: 'slug', operator: '$eq', value: slug }],
+                    populate: ['Audio', 'Thumbnail']
+                })
+                    .then(episodes => {
+                        if (episodes.data.length == 0) return Promise.reject('Podcast not found')
+                        return OkResult({ podcastInfo: podcastInfo.data, episode: episodes.data[0] })
+                    })
+                    .catch(err => ApiError(err))
+            )
 
     public getSiteInfo = async (): Promise<ApiResult<SiteInfo>> =>
         this.StrapiFetch<SiteInfo>('site-info')

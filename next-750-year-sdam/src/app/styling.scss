@@ -472,6 +472,8 @@ $mobile-width: 700px;
 
 // Main Grid
 .grid {
+    margin: 0 auto;
+    max-width: 1200px;
     display: flex;
     flex-wrap: wrap;
     overflow: hidden;
@@ -1103,6 +1105,8 @@ $mobile-width: 700px;
 
 // Podcast Block Grid
 .latest-podcasts {
+    margin: 0 auto;
+    max-width: 1200px;
     padding: 20px 10px;
     background-color: #f4f4f9;
 }
@@ -1185,4 +1189,34 @@ $mobile-width: 700px;
     font-family: 'Gotham-Black';
     text-transform: uppercase;
     border-bottom: 2px solid $just-black;
+}
+
+// Podcast Player 
+.player-container {
+    display: flex;
+    flex-direction: column;
+    width: max-content;
+    display: flex;
+}
+
+.player {
+    width: 100%;
+    @media (max-width: $mobile-width) {
+        width: 60%;
+        max-width: 350px;
+        min-width: 300px;
+        height: auto;
+    }
+}
+
+.img-fluid {
+    width: 100%;
+    height: auto;
+
+    @media (max-width: $mobile-width) {
+        width: 60%;
+        max-width: 350px;
+        min-width: 300px;
+        height: auto;
+    }
 }
