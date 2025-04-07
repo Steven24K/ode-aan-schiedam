@@ -52,7 +52,7 @@ export async function GET(request: Request): Promise<Response> {
                     <itunes:summary>${episode.Description}</itunes:summary>
                     <description>${episode.Description}</description>
                     <enclosure type="audio/mpeg" url="${APP_URL}${episode.Audio.url}" />
-                    <itunes:image href="${APP_URL}${episode.Thumbnail.url || podcastInfo.Logo.url}" />
+                    <itunes:image href="${APP_URL}${episode.Thumbnail ? episode.Thumbnail.url : podcastInfo.Logo.url}" />
                 </item>`).join('')}
             </channel>
         </rss>`
