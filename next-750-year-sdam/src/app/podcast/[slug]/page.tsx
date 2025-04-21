@@ -28,12 +28,7 @@ export default async function PodcastPage(props: PageProps) {
             cta={{ text: "Terug naar home", to: "/" }}
         />
 
-        <DisplayContent>
-            <div className="podcast-episode">
-                <p className="my-2">
-
-                </p>
-
+        <DisplayContent className="my-5">
                 <div className="player-container">
                     <audio className="player" controls>
                         <source src={episode.Audio.url} type="audio/mpeg" />
@@ -52,8 +47,6 @@ export default async function PodcastPage(props: PageProps) {
                 <p>{podcastInfo.Description}</p>
                 <hr/>
                 <p>Genre: {podcastInfo.Category}</p>
-
-            </div>
         </DisplayContent>
     </>
 }
