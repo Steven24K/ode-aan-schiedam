@@ -129,7 +129,12 @@ export class StrapiCMSService {
 
     public getPoemCounter = (): Promise<ApiResult<number>> =>
         this.StrapiFetch<StrapiPoem[]>('poems')
-            .then(res => OkResult(res.data.length))
+            .then(res =>
+                this.StrapiFetch<PodcastEpisode[]>('podcast-episodes')
+                    .then(podcasts =>
+                        OkResult(res.data.length + podcasts.data.length)
+                    )
+            )
             .catch(err => ApiError(err))
 
     public GetHomePage = async (): Promise<ApiResult<StrapiHomePage>> =>
