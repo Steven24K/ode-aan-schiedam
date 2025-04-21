@@ -1,3 +1,4 @@
+import { PageBlock } from "./PageBlock"
 import { StrapiImage } from "./StrapiImage"
 
 export interface PodcastData {
@@ -37,4 +38,5 @@ export interface PodcastEpisode {
         url: string
         name: string
     }
+    Blocks: PageBlock[]
 }

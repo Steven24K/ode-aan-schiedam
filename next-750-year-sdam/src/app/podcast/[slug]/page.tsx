@@ -28,25 +28,27 @@ export default async function PodcastPage(props: PageProps) {
             cta={{ text: "Terug naar home", to: "/" }}
         />
 
-        <DisplayContent className="my-5">
-                <div className="player-container">
-                    <audio className="player" controls>
-                        <source src={episode.Audio.url} type="audio/mpeg" />
-                        Your browser does not support the audio element.
-                    </audio>
-                    <Image src={episode.Thumbnail ? episode.Thumbnail.url : podcastInfo.Logo.url}
-                        alt={episode.Title}
-                        width={600} height={400}
-                        className="img-fluid mb-2"
-                    />
-                </div>
-                <p className="my-4">{episode.Description}</p>
+        <DisplayContent childPositon="top" blocks={episode.Blocks}>
+            <div className="player-container">
+                <audio className="player" controls>
+                    <source src={episode.Audio.url} type="audio/mpeg" />
+                    Your browser does not support the audio element.
+                </audio>
+                <Image src={episode.Thumbnail ? episode.Thumbnail.url : podcastInfo.Logo.url}
+                    alt={episode.Title}
+                    width={600} height={400}
+                    className="img-fluid mb-2"
+                />
+            </div>
+            <p className="my-4">{episode.Description}</p>
 
-                <h2>{podcastInfo.Title}</h2>
-                <p>Door: <i>{podcastInfo.Creator}</i></p>
-                <p>{podcastInfo.Description}</p>
-                <hr/>
-                <p>Genre: {podcastInfo.Category}</p>
+        </DisplayContent>
+        <DisplayContent>
+            <h2>{podcastInfo.Title}</h2>
+            <p>Door: <i>{podcastInfo.Creator}</i></p>
+            <p>{podcastInfo.Description}</p>
+            <hr />
+            <p>Genre: {podcastInfo.Category}</p>
         </DisplayContent>
     </>
 }

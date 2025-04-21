@@ -4,7 +4,8 @@
   "info": {
     "singularName": "podcast-episode",
     "pluralName": "podcast-episodes",
-    "displayName": "Podcast Episodes"
+    "displayName": "Podcast Episodes",
+    "description": ""
   },
   "options": {
     "draftAndPublish": true
@@ -20,25 +21,38 @@
       "required": true
     },
     "Thumbnail": {
+      "type": "media",
+      "multiple": false,
+      "required": false,
       "allowedTypes": [
         "images",
         "files"
-      ],
-      "type": "media",
-      "multiple": false
+      ]
     },
     "Audio": {
-      "allowedTypes": [
-        "audios"
-      ],
       "type": "media",
       "multiple": false,
-      "required": true
+      "required": true,
+      "allowedTypes": [
+        "audios"
+      ]
     },
     "slug": {
       "type": "uid",
       "targetField": "Title",
       "required": true
+    },
+    "Blocks": {
+      "type": "dynamiczone",
+      "components": [
+        "blocks.you-tube-video",
+        "blocks.text",
+        "blocks.text-image",
+        "blocks.image",
+        "blocks.image-slider",
+        "blocks.form",
+        "blocks.call-to-action-cta"
+      ]
     }
   }
 }

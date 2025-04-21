@@ -46,6 +46,18 @@
       "relation": "oneToOne",
       "target": "api::form.form",
       "private": true
+    },
+    "Blocks": {
+      "type": "dynamiczone",
+      "components": [
+        "blocks.you-tube-video",
+        "blocks.text",
+        "blocks.text-image",
+        "blocks.image",
+        "blocks.image-slider",
+        "blocks.form",
+        "blocks.call-to-action-cta"
+      ]
     }
   }
 }

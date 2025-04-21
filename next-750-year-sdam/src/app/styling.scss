@@ -414,12 +414,12 @@ $mobile-width: 700px;
 
         a {
             font-family: 'Gotham-Book';
-            background-color: $fiery-red--light;
+            border-bottom: 1px solid $just-white;
             color: $just-white;
         }
 
         a:hover {
-            background-color: $fiery-red;
+            color: #dfdbdb;
         }
     }
 }
@@ -440,7 +440,7 @@ $mobile-width: 700px;
 // Page content for CMS data
 .page-content {
     margin-top: 25px;
-    min-height: 80vh;
+    // min-height: 80vh;
     width: 60vw;
     min-width: 350px;
     max-width: 1200px;

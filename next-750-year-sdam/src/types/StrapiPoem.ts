@@ -1,3 +1,4 @@
+import { PageBlock } from "./PageBlock"
 import { PostCategory } from "./PostCategory"
 
 export type StrapiPoem = {
@@ -9,4 +10,5 @@ export type StrapiPoem = {
     category: PostCategory
     Email: string 
     Phone: string
+    Blocks: PageBlock[]
 }

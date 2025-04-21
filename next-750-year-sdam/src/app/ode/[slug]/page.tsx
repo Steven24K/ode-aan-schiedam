@@ -25,6 +25,7 @@ export default async function StoryPage(props: StoryProps) {
 
     const category = poem.data.category
     const content = poem.data.Content
+    const blocks = poem.data.Blocks
 
     return <>
         <Hero title={title}
@@ -32,7 +33,7 @@ export default async function StoryPage(props: StoryProps) {
             color={category.Color}
             cta={{ text: `Terug naar ${category.Title}`, to: `/odes/${category.slug}` }}
         />
-        <DisplayContent>
+        <DisplayContent blocks={blocks} childPositon="top">
             <section className="flex justify-center">
                 <div className="poem">
                     <Markdown className="text-base">
@@ -40,7 +41,10 @@ export default async function StoryPage(props: StoryProps) {
                     </Markdown>
                 </div>
             </section>
-            <section className="my-8">
+        </DisplayContent>
+        <DisplayContent>
+
+            <section>
                 <h2 className="text-2xl">Deel deze ode:</h2>
                 <SocialButtons />
             </section>

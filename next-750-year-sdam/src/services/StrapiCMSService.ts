@@ -34,7 +34,8 @@ type Populate = "Blocks" |
     "Logo" |
     "Blocks.Images" |
     'Audio' |
-    'Thumbnail'
+    'Thumbnail' | 
+    'category'
 
 const populator: Populate[] = [
     'Blocks',
@@ -113,7 +114,7 @@ export class StrapiCMSService {
             .then(podcastInfo =>
                 this.StrapiFetch<PodcastEpisode[]>('podcast-episodes', {
                     filters: [{ field: 'slug', operator: '$eq', value: slug }],
-                    populate: ['Audio', 'Thumbnail']
+                    populate: populator.concat(['Audio', 'Thumbnail'])
                 })
                     .then(episodes => {
                         if (episodes.data.length == 0) return Promise.reject('Podcast not found')
@@ -171,7 +172,8 @@ export class StrapiCMSService {
 
     public GetPoem = async (slug: string): Promise<ApiResult<StrapiPoem>> =>
         this.StrapiFetch<StrapiPoem[]>('poems', {
-            filters: [{ field: 'slug', operator: '$eq', value: slug }]
+            filters: [{ field: 'slug', operator: '$eq', value: slug }],
+            populate: populator.concat(['category'])
         })
             .then(pages => {
                 if (pages.data.length == 0) return Promise.reject('Poem not found')

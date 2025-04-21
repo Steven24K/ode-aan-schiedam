@@ -31,7 +31,7 @@ export const Hero = (props: HeroProps) => {
             }
             {
                 cta &&
-                <Link href={cta.to} className="text-center py-4 px-8">
+                <Link href={cta.to} className="text-center">
                     {cta.text}
                 </Link>
             }

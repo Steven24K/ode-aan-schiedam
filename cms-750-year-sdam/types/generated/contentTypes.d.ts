@@ -632,6 +632,7 @@ export interface ApiPodcastEpisodePodcastEpisode
   extends Struct.CollectionTypeSchema {
   collectionName: 'podcast_episodes';
   info: {
+    description: '';
     displayName: 'Podcast Episodes';
     pluralName: 'podcast-episodes';
     singularName: 'podcast-episode';
@@ -641,6 +642,17 @@ export interface ApiPodcastEpisodePodcastEpisode
   };
   attributes: {
     Audio: Schema.Attribute.Media<'audios'> & Schema.Attribute.Required;
+    Blocks: Schema.Attribute.DynamicZone<
+      [
+        'blocks.you-tube-video',
+        'blocks.text',
+        'blocks.text-image',
+        'blocks.image',
+        'blocks.image-slider',
+        'blocks.form',
+        'blocks.call-to-action-cta',
+      ]
+    >;
     createdAt: Schema.Attribute.DateTime;
     createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
@@ -708,6 +720,17 @@ export interface ApiPoemPoem extends Struct.CollectionTypeSchema {
   };
   attributes: {
     Author: Schema.Attribute.String;
+    Blocks: Schema.Attribute.DynamicZone<
+      [
+        'blocks.you-tube-video',
+        'blocks.text',
+        'blocks.text-image',
+        'blocks.image',
+        'blocks.image-slider',
+        'blocks.form',
+        'blocks.call-to-action-cta',
+      ]
+    >;
     category: Schema.Attribute.Relation<'oneToOne', 'api::category.category'>;
     Content: Schema.Attribute.RichText & Schema.Attribute.Required;
     createdAt: Schema.Attribute.DateTime;
