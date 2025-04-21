@@ -57,6 +57,7 @@ type Filter = {
 type StrapiOptions = Partial<{
     populate: Populate[]
     filters: Filter[]
+    sort: string[]
     method: 'GET' | 'POST'
     body: string
 }>
@@ -68,11 +69,13 @@ export class StrapiCMSService {
     }
 
     private async StrapiFetch<T>(end_point: EndPoint, options: StrapiOptions = {}): Promise<StrapiData<T>> {
-        const { populate, filters, method, body } = options
+        const { populate, filters, method, body, sort } = options
+
         const _filters = filters ? filters.reduce((xs, x) => `${xs}filters[${x.field}][${x.operator}]=${x.value}`, "") : ''
         const _populate = populate == undefined ? "populate=*&" : populate.reduce((xs, x, i) => `${xs}populate[${i}]=${x}&`, "")
+        const _sort = sort ? sort.reduce((xs, x, i) => `${xs}sort[${i}]=${x}&`, "") : ''
 
-        let _url = `${this.STRAPI_CMS_URL}/api/${end_point}/?${_populate}${_filters}`
+        let _url = `${this.STRAPI_CMS_URL}/api/${end_point}/?${_populate}${_filters}${_sort}`
         if (method == 'POST')
             _url = _url + 'status=draft'
 
@@ -97,7 +100,10 @@ export class StrapiCMSService {
     public getPodcastEpisodes = async (): Promise<ApiResult<PodcastData>> =>
         this.StrapiFetch<PodcastInfo>('podcast')
             .then(podcastInfo =>
-                this.StrapiFetch<PodcastEpisode[]>('podcast-episodes', { populate: ['Audio', 'Thumbnail'] })
+                this.StrapiFetch<PodcastEpisode[]>('podcast-episodes', {
+                    populate: ['Audio', 'Thumbnail'],
+                    sort: ['publishedAt:desc'],
+                })
                     .then(episodes => OkResult({ podcastInfo: podcastInfo.data, episodes: episodes.data }))
             )
             .catch(err => ApiError(err))
