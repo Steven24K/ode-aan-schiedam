@@ -1,5 +1,6 @@
 import { DisplayContent } from "@/components/DisplayContent"
 import { Hero } from "@/components/Hero"
+import { SocialButtons } from "@/components/SocialButtons"
 import { StrapiCMSService } from "@/services/StrapiCMSService"
 import { Params } from "@/types/Params"
 import { FormatDate } from "@/utils"
@@ -49,6 +50,10 @@ export default async function PodcastPage(props: PageProps) {
             <p>{podcastInfo.Description}</p>
             <hr />
             <p>Genre: {podcastInfo.Category}</p>
+            <section>
+                <h2 className="text-2xl">Deel deze podcast:</h2>
+                <SocialButtons />
+            </section>
         </DisplayContent>
     </>
 }
