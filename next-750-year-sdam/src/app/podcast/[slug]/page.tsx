@@ -25,7 +25,7 @@ export default async function PodcastPage(props: PageProps) {
     return <>
         <Hero title={episode.Title}
             description={`Gepubliceerd op: ${FormatDate(episode.publishedAt)}`}
-            color="sunny-yellow"
+            color="leafy-green"
             cta={{ text: "Terug naar home", to: "/" }}
         />
 
