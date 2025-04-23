@@ -22,7 +22,11 @@ export default async function CMSPage(props: PageProps) {
     const blocks = page.data.Blocks
 
     return <>
-        <Hero title={title} description={description} color={"sunny-yellow"} />
+        <Hero title={title}
+            description={description}
+            color={"sunny-yellow"}
+            cta={{ text: "Ga terug naar home", to: "/" }}
+        />
 
         <DisplayContent blocks={blocks} />
     </>
