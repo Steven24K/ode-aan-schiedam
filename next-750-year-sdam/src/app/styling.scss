@@ -162,6 +162,10 @@ $mobile-width: 700px;
 .bg-sunny-yellow {
     background-color: $sunny-yellow;
     color: $just-black;
+
+    a {
+        color: $sky-blue;
+    }
 }
 
 .bg-sunny-yellow--light {
