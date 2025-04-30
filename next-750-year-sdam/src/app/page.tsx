@@ -29,7 +29,7 @@ export default async function Home() {
   const description = homepage.data.Description
   const logo = homepage.data.Logo
   const blocks = homepage.data.Blocks
-  
+
   const cookieStore = await cookies()
   const splashed = cookieStore.get('splashed')?.value
 
@@ -55,9 +55,11 @@ export default async function Home() {
     <Hero title={title} description={description} color={"sunny-yellow"} />
     <StoryCounter />
     <PodcastGrid />
-    <Suspense fallback={<Loader />}>
+    
+    <DisplayContent blocks={blocks} childPositon="bottom" >
+      <Suspense fallback={<Loader />}>
         <Grid items={category_grid} />
       </Suspense>
-    <DisplayContent blocks={blocks} childPositon="top" />
+    </DisplayContent>
   </>
 }
