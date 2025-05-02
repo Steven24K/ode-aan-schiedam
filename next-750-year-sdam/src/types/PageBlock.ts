@@ -1,15 +1,21 @@
 import { EndPoint } from "@/services/StrapiCMSService"
 import { StrapiImage } from "./StrapiImage"
 import { PostCategory } from "./PostCategory"
+import { PageProps } from "./Params"
 
 export type PageBlock =
-    TextBlockProps |
-    TextWithImageBlockProps |
-    CallToActionBlockProps |
-    FormBlockProps |
-    ImageBlockProps |
-    ImageSliderBlockProps | 
-    YouTubeVideoBlockProps
+    (
+        TextBlockProps |
+        TextWithImageBlockProps |
+        CallToActionBlockProps |
+        FormBlockProps |
+        ImageBlockProps |
+        ImageSliderBlockProps |
+        YouTubeVideoBlockProps |
+        StoriesBlockProps
+    ) & {
+        pageParams: PageProps
+    }
 
 export type TextBlockProps = {
     __component: "blocks.text"
@@ -67,6 +73,12 @@ export type YouTubeVideoBlockProps = {
     __component: "blocks.you-tube-video"
     id: number
     url: string
+}
+export type StoriesBlockProps = {
+    __component: "blocks.stories"
+    id: number
+    max: number
+    paginated: boolean
 }
 
 export type StrapiFormField = StandardFormField | CategoriesDropDown | InfoText | DropDown

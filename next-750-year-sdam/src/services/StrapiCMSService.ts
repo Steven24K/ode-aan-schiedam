@@ -12,6 +12,8 @@ type Either<a, b> = { kind: 'left', v: a } | { kind: 'right', v: b }
 
 type CreateResponse = Either<true, string>
 
+const boolToString = (b: boolean): 'True' | 'False' => b ? 'True' : 'False'
+
 export type EndPoint = "site-info" |
     "homepage" |
     "categories" |
@@ -34,7 +36,7 @@ type Populate = "Blocks" |
     "Logo" |
     "Blocks.Images" |
     'Audio' |
-    'Thumbnail' | 
+    'Thumbnail' |
     'category'
 
 const populator: Populate[] = [
@@ -61,7 +63,14 @@ type StrapiOptions = Partial<{
     sort: string[]
     method: 'GET' | 'POST'
     body: string
+    pagination: StrapiPagination
 }>
+
+type StrapiPagination = {
+    page: number
+    pageSize: number
+    withCount: boolean
+}
 
 export class StrapiCMSService {
     private STRAPI_CMS_URL: string
@@ -70,13 +79,14 @@ export class StrapiCMSService {
     }
 
     private async StrapiFetch<T>(end_point: EndPoint, options: StrapiOptions = {}): Promise<StrapiData<T>> {
-        const { populate, filters, method, body, sort } = options
+        const { populate, filters, method, body, sort, pagination } = options
 
         const _filters = filters ? filters.reduce((xs, x) => `${xs}filters[${x.field}][${x.operator}]=${x.value}`, "") : ''
         const _populate = populate == undefined ? "populate=*&" : populate.reduce((xs, x, i) => `${xs}populate[${i}]=${x}&`, "")
         const _sort = sort ? sort.reduce((xs, x, i) => `${xs}sort[${i}]=${x}&`, "") : ''
+        const _pagination = pagination ? `pagination[page]=${pagination.page}&pagination[pageSize]=${pagination.pageSize}&withCount=${boolToString(pagination.withCount)}` : ''
 
-        let _url = `${this.STRAPI_CMS_URL}/api/${end_point}/?${_populate}${_filters}${_sort}`
+        let _url = `${this.STRAPI_CMS_URL}/api/${end_point}/?${_populate}${_filters}${_sort}${_pagination}`
         if (method == 'POST')
             _url = _url + 'status=draft'
 
@@ -129,12 +139,14 @@ export class StrapiCMSService {
             .catch(err => ApiError(err))
 
     public getPoemCounter = (): Promise<ApiResult<number>> =>
-        this.StrapiFetch<StrapiPoem[]>('poems')
-            .then(res =>
-                this.StrapiFetch<PodcastEpisode[]>('podcast-episodes')
-                    .then(podcasts =>
-                        OkResult(res.data.length + podcasts.data.length)
-                    )
+        this.StrapiFetch<StrapiPoem[]>('poems', { pagination: { page: 1, pageSize: 1, withCount: true } })
+            .then(res_poems =>
+                this.StrapiFetch<PodcastEpisode[]>('podcast-episodes', { pagination: { page: 1, pageSize: 1, withCount: true } })
+                    .then(res_podcasts => {
+                        const poem_count = res_poems.meta?.pagination?.total || 0
+                        const podcast_count = res_podcasts.meta?.pagination?.total || 0
+                        return OkResult(poem_count + podcast_count)
+                    })
             )
             .catch(err => ApiError(err))
 
@@ -189,9 +201,9 @@ export class StrapiCMSService {
             .then(() => ({ kind: 'left', v: true } as CreateResponse))
             .catch((reason) => ({ kind: 'right', v: reason } as CreateResponse))
 
-    public GetAllPoems = async (): Promise<ApiResult<StrapiPoem[]>> =>
-        this.StrapiFetch<StrapiPoem[]>('poems')
-            .then(res => OkResult(res.data))
+    public GetAllPoems = async (_pagination?: StrapiPagination): Promise<ApiResult<StrapiPoem[]>> =>
+        this.StrapiFetch<StrapiPoem[]>('poems', { pagination: _pagination })
+            .then(res => OkResult(res.data, res.meta))
             .catch(err => ApiError(err))
 
     public GetPoemsByCategory = (category: string): Promise<ApiResult<StrapiPoem[]>> =>

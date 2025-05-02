@@ -1,5 +1,5 @@
 "use client"
-import { FormBlockProps, StrapiFormField } from "@/types/PageBlock"
+import { PageBlock, StrapiFormField } from "@/types/PageBlock"
 import { FormBuilder, FormField } from "../FormBuilder"
 import { useState } from "react"
 import { EndPoint } from "@/services/StrapiCMSService"
@@ -28,7 +28,9 @@ const submitForm = async (endpoint: EndPoint, body: StrapiData<any>): Promise<bo
     return false
 }
 
-export const FormBlock = (props: FormBlockProps) => {
+export const FormBlock = (props: PageBlock) => {
+    if (props.__component != 'blocks.form') return <div>FormBlock: {JSON.stringify(props)}</div>
+    
     const { Fields, SubmissionText, Title, submit_url, documentId } = props.form
     const defaultObject = fieldsToDefaultObject(Fields)
     const [state, setState] = useState<FormState>(zeroFormState(defaultObject))

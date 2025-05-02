@@ -1,6 +1,8 @@
-import { YouTubeVideoBlockProps } from "@/types/PageBlock";
+import { PageBlock } from "@/types/PageBlock";
 
-export const YouTubeVideoBlock = (props: YouTubeVideoBlockProps) => {
+export const YouTubeVideoBlock = (props: PageBlock) => {
+    if (props.__component !== 'blocks.you-tube-video') return <div>Block does not exist {JSON.stringify(props)}</div>;
+    
     const { url } = props;
     const urlParts = url.split("?v=");
     const VideoId = urlParts[1] ? urlParts[1].split("&")[0] : urlParts[0].split("/").pop() || "";

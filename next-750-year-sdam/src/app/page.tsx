@@ -10,6 +10,7 @@ import { Loader } from "@/components/Loader"
 import { notFound } from "next/navigation"
 import { cookies } from "next/headers"
 import { PodcastGrid } from "@/components/PodcastGrid"
+import { PageProps } from "@/types/Params"
 
 const stringToBool = (v: string | undefined): boolean => {
   if (v === 'false') return false
@@ -17,7 +18,7 @@ const stringToBool = (v: string | undefined): boolean => {
   return false
 }
 
-export default async function Home() {
+export default async function Home(props: PageProps) {
 
   const strapi = new StrapiCMSService()
 
@@ -56,7 +57,7 @@ export default async function Home() {
     <StoryCounter />
     <PodcastGrid />
     
-    <DisplayContent blocks={blocks} childPositon="bottom" >
+    <DisplayContent blocks={blocks} childPositon="bottom" pageParams={props} >
       <Suspense fallback={<Loader />}>
         <Grid items={category_grid} />
       </Suspense>

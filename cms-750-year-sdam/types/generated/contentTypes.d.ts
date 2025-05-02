@@ -525,6 +525,7 @@ export interface ApiHomepageHomepage extends Struct.SingleTypeSchema {
         'blocks.image',
         'blocks.image-slider',
         'blocks.you-tube-video',
+        'blocks.stories',
       ]
     > &
       Schema.Attribute.Required &
@@ -603,6 +604,7 @@ export interface ApiPagePage extends Struct.CollectionTypeSchema {
         'blocks.image',
         'blocks.image-slider',
         'blocks.you-tube-video',
+        'blocks.stories',
       ]
     > &
       Schema.Attribute.Required &

@@ -28,7 +28,8 @@
         "blocks.form",
         "blocks.image",
         "blocks.image-slider",
-        "blocks.you-tube-video"
+        "blocks.you-tube-video",
+        "blocks.stories"
       ],
       "min": 1,
       "required": true

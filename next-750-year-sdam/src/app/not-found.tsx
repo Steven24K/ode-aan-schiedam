@@ -1,11 +1,12 @@
 import { DisplayContent } from '@/components/DisplayContent';
 import { Hero } from '@/components/Hero';
+import { PageProps } from '@/types/Params';
 import Link from 'next/link';
 
-export default function NotFound() {
+export default function NotFound(props: PageProps) {
     return <>
         <Hero title={'Pagina niet gevonden'} color={'sunny-yellow'} />
-        <DisplayContent>
+        <DisplayContent pageParams={props}>
             <div className="flex items-center justify-center h-96">
                 <div className="text-left">
                     <h1 className="text-6xl font-bold text-gray-800">404</h1>

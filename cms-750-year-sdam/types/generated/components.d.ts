@@ -74,6 +74,26 @@ export interface BlocksImageSlider extends Struct.ComponentSchema {
   };
 }
 
+export interface BlocksStories extends Struct.ComponentSchema {
+  collectionName: 'components_blocks_stories';
+  info: {
+    displayName: 'Stories';
+    icon: 'bulletList';
+  };
+  attributes: {
+    max: Schema.Attribute.Integer &
+      Schema.Attribute.Required &
+      Schema.Attribute.SetMinMax<
+        {
+          min: 1;
+        },
+        number
+      > &
+      Schema.Attribute.DefaultTo<5>;
+    paginated: Schema.Attribute.Boolean & Schema.Attribute.DefaultTo<false>;
+  };
+}
+
 export interface BlocksText extends Struct.ComponentSchema {
   collectionName: 'components_blocks_texts';
   info: {
@@ -331,6 +351,7 @@ declare module '@strapi/strapi' {
       'blocks.form': BlocksForm;
       'blocks.image': BlocksImage;
       'blocks.image-slider': BlocksImageSlider;
+      'blocks.stories': BlocksStories;
       'blocks.text': BlocksText;
       'blocks.text-image': BlocksTextImage;
       'blocks.you-tube-video': BlocksYouTubeVideo;

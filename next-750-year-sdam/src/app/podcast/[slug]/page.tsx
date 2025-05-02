@@ -2,15 +2,11 @@ import { DisplayContent } from "@/components/DisplayContent"
 import { Hero } from "@/components/Hero"
 import { SocialButtons } from "@/components/SocialButtons"
 import { StrapiCMSService } from "@/services/StrapiCMSService"
-import { Params } from "@/types/Params"
+import { PageProps } from "@/types/Params"
 import { FormatDate } from "@/utils"
 import Image from "next/image"
 import { notFound } from "next/navigation"
 
-
-type PageProps = {
-    params: Promise<Params>
-}
 
 export default async function PodcastPage(props: PageProps) {
     const { params } = props
@@ -29,7 +25,7 @@ export default async function PodcastPage(props: PageProps) {
             cta={{ text: "Terug naar home", to: "/" }}
         />
 
-        <DisplayContent childPositon="top" blocks={episode.Blocks}>
+        <DisplayContent childPositon="top" blocks={episode.Blocks} pageParams={props}>
             <div className="player-container">
                 <audio className="player" controls>
                     <source src={episode.Audio.url} type="audio/mpeg" />
@@ -44,7 +40,7 @@ export default async function PodcastPage(props: PageProps) {
             <p className="my-4">{episode.Description}</p>
 
         </DisplayContent>
-        <DisplayContent>
+        <DisplayContent pageParams={props}>
             <h2>{podcastInfo.Title}</h2>
             <p>Door: <i>{podcastInfo.Creator}</i></p>
             <p>{podcastInfo.Description}</p>

@@ -1,12 +1,8 @@
 import { DisplayContent } from "@/components/DisplayContent";
 import { Hero } from "@/components/Hero";
 import { StrapiCMSService } from "@/services/StrapiCMSService";
-import { Params } from "@/types/Params";
+import { PageProps } from "@/types/Params";
 import { notFound } from "next/navigation";
-
-type PageProps = {
-    params: Promise<Params>
-}
 
 export default async function CMSPage(props: PageProps) {
     const { params } = props
@@ -28,6 +24,6 @@ export default async function CMSPage(props: PageProps) {
             cta={{ text: "Ga terug naar home", to: "/" }}
         />
 
-        <DisplayContent blocks={blocks} />
+        <DisplayContent blocks={blocks} pageParams={props} />
     </>
 }

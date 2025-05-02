@@ -2,16 +2,13 @@ import { DisplayContent } from "@/components/DisplayContent"
 import { Hero } from "@/components/Hero"
 import { SocialButtons } from "@/components/SocialButtons"
 import { StrapiCMSService } from "@/services/StrapiCMSService"
-import { Params } from "@/types/Params"
+import { PageProps } from "@/types/Params"
 import Link from "next/link"
 import { notFound } from "next/navigation"
 import Markdown from "react-markdown"
 
-type StoryProps = {
-    params: Promise<Partial<Params>>
-}
 
-export default async function StoryPage(props: StoryProps) {
+export default async function StoryPage(props: PageProps) {
     const { params } = props
     const { slug } = await params
 
@@ -33,7 +30,7 @@ export default async function StoryPage(props: StoryProps) {
             color={category.Color}
             cta={{ text: `Terug naar ${category.Title}`, to: `/odes/${category.slug}` }}
         />
-        <DisplayContent blocks={blocks} childPositon="top">
+        <DisplayContent blocks={blocks} childPositon="top" pageParams={props}>
             <section className="flex justify-center">
                 <div className="poem">
                     <Markdown className="text-base">
@@ -42,8 +39,8 @@ export default async function StoryPage(props: StoryProps) {
                 </div>
             </section>
         </DisplayContent>
-        <DisplayContent>
 
+        <DisplayContent pageParams={props}>
             <section>
                 <h2 className="text-2xl">Deel deze ode:</h2>
                 <SocialButtons />

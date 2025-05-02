@@ -3,15 +3,12 @@ import { Grid, GridItem } from "@/components/Grid"
 import { Hero } from "@/components/Hero"
 import { Loader } from "@/components/Loader"
 import { StrapiCMSService } from "@/services/StrapiCMSService"
-import { Params } from "@/types/Params"
+import { PageProps } from "@/types/Params"
 import { notFound } from "next/navigation"
 import { Suspense } from "react"
 
-type StoryOverviewProps = {
-    params: Promise<Params>
-}
 
-export default async function StoryOverview(props: StoryOverviewProps) {
+export default async function StoryOverview(props: PageProps) {
     const { params } = props
     const { category } = await params
 
@@ -35,7 +32,7 @@ export default async function StoryOverview(props: StoryOverviewProps) {
             color={color}
             cta={{ text: "Terug naar het overzicht", to: '/' }}
         />
-        <DisplayContent childPositon="bottom" blocks={blocks} >
+        <DisplayContent childPositon="bottom" blocks={blocks} pageParams={props} >
             <Suspense fallback={<Loader />}>
                 <Grid items={poem_grid} />
             </Suspense>

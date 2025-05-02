@@ -1,0 +1,21 @@
+{
+  "collectionName": "components_blocks_stories",
+  "info": {
+    "displayName": "Stories",
+    "icon": "bulletList"
+  },
+  "options": {},
+  "attributes": {
+    "max": {
+      "type": "integer",
+      "required": true,
+      "min": 1,
+      "default": 5
+    },
+    "paginated": {
+      "type": "boolean",
+      "default": false,
+      "required": false
+    }
+  }
+}

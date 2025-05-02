@@ -1,5 +1,5 @@
 "use client"
-import { ImageSliderBlockProps } from "@/types/PageBlock";
+import { PageBlock } from "@/types/PageBlock";
 import Image from "next/image";
 import { useState } from "react";
 import { useEffect } from "react";
@@ -8,7 +8,9 @@ type SliderState = {
     currentSlide: number
 }
 
-export const ImageSlider = (props: ImageSliderBlockProps) => {
+export const ImageSlider = (props: PageBlock) => {
+    if (props.__component !== 'blocks.image-slider') return <div>Block does not exist {JSON.stringify(props)}</div>
+
     const { Images } = props
     const [state, setState] = useState<SliderState>({ currentSlide: 0 })
 
