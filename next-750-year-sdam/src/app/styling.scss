@@ -1211,6 +1211,16 @@ $grid__item_size: 200px;
     font-family: 'Gotham-Black';
     text-transform: uppercase;
     border-bottom: 2px solid $just-black;
+    display: flex;
+    gap: 8px;
+
+    h2 {
+        padding-top: 20px;
+    }
+
+    .arrow {
+        justify-content: center;
+    }
 }
 
 // Podcast Player 

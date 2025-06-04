@@ -9,8 +9,8 @@ import { StrapiCMSService } from "@/services/StrapiCMSService"
 import { Loader } from "@/components/Loader"
 import { notFound } from "next/navigation"
 import { cookies } from "next/headers"
-import { PodcastGrid } from "@/components/PodcastGrid"
 import { PageProps } from "@/types/Params"
+import { PodcastGrid } from "@/components/PodcastGrid/PodcastGrid"
 
 const stringToBool = (v: string | undefined): boolean => {
   if (v === 'false') return false
