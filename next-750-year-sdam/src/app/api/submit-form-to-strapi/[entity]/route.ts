@@ -16,7 +16,7 @@ export async function POST(request: Request): Promise<Response> {
 
   let form = Object.entries(body.data).map(([key, value]) => `${key}: ${value}`).join("\n")
   let msg = `Nieuwe inzending op formulier:\n${form}`
-  sendEmail("750@odeaanschiedam.nl", "750@odeaanschiedam.nl", `Nieuwe inzending ${entity}`, msg)
+  sendEmail("750@odeaanschiedam.nl", "750@odeaanschiedam.nl", `Nieuwe inzending ${entity}`, msg, "poezie750@gmail.com")
 
   return Response.json(response.v)
 }
