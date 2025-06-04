@@ -345,7 +345,7 @@ $mobile-width: 700px;
 // Site footer
 .footer {
     height: auto;
-    background: linear-gradient(to left, $royal-purple, $royal-purple--light);
+    background: linear-gradient(to right, $royal-purple, $royal-purple--light);
     color: $just-white;
 }
 
@@ -825,6 +825,10 @@ $grid__item_size: 200px;
 
 .mirror {
     direction: rtl;
+
+    &>* {
+        direction: ltr;
+    }
 }
 
 // Text Block
@@ -1233,6 +1237,7 @@ $grid__item_size: 200px;
 
 .player {
     width: 100%;
+
     @media (max-width: $mobile-width) {
         width: 60%;
         max-width: 350px;
