@@ -678,6 +678,7 @@ export interface ApiPodcastEpisodePodcastEpisode
 export interface ApiPodcastPodcast extends Struct.SingleTypeSchema {
   collectionName: 'podcasts';
   info: {
+    description: '';
     displayName: 'Podcast';
     pluralName: 'podcasts';
     singularName: 'podcast';
@@ -701,6 +702,7 @@ export interface ApiPodcastPodcast extends Struct.SingleTypeSchema {
       Schema.Attribute.Private;
     Logo: Schema.Attribute.Media<'images' | 'files'> &
       Schema.Attribute.Required;
+    Platforms: Schema.Attribute.Component<'clickables.image-link', true>;
     publishedAt: Schema.Attribute.DateTime;
     Title: Schema.Attribute.String & Schema.Attribute.Required;
     updatedAt: Schema.Attribute.DateTime;

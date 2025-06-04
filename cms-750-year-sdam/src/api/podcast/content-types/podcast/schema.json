@@ -4,7 +4,8 @@
   "info": {
     "singularName": "podcast",
     "pluralName": "podcasts",
-    "displayName": "Podcast"
+    "displayName": "Podcast",
+    "description": ""
   },
   "options": {
     "draftAndPublish": true
@@ -20,13 +21,13 @@
       "required": true
     },
     "Logo": {
+      "type": "media",
+      "multiple": false,
+      "required": true,
       "allowedTypes": [
         "images",
         "files"
-      ],
-      "type": "media",
-      "multiple": false,
-      "required": true
+      ]
     },
     "Creator": {
       "type": "string",
@@ -38,6 +39,12 @@
     },
     "Category": {
       "type": "string"
+    },
+    "Platforms": {
+      "type": "component",
+      "repeatable": true,
+      "component": "clickables.image-link",
+      "required": false
     }
   }
 }

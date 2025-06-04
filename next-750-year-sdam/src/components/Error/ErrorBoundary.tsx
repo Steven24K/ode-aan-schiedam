@@ -1,5 +1,6 @@
 'use client'
 import React, { ErrorInfo, ReactNode } from 'react'
+import { Hero } from '../Hero'
 
 type ErrorBoundaryProps = {
     dev?: true
@@ -16,7 +17,7 @@ type ErrorBoundaryState = {
 export default class ErrorBoundary extends React.Component<ErrorBoundaryProps, ErrorBoundaryState> {
     constructor(props: ErrorBoundaryProps) {
         super(props)
-        this.state = { hasError: false, showError: false }
+        this.state = { hasError: false, showError: props.dev ?? false }
     }
 
     componentDidCatch(error: Error, errorInfo: ErrorInfo): void {
@@ -25,17 +26,14 @@ export default class ErrorBoundary extends React.Component<ErrorBoundaryProps, E
 
     render(): ReactNode {
         if (!this.state.hasError) return this.props.children
-        return <div className='bg-gray-100 min-h-screen'>
-            {this.props.fallBack}
-
-            {this.props.dev && <div className='m-4 stacktrace'>
-                <button
-                    className='text-red-600 underline hover:text-red-900'
-                    onClick={() => this.setState({ ...this.state, showError: !this.state.showError })}
-                >
-                    Show stacktrace
-                </button>
-                {this.state.showError && <div className=''>
+        return <>
+            <Hero title='Error'
+                description='Er is iets mis gegaan met het laden van de pagina. Probeer het later opnieuw of neem contact op met de beheerder van de website.'
+                color='fiery-red'
+                cta={{ text: 'Terug naar home', to: '/' }}
+            />
+            <div className='mx-8 bg-gray-100 min-h-screen'>
+                <div className=''>
                     <div className='bg-gray-200 my-5 p-4 rounded-md'>
                         <h1 className='text-2xl'>An unexpected error occured</h1>
                         <div className='m-2 bg-red-200 text-red-900 border-l-4 border-red-500 p-2'><b>{this.state.error?.name}: </b>{this.state.error?.message}</div>
@@ -45,8 +43,9 @@ export default class ErrorBoundary extends React.Component<ErrorBoundaryProps, E
                         <h2 className='text-2xl'>Component Stack</h2>
                         <pre className='whitespace-pre-wrap bg-gray-900 text-white m-2 p-5 max-h-60 overflow-y-auto rounded-lg'>{this.state.errorInfo?.componentStack}</pre>
                     </div>
-                </div>}
-            </div>}
-        </div>
+                </div>
+            </div>
+        </>
+
     }
 }

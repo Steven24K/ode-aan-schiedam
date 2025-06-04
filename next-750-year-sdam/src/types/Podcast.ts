@@ -19,9 +19,18 @@ export interface PodcastInfo {
     Contact: string
     Category: string
     Logo: StrapiImage
+    Platforms: ImageLink[]
     publishedAt: string
     updatedAt: string
     createdAt: string
+}
+
+interface ImageLink {
+    id: number
+    Title: string
+    Url: string
+    Image: StrapiImage
+    
 }
 
 export interface PodcastEpisode {

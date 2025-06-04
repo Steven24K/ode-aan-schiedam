@@ -149,6 +149,19 @@ export interface ClickablesButton extends Struct.ComponentSchema {
   };
 }
 
+export interface ClickablesImageLink extends Struct.ComponentSchema {
+  collectionName: 'components_clickables_image_links';
+  info: {
+    displayName: 'Image link';
+    icon: 'link';
+  };
+  attributes: {
+    Image: Schema.Attribute.Media<'images'> & Schema.Attribute.Required;
+    Title: Schema.Attribute.String & Schema.Attribute.Required;
+    Url: Schema.Attribute.String & Schema.Attribute.Required;
+  };
+}
+
 export interface ClickablesMenuItem extends Struct.ComponentSchema {
   collectionName: 'components_clickables_menu_items';
   info: {
@@ -356,6 +369,7 @@ declare module '@strapi/strapi' {
       'blocks.text-image': BlocksTextImage;
       'blocks.you-tube-video': BlocksYouTubeVideo;
       'clickables.button': ClickablesButton;
+      'clickables.image-link': ClickablesImageLink;
       'clickables.menu-item': ClickablesMenuItem;
       'dropdown-options.dropdown-option': DropdownOptionsDropdownOption;
       'footer.column': FooterColumn;

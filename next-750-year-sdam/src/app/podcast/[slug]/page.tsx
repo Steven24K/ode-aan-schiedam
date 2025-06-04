@@ -5,6 +5,7 @@ import { StrapiCMSService } from "@/services/StrapiCMSService"
 import { PageProps } from "@/types/Params"
 import { FormatDate } from "@/utils"
 import Image from "next/image"
+import Link from "next/link"
 import { notFound } from "next/navigation"
 
 
@@ -16,7 +17,6 @@ export default async function PodcastPage(props: PageProps) {
     const data = await strapi.getPodcastBySlug(slug)
     if (data.kind == 'error') return notFound()
     const { podcastInfo, episode } = data.data
-
 
     return <>
         <Hero title={episode.Title}
@@ -41,12 +41,30 @@ export default async function PodcastPage(props: PageProps) {
 
         </DisplayContent>
         <DisplayContent pageParams={props}>
-            <h2>{podcastInfo.Title}</h2>
-            <p>Door: <i>{podcastInfo.Creator}</i></p>
-            <p>{podcastInfo.Description}</p>
-            <hr />
-            <p>Genre: {podcastInfo.Category}</p>
-            <section>
+            <section className="my-4">
+                <h2>{podcastInfo.Title}</h2>
+                <p>Door: <i>{podcastInfo.Creator}</i></p>
+                <p>{podcastInfo.Description}</p>
+                <hr />
+                <p>Genre: {podcastInfo.Category}</p>
+            </section>
+            <section className="my-4">
+                <h2>Luister ook op:</h2>
+                <div className="flex flex-wrap gap-8">
+                    {
+                        podcastInfo.Platforms.map(platform =>
+                            <Link key={platform.id} href={platform.Url} target="_blank" rel="noopener noreferrer">
+                                {platform.Image && <Image src={platform.Image.url}
+                                    alt={platform.Title}
+                                    width={128}
+                                    height={32}
+                                    className=""
+                                />}
+                            </Link>)
+                    }
+                </div>
+            </section>
+            <section className="my-4">
                 <h2 className="text-2xl">Deel deze podcast:</h2>
                 <SocialButtons />
             </section>

@@ -37,6 +37,7 @@ type Populate = "Blocks" |
     "Blocks.Images" |
     'Audio' |
     'Thumbnail' |
+    'Platforms.Image' |
     'category'
 
 const populator: Populate[] = [
@@ -112,7 +113,7 @@ export class StrapiCMSService {
         this.StrapiFetch<PodcastInfo>('podcast')
             .then(podcastInfo =>
                 this.StrapiFetch<PodcastEpisode[]>('podcast-episodes', {
-                    populate: ['Audio', 'Thumbnail'],
+                    populate: ['Thumbnail'],
                     sort: ['publishedAt:desc'],
                 })
                     .then(episodes => OkResult({ podcastInfo: podcastInfo.data, episodes: episodes.data }))
@@ -120,7 +121,9 @@ export class StrapiCMSService {
             .catch(err => ApiError(err))
 
     public getPodcastBySlug = async (slug: string): Promise<ApiResult<SinglePodcast>> =>
-        this.StrapiFetch<PodcastInfo>('podcast')
+        this.StrapiFetch<PodcastInfo>('podcast', {
+            populate: ['Platforms.Image', 'Logo']
+        })
             .then(podcastInfo =>
                 this.StrapiFetch<PodcastEpisode[]>('podcast-episodes', {
                     filters: [{ field: 'slug', operator: '$eq', value: slug }],
