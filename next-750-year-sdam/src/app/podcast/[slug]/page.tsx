@@ -42,14 +42,14 @@ export default async function PodcastPage(props: PageProps) {
         </DisplayContent>
         <DisplayContent pageParams={props}>
             <section className="my-4">
-                <h2>{podcastInfo.Title}</h2>
+                <h2 className="text-4xl">{podcastInfo.Title}</h2>
                 <p>Door: <i>{podcastInfo.Creator}</i></p>
                 <p>{podcastInfo.Description}</p>
                 <hr />
                 <p>Genre: {podcastInfo.Category}</p>
             </section>
-            <section className="my-4">
-                <h2>Luister ook op:</h2>
+            {podcastInfo.Platforms.length > 0 && <section className="my-4">
+                <h2 className="text-2xl">Luister ook op:</h2>
                 <div className="flex flex-wrap gap-8">
                     {
                         podcastInfo.Platforms.map(platform =>
@@ -63,7 +63,7 @@ export default async function PodcastPage(props: PageProps) {
                             </Link>)
                     }
                 </div>
-            </section>
+            </section>}
             <section className="my-4">
                 <h2 className="text-2xl">Deel deze podcast:</h2>
                 <SocialButtons />
