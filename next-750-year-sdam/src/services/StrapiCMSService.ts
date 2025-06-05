@@ -115,7 +115,7 @@ export class StrapiCMSService {
         })
             .then(podcastInfo =>
                 this.StrapiFetch<PodcastEpisode[]>('podcast-episodes', {
-                    populate: ['Thumbnail'],
+                    populate: ['Thumbnail', 'Audio'],
                     sort: ['publishedAt:desc'],
                 })
                     .then(episodes => OkResult({ podcastInfo: podcastInfo.data, episodes: episodes.data }))
