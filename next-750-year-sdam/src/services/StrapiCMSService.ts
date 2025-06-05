@@ -110,7 +110,9 @@ export class StrapiCMSService {
     }
 
     public getPodcastEpisodes = async (): Promise<ApiResult<PodcastData>> =>
-        this.StrapiFetch<PodcastInfo>('podcast')
+        this.StrapiFetch<PodcastInfo>('podcast', {
+            populate: ['Logo']
+        })
             .then(podcastInfo =>
                 this.StrapiFetch<PodcastEpisode[]>('podcast-episodes', {
                     populate: ['Thumbnail'],
