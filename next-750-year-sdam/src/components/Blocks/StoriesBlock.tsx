@@ -45,7 +45,7 @@ export const StoriesBlock = async (props: PageBlock) => {
                     <Markdown className='text-base'>
                         {poem.Content.slice(0, 200) + '...'}
                     </Markdown>
-                    <Link href={`/ode/${poem.slug}`} className="p-2 mx-5 my-1 border-4 border-red-600 text-red-600 hover:bg-red-600 hover:text-white text-center transition-colors duration-200 ease-in-out">
+                    <Link href={`/ode/${poem.slug}`} className="p-2 my-1 border-4 border-red-600 text-red-600 hover:bg-red-600 hover:text-white text-center transition-colors duration-200 ease-in-out">
                         Lees verder
                     </Link>
                 </li>
