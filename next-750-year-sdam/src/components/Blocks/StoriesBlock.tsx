@@ -39,8 +39,8 @@ export const StoriesBlock = async (props: PageBlock) => {
         <ul className="border-y my-4 border-yellow-500">
             {poems.map((poem, index) => {
                 return <li key={index} className="py-4 px-2 border-b border-yellow-300 last:border-b-0">
-                    <Link href={`/odes/${poem.category.slug}`} className="text-xl">{poem.category.Title}</Link>
                     <h2 className="text-2xl">{poem.Title}</h2>
+                    <Link href={`/odes/${poem.category.slug}`} className="underline text-blue-600 hover:text-blue-800 transition-colors duration-200 ease-in-out">{poem.category.Title}</Link>
                     {poem.Author && <p>Een ode van: <i>{poem.Author}</i></p>}
                     <Markdown className='text-base'>
                         {poem.Content.slice(0, 200) + '...'}
