@@ -1,0 +1,15 @@
+{
+  "collectionName": "components_blocks_html_blocks",
+  "info": {
+    "displayName": "HTML Block",
+    "icon": "code",
+    "description": ""
+  },
+  "options": {},
+  "attributes": {
+    "Content": {
+      "type": "text",
+      "required": true
+    }
+  }
+}

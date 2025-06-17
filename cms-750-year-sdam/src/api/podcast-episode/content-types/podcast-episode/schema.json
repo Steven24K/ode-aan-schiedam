@@ -51,7 +51,9 @@
         "blocks.image",
         "blocks.image-slider",
         "blocks.form",
-        "blocks.call-to-action-cta"
+        "blocks.call-to-action-cta",
+        "blocks.stories",
+        "blocks.html-block"
       ]
     }
   }

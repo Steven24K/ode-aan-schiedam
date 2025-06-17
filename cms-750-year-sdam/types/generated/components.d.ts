@@ -45,6 +45,18 @@ export interface BlocksForm extends Struct.ComponentSchema {
   };
 }
 
+export interface BlocksHtmlBlock extends Struct.ComponentSchema {
+  collectionName: 'components_blocks_html_blocks';
+  info: {
+    description: '';
+    displayName: 'HTML Block';
+    icon: 'code';
+  };
+  attributes: {
+    Content: Schema.Attribute.Text & Schema.Attribute.Required;
+  };
+}
+
 export interface BlocksImage extends Struct.ComponentSchema {
   collectionName: 'components_blocks_images';
   info: {
@@ -362,6 +374,7 @@ declare module '@strapi/strapi' {
     export interface ComponentSchemas {
       'blocks.call-to-action-cta': BlocksCallToActionCta;
       'blocks.form': BlocksForm;
+      'blocks.html-block': BlocksHtmlBlock;
       'blocks.image': BlocksImage;
       'blocks.image-slider': BlocksImageSlider;
       'blocks.stories': BlocksStories;

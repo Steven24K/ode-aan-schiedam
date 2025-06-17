@@ -34,7 +34,8 @@
         "blocks.image",
         "blocks.image-slider",
         "blocks.you-tube-video",
-        "blocks.stories"
+        "blocks.stories",
+        "blocks.html-block"
       ],
       "required": true,
       "min": 1
