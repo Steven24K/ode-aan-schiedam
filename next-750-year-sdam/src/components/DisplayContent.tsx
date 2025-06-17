@@ -8,6 +8,7 @@ import { ImageSlider } from "./Blocks/ImageSlider"
 import { YouTubeVideoBlock } from "./Blocks/YouTubeVideo"
 import { StoriesBlock } from "./Blocks/StoriesBlock"
 import { PageProps } from "@/types/Params"
+import { HTMLBlock } from "./Blocks/HTMLBlock"
 
 type DisplayContentProps = {
     className?: string
@@ -44,6 +45,8 @@ export const DisplayContent = (props: DisplayContentProps) => {
                         return <YouTubeVideoBlock key={`${block.__component}_${block.id}`} {...block} pageParams={pageParams} />
                     case 'blocks.stories':
                         return <StoriesBlock key={`${block.__component}_${block.id}`} {...block} pageParams={pageParams} />
+                    case 'blocks.html-block':
+                        return <HTMLBlock key={`${block.__component}_${block.id}`} {...block} pageParams={pageParams} />
                     default:
                         return <div key={JSON.stringify(block)}>Block does not exist {JSON.stringify(block)}</div>
                 }

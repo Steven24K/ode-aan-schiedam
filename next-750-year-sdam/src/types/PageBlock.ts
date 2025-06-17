@@ -12,7 +12,8 @@ export type PageBlock =
         ImageBlockProps |
         ImageSliderBlockProps |
         YouTubeVideoBlockProps |
-        StoriesBlockProps
+        StoriesBlockProps |
+        HTMLBlockProps
     ) & {
         pageParams: PageProps
     }
@@ -79,6 +80,12 @@ export type StoriesBlockProps = {
     id: number
     max: number
     paginated: boolean
+}
+
+export type HTMLBlockProps = {
+    __component: "blocks.html-block"
+    id: number
+    Content: string
 }
 
 export type StrapiFormField = StandardFormField | CategoriesDropDown | InfoText | DropDown
