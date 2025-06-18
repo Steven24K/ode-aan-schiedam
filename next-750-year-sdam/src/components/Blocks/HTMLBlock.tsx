@@ -11,10 +11,7 @@ export const HTMLBlock = (block: PageBlock) => {
     return <div
         key={block.id}
         className="relative overflow-hidden w-full aspect-16/9 my-2"
-    >
-        <div
-            className="absolute top-0 left-0 bottom-0 right-0 w-full h-full"
-            dangerouslySetInnerHTML={{ __html: clean_html }}
-        />
-    </div>
+        // className="absolute top-0 left-0 bottom-0 right-0 w-full h-full"
+        dangerouslySetInnerHTML={{ __html: clean_html }}
+    />
 }
