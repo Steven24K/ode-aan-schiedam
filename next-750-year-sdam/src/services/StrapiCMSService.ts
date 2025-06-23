@@ -209,7 +209,7 @@ export class StrapiCMSService {
     public GetAllPoems = async (_pagination?: StrapiPagination): Promise<ApiResult<StrapiPoem[]>> =>
         this.StrapiFetch<StrapiPoem[]>('poems', {
             pagination: _pagination,
-            sort: ['publishedAt:desc'],
+            sort: ['createdAt:desc'],
         })
             .then(res => OkResult(res.data, res.meta))
             .catch(err => ApiError(err))
