@@ -32,11 +32,9 @@ export const StoriesBlock = async (props: PageBlock) => {
     const meta = response.meta
     const page = meta.pagination?.page || 0
     const pageCount = meta.pagination?.pageCount || 0
-    
-    const pageinationSize = 3
 
+    const pageinationSize = 3
     const countUntil = pageCount <= pageinationSize ? pageCount : pageinationSize
-    const countEnd = pageCount > pageinationSize ? pageCount - 2 : 0
 
 
     return <div className="flex flex-col gap-2">
@@ -74,11 +72,11 @@ export const StoriesBlock = async (props: PageBlock) => {
                     )
                 }
 
-                {countEnd > 0 && <span className="px-2 py-1 border border-yellow-500 bg-white text-yellow-500">...</span>}
+                {countUntil < pageCount && <span className="px-2 py-1 border border-yellow-500 bg-white text-yellow-500">...</span>}
 
                 {
-                    countEnd > 0 &&
-                    Array.from({ length: countEnd }, (_, i) => i + (pageCount - countEnd + 1)).map((pageNumber) => {
+                    countUntil < pageCount &&
+                    Array.from({ length: countUntil }, (_, i) => i + (pageCount - countUntil + 1)).map((pageNumber) => {
                         return <Link key={pageNumber} href={`?page=${pageNumber}`} className={`px-2 py-1 border border-yellow-500 ${page == pageNumber ? 'bg-yellow-500 text-white' : 'bg-white text-yellow-500 hover:bg-yellow-500 hover:text-white transition-colors duration-200 ease-in-out'}`}>
                             {pageNumber}
                         </Link>
