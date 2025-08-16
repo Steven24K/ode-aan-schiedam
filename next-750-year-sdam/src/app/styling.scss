@@ -453,8 +453,8 @@ $mobile-width: 700px;
     animation: fadeIn 1s ease-in forwards;
 
     @media (max-width: $mobile-width) {
-        width: 90vw;
-        padding: 10px;
+        width: 100vw;
+        padding: 5px;
     }
 
     h1,
