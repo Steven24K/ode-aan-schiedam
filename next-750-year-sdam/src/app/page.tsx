@@ -1,4 +1,3 @@
-"use server"
 // import { Splash } from "@/components/Splash"
 // import { cookies } from "next/headers"
 import { Hero } from "@/components/Hero"
