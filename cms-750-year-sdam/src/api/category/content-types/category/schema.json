@@ -51,7 +51,8 @@
         "blocks.image-slider",
         "blocks.you-tube-video",
         "blocks.stories",
-        "blocks.html-block"
+        "blocks.html-block",
+        "blocks.categories"
       ]
     }
   }

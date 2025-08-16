@@ -9,12 +9,16 @@ import { YouTubeVideoBlock } from "./Blocks/YouTubeVideo"
 import { StoriesBlock } from "./Blocks/StoriesBlock"
 import { PageProps } from "@/types/Params"
 import { HTMLBlock } from "./Blocks/HTMLBlock"
+import { StoryCounter } from "./Blocks/StoryCounter"
+import { PodcastGrid } from "./PodcastGrid/PodcastGrid"
+import { CategoriesBlock } from "./Blocks/CategoriesBlock"
 
 type DisplayContentProps = {
     className?: string
     blocks?: PageBlock[]
     children?: React.ReactNode
     childPositon?: 'top' | 'bottom'
+    isHome?: true
     pageParams: PageProps
 }
 
@@ -22,9 +26,9 @@ type DisplayContentProps = {
 
 // Component responsible for displaying the content of the page from the CMS
 export const DisplayContent = (props: DisplayContentProps) => {
-    const { children, blocks, className, childPositon, pageParams } = props
+    const { children, blocks, className, childPositon, pageParams, isHome } = props
 
-    return <div className={`page-content container mx-auto ${className || ''}`}>
+    return <div className={`page-content container mx-auto ${className || ''} ${isHome ? 'home-container' : ''}`}>
         {childPositon == 'top' && children}
         {
             blocks && blocks.map(block => {
@@ -47,6 +51,12 @@ export const DisplayContent = (props: DisplayContentProps) => {
                         return <StoriesBlock key={`${block.__component}_${block.id}`} {...block} pageParams={pageParams} />
                     case 'blocks.html-block':
                         return <HTMLBlock key={`${block.__component}_${block.id}`} {...block} pageParams={pageParams} />
+                    case 'blocks.poem-counter':
+                        return <StoryCounter key={`${block.__component}_${block.id}`} {...block} pageParams={pageParams} />
+                    case 'blocks.podcasts':
+                        return <PodcastGrid key={`${block.__component}_${block.id}`} {...block} pageParams={pageParams} />
+                    case 'blocks.categories':
+                        return <CategoriesBlock key={`${block.__component}_${block.id}`} {...block} pageParams={pageParams} />
                     default:
                         return <div key={JSON.stringify(block)}>Block does not exist {JSON.stringify(block)}</div>
                 }

@@ -1,0 +1,15 @@
+{
+  "collectionName": "components_blocks_poem_counters",
+  "info": {
+    "displayName": "Poem Counter",
+    "icon": "star"
+  },
+  "options": {},
+  "attributes": {
+    "Counter": {
+      "type": "string",
+      "private": true,
+      "default": "Counts the number of poems"
+    }
+  }
+}

@@ -58,7 +58,10 @@
         "blocks.form",
         "blocks.call-to-action-cta",
         "blocks.stories",
-        "blocks.html-block"
+        "blocks.html-block",
+        "blocks.podcasts",
+        "blocks.categories",
+        "blocks.poem-counter"
       ]
     }
   }

@@ -1,0 +1,15 @@
+{
+  "collectionName": "components_blocks_podcasts",
+  "info": {
+    "displayName": "Podcasts",
+    "icon": "music"
+  },
+  "options": {},
+  "attributes": {
+    "Podcasts": {
+      "type": "string",
+      "private": true,
+      "default": "Displays an overview of all the podcasts episodes"
+    }
+  }
+}

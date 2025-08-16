@@ -29,7 +29,11 @@
         "blocks.image",
         "blocks.image-slider",
         "blocks.you-tube-video",
-        "blocks.stories"
+        "blocks.stories",
+        "blocks.poem-counter",
+        "blocks.html-block",
+        "blocks.podcasts",
+        "blocks.categories"
       ],
       "min": 1,
       "required": true

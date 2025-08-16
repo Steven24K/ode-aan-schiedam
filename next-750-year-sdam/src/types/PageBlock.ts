@@ -13,7 +13,10 @@ export type PageBlock =
         ImageSliderBlockProps |
         YouTubeVideoBlockProps |
         StoriesBlockProps |
-        HTMLBlockProps
+        HTMLBlockProps |
+        StoryCounterBlockProps | 
+        PodcastsBlockProps | 
+        CategoriesBlockProps
     ) & {
         pageParams: PageProps
     }
@@ -86,6 +89,21 @@ export type HTMLBlockProps = {
     __component: "blocks.html-block"
     id: number
     Content: string
+}
+
+export type StoryCounterBlockProps = {
+    __component: "blocks.poem-counter"
+    id: number
+}
+
+export type PodcastsBlockProps = {
+    __component: "blocks.podcasts"
+    id: number
+}
+
+export type CategoriesBlockProps = {
+    __component: "blocks.categories"
+    id: number
 }
 
 export type StrapiFormField = StandardFormField | CategoriesDropDown | InfoText | DropDown

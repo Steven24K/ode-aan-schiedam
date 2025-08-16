@@ -35,7 +35,10 @@
         "blocks.image-slider",
         "blocks.you-tube-video",
         "blocks.stories",
-        "blocks.html-block"
+        "blocks.html-block",
+        "blocks.poem-counter",
+        "blocks.podcasts",
+        "blocks.categories"
       ],
       "required": true,
       "min": 1

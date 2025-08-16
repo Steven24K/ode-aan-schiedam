@@ -1,10 +1,13 @@
 import { StrapiCMSService } from "@/services/StrapiCMSService"
 import { Suspense } from "react"
-import { CounterAnimation } from "./CounterAnimation"
+import { CounterAnimation } from "../CounterAnimation"
+import { PageBlock } from "@/types/PageBlock"
 
 
 
-export const StoryCounter = async () => {
+export const StoryCounter = async (props: PageBlock) => {
+    if (props.__component !== "blocks.poem-counter") return <div>Block does not exist {JSON.stringify(props)}</div>
+    
     const strapi = new StrapiCMSService()
 
     const poem_count = await strapi.getPoemCounter().then(res => res.kind == 'ok' ? res.data : 0)

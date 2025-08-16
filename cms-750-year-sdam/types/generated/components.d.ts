@@ -33,6 +33,19 @@ export interface BlocksCallToActionCta extends Struct.ComponentSchema {
   };
 }
 
+export interface BlocksCategories extends Struct.ComponentSchema {
+  collectionName: 'components_blocks_categories';
+  info: {
+    displayName: 'Categories';
+    icon: 'apps';
+  };
+  attributes: {
+    Categories: Schema.Attribute.String &
+      Schema.Attribute.Private &
+      Schema.Attribute.DefaultTo<'Displays all the categories'>;
+  };
+}
+
 export interface BlocksForm extends Struct.ComponentSchema {
   collectionName: 'components_blocks_forms';
   info: {
@@ -83,6 +96,32 @@ export interface BlocksImageSlider extends Struct.ComponentSchema {
   attributes: {
     Images: Schema.Attribute.Media<'images' | 'files', true> &
       Schema.Attribute.Required;
+  };
+}
+
+export interface BlocksPodcasts extends Struct.ComponentSchema {
+  collectionName: 'components_blocks_podcasts';
+  info: {
+    displayName: 'Podcasts';
+    icon: 'music';
+  };
+  attributes: {
+    Podcasts: Schema.Attribute.String &
+      Schema.Attribute.Private &
+      Schema.Attribute.DefaultTo<'Displays an overview of all the podcasts episodes'>;
+  };
+}
+
+export interface BlocksPoemCounter extends Struct.ComponentSchema {
+  collectionName: 'components_blocks_poem_counters';
+  info: {
+    displayName: 'Poem Counter';
+    icon: 'star';
+  };
+  attributes: {
+    Counter: Schema.Attribute.String &
+      Schema.Attribute.Private &
+      Schema.Attribute.DefaultTo<'Counts the number of poems'>;
   };
 }
 
@@ -373,10 +412,13 @@ declare module '@strapi/strapi' {
   export module Public {
     export interface ComponentSchemas {
       'blocks.call-to-action-cta': BlocksCallToActionCta;
+      'blocks.categories': BlocksCategories;
       'blocks.form': BlocksForm;
       'blocks.html-block': BlocksHtmlBlock;
       'blocks.image': BlocksImage;
       'blocks.image-slider': BlocksImageSlider;
+      'blocks.podcasts': BlocksPodcasts;
+      'blocks.poem-counter': BlocksPoemCounter;
       'blocks.stories': BlocksStories;
       'blocks.text': BlocksText;
       'blocks.text-image': BlocksTextImage;

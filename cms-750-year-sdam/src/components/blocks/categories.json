@@ -1,0 +1,15 @@
+{
+  "collectionName": "components_blocks_categories",
+  "info": {
+    "displayName": "Categories",
+    "icon": "apps"
+  },
+  "options": {},
+  "attributes": {
+    "Categories": {
+      "type": "string",
+      "private": true,
+      "default": "Displays all the categories"
+    }
+  }
+}

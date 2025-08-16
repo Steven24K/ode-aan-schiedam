@@ -1,66 +1,44 @@
 "use server"
-import { Suspense } from "react"
-import { Splash } from "@/components/Splash"
+// import { Splash } from "@/components/Splash"
+// import { cookies } from "next/headers"
 import { Hero } from "@/components/Hero"
 import { DisplayContent } from "@/components/DisplayContent"
-import { Grid, GridItem } from "@/components/Grid"
-import { StoryCounter } from "@/components/StoryCounter"
 import { StrapiCMSService } from "@/services/StrapiCMSService"
-import { Loader } from "@/components/Loader"
 import { notFound } from "next/navigation"
-import { cookies } from "next/headers"
 import { PageProps } from "@/types/Params"
-import { PodcastGrid } from "@/components/PodcastGrid/PodcastGrid"
 
-const stringToBool = (v: string | undefined): boolean => {
-  if (v === 'false') return false
-  if (v === 'true') return true
-  return false
-}
+// const stringToBool = (v: string | undefined): boolean => {
+//   if (v === 'false') return false
+//   if (v === 'true') return true
+//   return false
+// }
 
 export default async function Home(props: PageProps) {
 
   const strapi = new StrapiCMSService()
-
   const homepage = await strapi.GetHomePage()
-
   if (homepage.kind == 'error') return notFound()
 
   const title = homepage.data.Title
   const description = homepage.data.Description
-  const logo = homepage.data.Logo
   const blocks = homepage.data.Blocks
 
-  const cookieStore = await cookies()
-  const splashed = cookieStore.get('splashed')?.value
+  // const logo = homepage.data.Logo
+  // const cookieStore = await cookies()
+  // const splashed = cookieStore.get('splashed')?.value
 
-  if (!stringToBool(splashed)) { // if not splashed, only splash onces
-    return <Suspense fallback={<Loader />}>
-      <Splash
-        title={title}
-        slogan={description}
-        logo={logo}
-      />
-    </Suspense>
-  }
-
-  const getCategories = strapi.GetCategories().then(res => res.kind == 'ok' ? res.data : [])
-  const category_grid = getCategories.then(categories => categories.map<GridItem>(cat => ({
-    id: cat.id,
-    title: cat.Title,
-    slug: `/odes/${cat.slug}/`,
-    color: cat.Color,
-  })))
+  // if (!stringToBool(splashed)) { // if not splashed, only splash onces
+  //   return <Suspense fallback={<Loader />}>
+  //     <Splash
+  //       title={title}
+  //       slogan={description}
+  //       logo={logo}
+  //     />
+  //   </Suspense>
+  // }
 
   return <>
     <Hero title={title} description={description} color={"sunny-yellow"} />
-    <StoryCounter />
-    <PodcastGrid />
-    
-    <DisplayContent blocks={blocks} childPositon="bottom" pageParams={props} >
-      <Suspense fallback={<Loader />}>
-        <Grid items={category_grid} />
-      </Suspense>
-    </DisplayContent>
+    <DisplayContent isHome blocks={blocks} pageParams={props} />
   </>
 }

@@ -392,6 +392,7 @@ export interface ApiCategoryCategory extends Struct.CollectionTypeSchema {
         'blocks.you-tube-video',
         'blocks.stories',
         'blocks.html-block',
+        'blocks.categories',
       ]
     >;
     Color: Schema.Attribute.Enumeration<
@@ -528,6 +529,10 @@ export interface ApiHomepageHomepage extends Struct.SingleTypeSchema {
         'blocks.image-slider',
         'blocks.you-tube-video',
         'blocks.stories',
+        'blocks.poem-counter',
+        'blocks.html-block',
+        'blocks.podcasts',
+        'blocks.categories',
       ]
     > &
       Schema.Attribute.Required &
@@ -608,6 +613,9 @@ export interface ApiPagePage extends Struct.CollectionTypeSchema {
         'blocks.you-tube-video',
         'blocks.stories',
         'blocks.html-block',
+        'blocks.poem-counter',
+        'blocks.podcasts',
+        'blocks.categories',
       ]
     > &
       Schema.Attribute.Required &
@@ -740,6 +748,9 @@ export interface ApiPoemPoem extends Struct.CollectionTypeSchema {
         'blocks.call-to-action-cta',
         'blocks.stories',
         'blocks.html-block',
+        'blocks.podcasts',
+        'blocks.categories',
+        'blocks.poem-counter',
       ]
     >;
     category: Schema.Attribute.Relation<'oneToOne', 'api::category.category'>;

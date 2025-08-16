@@ -400,12 +400,12 @@ $mobile-width: 700px;
 
 // Main hero
 .hero {
-    animation: curtain-down 1.5s ease-in-out forwards;
+    animation: curtain-down 1s ease-in-out forwards;
 
     .hero-content {
         opacity: 0;
         padding: 100px 10px 10px 10px;
-        animation: slide-in-top 2s ease-in-out forwards;
+        animation: slide-in-top 1s ease-in-out forwards;
         animation-delay: 0.2s;
 
         h1 {
@@ -439,7 +439,7 @@ $mobile-width: 700px;
     height: auto;
     clip-path: polygon(0% 0%, 100% 0%, 100% 60%, 50% 100%, 0% 60%);
     animation-delay: 3s;
-    animation: slide-in-top 4s ease-out forwards;
+    animation: slide-in-top 2s ease-out forwards;
 }
 
 // Page content for CMS data
@@ -449,8 +449,8 @@ $mobile-width: 700px;
     width: 60vw;
     min-width: 350px;
     max-width: 880px;
-    animation-delay: 4s;
-    animation: fadeIn 2s ease-in forwards;
+    animation-delay: 1s;
+    animation: fadeIn 1s ease-in forwards;
 
     @media (max-width: $mobile-width) {
         width: 90vw;
@@ -473,6 +473,11 @@ $mobile-width: 700px;
     li {
         font-family: 'Gotham-Book';
     }
+}
+
+.home-container {
+    margin-top: 0px;
+    max-width: 1200px;
 }
 
 // Main Grid
@@ -595,8 +600,8 @@ $grid__item_size: 200px;
     align-items: center;
     justify-content: center;
     gap: 1rem;
-    animation-delay: 3s;
-    animation: slide-in-top 3s ease-out forwards;
+    animation-delay: 1s;
+    animation: slide-in-top 1s ease-out forwards;
 
     @media (max-width: $mobile-width) {
         gap: 0.3rem;
@@ -604,9 +609,8 @@ $grid__item_size: 200px;
 }
 
 .diamond-wrapper {
-    display: flex;
     gap: 10px;
-    margin: 0 10px;
+    margin: 0 30px;
 
     @media (max-width: 780px) {
         display: block;
@@ -622,10 +626,10 @@ $grid__item_size: 200px;
 .diamond-counter {
     z-index: 1;
     transform: rotate(45deg);
-    margin-bottom: 50px;
     background-color: $just-white;
     height: 250px;
     width: 250px;
+    border: 1px solid $just-black;
 
     @media (max-width: $mobile-width) {
         height: 150px;
@@ -963,7 +967,7 @@ $grid__item_size: 200px;
 /* Fading animation */
 .fade {
     animation-name: fade;
-    animation-duration: 2s;
+    animation-duration: 1s;
 }
 
 @keyframes fade {
@@ -1010,7 +1014,7 @@ $grid__item_size: 200px;
 // Form
 .form-card {
     margin: 1.5rem 0;
-    animation: slide-in-right 2s ease-out forwards;
+    animation: slide-in-right 1s ease-out forwards;
     background-color: $just-white;
     padding: 2rem 1rem;
     box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
@@ -1140,6 +1144,11 @@ $grid__item_size: 200px;
 .latest-podcasts h2 {
     font-size: 32px;
     margin-bottom: 20px;
+
+    @media screen and (max-width: $mobile-width) {
+        font-size: 20px;
+        margin-bottom: 10px;
+    }
 }
 
 /* podcasts Container */
