@@ -125,6 +125,29 @@ export interface BlocksPoemCounter extends Struct.ComponentSchema {
   };
 }
 
+export interface BlocksPrintifyShop extends Struct.ComponentSchema {
+  collectionName: 'components_blocks_printify_shops';
+  info: {
+    displayName: 'Printify shop';
+    icon: 'shoppingCart';
+  };
+  attributes: {
+    Paginated: Schema.Attribute.Boolean &
+      Schema.Attribute.Required &
+      Schema.Attribute.DefaultTo<false>;
+    Size: Schema.Attribute.Integer &
+      Schema.Attribute.Required &
+      Schema.Attribute.SetMinMax<
+        {
+          max: 100;
+          min: 0;
+        },
+        number
+      > &
+      Schema.Attribute.DefaultTo<10>;
+  };
+}
+
 export interface BlocksStories extends Struct.ComponentSchema {
   collectionName: 'components_blocks_stories';
   info: {
@@ -419,6 +442,7 @@ declare module '@strapi/strapi' {
       'blocks.image-slider': BlocksImageSlider;
       'blocks.podcasts': BlocksPodcasts;
       'blocks.poem-counter': BlocksPoemCounter;
+      'blocks.printify-shop': BlocksPrintifyShop;
       'blocks.stories': BlocksStories;
       'blocks.text': BlocksText;
       'blocks.text-image': BlocksTextImage;

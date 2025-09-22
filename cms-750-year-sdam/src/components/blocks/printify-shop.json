@@ -1,0 +1,22 @@
+{
+  "collectionName": "components_blocks_printify_shops",
+  "info": {
+    "displayName": "Printify shop",
+    "icon": "shoppingCart"
+  },
+  "options": {},
+  "attributes": {
+    "Paginated": {
+      "type": "boolean",
+      "default": false,
+      "required": true
+    },
+    "Size": {
+      "type": "integer",
+      "required": true,
+      "default": 10,
+      "min": 0,
+      "max": 100
+    }
+  }
+}

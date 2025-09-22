@@ -12,6 +12,7 @@ import { HTMLBlock } from "./Blocks/HTMLBlock"
 import { StoryCounter } from "./Blocks/StoryCounter"
 import { PodcastGrid } from "./PodcastGrid/PodcastGrid"
 import { CategoriesBlock } from "./Blocks/CategoriesBlock"
+import { PrintifyShopBlock } from "./Blocks/PrintifyShopBlock"
 
 type DisplayContentProps = {
     className?: string
@@ -21,7 +22,6 @@ type DisplayContentProps = {
     isHome?: true
     pageParams: PageProps
 }
-
 
 
 // Component responsible for displaying the content of the page from the CMS
@@ -57,6 +57,8 @@ export const DisplayContent = (props: DisplayContentProps) => {
                         return <PodcastGrid key={`${block.__component}_${block.id}`} {...block} pageParams={pageParams} />
                     case 'blocks.categories':
                         return <CategoriesBlock key={`${block.__component}_${block.id}`} {...block} pageParams={pageParams} />
+                    case 'blocks.printify-shop':
+                        return <PrintifyShopBlock key={`${block.__component}_${block.id}`} {...block} pageParams={pageParams} />
                     default:
                         return <div key={JSON.stringify(block)}>Block does not exist {JSON.stringify(block)}</div>
                 }

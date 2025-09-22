@@ -14,9 +14,10 @@ export type PageBlock =
         YouTubeVideoBlockProps |
         StoriesBlockProps |
         HTMLBlockProps |
-        StoryCounterBlockProps | 
-        PodcastsBlockProps | 
-        CategoriesBlockProps
+        StoryCounterBlockProps |
+        PodcastsBlockProps |
+        CategoriesBlockProps | 
+        PrintifyShopBlockProps
     ) & {
         pageParams: PageProps
     }
@@ -104,6 +105,13 @@ export type PodcastsBlockProps = {
 export type CategoriesBlockProps = {
     __component: "blocks.categories"
     id: number
+}
+
+export type PrintifyShopBlockProps = {
+    __component: "blocks.printify-shop"
+    id: number
+    Paginated: boolean
+    Size: number
 }
 
 export type StrapiFormField = StandardFormField | CategoriesDropDown | InfoText | DropDown

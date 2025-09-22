@@ -38,7 +38,8 @@
         "blocks.html-block",
         "blocks.poem-counter",
         "blocks.podcasts",
-        "blocks.categories"
+        "blocks.categories",
+        "blocks.printify-shop"
       ],
       "required": true,
       "min": 1

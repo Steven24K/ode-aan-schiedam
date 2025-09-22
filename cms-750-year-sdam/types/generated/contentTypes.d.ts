@@ -533,6 +533,7 @@ export interface ApiHomepageHomepage extends Struct.SingleTypeSchema {
         'blocks.html-block',
         'blocks.podcasts',
         'blocks.categories',
+        'blocks.printify-shop',
       ]
     > &
       Schema.Attribute.Required &
@@ -616,6 +617,7 @@ export interface ApiPagePage extends Struct.CollectionTypeSchema {
         'blocks.poem-counter',
         'blocks.podcasts',
         'blocks.categories',
+        'blocks.printify-shop',
       ]
     > &
       Schema.Attribute.Required &
