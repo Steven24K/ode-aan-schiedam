@@ -17,25 +17,15 @@ export const PrintifyProductList: React.FC<PrintifyProductPage> = (products) => 
     return <div className="flex flex-wrap gap-1">
         {
             products.data.map(product => {
-                const sizeOption = product.options.find((opt) => opt.type === "size");
-                const sizeValues = sizeOption?.values ?? [];
-
-                const defaultVariant =
-                    product.variants.find((v) => v.is_default) ||
-                    product.variants.find((v) => v.is_available);
-
-                const [selectedSize, setSelectedSize] = useState<string>(
-                    defaultVariant?.title || sizeValues[0]?.title || ""
-                );
-
-                const selectedVariant =
-                    product.variants.find((v) => v.title === selectedSize) || product.variants[0];
+                const variants = product.variants
+                const [selectedSize, setSelectedSize] = useState<number>(variants[0].id);
+                const selectedVariant = product.variants.find(v => v.id === selectedSize)!
 
                 const productImage = product.images[0]
 
                 const tags = product.tags.slice(0, 5);
 
-                const sizesInfo = sizeValues.map((v) => v.title).join(", ");
+                const sizesInfo = variants.map((v) => v.title).join(", ");
                 return <div key={product.id} className="border border-gray-200 p-4 rounded-lg lg:max-w-64 max-w-full bg-white shadow">
                     {productImage && (
                         <img
@@ -54,22 +44,22 @@ export const PrintifyProductList: React.FC<PrintifyProductPage> = (products) => 
                     <div className="mb-2">
                         <strong className="font-medium">Select size:</strong>
                         <div className="flex flex-wrap gap-2 mt-1">
-                            {sizeValues.map((size) => (
+                            {variants.map((size) => (
                                 <button
                                     key={size.id}
-                                    onClick={() => setSelectedSize(size.title)}
+                                    onClick={() => setSelectedSize(size.id)}
                                     className={`px-3 py-1 rounded border transition
-                    ${selectedSize === size.title
+                    ${selectedSize === size.id
                                             ? "border-blue-500 bg-blue-50 font-bold"
                                             : "border-gray-300 bg-white font-normal"
                                         }
-                    ${!product.variants.find((v) => v.title === size.title && v.is_available)
+                    ${!product.variants.find((v) => v.id === size.id && v.is_available)
                                             ? "opacity-50 cursor-not-allowed"
                                             : "hover:border-blue-400"
                                         }
                     `}
                                     disabled={
-                                        !product.variants.find((v) => v.title === size.title && v.is_available)
+                                        !product.variants.find((v) => v.id === size.id && v.is_available)
                                     }
                                 >
                                     {size.title}
@@ -90,22 +80,20 @@ export const PrintifyProductList: React.FC<PrintifyProductPage> = (products) => 
                         More info
                     </Link>
                     <div>
-                        <ShoppingCartContext value={state}>
-                            <button
-                                type="button"
-                                aria-label="Add to cart"
-                                className="text-sm bg-green-500 text-white py-2 px-8 flex items-center gap-2 rounded hover:bg-green-600 transition"
-                                onClick={toggleSideBar}
-                            >
-                                <FontAwesomeIcon
-                                    icon={faShoppingCart}
-                                    size="xs"
-                                    className="text-white mr-1"
-                                    style={{ fontSize: "1.5em" }}
-                                />
-                                <span>Add to cart</span>
-                            </button>
-                        </ShoppingCartContext>
+                        <button
+                            type="button"
+                            aria-label="Add to cart"
+                            className="text-sm bg-green-500 text-white py-2 px-8 flex items-center gap-2 rounded hover:bg-green-600 transition"
+                            onClick={toggleSideBar}
+                        >
+                            <FontAwesomeIcon
+                                icon={faShoppingCart}
+                                size="xs"
+                                className="text-white mr-1"
+                                style={{ fontSize: "1.5em" }}
+                            />
+                            <span>Add to cart</span>
+                        </button>
                     </div>
                 </div>
             })

@@ -1,5 +1,5 @@
 "use client"
-import { ShoppingCartContext, ShoppingCartDispatchContext, ShoppingCartReducer } from "@/contexts/ShoppingCartContext"
+import { ShoppingCartContext, ShoppingCartDispatchContext } from "@/contexts/ShoppingCartContext"
 import { faBasketShopping } from "@fortawesome/free-solid-svg-icons"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import React, { useContext } from "react"
@@ -11,7 +11,7 @@ export const ShoppingCart: React.FC = () => {
 
     const toggleSideBar = () => dispatch(['sidebar', state.sidebar == 'open' ? 'closed' : 'open'])
 
-    return <ShoppingCartContext value={state}>
+    return <>
         <div className="flex justify-end mb-2 items-center">
             <button
                 type="button"
@@ -76,5 +76,5 @@ export const ShoppingCart: React.FC = () => {
                 </button>
             </div>
         </div>
-    </ShoppingCartContext>
+    </>
 }
