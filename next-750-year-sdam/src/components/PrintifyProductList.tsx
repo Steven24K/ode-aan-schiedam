@@ -3,22 +3,27 @@ import React, { useContext, useState } from "react";
 import Link from "next/link";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faShoppingCart } from "@fortawesome/free-solid-svg-icons/faShoppingCart";
-import { ShoppingCartContext, ShoppingCartDispatchContext } from "@/contexts/ShoppingCartContext";
+import { ShoppingCartContext, ShoppingCartDispatchContext, ShoppingCartProduct } from "@/contexts/ShoppingCartContext";
 import { PrintifyProductPage } from "@/types/PrintifyProduct";
 
+interface PrintifyProductListProps {
+    products: PrintifyProductPage
+}
 
-export const PrintifyProductList: React.FC<PrintifyProductPage> = (products) => {
+export const PrintifyProductList: React.FC<PrintifyProductListProps> = (props) => {
+    const { products } = props
     const state = useContext(ShoppingCartContext)
     const dispatch = useContext(ShoppingCartDispatchContext)
 
-    const toggleSideBar = () => dispatch(['sidebar', state.sidebar == 'open' ? 'closed' : 'open'])
+    const openSideBar = () => dispatch(['sidebar', 'open'])
 
 
     return <div className="flex flex-wrap gap-1">
         {
             products.data.map(product => {
-                const variants = product.variants
-                const [selectedSize, setSelectedSize] = useState<number>(variants[0].id);
+                const variants = product.variants.filter(v => v.is_enabled)
+                const defaultVariant = variants.find(v => v.is_default) || variants[0]
+                const [selectedSize, setSelectedSize] = useState<number>(defaultVariant.id);
                 const selectedVariant = product.variants.find(v => v.id === selectedSize)!
 
                 const productImage = product.images[0]
@@ -84,7 +89,24 @@ export const PrintifyProductList: React.FC<PrintifyProductPage> = (products) => 
                             type="button"
                             aria-label="Add to cart"
                             className="text-sm bg-green-500 text-white py-2 px-8 flex items-center gap-2 rounded hover:bg-green-600 transition"
-                            onClick={toggleSideBar}
+                            onClick={() => {
+                                const newProduct: ShoppingCartProduct = {
+                                    internalId: self.crypto.randomUUID(),
+                                    label: product.title,
+                                    productId: product.id,
+                                    variantId: selectedVariant.id,
+                                    quantity: 1
+                                }
+                    
+                                if (state.storage.has(selectedVariant.id.toString())) {
+                                    const existingProduct = state.storage.get(selectedVariant.id.toString())!
+                                    newProduct.quantity += existingProduct.quantity
+                                }
+
+                                dispatch(['storage', state.storage.set(selectedVariant.id.toString(), newProduct)])
+
+                                openSideBar()
+                            }}
                         >
                             <FontAwesomeIcon
                                 icon={faShoppingCart}

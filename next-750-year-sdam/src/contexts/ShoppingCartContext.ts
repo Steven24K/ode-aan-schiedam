@@ -1,9 +1,18 @@
-import { PrintifyProduct } from "@/types/PrintifyProduct";
 import { ActionDispatch, createContext } from "react";
 
 
 // id => [quantity, product]
-export type ShoppingCartStorage = Map<string, [number, PrintifyProduct]>
+// product => internal id, label, product id and variant id
+
+export interface ShoppingCartProduct {
+    internalId: string
+    label: string
+    productId: string
+    variantId: number
+    quantity: number
+}
+
+export type ShoppingCartStorage = Map<string, ShoppingCartProduct>
 export type SideBarState = 'open' | 'closed'
 
 export interface ShoppingCartState {

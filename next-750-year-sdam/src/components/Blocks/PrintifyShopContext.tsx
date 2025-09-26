@@ -14,8 +14,8 @@ export const PrintifyShopContext = (props: PrintifyShopContextProps) => {
     const { products } = props
     return <ShoppingCartContext value={shoppingCart}>
         <ShoppingCartDispatchContext value={dispatch}>
-            <ShoppingCart />
-            <PrintifyProductList {...products} />
+            <ShoppingCart products={products} />
+            <PrintifyProductList products={products} />
         </ShoppingCartDispatchContext>
     </ShoppingCartContext>
 }
