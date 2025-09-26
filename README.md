@@ -57,3 +57,13 @@ Make sure the `.env` file is created for both CMS and NextJS App.
 - `yarn install`
 - `yarn build`
 - `pm2 restart next` 
+
+
+# TODO shop checkout flow:
+- Send order details to custom endpoint
+- Store Printify Order in CMS -> return internal order ID
+- Create payment request with Mollie, pass internal ID to Mollie Metadata, returns payment link
+- Return payment link to client
+- Redirect client back to webshop after payment (could be succes or fail). 
+- Send order to Printify after succesfull payment in webhook
+- E-mail customer with order summary. 
