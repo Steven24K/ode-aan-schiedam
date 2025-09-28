@@ -1,8 +1,11 @@
 import { PrintifyProduct, PrintifyProductPage } from "@/types/PrintifyProduct"
 import { ApiError, ApiResult, OkResult } from "@/types/StrapiData"
 
-export const getPrintifyProducts = async (): Promise<ApiResult<PrintifyProductPage>> => {
-    const response = await fetch(`${process.env.PRINTIFY_ENDPOINT}/v1/shops/${process.env.PRINTIFY_SHOP_ID}/products.json`, {
+export const getPrintifyProducts = async (limit?: number, page?: number): Promise<ApiResult<PrintifyProductPage>> => {
+    const url = new URL(`${process.env.PRINTIFY_ENDPOINT}/v1/shops/${process.env.PRINTIFY_SHOP_ID}/products.json`)
+    if (limit) url.searchParams.append('limit', limit.toString())
+    if (page) url.searchParams.append('page', page.toString())
+    const response = await fetch(url.toString(), {
         headers: {
             'Content-Type': 'application/json',
             'Authorization': `Bearer ${process.env.PRINTIFY_API_KEY}`

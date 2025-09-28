@@ -128,6 +128,7 @@ export interface BlocksPoemCounter extends Struct.ComponentSchema {
 export interface BlocksPrintifyShop extends Struct.ComponentSchema {
   collectionName: 'components_blocks_printify_shops';
   info: {
+    description: '';
     displayName: 'Printify shop';
     icon: 'shoppingCart';
   };
@@ -139,7 +140,7 @@ export interface BlocksPrintifyShop extends Struct.ComponentSchema {
       Schema.Attribute.Required &
       Schema.Attribute.SetMinMax<
         {
-          max: 100;
+          max: 50;
           min: 0;
         },
         number

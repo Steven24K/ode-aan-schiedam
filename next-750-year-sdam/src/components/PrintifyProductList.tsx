@@ -15,6 +15,12 @@ export const PrintifyProductList: React.FC<PrintifyProductListProps> = (props) =
     const state = useContext(ShoppingCartContext)
     const dispatch = useContext(ShoppingCartDispatchContext)
 
+    React.useEffect(() => {
+        if (products) {
+            dispatch(['products', products]);
+        }
+    }, [products, dispatch]);
+
     const openSideBar = () => dispatch(['sidebar', 'open'])
 
 

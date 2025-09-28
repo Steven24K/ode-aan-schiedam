@@ -5,6 +5,8 @@ import ErrorBoundary from "../components/Error/ErrorBoundary";
 import "./styling.scss";
 import { SiteMetaData } from "@/components/SiteMetaData";
 import { GeneralError } from "@/components/Error/GeneralError";
+import { ShoppingCart } from "@/components/ShoppingCart";
+import { ShoppingCartProvider } from "@/components/Blocks/ShoppingCartProvider";
 
 type LayoutProps = { children: React.ReactNode; }
 
@@ -21,7 +23,10 @@ export default function RootLayout(props: Readonly<LayoutProps>) {
           <NavBar />
 
           <main>
-            {children}
+            <ShoppingCartProvider>
+              {children}
+              <ShoppingCart />
+            </ShoppingCartProvider>
           </main>
 
           <Footer />

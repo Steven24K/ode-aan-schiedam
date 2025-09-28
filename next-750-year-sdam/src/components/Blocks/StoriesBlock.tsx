@@ -2,6 +2,7 @@ import { StrapiCMSService } from "@/services/StrapiCMSService"
 import { PageBlock } from "@/types/PageBlock"
 import Link from "next/link"
 import Markdown from "react-markdown"
+import { Pagination } from "../Pagination"
 
 const parseQueryNumber = (str: string | string[]): number => {
     if (Array.isArray(str)) return 1
@@ -52,29 +53,6 @@ export const StoriesBlock = async (props: PageBlock) => {
             })}
         </ul>
 
-        {
-            paginated && <div className="mb-4 flex flex-wrap">
-                {page > 1 && (
-                    <Link href={`?page=${page - 1}`} className="mr-2 px-2 py-1 border border-yellow-500 bg-white text-yellow-500 hover:bg-yellow-500 hover:text-white transition-colors duration-200 ease-in-out">
-                        Vorige
-                    </Link>
-                )}
-
-                {
-                    Array.from({ length: pageCount }, (_, i) => i + 1).map((pageNumber) => {
-                        return <Link key={pageNumber} href={`?page=${pageNumber}`} className={`px-2 py-1 border border-yellow-500 ${page == pageNumber ? 'bg-yellow-500 text-white' : 'bg-white text-yellow-500 hover:bg-yellow-500 hover:text-white transition-colors duration-200 ease-in-out'}`}>
-                            {pageNumber}
-                        </Link>
-                    }
-                    )
-                }
-
-                {page < pageCount && (
-                    <Link href={`?page=${page + 1}`} className="ml-2 px-2 py-1 border border-yellow-500 bg-white text-yellow-500 hover:bg-yellow-500 hover:text-white transition-colors duration-200 ease-in-out">
-                        Volgende
-                    </Link>
-                )}
-            </div>
-        }
+        {paginated && <Pagination currentPage={page} totalPages={pageCount} pageParamName="page" />}
     </div>
 }
