@@ -8,6 +8,7 @@ import { ActionDispatch, createContext } from "react";
 export interface ShoppingCartProduct {
     label: string
     productId: string
+    variantLabel: string
     variantId: number
     sku: string
     quantity: number

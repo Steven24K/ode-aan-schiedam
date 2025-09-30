@@ -27,7 +27,7 @@ export async function POST(request: Request): Promise<Response> {
     method: formState.payment_method as PaymentMethod,
     lines: cart.entries().map<MollieOrderLine>(([, product]) => ({
       type: 'physical',
-      description: product.label,
+      description: product.label + ' - ' + product.variantLabel,
       quantity: product.quantity,
       unitPrice: {
         currency: 'EUR',

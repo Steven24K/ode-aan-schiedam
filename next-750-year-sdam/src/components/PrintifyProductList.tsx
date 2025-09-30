@@ -99,6 +99,7 @@ export const PrintifyProductList: React.FC<PrintifyProductListProps> = (props) =
                                 const newProduct: ShoppingCartProduct = {
                                     label: product.title,
                                     productId: product.id,
+                                    variantLabel: selectedVariant.title,
                                     variantId: selectedVariant.id,
                                     quantity: 1, 
                                     pricePerUnit: selectedVariant.price, 
