@@ -99,7 +99,7 @@ export const ShoppingCart: React.FC = () => {
                 products && Array.from(context.storage.values()).map(cartItem => {
                     const product = products.data.find(p => p.id === cartItem.productId)!
                     const variant = product.variants.find(v => v.id === cartItem.variantId)!
-                    return <div key={cartItem.internalId} className="flex items-center justify-between gap-2 border-b pb-2">
+                    return <div key={cartItem.variantId} className="flex items-center justify-between gap-2 border-b pb-2">
                         <div>
                             <div className="font-semibold">{product.title}</div>
                             <div className="text-sm text-gray-500">Size: {variant.title}</div>

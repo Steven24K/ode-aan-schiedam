@@ -97,7 +97,6 @@ export const PrintifyProductList: React.FC<PrintifyProductListProps> = (props) =
                             className="text-sm bg-green-500 text-white py-2 px-8 flex items-center gap-2 rounded hover:bg-green-600 transition"
                             onClick={() => {
                                 const newProduct: ShoppingCartProduct = {
-                                    internalId: self.crypto.randomUUID(),
                                     label: product.title,
                                     productId: product.id,
                                     variantId: selectedVariant.id,

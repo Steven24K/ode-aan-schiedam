@@ -6,7 +6,6 @@ import { ActionDispatch, createContext } from "react";
 // product => internal id, label, product id and variant id
 
 export interface ShoppingCartProduct {
-    internalId: string
     label: string
     productId: string
     variantId: number
