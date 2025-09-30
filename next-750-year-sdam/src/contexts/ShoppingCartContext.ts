@@ -10,6 +10,7 @@ export interface ShoppingCartProduct {
     label: string
     productId: string
     variantId: number
+    sku: string
     quantity: number
     pricePerUnit: number
 }

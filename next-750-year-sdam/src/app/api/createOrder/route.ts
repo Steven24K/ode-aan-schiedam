@@ -42,7 +42,7 @@ export async function POST(request: Request): Promise<Response> {
         currency: 'EUR',
         value: ((product.pricePerUnit / 100 * product.quantity) * (21 / 121)).toFixed(2).toString()
       },
-      sku: product.productId.toString(),
+      sku: product.sku.toString(),
       productUrl: `${body.origin}/products/${product.productId}`,
     })).toArray(),
     locale: formState.country == 'NL' ? 'nl_NL' : 'nl_BE' as Locale,
