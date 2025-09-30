@@ -7,16 +7,21 @@ import { SiteMetaData } from "@/components/SiteMetaData";
 import { GeneralError } from "@/components/Error/GeneralError";
 import { ShoppingCart } from "@/components/ShoppingCart";
 import { ShoppingCartProvider } from "@/components/Blocks/ShoppingCartProvider";
+import { StrapiCMSService } from "@/services/StrapiCMSService";
 
 type LayoutProps = { children: React.ReactNode; }
 
-export default function RootLayout(props: Readonly<LayoutProps>) {
+export default async function RootLayout(props: Readonly<LayoutProps>) {
   const { children } = props
+
+  const strapi = new StrapiCMSService()
+
+  const siteInfo = await strapi.getSiteInfo()
 
   return (
     <html lang="en">
       <head>
-        <SiteMetaData />
+        <SiteMetaData siteInfo={siteInfo} />
       </head>
       <body>
         <ErrorBoundary dev fallBack={<GeneralError />}>
@@ -25,7 +30,7 @@ export default function RootLayout(props: Readonly<LayoutProps>) {
           <main>
             <ShoppingCartProvider>
               {children}
-              <ShoppingCart />
+              <ShoppingCart siteInfo={siteInfo} />
             </ShoppingCartProvider>
           </main>
 

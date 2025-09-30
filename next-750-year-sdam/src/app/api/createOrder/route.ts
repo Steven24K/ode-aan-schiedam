@@ -20,8 +20,8 @@ export async function POST(request: Request): Promise<Response> {
       currency: 'EUR'
     },
     description: `Order for ${formState.name} ${formState.surname}`,
-    redirectUrl: `${body.origin}/order/thank-you`,
-    cancelUrl: `${body.origin}/shop`,
+    redirectUrl: `${body.origin}/${body.successUrl}`,
+    cancelUrl: `${body.origin}/${body.cancelUrl}`,
     webhookUrl: `${body.origin}/api/mollieWebhook`,
     metadata: {},
     method: formState.payment_method as PaymentMethod,

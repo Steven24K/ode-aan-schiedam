@@ -1,10 +1,15 @@
 import { StrapiCMSService } from "@/services/StrapiCMSService"
+import { SiteInfo } from "@/types/SiteInfo"
+import { ApiResult } from "@/types/StrapiData"
 
-export async function SiteMetaData() {
-    const strapi = new StrapiCMSService()
+interface SiteMetaDataProps {
+    siteInfo: ApiResult<SiteInfo>
 
-    const siteInfo = await strapi.getSiteInfo()
+}
 
+
+export async function SiteMetaData(props: SiteMetaDataProps) {
+    const { siteInfo } = props
 
     if (siteInfo.kind != 'ok') return <title>{siteInfo.error}</title>
 

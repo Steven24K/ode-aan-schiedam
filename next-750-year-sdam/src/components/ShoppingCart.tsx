@@ -4,6 +4,7 @@ import React, { useContext, useEffect } from "react"
 import { FormBuilder } from "./FormBuilder"
 import { MolliePaymentMethodList, MolliePaymentResponse } from "@/services/MolliePaymentService"
 import { ApiError, ApiResult, OkResult } from "@/types/StrapiData"
+import { SiteInfo } from "@/types/SiteInfo"
 
 interface ShoppingCartState {
     checkout: 'idle' | 'form' | 'processing' | 'success' | 'error'
@@ -44,8 +45,8 @@ const getMolliePaymentMethodsProxy = (): Promise<ApiResult<MolliePaymentMethodLi
     .then(data => OkResult(data as MolliePaymentMethodList))
     .catch(() => ApiError('Failed to fetch payment methods'))
 
-const SubmitOrder = (formState: CheckoutFormState, cart: ShoppingCartStorage): Promise<ApiResult<MolliePaymentResponse>> =>
-    fetch('/api/createOrder', { method: 'POST', body: JSON.stringify({ formState, cart: Array.from(cart.entries()), origin: window.location.origin }) })
+const SubmitOrder = (formState: CheckoutFormState, cart: ShoppingCartStorage, successUrl: string, cancelUrl: string): Promise<ApiResult<MolliePaymentResponse>> =>
+    fetch('/api/createOrder', { method: 'POST', body: JSON.stringify({ formState, cart: Array.from(cart.entries()), origin: window.location.origin, successUrl, cancelUrl }) })
         .then(res => {
             if (!res.ok) return ApiError('Failed to create order')
             return res.json()
@@ -53,7 +54,14 @@ const SubmitOrder = (formState: CheckoutFormState, cart: ShoppingCartStorage): P
         .then(data => OkResult(data))
         .catch(() => ApiError('Failed to create order'))
 
-export const ShoppingCart: React.FC = () => {
+interface ShoppingCartProps {
+    siteInfo: ApiResult<SiteInfo>
+}
+
+export const ShoppingCart: React.FC<ShoppingCartProps> = ({ siteInfo }) => {
+    if (siteInfo.kind != 'ok') return <div className="text-red-500 p-4">Error loading site info: {siteInfo.error}</div>
+    const { CheckoutCancel, CheckoutSuccess } = siteInfo.data
+    
     const context = useContext(ShoppingCartContext)
     const dispatch = useContext(ShoppingCartDispatchContext)
 
@@ -158,7 +166,7 @@ export const ShoppingCart: React.FC = () => {
                 handleChange={(key, value) => setState(s => ({ ...s, formState: { ...s.formState, [key]: value } }))}
                 handleSubmit={() => {
                     setState(s => ({ ...s, checkout: 'processing' }))
-                    SubmitOrder(state.formState, context.storage).then(res => {
+                    SubmitOrder(state.formState, context.storage, CheckoutSuccess.slug, CheckoutCancel.slug).then(res => {
                         if (res.kind === 'ok') {
                             if (res.data._links.checkout) {
                                 setState(s => ({ ...s, checkout: 'success' }))
@@ -193,7 +201,7 @@ export const ShoppingCart: React.FC = () => {
                 </div>
             )}
         </div>
-        
+
         <div className="p-4 border-t">
             {products && <div className="flex justify-between font-semibold mb-4">
                 <span>Total</span>

@@ -28,6 +28,16 @@
         "images",
         "files"
       ]
+    },
+    "CheckoutCancel": {
+      "type": "relation",
+      "relation": "oneToOne",
+      "target": "api::page.page"
+    },
+    "CheckoutSuccess": {
+      "type": "relation",
+      "relation": "oneToOne",
+      "target": "api::page.page"
     }
   }
 }
