@@ -5,6 +5,7 @@ import { FormBuilder } from "./FormBuilder"
 import { MolliePaymentMethodList, MolliePaymentResponse } from "@/services/MolliePaymentService"
 import { ApiError, ApiResult, OkResult } from "@/types/StrapiData"
 import { SiteInfo } from "@/types/SiteInfo"
+import { setCookie_clientside } from "@/utils"
 
 interface ShoppingCartState {
     checkout: 'idle' | 'form' | 'processing' | 'success' | 'error'
@@ -28,7 +29,7 @@ export interface CheckoutFormState {
 const defaultCheckoutFormState: CheckoutFormState = {
     name: 'Steven',
     surname: 'Koerts',
-    email: 'info@sample.com',
+    email: 'steven_first@outlook.com',
     phone: '+31612345678',
     country: 'NL',
     address: 'Some street 1',
@@ -170,6 +171,7 @@ export const ShoppingCart: React.FC<ShoppingCartProps> = ({ siteInfo }) => {
                         if (res.kind === 'ok') {
                             if (res.data._links.checkout) {
                                 setState(s => ({ ...s, checkout: 'success' }))
+                                setCookie_clientside('paymentId', res.data.id, 1)
                                 window.location.href = res.data._links.checkout.href
                             } else {
                                 setState(s => ({ ...s, checkout: 'error' }))

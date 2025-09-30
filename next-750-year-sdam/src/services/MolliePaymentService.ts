@@ -15,7 +15,7 @@ export interface MolliePaymentBody {
 }
 
 export type Locale = 'nl_NL' | 'nl_BE';
-export type PaymentMethod = 'ideal' | 'creditcard' | 'paypal' | 'bancontact' | 'sofort' | 'giropay' | 'paysafecard' | 'kbc' | 'belfius' | 'inghomepay' | 'afterpay' | 'applepay' | 'googlepay'  | 'giftcard' | 'eps' | 'przelewy24' | 'wechatpay' | 'alipay' | 'blik' | 'trustly' | 'swish' | 'mobilepay';
+export type PaymentMethod = 'ideal' | 'creditcard' | 'paypal' | 'bancontact' | 'sofort' | 'giropay' | 'paysafecard' | 'kbc' | 'belfius' | 'inghomepay' | 'afterpay' | 'applepay' | 'googlepay' | 'giftcard' | 'eps' | 'przelewy24' | 'wechatpay' | 'alipay' | 'blik' | 'trustly' | 'swish' | 'mobilepay';
 
 interface MollieAdress {
     givenName: string
@@ -46,6 +46,7 @@ export interface MollieOrderLine {
     productUrl?: string
 }
 
+type PaymentStatus = "open" | "pending" | "paid" | "failed" | "expired" | "canceled" | "authorized"
 export interface MolliePaymentResponse {
     resource: "payment";
     id: string;
@@ -60,10 +61,13 @@ export interface MolliePaymentResponse {
     webhookUrl: string;
     metadata?: string | Record<string, any>;
     profileId: string;
-    status: "open" | "pending" | "paid" | "failed" | "expired" | "canceled" | "authorized" | "completed";
+    status: PaymentStatus;
     isCancelable: boolean;
     createdAt: string;
     expiresAt?: string;
+    lines: MollieOrderLine[]
+    billingAddress?: MollieAdress
+    shippingAddress?: MollieAdress
     _links: {
         self: {
             href: string;
@@ -94,6 +98,20 @@ export const createMolliePayment = async (body: MolliePaymentBody): Promise<ApiR
         body: JSON.stringify(body),
     })
 
+    let json = await response.json()
+    if (!response.ok) return ApiError(JSON.stringify({ ...json, message: response.statusText, status: response.status }))
+
+    return OkResult(json)
+}
+
+export const getMolliePayment = async (paymentId: string): Promise<ApiResult<MolliePaymentResponse>> => {
+    const response = await fetch(`${process.env.MOLLIE_ENDPOINT}/v2/payments/${paymentId}`, {
+        headers: {
+            'Content-Type': 'application/json',
+            'Authorization': `Bearer ${process.env.MOLLIE_API_KEY}`
+        },
+        method: 'GET',
+    })
     let json = await response.json()
     if (!response.ok) return ApiError(JSON.stringify({ ...json, message: response.statusText, status: response.status }))
 
