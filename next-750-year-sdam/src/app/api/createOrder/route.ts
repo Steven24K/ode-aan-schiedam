@@ -22,7 +22,7 @@ export async function POST(request: Request): Promise<Response> {
     description: `Order for ${formState.name} ${formState.surname}`,
     redirectUrl: `${body.origin}/${body.redirectUrl}`,
     cancelUrl: `${body.origin}/${body.cancelUrl}`,
-    webhookUrl: `${body.origin}/api/mollieWebhook`,
+    webhookUrl: `${body.origin}/api/webhooks/mollie`,
     metadata: {},
     method: formState.payment_method as PaymentMethod,
     lines: cart.entries().map<MollieOrderLine>(([, product]) => ({
@@ -74,4 +74,4 @@ export async function POST(request: Request): Promise<Response> {
   }
   // Return payment link
   return Response.json(response.data)
-} ``
+}
