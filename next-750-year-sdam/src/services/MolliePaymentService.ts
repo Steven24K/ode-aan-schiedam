@@ -4,14 +4,18 @@ export interface MolliePaymentBody {
     description: string
     amount: MollieCurrency
     redirectUrl: string
-    webhookUrl: string
+    cancelUrl?: string;
+    webhookUrl?: string
     lines: MollieOrderLine[]
     billingAddress?: MollieAdress
     shippingAddress?: MollieAdress
     metadata?: Record<string, any>
-    locale: 'nl_NL' | 'nl_BE'
-    method: 'ideal' | 'creditcard' | 'bancontact' | 'applepay' | 'googlepay' | 'sofort' | 'giftcard' | 'banktransfer'
+    locale: Locale
+    method: PaymentMethod
 }
+
+export type Locale = 'nl_NL' | 'nl_BE';
+export type PaymentMethod = 'ideal' | 'creditcard' | 'paypal' | 'bancontact' | 'sofort' | 'giropay' | 'paysafecard' | 'kbc' | 'belfius' | 'inghomepay' | 'afterpay' | 'applepay' | 'googlepay'  | 'giftcard' | 'eps' | 'przelewy24' | 'wechatpay' | 'alipay' | 'blik' | 'trustly' | 'swish' | 'mobilepay';
 
 interface MollieAdress {
     givenName: string
@@ -29,7 +33,7 @@ interface MollieCurrency {
     value: string
 }
 
-interface MollieOrderLine {
+export interface MollieOrderLine {
     type: 'physical'
     description: string
     quantity: number
@@ -80,7 +84,7 @@ export interface MolliePaymentResponse {
     };
 }
 
-export const createMolliePayment = async (body: MolliePaymentBody):Promise<ApiResult<MolliePaymentResponse>> => {
+export const createMolliePayment = async (body: MolliePaymentBody): Promise<ApiResult<MolliePaymentResponse>> => {
     const response = await fetch(`${process.env.MOLLIE_ENDPOINT}/v2/payments`, {
         headers: {
             'Content-Type': 'application/json',
@@ -90,11 +94,11 @@ export const createMolliePayment = async (body: MolliePaymentBody):Promise<ApiRe
         body: JSON.stringify(body),
     })
 
-    if (!response.ok) return ApiError(response.statusText)
     let json = await response.json()
+    if (!response.ok) return ApiError(JSON.stringify({ ...json, message: response.statusText, status: response.status }))
 
     return OkResult(json)
-} 
+}
 
 export interface MolliePaymentMethodList {
     count: number;

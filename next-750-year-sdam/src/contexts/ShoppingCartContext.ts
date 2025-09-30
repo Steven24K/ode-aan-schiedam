@@ -11,6 +11,7 @@ export interface ShoppingCartProduct {
     productId: string
     variantId: number
     quantity: number
+    pricePerUnit: number
 }
 
 export type ShoppingCartStorage = Map<string, ShoppingCartProduct>

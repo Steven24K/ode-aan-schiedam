@@ -60,10 +60,10 @@ Make sure the `.env` file is created for both CMS and NextJS App.
 
 
 # TODO shop checkout flow:
-- Send order details to custom endpoint
-- Store Printify Order in CMS -> return internal order ID, store product info in Mollie Metadata
-- Create payment request with Mollie, pass internal ID to Mollie Metadata, returns payment link
-- Return payment link to client
+- Send order details to custom endpoint [check]
+- Store product info in Mollie Line Items [check]
+- Create payment request with Mollie, pass internal ID to Mollie Metadata, returns payment link [check]
+- Return payment link to client [check]
 - Redirect client back to webshop after payment (could be succes or fail). 
 - Send order to Printify after succesfull payment in webhook
 - E-mail customer with order summary. 

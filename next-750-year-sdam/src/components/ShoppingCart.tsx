@@ -1,17 +1,18 @@
 "use client"
-import { ShoppingCartContext, ShoppingCartDispatchContext } from "@/contexts/ShoppingCartContext"
-import React, { use, useContext, useEffect } from "react"
+import { ShoppingCartContext, ShoppingCartDispatchContext, ShoppingCartStorage } from "@/contexts/ShoppingCartContext"
+import React, { useContext, useEffect } from "react"
 import { FormBuilder } from "./FormBuilder"
-import { MolliePaymentMethodList } from "@/services/MolliePaymentService"
+import { MolliePaymentMethodList, MolliePaymentResponse } from "@/services/MolliePaymentService"
 import { ApiError, ApiResult, OkResult } from "@/types/StrapiData"
 
 interface ShoppingCartState {
-    checkout: 'idle' | 'form' | 'processing' | 'success'
+    checkout: 'idle' | 'form' | 'processing' | 'success' | 'error'
     paymentMethods: ApiResult<MolliePaymentMethodList> | 'unloaded'
     formState: CheckoutFormState
+    paymentLink?: string
 }
 
-interface CheckoutFormState {
+export interface CheckoutFormState {
     name: string
     surname: string
     email: string
@@ -24,15 +25,15 @@ interface CheckoutFormState {
 }
 
 const defaultCheckoutFormState: CheckoutFormState = {
-    name: '',
-    surname: '',
-    email: '',
-    phone: '',
+    name: 'Steven',
+    surname: 'Koerts',
+    email: 'info@sample.com',
+    phone: '+31612345678',
     country: 'NL',
-    address: '',
-    city: '',
-    postalcode: '',
-    payment_method: ''
+    address: 'Some street 1',
+    city: 'Amsterdam',
+    postalcode: '1012 AB',
+    payment_method: 'ideal'
 }
 
 const getMolliePaymentMethodsProxy = (): Promise<ApiResult<MolliePaymentMethodList>> => fetch('/api/getPaymentMethods')
@@ -42,6 +43,15 @@ const getMolliePaymentMethodsProxy = (): Promise<ApiResult<MolliePaymentMethodLi
     })
     .then(data => OkResult(data as MolliePaymentMethodList))
     .catch(() => ApiError('Failed to fetch payment methods'))
+
+const SubmitOrder = (formState: CheckoutFormState, cart: ShoppingCartStorage): Promise<ApiResult<MolliePaymentResponse>> =>
+    fetch('/api/createOrder', { method: 'POST', body: JSON.stringify({ formState, cart: Array.from(cart.entries()), origin: window.location.origin }) })
+        .then(res => {
+            if (!res.ok) return ApiError('Failed to create order')
+            return res.json()
+        })
+        .then(data => OkResult(data))
+        .catch(() => ApiError('Failed to create order'))
 
 export const ShoppingCart: React.FC = () => {
     const context = useContext(ShoppingCartContext)
@@ -133,7 +143,7 @@ export const ShoppingCart: React.FC = () => {
                     { name: 'surname', label: 'Last Name', kind: 'text', weight: 2, required: true },
                     { name: 'email', label: 'Email', kind: 'email', weight: 3, required: true },
                     { name: 'phone', label: 'Phone', kind: 'text', weight: 4, required: false },
-                    { name: 'country', label: 'Country', kind: 'dropdown', weight: 5, required: true, options: [{ name: 'NL', value: 'NL' }, { name: 'BE', value: 'BE' }] },
+                    { name: 'country', label: 'Country', kind: 'dropdown', weight: 5, required: true, options: [{ name: 'Nederland', value: 'NL' }, { name: 'België', value: 'BE' }] },
                     { name: 'address', label: 'Address', kind: 'text', weight: 4, required: true },
                     { name: 'city', label: 'City', kind: 'text', weight: 5, required: true },
                     { name: 'postalcode', label: 'Postal Code', kind: 'text', weight: 6, required: true },
@@ -146,12 +156,44 @@ export const ShoppingCart: React.FC = () => {
                     }
                 ]}
                 handleChange={(key, value) => setState(s => ({ ...s, formState: { ...s.formState, [key]: value } }))}
-                handleSubmit={() => { 
-                    
+                handleSubmit={() => {
+                    setState(s => ({ ...s, checkout: 'processing' }))
+                    SubmitOrder(state.formState, context.storage).then(res => {
+                        if (res.kind === 'ok') {
+                            if (res.data._links.checkout) {
+                                window.location.href = res.data._links.checkout.href
+                                setState(s => ({ ...s, checkout: 'success' }))
+                            } else {
+                                setState(s => ({ ...s, checkout: 'error' }))
+                            }
+                        }
+                    })
                 }}
                 submitText="Pay now"
             />}
+
+            {state.checkout == 'processing' && <div className="text-center text-blue-500 font-semibold">Processing your order...</div>}
+
+            {state.checkout == 'success' && state.paymentLink && (
+                <div className="text-center font-semibold">
+                    Payment started!<br />
+                    If you are not redirected, <a href={state.paymentLink} className="underline text-blue-600" target="_blank" rel="noopener noreferrer">click here</a>.
+                </div>
+            )}
+
+            {state.checkout === 'error' && (
+                <div className="text-center text-red-500 font-semibold space-y-2">
+                    <div>Failed to create payment. Please try again.</div>
+                    <button
+                        className="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700 transition-colors font-bold"
+                        onClick={() => setState(s => ({ ...s, checkout: 'form' }))}
+                    >
+                        Try Again
+                    </button>
+                </div>
+            )}
         </div>
+        
         <div className="p-4 border-t">
             {products && <div className="flex justify-between font-semibold mb-4">
                 <span>Total</span>

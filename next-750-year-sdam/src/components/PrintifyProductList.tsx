@@ -101,7 +101,8 @@ export const PrintifyProductList: React.FC<PrintifyProductListProps> = (props) =
                                     label: product.title,
                                     productId: product.id,
                                     variantId: selectedVariant.id,
-                                    quantity: 1
+                                    quantity: 1, 
+                                    pricePerUnit: selectedVariant.price
                                 }
                     
                                 if (state.storage.has(selectedVariant.id.toString())) {
