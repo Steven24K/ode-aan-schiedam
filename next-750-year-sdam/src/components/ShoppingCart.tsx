@@ -45,8 +45,8 @@ const getMolliePaymentMethodsProxy = (): Promise<ApiResult<MolliePaymentMethodLi
     .then(data => OkResult(data as MolliePaymentMethodList))
     .catch(() => ApiError('Failed to fetch payment methods'))
 
-const SubmitOrder = (formState: CheckoutFormState, cart: ShoppingCartStorage, successUrl: string, cancelUrl: string): Promise<ApiResult<MolliePaymentResponse>> =>
-    fetch('/api/createOrder', { method: 'POST', body: JSON.stringify({ formState, cart: Array.from(cart.entries()), origin: window.location.origin, successUrl, cancelUrl }) })
+const SubmitOrder = (formState: CheckoutFormState, cart: ShoppingCartStorage, redirectUrl: string, cancelUrl: string): Promise<ApiResult<MolliePaymentResponse>> =>
+    fetch('/api/createOrder', { method: 'POST', body: JSON.stringify({ formState, cart: Array.from(cart.entries()), origin: window.location.origin, redirectUrl, cancelUrl }) })
         .then(res => {
             if (!res.ok) return ApiError('Failed to create order')
             return res.json()
@@ -60,8 +60,8 @@ interface ShoppingCartProps {
 
 export const ShoppingCart: React.FC<ShoppingCartProps> = ({ siteInfo }) => {
     if (siteInfo.kind != 'ok') return <div className="text-red-500 p-4">Error loading site info: {siteInfo.error}</div>
-    const { CheckoutCancel, CheckoutSuccess } = siteInfo.data
-    
+    const { CheckoutCancel, CheckoutRedirect } = siteInfo.data
+
     const context = useContext(ShoppingCartContext)
     const dispatch = useContext(ShoppingCartDispatchContext)
 
@@ -166,7 +166,7 @@ export const ShoppingCart: React.FC<ShoppingCartProps> = ({ siteInfo }) => {
                 handleChange={(key, value) => setState(s => ({ ...s, formState: { ...s.formState, [key]: value } }))}
                 handleSubmit={() => {
                     setState(s => ({ ...s, checkout: 'processing' }))
-                    SubmitOrder(state.formState, context.storage, CheckoutSuccess.slug, CheckoutCancel.slug).then(res => {
+                    SubmitOrder(state.formState, context.storage, CheckoutRedirect.slug, CheckoutCancel.slug).then(res => {
                         if (res.kind === 'ok') {
                             if (res.data._links.checkout) {
                                 setState(s => ({ ...s, checkout: 'success' }))

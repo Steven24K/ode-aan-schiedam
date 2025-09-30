@@ -5,6 +5,6 @@ export type SiteInfo = {
     SiteName: string
     Slogan: string
     Icon: StrapiImage
-    CheckoutSuccess: StrapiPage
+    CheckoutRedirect: StrapiPage
     CheckoutCancel: StrapiPage
 }

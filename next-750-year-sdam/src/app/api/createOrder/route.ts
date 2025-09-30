@@ -20,7 +20,7 @@ export async function POST(request: Request): Promise<Response> {
       currency: 'EUR'
     },
     description: `Order for ${formState.name} ${formState.surname}`,
-    redirectUrl: `${body.origin}/${body.successUrl}`,
+    redirectUrl: `${body.origin}/${body.redirectUrl}`,
     cancelUrl: `${body.origin}/${body.cancelUrl}`,
     webhookUrl: `${body.origin}/api/mollieWebhook`,
     metadata: {},

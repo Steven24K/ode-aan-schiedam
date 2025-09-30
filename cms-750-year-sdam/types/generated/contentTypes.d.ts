@@ -789,7 +789,7 @@ export interface ApiSiteInfoSiteInfo extends Struct.SingleTypeSchema {
   };
   attributes: {
     CheckoutCancel: Schema.Attribute.Relation<'oneToOne', 'api::page.page'>;
-    CheckoutSuccess: Schema.Attribute.Relation<'oneToOne', 'api::page.page'>;
+    CheckoutRedirect: Schema.Attribute.Relation<'oneToOne', 'api::page.page'>;
     createdAt: Schema.Attribute.DateTime;
     createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
