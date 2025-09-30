@@ -169,7 +169,7 @@ export const ShoppingCart: React.FC<ShoppingCartProps> = ({ siteInfo }) => {
                     setState(s => ({ ...s, checkout: 'processing' }))
                     SubmitOrder(state.formState, context.storage, CheckoutRedirect.slug, CheckoutCancel.slug).then(res => {
                         if (res.kind === 'ok') {
-                            if (res.data._links.checkout) {
+                            if (res.data && res.data._links && res.data._links.checkout) {
                                 setState(s => ({ ...s, checkout: 'success' }))
                                 setCookie_clientside('paymentId', res.data.id, 1)
                                 window.location.href = res.data._links.checkout.href
