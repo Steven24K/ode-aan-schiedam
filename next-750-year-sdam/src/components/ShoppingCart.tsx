@@ -161,8 +161,8 @@ export const ShoppingCart: React.FC = () => {
                     SubmitOrder(state.formState, context.storage).then(res => {
                         if (res.kind === 'ok') {
                             if (res.data._links.checkout) {
-                                window.location.href = res.data._links.checkout.href
                                 setState(s => ({ ...s, checkout: 'success' }))
+                                window.location.href = res.data._links.checkout.href
                             } else {
                                 setState(s => ({ ...s, checkout: 'error' }))
                             }
