@@ -99,6 +99,23 @@ export interface BlocksImageSlider extends Struct.ComponentSchema {
   };
 }
 
+export interface BlocksPaymentStatus extends Struct.ComponentSchema {
+  collectionName: 'components_blocks_payment_statuses';
+  info: {
+    description: '';
+    displayName: 'PaymentStatus';
+    icon: 'lightbulb';
+  };
+  attributes: {
+    FailText: Schema.Attribute.Text &
+      Schema.Attribute.Required &
+      Schema.Attribute.DefaultTo<'No payment was made'>;
+    SuccessText: Schema.Attribute.Text &
+      Schema.Attribute.Required &
+      Schema.Attribute.DefaultTo<'Thanks for your payment'>;
+  };
+}
+
 export interface BlocksPodcasts extends Struct.ComponentSchema {
   collectionName: 'components_blocks_podcasts';
   info: {
@@ -441,6 +458,7 @@ declare module '@strapi/strapi' {
       'blocks.html-block': BlocksHtmlBlock;
       'blocks.image': BlocksImage;
       'blocks.image-slider': BlocksImageSlider;
+      'blocks.payment-status': BlocksPaymentStatus;
       'blocks.podcasts': BlocksPodcasts;
       'blocks.poem-counter': BlocksPoemCounter;
       'blocks.printify-shop': BlocksPrintifyShop;

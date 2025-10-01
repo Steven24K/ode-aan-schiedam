@@ -618,6 +618,7 @@ export interface ApiPagePage extends Struct.CollectionTypeSchema {
         'blocks.podcasts',
         'blocks.categories',
         'blocks.printify-shop',
+        'blocks.payment-status',
       ]
     > &
       Schema.Attribute.Required &

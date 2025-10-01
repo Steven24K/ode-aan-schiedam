@@ -13,6 +13,7 @@ import { StoryCounter } from "./Blocks/StoryCounter"
 import { PodcastGrid } from "./PodcastGrid/PodcastGrid"
 import { CategoriesBlock } from "./Blocks/CategoriesBlock"
 import { PrintifyShopBlock } from "./Blocks/PrintifyShopBlock"
+import { PaymentStatusBlock } from "./Blocks/PaymentStatusBlock"
 
 type DisplayContentProps = {
     className?: string
@@ -59,6 +60,8 @@ export const DisplayContent = (props: DisplayContentProps) => {
                         return <CategoriesBlock key={`${block.__component}_${block.id}`} {...block} pageParams={pageParams} />
                     case 'blocks.printify-shop':
                         return <PrintifyShopBlock key={`${block.__component}_${block.id}`} {...block} pageParams={pageParams} />
+                    case 'blocks.payment-status': 
+                        return <PaymentStatusBlock key={`${block.__component}_${block.id}`} {...block} pageParams={pageParams} />
                     default:
                         return <div key={JSON.stringify(block)}>Block does not exist {JSON.stringify(block)}</div>
                 }

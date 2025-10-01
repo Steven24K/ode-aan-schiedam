@@ -16,8 +16,9 @@ export type PageBlock =
         HTMLBlockProps |
         StoryCounterBlockProps |
         PodcastsBlockProps |
-        CategoriesBlockProps | 
-        PrintifyShopBlockProps
+        CategoriesBlockProps |
+        PrintifyShopBlockProps |
+        PaymentStatusBlock
     ) & {
         pageParams: PageProps
     }
@@ -112,6 +113,13 @@ export type PrintifyShopBlockProps = {
     id: number
     Paginated: boolean
     Size: number
+}
+
+export type PaymentStatusBlock = {
+    __component: "blocks.payment-status"
+    id: number
+    SuccessText: string
+    FailText: string
 }
 
 export type StrapiFormField = StandardFormField | CategoriesDropDown | InfoText | DropDown

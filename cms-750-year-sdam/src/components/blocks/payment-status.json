@@ -1,0 +1,21 @@
+{
+  "collectionName": "components_blocks_payment_statuses",
+  "info": {
+    "displayName": "PaymentStatus",
+    "icon": "lightbulb",
+    "description": ""
+  },
+  "options": {},
+  "attributes": {
+    "SuccessText": {
+      "type": "text",
+      "required": true,
+      "default": "Thanks for your payment"
+    },
+    "FailText": {
+      "type": "text",
+      "required": true,
+      "default": "No payment was made"
+    }
+  }
+}
