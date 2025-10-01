@@ -23,7 +23,9 @@ export async function POST(request: Request): Promise<Response> {
     redirectUrl: `${body.origin}/${body.redirectUrl}`,
     cancelUrl: `${body.origin}/${body.cancelUrl}`,
     webhookUrl: `${body.origin}/api/webhooks/mollie`,
-    metadata: {},
+    metadata: {
+      cart: Array.from(cart.entries())
+    },
     method: formState.payment_method as PaymentMethod,
     lines: cart.entries().map<MollieOrderLine>(([, product]) => ({
       type: 'physical',

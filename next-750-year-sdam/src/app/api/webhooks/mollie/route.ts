@@ -1,5 +1,7 @@
+import { ShoppingCartStorage } from "@/contexts/ShoppingCartContext";
 import { sendEmail } from "@/sendMail";
 import { getMolliePayment } from "@/services/MolliePaymentService";
+import { createPrintifyOrder, PrintifyLineItem } from "@/services/PrintifyShopService";
 
 export async function POST(request: Request) {
     const formData = await request.formData()
@@ -104,9 +106,39 @@ export async function POST(request: Request) {
             </div>
         `
 
-        // TODO: Send order to printify
+        const cart: ShoppingCartStorage = new Map((payment.data.metadata as any)['cart'])
 
-        sendEmail('750@odeaanschiedam.nl', payment.data.billingAddress!.email, `Bevesting bestelling Ode aan Schiedam #${payment.data.id}`, emailText, '', emailHtml)
+        const res = await createPrintifyOrder({
+            shipping_method: 1,
+            is_economy_shipping: true,
+            is_printify_express: false,
+            send_shipping_notification: true,
+            external_id: payment.data.id,
+            label: `Order for: ${payment.data.billingAddress?.givenName}`,
+            address_to: {
+                first_name: payment.data.shippingAddress!.givenName,
+                last_name: payment.data.shippingAddress!.familyName,
+                email: payment.data.billingAddress!.email,
+                phone: payment.data.billingAddress!.phone!,
+                address1: payment.data.shippingAddress!.streetAndNumber,
+                city: payment.data.shippingAddress!.city,
+                zip: payment.data.shippingAddress!.postalCode,
+                country: payment.data.shippingAddress!.country,
+            },
+            line_items: cart.values().map<PrintifyLineItem>(product => ({
+                product_id: product.productId,
+                quantity: product.quantity,
+                variant_id: product.variantId,
+                external_id: `${payment.data.id}_${product.productId}`
+            })).toArray(),
+        })
+
+        if (res.kind == 'error') {
+            sendEmail('750@odeaanschiedam.nl', 'steven_first@outlook.com', 'Error with sending order to Printify', res.error)
+        }
+        else {
+            sendEmail('750@odeaanschiedam.nl', payment.data.billingAddress!.email, `Bevesting bestelling Ode aan Schiedam #${payment.data.id}`, emailText, '', emailHtml)
+        }
     }
 
     return new Response('OK', { status: 200 })
