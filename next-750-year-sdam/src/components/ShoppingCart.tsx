@@ -94,7 +94,7 @@ export const ShoppingCart: React.FC<ShoppingCartProps> = ({ siteInfo }) => {
         className={`fixed top-0 left-0 h-full w-96 bg-white shadow-lg z-50 flex flex-col transition-transform duration-300 ${context.sidebar === 'open' ? 'translate-x-0' : '-translate-x-full'}`}
     >
         <div className="flex items-center justify-between p-4 border-b">
-            <h2 className="text-lg font-bold">Shopping Cart</h2>
+            <h2 className="text-lg font-bold">Winkelwagen</h2>
             <button className="text-gray-500 hover:text-gray-700" aria-label="Close cart" onClick={toggleSideBar}>
                 &times;
             </button>
@@ -102,7 +102,7 @@ export const ShoppingCart: React.FC<ShoppingCartProps> = ({ siteInfo }) => {
         <div className="flex-1 overflow-y-auto p-4 space-y-4">
             {/* Example product item */}
 
-            {context.storage.size === 0 && <div className="text-center text-gray-500">Your cart is empty</div>}
+            {context.storage.size === 0 && <div className="text-center text-gray-500">Je winkelwagen is nog leeg.</div>}
 
             {
                 products && Array.from(context.storage.values()).map(cartItem => {
@@ -111,7 +111,7 @@ export const ShoppingCart: React.FC<ShoppingCartProps> = ({ siteInfo }) => {
                     return <div key={cartItem.variantId} className="flex items-center justify-between gap-2 border-b pb-2">
                         <div>
                             <div className="font-semibold">{product.title}</div>
-                            <div className="text-sm text-gray-500">Size: {variant.title}</div>
+                            <div className="text-sm text-gray-500">Maat: {variant.title}</div>
                         </div>
                         <div className="flex items-center gap-2">
                             <input
@@ -148,19 +148,20 @@ export const ShoppingCart: React.FC<ShoppingCartProps> = ({ siteInfo }) => {
             {state.checkout == 'form' && <FormBuilder<CheckoutFormState>
                 defaultObject={state.formState}
                 fields={[
-                    { name: 'name', label: 'First Name', kind: 'text', weight: 1, required: true },
-                    { name: 'surname', label: 'Last Name', kind: 'text', weight: 2, required: true },
-                    { name: 'email', label: 'Email', kind: 'email', weight: 3, required: true },
-                    { name: 'phone', label: 'Phone', kind: 'text', weight: 4, required: false },
-                    { name: 'country', label: 'Country', kind: 'dropdown', weight: 5, required: true, options: [{ name: 'Nederland', value: 'NL' }, { name: 'België', value: 'BE' }] },
-                    { name: 'address', label: 'Address', kind: 'text', weight: 4, required: true },
-                    { name: 'city', label: 'City', kind: 'text', weight: 5, required: true },
-                    { name: 'postalcode', label: 'Postal Code', kind: 'text', weight: 6, required: true },
+                    { name: 'name', label: 'Voornaam', kind: 'text', weight: 1, required: true },
+                    { name: 'surname', label: 'Achternaam', kind: 'text', weight: 10, required: true },
+                    { name: 'email', label: 'Email', kind: 'email', weight: 20, required: true },
+                    { name: 'phone', label: 'Tel.', kind: 'text', weight: 30, required: false },
+                    { name: 'country', label: 'Land', kind: 'dropdown', weight: 40, required: true, options: [{ name: 'Nederland', value: 'NL' }, { name: 'België', value: 'BE' }] },
+                    { name: 'address', label: 'Addres', kind: 'text', weight: 50, required: true },
+                    { name: 'Straat + Nr.', kind: 'info', weight: 60},
+                    { name: 'city', label: 'Stad', kind: 'text', weight: 70, required: true },
+                    { name: 'postalcode', label: 'Postcode', kind: 'text', weight: 80, required: true },
                     {
                         name: 'payment_method',
                         label: 'Payment Method',
                         kind: 'dropdown',
-                        weight: 7, required: true,
+                        weight: 90, required: true,
                         options: _paymentMethods.kind === 'ok' ? _paymentMethods.data._embedded.methods.map(m => ({ name: m.description, value: m.id })) : []
                     }
                 ]}
@@ -179,26 +180,26 @@ export const ShoppingCart: React.FC<ShoppingCartProps> = ({ siteInfo }) => {
                         }
                     })
                 }}
-                submitText="Pay now"
+                submitText="Betalen"
             />}
 
-            {state.checkout == 'processing' && <div className="text-center text-blue-500 font-semibold">Processing your order...</div>}
+            {state.checkout == 'processing' && <div className="text-center text-blue-500 font-semibold">Bestelling aan het verwerken...</div>}
 
             {state.checkout == 'success' && state.paymentLink && (
                 <div className="text-center font-semibold">
-                    Payment started!<br />
-                    If you are not redirected, <a href={state.paymentLink} className="underline text-blue-600" target="_blank" rel="noopener noreferrer">click here</a>.
+                    Betaalverzoek aangemaakt!<br />
+                    Indien niet automatisch doorgestuurd, <a href={state.paymentLink} className="underline text-blue-600" target="_blank" rel="noopener noreferrer">klik deze link</a>.
                 </div>
             )}
 
             {state.checkout === 'error' && (
                 <div className="text-center text-red-500 font-semibold space-y-2">
-                    <div>Failed to create payment. Please try again.</div>
+                    <div>Aanmaken betaallink mislukt.</div>
                     <button
                         className="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700 transition-colors font-bold"
                         onClick={() => setState(s => ({ ...s, checkout: 'form' }))}
                     >
-                        Try Again
+                        Probeer opnieuw
                     </button>
                 </div>
             )}
@@ -206,7 +207,7 @@ export const ShoppingCart: React.FC<ShoppingCartProps> = ({ siteInfo }) => {
 
         <div className="p-4 border-t">
             {products && <div className="flex justify-between font-semibold mb-4">
-                <span>Total</span>
+                <span>Totaal</span>
                 <span>€{(Array.from(context.storage.values()).reduce((acc, item) => {
                     const product = products.data.find(p => p.id === item.productId)!
                     const variant = product.variants.find(v => v.id === item.variantId)!
@@ -218,7 +219,7 @@ export const ShoppingCart: React.FC<ShoppingCartProps> = ({ siteInfo }) => {
                 disabled={context.storage.size === 0}
                 onClick={() => setState(s => ({ ...s, checkout: 'form' }))}
             >
-                Order Now
+                Bestellen
             </button>}
         </div>
     </div>

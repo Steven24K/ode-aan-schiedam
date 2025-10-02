@@ -47,13 +47,13 @@ export const PrintifyProductList: React.FC<PrintifyProductListProps> = (props) =
                     )}
                     <h2 className="text-lg font-semibold mb-2">{product.title}</h2>
                     <div className="mb-2 text-sm text-gray-700">
-                        <strong className="font-medium">Tags:</strong> {tags.join(", ")}
+                        {tags.join(", ")}
                     </div>
                     <div className="mb-2 text-sm text-gray-700">
-                        <strong className="font-medium">Available sizes:</strong> {sizesInfo}
+                        <strong className="font-medium">Beschikbare maten:</strong> {sizesInfo}
                     </div>
                     <div className="mb-2">
-                        <strong className="font-medium">Select size:</strong>
+                        <strong className="font-medium">Kies maat:</strong>
                         <div className="flex flex-wrap gap-2 mt-1">
                             {variants.map((size) => (
                                 <button
@@ -79,7 +79,7 @@ export const PrintifyProductList: React.FC<PrintifyProductListProps> = (props) =
                         </div>
                     </div>
                     <div>
-                        <strong className="font-medium">Price:</strong>{" "}
+                        <strong className="font-medium">Prijs:</strong>{" "}
                         <span className="text-lg font-bold text-gray-900">
                             €{(selectedVariant.price / 100).toFixed(2)}
                         </span>
@@ -88,7 +88,7 @@ export const PrintifyProductList: React.FC<PrintifyProductListProps> = (props) =
                         href={`/product/${product.id}`}
                         className="mt-4 inline-block text-blue-600 hover:underline font-medium"
                     >
-                        More info
+                        Meer info
                     </Link>
                     <div>
                         <button
@@ -101,11 +101,11 @@ export const PrintifyProductList: React.FC<PrintifyProductListProps> = (props) =
                                     productId: product.id,
                                     variantLabel: selectedVariant.title,
                                     variantId: selectedVariant.id,
-                                    quantity: 1, 
-                                    pricePerUnit: selectedVariant.price, 
+                                    quantity: 1,
+                                    pricePerUnit: selectedVariant.price,
                                     sku: selectedVariant.sku
                                 }
-                    
+
                                 if (state.storage.has(selectedVariant.id.toString())) {
                                     const existingProduct = state.storage.get(selectedVariant.id.toString())!
                                     newProduct.quantity += existingProduct.quantity
@@ -122,7 +122,7 @@ export const PrintifyProductList: React.FC<PrintifyProductListProps> = (props) =
                                 className="text-white mr-1"
                                 style={{ fontSize: "1.5em" }}
                             />
-                            <span>Add to cart</span>
+                            <span>Voeg toe</span>
                         </button>
                     </div>
                 </div>
