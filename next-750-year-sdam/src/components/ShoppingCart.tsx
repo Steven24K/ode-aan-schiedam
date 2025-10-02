@@ -27,14 +27,14 @@ export interface CheckoutFormState {
 }
 
 const defaultCheckoutFormState: CheckoutFormState = {
-    name: 'Steven',
-    surname: 'Koerts',
-    email: 'steven_first@outlook.com',
-    phone: '+31612345678',
+    name: '',
+    surname: '',
+    email: '',
+    phone: '',
     country: 'NL',
-    address: 'Some street 1',
-    city: 'Amsterdam',
-    postalcode: '1012 AB',
+    address: '',
+    city: '',
+    postalcode: '',
     payment_method: 'ideal'
 }
 
