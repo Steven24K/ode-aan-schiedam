@@ -84,6 +84,23 @@ export const ShoppingCart: React.FC<ShoppingCartProps> = ({ siteInfo }) => {
         }
     }, [state.paymentMethods])
 
+    useEffect(() => {
+        if (state.checkout === 'processing') {
+            SubmitOrder(state.formState, context.storage, CheckoutRedirect.slug, CheckoutCancel.slug)
+                .then(res => {
+                    if (res.kind === 'ok') {
+                        if (res.data && res.data._links && res.data._links.checkout) {
+                            setState(s => ({ ...s, checkout: 'success' }))
+                            setCookie_clientside('paymentId', res.data.id, 1)
+                            window.location.href = res.data._links.checkout.href
+                        } else {
+                            setState(s => ({ ...s, checkout: 'error' }))
+                        }
+                    }
+                })
+        }
+    }, [state.checkout])
+
 
     let _paymentMethods: ApiResult<MolliePaymentMethodList> = ApiError('Unloaded')
     if (state.paymentMethods !== 'unloaded') {
@@ -154,7 +171,7 @@ export const ShoppingCart: React.FC<ShoppingCartProps> = ({ siteInfo }) => {
                     { name: 'phone', label: 'Tel.', kind: 'text', weight: 30, required: false },
                     { name: 'country', label: 'Land', kind: 'dropdown', weight: 40, required: true, options: [{ name: 'Nederland', value: 'NL' }, { name: 'België', value: 'BE' }] },
                     { name: 'address', label: 'Addres', kind: 'text', weight: 50, required: true },
-                    { name: 'Straat + Nr.', kind: 'info', weight: 60},
+                    { name: 'Straat + Nr.', kind: 'info', weight: 60 },
                     { name: 'city', label: 'Stad', kind: 'text', weight: 70, required: true },
                     { name: 'postalcode', label: 'Postcode', kind: 'text', weight: 80, required: true },
                     {
@@ -166,20 +183,7 @@ export const ShoppingCart: React.FC<ShoppingCartProps> = ({ siteInfo }) => {
                     }
                 ]}
                 handleChange={(key, value) => setState(s => ({ ...s, formState: { ...s.formState, [key]: value } }))}
-                handleSubmit={() => {
-                    setState(s => ({ ...s, checkout: 'processing' }))
-                    SubmitOrder(state.formState, context.storage, CheckoutRedirect.slug, CheckoutCancel.slug).then(res => {
-                        if (res.kind === 'ok') {
-                            if (res.data && res.data._links && res.data._links.checkout) {
-                                setState(s => ({ ...s, checkout: 'success' }))
-                                setCookie_clientside('paymentId', res.data.id, 1)
-                                window.location.href = res.data._links.checkout.href
-                            } else {
-                                setState(s => ({ ...s, checkout: 'error' }))
-                            }
-                        }
-                    })
-                }}
+                handleSubmit={() => setState(s => ({ ...s, checkout: 'processing' }))}
                 submitText="Betalen"
             />}
 
