@@ -6,7 +6,7 @@ import { createMolliePayment, Locale, MollieOrderLine, PaymentMethod } from "@/s
 export async function POST(request: Request): Promise<Response> {
   const body = await request.json()
 
-  // console.log('Create order called', body)
+  console.log('Create order called', body)
   // console.log('Create order called', body.cart)
 
   // read body

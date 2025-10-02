@@ -6,6 +6,7 @@ import { createPrintifyOrder, PrintifyLineItem } from "@/services/PrintifyShopSe
 export async function POST(request: Request) {
     const formData = await request.formData()
     const id = formData.get('id')
+    console.log('Webhook called with ID: ', id)
     if (!id) return new Response('Missing id', { status: 400 })
 
     const payment = await getMolliePayment(id.toString())
