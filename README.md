@@ -58,3 +58,15 @@ Make sure the `.env` file is created for both CMS and NextJS App.
 - `yarn build`
 - `pm2 restart next` 
 
+
+# TODO:
+- Form validation for checkout
+    - check email format
+    - check phone format
+- Placeholder feature for form builder
+- Product detail page
+- Multistepp form;
+    - Customer details
+    - payment method
+    - shipping method
+    - discount codes
