@@ -171,7 +171,6 @@ export const ShoppingCart: React.FC<ShoppingCartProps> = ({ siteInfo }) => {
                     { name: 'phone', label: 'Tel.', kind: 'text', weight: 30, required: false },
                     { name: 'country', label: 'Land', kind: 'dropdown', weight: 40, required: true, options: [{ name: 'Nederland', value: 'NL' }, { name: 'België', value: 'BE' }] },
                     { name: 'address', label: 'Addres', kind: 'text', weight: 50, required: true },
-                    { name: 'Straat + Nr.', kind: 'info', weight: 60 },
                     { name: 'city', label: 'Stad', kind: 'text', weight: 70, required: true },
                     { name: 'postalcode', label: 'Postcode', kind: 'text', weight: 80, required: true },
                     {
