@@ -34,4 +34,4 @@ export const ShoppingCartReducer = <K extends keyof ShoppingCartState>(currentSt
     ({ ...currentState, [update[0]]: update[1] })
 
 export const ShoppingCartContext = createContext<ShoppingCartState>(initialState())
-export const ShoppingCartDispatchContext = createContext<ActionDispatch<[update: [keyof ShoppingCartState, ShoppingCartStorage | SideBarState | PrintifyProductPage]]>>(() => {})
+export const ShoppingCartDispatchContext = createContext<ActionDispatch<[update: [keyof ShoppingCartState, ShoppingCartState[keyof ShoppingCartState]]]>>(() => {})

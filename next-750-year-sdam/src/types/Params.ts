@@ -1,6 +1,7 @@
 type Params = {
     category: string
     slug: string
+    id: string
 }
 
 export type PageProps = {

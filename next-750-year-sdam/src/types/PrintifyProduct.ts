@@ -20,7 +20,7 @@ export interface PrintifyProduct {
     description: string;
     tags: string[];
     options: Option[];
-    variants: Variant[];
+    variants: PrintifyProductVariant[];
     images: PrintifyImage[];
     created_at: Date;
     updated_at: Date;
@@ -111,7 +111,7 @@ interface PlaceholderImage {
     text_align?: string;
 }
 
-interface Variant {
+export interface PrintifyProductVariant {
     id: number;
     sku: string;
     cost: number;

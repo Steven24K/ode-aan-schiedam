@@ -60,11 +60,11 @@ Make sure the `.env` file is created for both CMS and NextJS App.
 
 
 # TODO:
+- Product detail page
 - Form validation for checkout
     - check email format
     - check phone format
 - Placeholder feature for form builder
-- Product detail page
 - Multistepp form;
     - Customer details
     - payment method

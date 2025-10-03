@@ -16,7 +16,7 @@ export const getPrintifyProducts = async (limit?: number, page?: number): Promis
     return OkResult(json)
 }
 
-export const getPrintifyProductById = async (id: number): Promise<ApiResult<PrintifyProduct>> => {
+export const getPrintifyProductById = async (id: string): Promise<ApiResult<PrintifyProduct>> => {
     const response = await fetch(`${process.env.PRINTIFY_ENDPOINT}/v1/shops/${process.env.PRINTIFY_SHOP_ID}/products/${id}.json`, {
         headers: {
             'Content-Type': 'application/json',

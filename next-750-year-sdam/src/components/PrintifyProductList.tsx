@@ -1,10 +1,9 @@
 "use client"
 import React, { useContext, useState } from "react";
 import Link from "next/link";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faShoppingCart } from "@fortawesome/free-solid-svg-icons/faShoppingCart";
-import { ShoppingCartContext, ShoppingCartDispatchContext, ShoppingCartProduct } from "@/contexts/ShoppingCartContext";
+import { ShoppingCartDispatchContext } from "@/contexts/ShoppingCartContext";
 import { PrintifyProductPage } from "@/types/PrintifyProduct";
+import { AddProductToCartBtn } from "./AddProductToCartBtn";
 
 interface PrintifyProductListProps {
     products: PrintifyProductPage
@@ -12,7 +11,6 @@ interface PrintifyProductListProps {
 
 export const PrintifyProductList: React.FC<PrintifyProductListProps> = (props) => {
     const { products } = props
-    const state = useContext(ShoppingCartContext)
     const dispatch = useContext(ShoppingCartDispatchContext)
 
     React.useEffect(() => {
@@ -20,9 +18,6 @@ export const PrintifyProductList: React.FC<PrintifyProductListProps> = (props) =
             dispatch(['products', products]);
         }
     }, [products, dispatch]);
-
-    const openSideBar = () => dispatch(['sidebar', 'open'])
-
 
     return <div className="flex flex-wrap gap-1">
         {
@@ -53,7 +48,7 @@ export const PrintifyProductList: React.FC<PrintifyProductListProps> = (props) =
                         <strong className="font-medium">Beschikbare maten:</strong> {sizesInfo}
                     </div>
                     <div className="mb-2">
-                        <strong className="font-medium">Kies maat:</strong>
+                        <strong className="font-medium">Kies variant:</strong>
                         <div className="flex flex-wrap gap-2 mt-1">
                             {variants.map((size) => (
                                 <button
@@ -64,14 +59,12 @@ export const PrintifyProductList: React.FC<PrintifyProductListProps> = (props) =
                                             ? "border-blue-500 bg-blue-50 font-bold"
                                             : "border-gray-300 bg-white font-normal"
                                         }
-                    ${!product.variants.find((v) => v.id === size.id && v.is_available)
+                    ${!size.is_available
                                             ? "opacity-50 cursor-not-allowed"
                                             : "hover:border-blue-400"
                                         }
                     `}
-                                    disabled={
-                                        !product.variants.find((v) => v.id === size.id && v.is_available)
-                                    }
+                                    disabled={!size.is_available}
                                 >
                                     {size.title}
                                 </button>
@@ -90,41 +83,9 @@ export const PrintifyProductList: React.FC<PrintifyProductListProps> = (props) =
                     >
                         Meer info
                     </Link>
-                    <div>
-                        <button
-                            type="button"
-                            aria-label="Add to cart"
-                            className="text-sm bg-green-500 text-white py-2 px-8 flex items-center gap-2 rounded hover:bg-green-600 transition"
-                            onClick={() => {
-                                const newProduct: ShoppingCartProduct = {
-                                    label: product.title,
-                                    productId: product.id,
-                                    variantLabel: selectedVariant.title,
-                                    variantId: selectedVariant.id,
-                                    quantity: 1,
-                                    pricePerUnit: selectedVariant.price,
-                                    sku: selectedVariant.sku
-                                }
 
-                                if (state.storage.has(selectedVariant.id.toString())) {
-                                    const existingProduct = state.storage.get(selectedVariant.id.toString())!
-                                    newProduct.quantity += existingProduct.quantity
-                                }
 
-                                dispatch(['storage', state.storage.set(selectedVariant.id.toString(), newProduct)])
-
-                                openSideBar()
-                            }}
-                        >
-                            <FontAwesomeIcon
-                                icon={faShoppingCart}
-                                size="xs"
-                                className="text-white mr-1"
-                                style={{ fontSize: "1.5em" }}
-                            />
-                            <span>Voeg toe</span>
-                        </button>
-                    </div>
+                    <AddProductToCartBtn product={product} selectedVariant={selectedVariant} />
                 </div>
             })
         }
