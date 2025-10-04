@@ -66,8 +66,6 @@ export const ShoppingCart: React.FC<ShoppingCartProps> = ({ siteInfo }) => {
     const context = useContext(ShoppingCartContext)
     const dispatch = useContext(ShoppingCartDispatchContext)
 
-    const products = context.products
-
     const toggleSideBar = () => dispatch(['sidebar', context.sidebar == 'open' ? 'closed' : 'open'])
 
     const [state, setState] = React.useState<ShoppingCartState>({ checkout: 'idle', paymentMethods: 'unloaded', formState: defaultCheckoutFormState })
@@ -122,13 +120,11 @@ export const ShoppingCart: React.FC<ShoppingCartProps> = ({ siteInfo }) => {
             {context.storage.size === 0 && <div className="text-center text-gray-500">Je winkelwagen is nog leeg.</div>}
 
             {
-                products && Array.from(context.storage.values()).map(cartItem => {
-                    const product = products.data.find(p => p.id === cartItem.productId)!
-                    const variant = product.variants.find(v => v.id === cartItem.variantId)!
+                Array.from(context.storage.values()).map(cartItem => {
                     return <div key={cartItem.variantId} className="flex items-center justify-between gap-2 border-b pb-2">
                         <div>
-                            <div className="font-semibold">{product.title}</div>
-                            <div className="text-sm text-gray-500">Maat: {variant.title}</div>
+                            <div className="font-semibold">{cartItem.label}</div>
+                            <div className="text-sm text-gray-500">{cartItem.variantLabel}</div>
                         </div>
                         <div className="flex items-center gap-2">
                             <input
@@ -142,11 +138,11 @@ export const ShoppingCart: React.FC<ShoppingCartProps> = ({ siteInfo }) => {
                                     dispatch(['storage', context.storage.set(cartItem.variantId.toString(), updatedProduct)])
                                 }}
                             />
-                            <div className="text-sm">x €{(variant.price / 100).toFixed(2)}</div>
-                            <div className="font-bold ml-2">€{(variant.price * cartItem.quantity / 100).toFixed(2)}</div>
+                            <div className="text-sm">x €{(cartItem.pricePerUnit / 100).toFixed(2)}</div>
+                            <div className="font-bold ml-2">€{(cartItem.pricePerUnit * cartItem.quantity / 100).toFixed(2)}</div>
                         </div>
                         <button
-                            className="ml-2 text-red-500 hover:text-red-700 text-xs px-2 py-1 rounded border border-red-200"
+                            className="ml-2 text-red-500 hover:text-red-700 text-xs px-1 py-1 rounded border border-red-200"
                             aria-label="Remove item"
                             onClick={() => {
                                 context.storage.delete(cartItem.variantId.toString())
@@ -209,14 +205,12 @@ export const ShoppingCart: React.FC<ShoppingCartProps> = ({ siteInfo }) => {
         </div>
 
         <div className="p-4 border-t">
-            {products && <div className="flex justify-between font-semibold mb-4">
+             <div className="flex justify-between font-semibold mb-4">
                 <span>Totaal</span>
                 <span>€{(Array.from(context.storage.values()).reduce((acc, item) => {
-                    const product = products.data.find(p => p.id === item.productId)!
-                    const variant = product.variants.find(v => v.id === item.variantId)!
-                    return acc + (variant.price * item.quantity / 100)
+                    return acc + (item.pricePerUnit * item.quantity / 100)
                 }, 0)).toFixed(2)}</span>
-            </div>}
+            </div>
 
             {state.checkout == 'idle' && <button className="w-full bg-blue-600 text-white py-2 rounded hover:bg-blue-700 transition-colors font-bold disabled:opacity-50 disabled:cursor-not-allowed"
                 disabled={context.storage.size === 0}

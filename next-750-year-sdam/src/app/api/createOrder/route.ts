@@ -8,11 +8,32 @@ export async function POST(request: Request): Promise<Response> {
 
   console.log('Create order called', body)
   console.log('Create order called', body.cart)
-  console.log(typeof(body.cart))
 
   // read body
   const formState: CheckoutFormState = body.formState
   const cart: ShoppingCartStorage = new Map(body.cart)
+
+  // Validate formState fields
+  if (!formState.name || !formState.surname || !formState.address || !formState.city || !formState.postalcode || !formState.country || !formState.email) {
+    return new Response('Missing required form fields', { status: 400 })
+  }
+
+  // Simple email format check
+  const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
+  if (!emailRegex.test(formState.email)) {
+    return new Response('Invalid email format', { status: 400 })
+  }
+
+  // Simple phone format check (international, digits, spaces, dashes)
+  const phoneRegex = /^[+\d][\d\s\-()]{7,}$/
+  if (formState.phone && !phoneRegex.test(formState.phone)) {
+    return new Response('Invalid phone format', { status: 400 })
+  }
+
+  // Check if shopping cart is not empty
+  if (cart.size === 0) {
+    return new Response('Shopping cart is empty', { status: 400 })
+  }
 
   // Create payment request from Mollie and pass product details to metadata
   const response = await createMolliePayment({

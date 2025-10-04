@@ -1,7 +1,6 @@
 "use client"
-import React, { useContext, useState } from "react";
+import React, { useState } from "react";
 import Link from "next/link";
-import { ShoppingCartDispatchContext } from "@/contexts/ShoppingCartContext";
 import { PrintifyProductPage } from "@/types/PrintifyProduct";
 import { AddProductToCartBtn } from "./AddProductToCartBtn";
 
@@ -11,13 +10,6 @@ interface PrintifyProductListProps {
 
 export const PrintifyProductList: React.FC<PrintifyProductListProps> = (props) => {
     const { products } = props
-    const dispatch = useContext(ShoppingCartDispatchContext)
-
-    React.useEffect(() => {
-        if (products) {
-            dispatch(['products', products]);
-        }
-    }, [products, dispatch]);
 
     return <div className="flex flex-wrap gap-1">
         {

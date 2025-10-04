@@ -5,8 +5,8 @@ import { getPrintifyProductById } from "@/services/PrintifyShopService"
 import { PageProps } from "@/types/Params"
 import { notFound } from "next/navigation"
 import { ProductPageProvider } from "./ProductPageProvider"
-import { AddProductToCartBtn } from "@/components/AddProductToCartBtn"
 import { ProductVariants } from "./ProductVariants"
+import { AddProductToShoppingCartWrapper } from "./AddProducttoShoppingCartWrapper"
 
 export default async function ProductPage(props: PageProps) {
     const { params } = props
@@ -73,10 +73,8 @@ export default async function ProductPage(props: PageProps) {
                     {/* Variants */}
                     <ProductVariants variants={variants} />
 
-                    <AddProductToCartBtn
-                        product={_product}
-                        selectedVariant={variants[0]}
-                    />
+                    <AddProductToShoppingCartWrapper product={_product} />
+
                 </section>
             </ProductPageProvider>
 
