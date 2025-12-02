@@ -14,6 +14,7 @@ import { PodcastGrid } from "./PodcastGrid/PodcastGrid"
 import { CategoriesBlock } from "./Blocks/CategoriesBlock"
 import { PrintifyShopBlock } from "./Blocks/PrintifyShopBlock"
 import { PaymentStatusBlock } from "./Blocks/PaymentStatusBlock"
+import { InteractiveChat } from "./Blocks/InteractiveChat/InteractiveChat.server"
 
 type DisplayContentProps = {
     className?: string
@@ -62,6 +63,8 @@ export const DisplayContent = (props: DisplayContentProps) => {
                         return <PrintifyShopBlock key={`${block.__component}_${block.id}`} {...block} pageParams={pageParams} />
                     case 'blocks.payment-status': 
                         return <PaymentStatusBlock key={`${block.__component}_${block.id}`} {...block} pageParams={pageParams} />
+                    case 'blocks.interactive-chat':
+                        return <InteractiveChat key={`${block.__component}_${block.id}`} {...block} pageParams={pageParams} />
                     default:
                         return <div key={JSON.stringify(block)}>Block does not exist {JSON.stringify(block)}</div>
                 }

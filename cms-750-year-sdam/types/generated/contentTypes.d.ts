@@ -595,6 +595,7 @@ export interface ApiHomepageHomepage extends Struct.SingleTypeSchema {
         'blocks.podcasts',
         'blocks.categories',
         'blocks.printify-shop',
+        'blocks.interactive-chat',
       ]
     > &
       Schema.Attribute.Required &
@@ -680,6 +681,7 @@ export interface ApiPagePage extends Struct.CollectionTypeSchema {
         'blocks.categories',
         'blocks.printify-shop',
         'blocks.payment-status',
+        'blocks.interactive-chat',
       ]
     > &
       Schema.Attribute.Required &

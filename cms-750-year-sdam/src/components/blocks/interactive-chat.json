@@ -1,0 +1,14 @@
+{
+  "collectionName": "components_blocks_interactive_chats",
+  "info": {
+    "displayName": "Interactive Chat",
+    "icon": "cup"
+  },
+  "options": {},
+  "attributes": {
+    "GoBackUntil": {
+      "type": "date"
+    }
+  },
+  "config": {}
+}
