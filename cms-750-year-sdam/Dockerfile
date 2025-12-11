@@ -1,24 +1,24 @@
 # Gebruik Node.js 22 LTS
-FROM node:22-alpine AS builder
+FROM node:22.21.1-alpine AS builder
 
 WORKDIR /usr/src/app
 
 # Copy package.json en lockfile
 COPY package*.json ./
-
+COPY yarn.lock ./
 COPY .env.production .env
 
-# Dependencies installeren
-RUN npm install
+# Dependencies installeren met Yarn
+RUN yarn install --frozen-lockfile
 
 # Copy project
 COPY . .
 
 # Productie build
-RUN npm run build
+RUN yarn build
 
 # --- Production image ---
-FROM node:22-alpine AS production
+FROM node:22.21.1-alpine AS production
 
 WORKDIR /usr/src/app
 
@@ -29,4 +29,4 @@ COPY --from=builder /usr/src/app ./
 EXPOSE 1337
 
 # Start Strapi
-CMD ["npm", "run", "start"]
+CMD ["yarn", "start"]
