@@ -1,0 +1,18 @@
+version: "3.9"
+
+services:
+  strapi:
+    build: .
+    container_name: strapi_app
+    restart: unless-stopped
+    volumes:
+      - strapi_uploads:/usr/src/app/public/uploads
+    networks:
+      - internal
+
+networks:
+  internal:
+    driver: bridge
+
+volumes:
+  strapi_uploads:
