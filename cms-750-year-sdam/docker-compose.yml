@@ -5,16 +5,8 @@ services:
     restart: unless-stopped
     volumes:
       - strapi_uploads:/usr/src/app/public/uploads
-    networks:
-      - internal
     ports:
       - "1337:1337"
-    depends_on:
-      - postgres
-
-networks:
-  internal:
-    driver: bridge
 
 volumes:
   strapi_uploads:
