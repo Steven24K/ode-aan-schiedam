@@ -6,7 +6,7 @@ WORKDIR /usr/src/app
 # Copy package.json en lockfile
 COPY package*.json ./
 COPY yarn.lock ./
-COPY .env.production .env
+COPY .env .env
 
 # Dependencies installeren met Yarn
 RUN yarn install --frozen-lockfile
@@ -16,9 +16,6 @@ COPY . .
 
 # Productie build
 RUN yarn build
-
-# --- Production image ---
-FROM node:22.21.1-alpine AS production
 
 WORKDIR /usr/src/app
 
