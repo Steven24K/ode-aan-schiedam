@@ -17,6 +17,9 @@ COPY . .
 # Productie build
 RUN yarn build
 
+# --- Production image ---
+FROM node:22.21.1-alpine AS production
+
 WORKDIR /usr/src/app
 
 # Copy build en node_modules
