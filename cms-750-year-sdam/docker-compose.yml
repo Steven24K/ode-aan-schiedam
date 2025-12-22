@@ -1,7 +1,7 @@
 services:
 
   db:
-    image: postgres
+    image: postgres:16
     container_name: postgres_cmsodeaanschiedam
     restart: "unless-stopped"
     shm_size: 128mb
