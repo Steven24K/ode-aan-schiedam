@@ -9,6 +9,8 @@ import { ShoppingCart } from "@/components/ShoppingCart";
 import { ShoppingCartProvider } from "@/components/Blocks/ShoppingCartProvider";
 import { StrapiCMSService } from "@/services/StrapiCMSService";
 
+export const dynamic = 'force-dynamic'
+
 type LayoutProps = { children: React.ReactNode; }
 
 export default async function RootLayout(props: Readonly<LayoutProps>) {
