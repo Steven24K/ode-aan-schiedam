@@ -12,6 +12,7 @@ RUN yarn install --frozen-lockfile
 
 # Copy project
 COPY . .
+COPY .env.production .env
 
 # Productie build
 RUN yarn build
