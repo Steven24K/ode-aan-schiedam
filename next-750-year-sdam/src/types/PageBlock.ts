@@ -18,8 +18,7 @@ export type PageBlock =
         PodcastsBlockProps |
         CategoriesBlockProps |
         PrintifyShopBlockProps |
-        PaymentStatusBlock | 
-        InteracticeChatBlockProps
+        PaymentStatusBlock
     ) & {
         pageParams: PageProps
     }
@@ -121,12 +120,6 @@ export type PaymentStatusBlock = {
     id: number
     SuccessText: string
     FailText: string
-}
-
-export type InteracticeChatBlockProps = {
-    __component: "blocks.interactive-chat"
-    id: number
-    GoBackUntil?: string
 }
 
 export type StrapiFormField = StandardFormField | CategoriesDropDown | InfoText | DropDown

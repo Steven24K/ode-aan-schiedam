@@ -99,17 +99,6 @@ export interface BlocksImageSlider extends Struct.ComponentSchema {
   };
 }
 
-export interface BlocksInteractiveChat extends Struct.ComponentSchema {
-  collectionName: 'components_blocks_interactive_chats';
-  info: {
-    displayName: 'Interactive Chat';
-    icon: 'cup';
-  };
-  attributes: {
-    GoBackUntil: Schema.Attribute.Date;
-  };
-}
-
 export interface BlocksPaymentStatus extends Struct.ComponentSchema {
   collectionName: 'components_blocks_payment_statuses';
   info: {
@@ -469,7 +458,6 @@ declare module '@strapi/strapi' {
       'blocks.html-block': BlocksHtmlBlock;
       'blocks.image': BlocksImage;
       'blocks.image-slider': BlocksImageSlider;
-      'blocks.interactive-chat': BlocksInteractiveChat;
       'blocks.payment-status': BlocksPaymentStatus;
       'blocks.podcasts': BlocksPodcasts;
       'blocks.poem-counter': BlocksPoemCounter;

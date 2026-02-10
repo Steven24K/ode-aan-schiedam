@@ -40,8 +40,7 @@
         "blocks.podcasts",
         "blocks.categories",
         "blocks.printify-shop",
-        "blocks.payment-status",
-        "blocks.interactive-chat"
+        "blocks.payment-status"
       ],
       "required": true,
       "min": 1
