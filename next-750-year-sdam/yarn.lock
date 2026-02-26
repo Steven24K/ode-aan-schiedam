@@ -405,6 +405,11 @@
   resolved "https://registry.yarnpkg.com/@pkgjs/parseargs/-/parseargs-0.11.0.tgz#a77ea742fab25775145434eb1d2328cf5013ac33"
   integrity sha512-+1VkjdD0QBLPodGrJUeqarH8VAIvQODIbwh9XpP5Syisf7YoQgsJKPNFoqqLQlu+VQ/tVSshMR6loPMn8U+dPg==
 
+"@strapi/blocks-react-renderer@^1.0.2":
+  version "1.0.2"
+  resolved "https://registry.yarnpkg.com/@strapi/blocks-react-renderer/-/blocks-react-renderer-1.0.2.tgz#56b48d65a84601f803d983f12d1457257b1ec02f"
+  integrity sha512-pRV/WMreo5wyrLg7J0pw1DM9lg8U8m+QA7Bd8CPN3beUBTdDhYrFTTNZh3XveEdnURZNJu1X0aWXAg4SzVg7QA==
+
 "@swc/helpers@0.5.15":
   version "0.5.15"
   resolved "https://registry.yarnpkg.com/@swc/helpers/-/helpers-0.5.15.tgz#79efab344c5819ecf83a43f3f9f811fc84b516d7"

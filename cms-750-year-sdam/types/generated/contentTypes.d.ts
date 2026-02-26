@@ -595,6 +595,9 @@ export interface ApiHomepageHomepage extends Struct.SingleTypeSchema {
         'blocks.podcasts',
         'blocks.categories',
         'blocks.printify-shop',
+        'blocks.rich-text',
+        'blocks.post-overview',
+        'blocks.latest-post',
       ]
     > &
       Schema.Attribute.Required &
@@ -680,6 +683,9 @@ export interface ApiPagePage extends Struct.CollectionTypeSchema {
         'blocks.categories',
         'blocks.printify-shop',
         'blocks.payment-status',
+        'blocks.rich-text',
+        'blocks.latest-post',
+        'blocks.post-overview',
       ]
     > &
       Schema.Attribute.Required &
@@ -832,6 +838,60 @@ export interface ApiPoemPoem extends Struct.CollectionTypeSchema {
     publishedAt: Schema.Attribute.DateTime;
     slug: Schema.Attribute.UID<'Title'> & Schema.Attribute.Required;
     Title: Schema.Attribute.String & Schema.Attribute.Required;
+    updatedAt: Schema.Attribute.DateTime;
+    updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+  };
+}
+
+export interface ApiPostPost extends Struct.CollectionTypeSchema {
+  collectionName: 'posts';
+  info: {
+    displayName: 'Post';
+    pluralName: 'posts';
+    singularName: 'post';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    Blocks: Schema.Attribute.DynamicZone<
+      [
+        'blocks.you-tube-video',
+        'blocks.text',
+        'blocks.text-image',
+        'blocks.podcasts',
+        'blocks.image-slider',
+        'blocks.html-block',
+        'blocks.call-to-action-cta',
+        'blocks.rich-text',
+        'blocks.image',
+      ]
+    > &
+      Schema.Attribute.Required &
+      Schema.Attribute.SetMinMax<
+        {
+          min: 1;
+        },
+        number
+      >;
+    createdAt: Schema.Attribute.DateTime;
+    createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+    Description: Schema.Attribute.Text &
+      Schema.Attribute.SetMinMaxLength<{
+        maxLength: 250;
+      }>;
+    locale: Schema.Attribute.String & Schema.Attribute.Private;
+    localizations: Schema.Attribute.Relation<'oneToMany', 'api::post.post'> &
+      Schema.Attribute.Private;
+    publishedAt: Schema.Attribute.DateTime;
+    slug: Schema.Attribute.UID<'Title'> & Schema.Attribute.Required;
+    Title: Schema.Attribute.String &
+      Schema.Attribute.Required &
+      Schema.Attribute.SetMinMaxLength<{
+        maxLength: 124;
+      }>;
     updatedAt: Schema.Attribute.DateTime;
     updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
@@ -1391,6 +1451,7 @@ declare module '@strapi/strapi' {
       'api::podcast-episode.podcast-episode': ApiPodcastEpisodePodcastEpisode;
       'api::podcast.podcast': ApiPodcastPodcast;
       'api::poem.poem': ApiPoemPoem;
+      'api::post.post': ApiPostPost;
       'api::site-info.site-info': ApiSiteInfoSiteInfo;
       'plugin::content-releases.release': PluginContentReleasesRelease;
       'plugin::content-releases.release-action': PluginContentReleasesReleaseAction;

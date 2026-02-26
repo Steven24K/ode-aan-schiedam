@@ -1,0 +1,23 @@
+{
+  "collectionName": "components_blocks_post_overviews",
+  "info": {
+    "displayName": "Post Overview",
+    "icon": "apps"
+  },
+  "options": {},
+  "attributes": {
+    "max": {
+      "type": "integer",
+      "required": true,
+      "default": 10,
+      "min": 0,
+      "max": 100
+    },
+    "Paginated": {
+      "type": "boolean",
+      "required": true,
+      "default": true
+    }
+  },
+  "config": {}
+}

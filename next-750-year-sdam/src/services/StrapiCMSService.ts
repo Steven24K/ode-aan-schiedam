@@ -7,6 +7,7 @@ import { OkResult, ApiResult, StrapiData, ApiError } from "@/types/StrapiData"
 import { StrapiHomePage } from "@/types/StrapiHomePage"
 import { StrapiPage } from "@/types/StrapiPage"
 import { StrapiPoem } from "@/types/StrapiPoem"
+import { StrapiPost } from "@/types/StrapiPost"
 
 type Either<a, b> = { kind: 'left', v: a } | { kind: 'right', v: b }
 
@@ -22,7 +23,8 @@ export type EndPoint = "site-info" |
     "main-menu" |
     "footer-menu" |
     "podcast" |
-    "podcast-episodes"
+    "podcast-episodes" |
+    "posts"
 
 type Populate = "Blocks" |
     "Blocks.Button" |
@@ -184,6 +186,38 @@ export class StrapiCMSService {
             .then(pages => {
                 if (pages.data.length == 0) return Promise.reject('Page not found')
                 return OkResult(pages.data[0])
+            })
+            .catch(err => ApiError(err))
+
+    public GetAllPosts = async (_pagination?: StrapiPagination): Promise<ApiResult<StrapiPost[]>> =>
+        this.StrapiFetch<StrapiPost[]>('posts', {
+            pagination: _pagination,
+            sort: ['createdAt:desc'],
+        })
+            .then(res => OkResult(res.data, res.meta))
+            .catch(err => ApiError(err))
+
+    public GetLatestPost = async (): Promise<ApiResult<StrapiPost>> =>
+        this.StrapiFetch<StrapiPost[]>('posts', {
+            pagination: { page: 1, pageSize: 1, withCount: false },
+            populate: populator,
+            sort: ['createdAt:desc'],
+        })
+            .then(res => {
+                if (res.data.length == 0) return Promise.reject('No posts found')
+                return OkResult(res.data[0])
+            })
+            .catch(err => ApiError(err))
+
+    public GetPost = async (slug: string): Promise<ApiResult<StrapiPost>> =>
+        this.StrapiFetch<StrapiPost[]>('posts', {
+            populate: populator,
+            filters: [{ field: 'slug', operator: '$eq', value: slug }],
+
+        })
+            .then(posts => {
+                if (posts.data.length == 0) return Promise.reject('Post not found')
+                return OkResult(posts.data[0])
             })
             .catch(err => ApiError(err))
 

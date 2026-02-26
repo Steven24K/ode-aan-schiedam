@@ -1,4 +1,4 @@
-import { PageBlock } from "@/types/PageBlock"
+import { PageBlock, PageBlockComponent } from "@/types/PageBlock"
 import { TextBlock } from "./Blocks/Text"
 import { TextWithImageBlock } from "./Blocks/TextWithImage"
 import { CallToActionBlock } from "./Blocks/CallToAction"
@@ -14,6 +14,8 @@ import { PodcastGrid } from "./PodcastGrid/PodcastGrid"
 import { CategoriesBlock } from "./Blocks/CategoriesBlock"
 import { PrintifyShopBlock } from "./Blocks/PrintifyShopBlock"
 import { PaymentStatusBlock } from "./Blocks/PaymentStatusBlock"
+import { RichTextBlock } from "./Blocks/RichText"
+import { LatestPostsBlock } from "./Blocks/LatestPosts/LatestPosts.server"
 
 type DisplayContentProps = {
     className?: string
@@ -24,6 +26,30 @@ type DisplayContentProps = {
     pageParams: PageProps
 }
 
+const BLOCK_COMPONENTS: PageBlockComponent = {
+    'blocks.text': TextBlock,
+    'blocks.text-image': TextWithImageBlock,
+    'blocks.call-to-action-cta': CallToActionBlock,
+    'blocks.form': FormBlock,
+    'blocks.image': ImageBlock,
+    'blocks.image-slider': ImageSlider,
+    'blocks.you-tube-video': YouTubeVideoBlock,
+    'blocks.stories': StoriesBlock,
+    'blocks.html-block': HTMLBlock,
+    'blocks.poem-counter': StoryCounter,
+    'blocks.podcasts': PodcastGrid,
+    'blocks.categories': CategoriesBlock,
+    'blocks.printify-shop': PrintifyShopBlock,
+    'blocks.payment-status': PaymentStatusBlock,
+    'blocks.rich-text': RichTextBlock,
+    "blocks.latest-post": LatestPostsBlock,
+}
+
+const BlockRenderer = (pageParams: PageProps) => (block: PageBlock) => {
+    const Component = BLOCK_COMPONENTS[block.__component] as React.ComponentType<any>;
+    if (!Component) return <div key={JSON.stringify(block)}>Block does not exist {JSON.stringify(block)}</div>
+    return <Component key={`${block.__component}_${block.id}`} {...block} pageParams={pageParams} />
+}
 
 // Component responsible for displaying the content of the page from the CMS
 export const DisplayContent = (props: DisplayContentProps) => {
@@ -31,42 +57,7 @@ export const DisplayContent = (props: DisplayContentProps) => {
 
     return <div className={`page-content container mx-auto ${className || ''} ${isHome ? 'home-container' : ''}`}>
         {childPositon == 'top' && children}
-        {
-            blocks && blocks.map(block => {
-                switch (block.__component) {
-                    case 'blocks.text':
-                        return <TextBlock key={`${block.__component}_${block.id}`} {...block} pageParams={pageParams} />
-                    case 'blocks.text-image':
-                        return <TextWithImageBlock key={`${block.__component}_${block.id}`} {...block} pageParams={pageParams} />
-                    case 'blocks.call-to-action-cta':
-                        return <CallToActionBlock key={`${block.__component}_${block.id}`} {...block} pageParams={pageParams} />
-                    case 'blocks.form':
-                        return <FormBlock key={`${block.__component}_${block.id}`} {...block} pageParams={pageParams} />
-                    case 'blocks.image':
-                        return <ImageBlock key={`${block.__component}_${block.id}`} {...block} pageParams={pageParams} />
-                    case 'blocks.image-slider':
-                        return <ImageSlider key={`${block.__component}_${block.id}`} {...block} pageParams={pageParams} />
-                    case 'blocks.you-tube-video':
-                        return <YouTubeVideoBlock key={`${block.__component}_${block.id}`} {...block} pageParams={pageParams} />
-                    case 'blocks.stories':
-                        return <StoriesBlock key={`${block.__component}_${block.id}`} {...block} pageParams={pageParams} />
-                    case 'blocks.html-block':
-                        return <HTMLBlock key={`${block.__component}_${block.id}`} {...block} pageParams={pageParams} />
-                    case 'blocks.poem-counter':
-                        return <StoryCounter key={`${block.__component}_${block.id}`} {...block} pageParams={pageParams} />
-                    case 'blocks.podcasts':
-                        return <PodcastGrid key={`${block.__component}_${block.id}`} {...block} pageParams={pageParams} />
-                    case 'blocks.categories':
-                        return <CategoriesBlock key={`${block.__component}_${block.id}`} {...block} pageParams={pageParams} />
-                    case 'blocks.printify-shop':
-                        return <PrintifyShopBlock key={`${block.__component}_${block.id}`} {...block} pageParams={pageParams} />
-                    case 'blocks.payment-status': 
-                        return <PaymentStatusBlock key={`${block.__component}_${block.id}`} {...block} pageParams={pageParams} />
-                    default:
-                        return <div key={JSON.stringify(block)}>Block does not exist {JSON.stringify(block)}</div>
-                }
-            })
-        }
+        {blocks && blocks.map(BlockRenderer(pageParams))}
         {(childPositon == undefined || childPositon == 'bottom') && children}
     </div>
 }

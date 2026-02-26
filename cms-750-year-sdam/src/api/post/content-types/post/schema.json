@@ -1,11 +1,10 @@
 {
   "kind": "collectionType",
-  "collectionName": "pages",
+  "collectionName": "posts",
   "info": {
-    "singularName": "page",
-    "pluralName": "pages",
-    "displayName": "Pages",
-    "description": ""
+    "singularName": "post",
+    "pluralName": "posts",
+    "displayName": "Post"
   },
   "options": {
     "draftAndPublish": true
@@ -14,6 +13,7 @@
   "attributes": {
     "Title": {
       "type": "string",
+      "maxLength": 124,
       "required": true
     },
     "slug": {
@@ -22,28 +22,21 @@
       "required": true
     },
     "Description": {
-      "type": "text"
+      "type": "text",
+      "maxLength": 250
     },
     "Blocks": {
       "type": "dynamiczone",
       "components": [
+        "blocks.you-tube-video",
         "blocks.text",
         "blocks.text-image",
-        "blocks.call-to-action-cta",
-        "blocks.form",
-        "blocks.image",
-        "blocks.image-slider",
-        "blocks.you-tube-video",
-        "blocks.stories",
-        "blocks.html-block",
-        "blocks.poem-counter",
         "blocks.podcasts",
-        "blocks.categories",
-        "blocks.printify-shop",
-        "blocks.payment-status",
+        "blocks.image-slider",
+        "blocks.html-block",
+        "blocks.call-to-action-cta",
         "blocks.rich-text",
-        "blocks.latest-post",
-        "blocks.post-overview"
+        "blocks.image"
       ],
       "required": true,
       "min": 1

@@ -99,6 +99,26 @@ export interface BlocksImageSlider extends Struct.ComponentSchema {
   };
 }
 
+export interface BlocksLatestPost extends Struct.ComponentSchema {
+  collectionName: 'components_blocks_latest_posts';
+  info: {
+    displayName: 'Latest Posts';
+    icon: 'rocket';
+  };
+  attributes: {
+    Max: Schema.Attribute.Integer &
+      Schema.Attribute.Required &
+      Schema.Attribute.SetMinMax<
+        {
+          max: 100;
+          min: 1;
+        },
+        number
+      > &
+      Schema.Attribute.DefaultTo<10>;
+  };
+}
+
 export interface BlocksPaymentStatus extends Struct.ComponentSchema {
   collectionName: 'components_blocks_payment_statuses';
   info: {
@@ -142,6 +162,29 @@ export interface BlocksPoemCounter extends Struct.ComponentSchema {
   };
 }
 
+export interface BlocksPostOverview extends Struct.ComponentSchema {
+  collectionName: 'components_blocks_post_overviews';
+  info: {
+    displayName: 'Post Overview';
+    icon: 'apps';
+  };
+  attributes: {
+    max: Schema.Attribute.Integer &
+      Schema.Attribute.Required &
+      Schema.Attribute.SetMinMax<
+        {
+          max: 100;
+          min: 0;
+        },
+        number
+      > &
+      Schema.Attribute.DefaultTo<10>;
+    Paginated: Schema.Attribute.Boolean &
+      Schema.Attribute.Required &
+      Schema.Attribute.DefaultTo<true>;
+  };
+}
+
 export interface BlocksPrintifyShop extends Struct.ComponentSchema {
   collectionName: 'components_blocks_printify_shops';
   info: {
@@ -163,6 +206,21 @@ export interface BlocksPrintifyShop extends Struct.ComponentSchema {
         number
       > &
       Schema.Attribute.DefaultTo<10>;
+  };
+}
+
+export interface BlocksRichText extends Struct.ComponentSchema {
+  collectionName: 'components_blocks_rich_texts';
+  info: {
+    displayName: 'Rich Text';
+    icon: 'brush';
+  };
+  attributes: {
+    Content: Schema.Attribute.Blocks;
+    Title: Schema.Attribute.String &
+      Schema.Attribute.SetMinMaxLength<{
+        maxLength: 100;
+      }>;
   };
 }
 
@@ -458,10 +516,13 @@ declare module '@strapi/strapi' {
       'blocks.html-block': BlocksHtmlBlock;
       'blocks.image': BlocksImage;
       'blocks.image-slider': BlocksImageSlider;
+      'blocks.latest-post': BlocksLatestPost;
       'blocks.payment-status': BlocksPaymentStatus;
       'blocks.podcasts': BlocksPodcasts;
       'blocks.poem-counter': BlocksPoemCounter;
+      'blocks.post-overview': BlocksPostOverview;
       'blocks.printify-shop': BlocksPrintifyShop;
+      'blocks.rich-text': BlocksRichText;
       'blocks.stories': BlocksStories;
       'blocks.text': BlocksText;
       'blocks.text-image': BlocksTextImage;

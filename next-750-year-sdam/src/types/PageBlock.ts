@@ -2,6 +2,11 @@ import { EndPoint } from "@/services/StrapiCMSService"
 import { StrapiImage } from "./StrapiImage"
 import { PostCategory } from "./PostCategory"
 import { PageProps } from "./Params"
+import { BlocksContent } from "@strapi/blocks-react-renderer"
+
+export type PageBlockComponent = {
+    [K in PageBlock['__component']]: React.ComponentType<Extract<PageBlock, { __component: K }>>
+}
 
 export type PageBlock =
     (
@@ -18,7 +23,9 @@ export type PageBlock =
         PodcastsBlockProps |
         CategoriesBlockProps |
         PrintifyShopBlockProps |
-        PaymentStatusBlock
+        PaymentStatusBlock |
+        RichtTextBlockProps | 
+        LatestPostsBlock
     ) & {
         pageParams: PageProps
     }
@@ -28,6 +35,13 @@ export type TextBlockProps = {
     id: number
     Title?: string
     Description: string
+}
+
+export type RichtTextBlockProps = {
+    __component: "blocks.rich-text"
+    id: number
+    Title?: string
+    Content: BlocksContent
 }
 
 export type TextWithImageBlockProps = {
@@ -120,6 +134,12 @@ export type PaymentStatusBlock = {
     id: number
     SuccessText: string
     FailText: string
+}
+
+export type LatestPostsBlock = {
+    __component: "blocks.latest-post"
+    id: number
+    Max: number
 }
 
 export type StrapiFormField = StandardFormField | CategoriesDropDown | InfoText | DropDown

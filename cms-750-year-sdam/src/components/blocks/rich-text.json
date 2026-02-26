@@ -1,0 +1,19 @@
+{
+  "collectionName": "components_blocks_rich_texts",
+  "info": {
+    "displayName": "Rich Text",
+    "icon": "brush"
+  },
+  "options": {},
+  "attributes": {
+    "Title": {
+      "type": "string",
+      "maxLength": 100
+    },
+    "Content": {
+      "type": "blocks",
+      "required": false
+    }
+  },
+  "config": {}
+}
