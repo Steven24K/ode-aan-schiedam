@@ -13,7 +13,7 @@ export const PoemSliderLayout: FC<PoemSliderProps> = props => <div className="w-
             {props.poems.map((poem) => (
                 <Link
                     key={poem.id}
-                    href={poem.slug}
+                    href={`/ode/${poem.slug}`}
                     className="text-sm font-medium uppercase tracking-widest text-stone-500 
                            hover:text-stone-800 border-b border-stone-300 hover:border-black-800 
                            transition duration-200"
