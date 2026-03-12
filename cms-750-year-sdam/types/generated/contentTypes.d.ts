@@ -598,6 +598,7 @@ export interface ApiHomepageHomepage extends Struct.SingleTypeSchema {
         'blocks.rich-text',
         'blocks.post-overview',
         'blocks.latest-post',
+        'blocks.poem-slider',
       ]
     > &
       Schema.Attribute.Required &
@@ -686,6 +687,7 @@ export interface ApiPagePage extends Struct.CollectionTypeSchema {
         'blocks.rich-text',
         'blocks.latest-post',
         'blocks.post-overview',
+        'blocks.poem-slider',
       ]
     > &
       Schema.Attribute.Required &

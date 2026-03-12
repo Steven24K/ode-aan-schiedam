@@ -162,6 +162,18 @@ export interface BlocksPoemCounter extends Struct.ComponentSchema {
   };
 }
 
+export interface BlocksPoemSlider extends Struct.ComponentSchema {
+  collectionName: 'components_blocks_poem_sliders';
+  info: {
+    displayName: 'PoemSlider';
+    icon: 'slideshow';
+  };
+  attributes: {
+    Poems: Schema.Attribute.Relation<'oneToMany', 'api::poem.poem'>;
+    Selection: Schema.Attribute.Boolean & Schema.Attribute.DefaultTo<false>;
+  };
+}
+
 export interface BlocksPostOverview extends Struct.ComponentSchema {
   collectionName: 'components_blocks_post_overviews';
   info: {
@@ -520,6 +532,7 @@ declare module '@strapi/strapi' {
       'blocks.payment-status': BlocksPaymentStatus;
       'blocks.podcasts': BlocksPodcasts;
       'blocks.poem-counter': BlocksPoemCounter;
+      'blocks.poem-slider': BlocksPoemSlider;
       'blocks.post-overview': BlocksPostOverview;
       'blocks.printify-shop': BlocksPrintifyShop;
       'blocks.rich-text': BlocksRichText;

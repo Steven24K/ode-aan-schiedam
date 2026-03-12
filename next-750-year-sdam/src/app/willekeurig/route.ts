@@ -1,5 +1,5 @@
 import { StrapiCMSService } from "@/services/StrapiCMSService"
-import { NextResponse } from "next/server"
+import { redirect } from "next/navigation"
 
 export async function GET(request: Request): Promise<Response> {
     const request_url = new URL(request.url)
@@ -12,9 +12,8 @@ export async function GET(request: Request): Promise<Response> {
     }
     if (poems.length > 0) {
         const randomPoem = poems[Math.floor(Math.random() * poems.length)]
-        return NextResponse.redirect(new URL(`/ode/${randomPoem.slug}`, request.url))
+        return redirect(`/ode/${randomPoem.slug}`)
     }
 
-    return NextResponse.redirect(new URL(`/`, request.url))
+    return redirect('')
 }
-

@@ -16,6 +16,7 @@ import { PrintifyShopBlock } from "./Blocks/PrintifyShopBlock"
 import { PaymentStatusBlock } from "./Blocks/PaymentStatusBlock"
 import { RichTextBlock } from "./Blocks/RichText"
 import { LatestPostsBlock } from "./Blocks/LatestPosts/LatestPosts.server"
+import { PoemSliderBlock } from "./Blocks/PoemSlider/PoemSlider.server"
 
 type DisplayContentProps = {
     className?: string
@@ -43,6 +44,7 @@ const BLOCK_COMPONENTS: PageBlockComponent = {
     'blocks.payment-status': PaymentStatusBlock,
     'blocks.rich-text': RichTextBlock,
     "blocks.latest-post": LatestPostsBlock,
+    "blocks.poem-slider": PoemSliderBlock
 }
 
 const BlockRenderer = (pageParams: PageProps) => (block: PageBlock) => {

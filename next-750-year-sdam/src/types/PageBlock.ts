@@ -3,6 +3,7 @@ import { StrapiImage } from "./StrapiImage"
 import { PostCategory } from "./PostCategory"
 import { PageProps } from "./Params"
 import { BlocksContent } from "@strapi/blocks-react-renderer"
+import { StrapiPoem } from "./StrapiPoem"
 
 export type PageBlockComponent = {
     [K in PageBlock['__component']]: React.ComponentType<Extract<PageBlock, { __component: K }>>
@@ -25,7 +26,8 @@ export type PageBlock =
         PrintifyShopBlockProps |
         PaymentStatusBlock |
         RichtTextBlockProps | 
-        LatestPostsBlock
+        LatestPostsBlock | 
+        PoemSlider
     ) & {
         pageParams: PageProps
     }
@@ -140,6 +142,13 @@ export type LatestPostsBlock = {
     __component: "blocks.latest-post"
     id: number
     Max: number
+}
+
+export type PoemSlider = {
+    __component: "blocks.poem-slider",
+    id: number 
+    Selection: boolean
+    Poems: StrapiPoem[]
 }
 
 export type StrapiFormField = StandardFormField | CategoriesDropDown | InfoText | DropDown

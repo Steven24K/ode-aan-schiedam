@@ -9,7 +9,7 @@ export const LatestPostsBlock: React.FC<PageBlock> = async block => {
     const strapi = new StrapiCMSService()
 
     const posts = await strapi.GetAllPosts({ page: 0, pageSize: block.Max, withCount: true })
-    if (posts.kind == 'error') return <div>Kan berichten niet laden</div>
+    if (posts.kind == 'error') return <div>Geen berichten gevonden</div>
 
     return <LatestPostsLayout items={posts.data} />
 

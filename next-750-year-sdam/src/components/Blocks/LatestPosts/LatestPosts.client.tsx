@@ -19,7 +19,7 @@ export const LatestPostsLayout: React.FC<LatestPostsProps> = (props) => {
             href={`/post/${item.slug}`}
             className="flex items-center justify-between p-5 bg-white border-2 border-gray-900 shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] transition-all hover:translate-x-[2px] hover:translate-y-[2px] hover:shadow-none"
           >
-            <span className="text-lg font-bold text-gray-900 truncate pr-4">
+            <span className="text-lg font-bold text-gray-900 pr-4">
               {item.Title}
             </span>
             

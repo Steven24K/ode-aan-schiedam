@@ -1,0 +1,30 @@
+{
+  "collectionName": "components_blocks_poem_sliders",
+  "info": {
+    "displayName": "PoemSlider",
+    "icon": "slideshow"
+  },
+  "options": {},
+  "attributes": {
+    "Selection": {
+      "type": "boolean",
+      "default": false
+    },
+    "Poems": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::poem.poem",
+      "conditions": {
+        "visible": {
+          "==": [
+            {
+              "var": "Selection"
+            },
+            true
+          ]
+        }
+      }
+    }
+  },
+  "config": {}
+}

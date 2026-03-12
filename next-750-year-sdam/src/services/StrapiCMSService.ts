@@ -34,6 +34,7 @@ type Populate = "Blocks" |
     "Blocks.form.Fields.categories" |
     "Blocks.form.Fields.Options" |
     "Blocks.Media" |
+    'Blocks.Poems' |
     "Columns.Items" |
     "Logo" |
     "Blocks.Images" |
@@ -51,7 +52,8 @@ const populator: Populate[] = [
     'Blocks.form.Fields.categories',
     'Blocks.form.Fields.Options',
     'Blocks.Media',
-    'Blocks.Images'
+    'Blocks.Images',
+    'Blocks.Poems'
 ]
 
 type Filter = {

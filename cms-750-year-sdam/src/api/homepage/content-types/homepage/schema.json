@@ -37,7 +37,8 @@
         "blocks.printify-shop",
         "blocks.rich-text",
         "blocks.post-overview",
-        "blocks.latest-post"
+        "blocks.latest-post",
+        "blocks.poem-slider"
       ],
       "required": true,
       "min": 1

@@ -43,7 +43,8 @@
         "blocks.payment-status",
         "blocks.rich-text",
         "blocks.latest-post",
-        "blocks.post-overview"
+        "blocks.post-overview",
+        "blocks.poem-slider"
       ],
       "required": true,
       "min": 1
