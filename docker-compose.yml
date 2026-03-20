@@ -4,18 +4,15 @@ services:
     restart: "no"
     shm_size: 128mb
     volumes:
-      - pg_data:/var/lib/postgresql/data
+     - type: tmpfs
+       target: /dev/shm
+       tmpfs:
+         size: 134217728 # 128*2^20 bytes = 128Mb
     environment:
       POSTGRES_DB: cms_odeaanschiedam
       POSTGRES_PASSWORD: postgres
     ports:
       - "5432:5432"
-
-  adminer:
-    image: adminer
-    restart: "no"
-    ports:
-      - 8080:8080
 
 volumes:
   pg_data:
