@@ -160,7 +160,7 @@ export class StrapiCMSService {
             .catch(err => ApiError(err))
 
     public GetHomePage = async (): Promise<ApiResult<StrapiHomePage>> =>
-        this.StrapiFetch<StrapiHomePage>('homepage', { populate: populator.concat(['Logo']) })
+        this.StrapiFetch<StrapiHomePage>('homepage', { populate: populator })
             .then(res => OkResult(res.data))
             .catch(err => ApiError(err))
 

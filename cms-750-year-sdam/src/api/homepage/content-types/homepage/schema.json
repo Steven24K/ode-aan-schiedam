@@ -42,15 +42,6 @@
       ],
       "required": true,
       "min": 1
-    },
-    "Logo": {
-      "type": "media",
-      "multiple": false,
-      "required": true,
-      "allowedTypes": [
-        "images",
-        "files"
-      ]
     }
   }
 }

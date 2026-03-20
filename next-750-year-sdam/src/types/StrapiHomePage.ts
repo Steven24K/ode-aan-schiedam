@@ -6,5 +6,4 @@ export type StrapiHomePage = {
     Title: string
     Description: string
     Blocks: PageBlock[]
-    Logo: StrapiImage
 }
