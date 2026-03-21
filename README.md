@@ -1,6 +1,7 @@
 # Ode aan Schiedam
 This repo contains the source code for:
 *[odeaanschiedam.nl](https://odeaanschiedam.nl/)*
+*[cms.odeaanschiedam.nl](https://cms.odeaanschiedam.nl/)*
 
 The repository is a mono repo containing: 
 - Strapi CMs
@@ -38,35 +39,4 @@ If you setup Strapi locally you don't need one.
 
 
 # Deploy 
-*(incase you need to start a new process: `pm2 start yarn --name "<PROCESS NAME>" -- start`)*
-
-Make sure the `.env` file is created for both CMS and NextJS App.
-
-## Strapi CMS
-- SSH into server
-- `cd ode-aan-schiedam`
-- `git pull`
-- `cd cms-750-year-sdam`
-- `yarn install`
-- `yarn build`
-- `pm2 restart strapi` 
-
-## NextJS App
-- `cd ..`
-- `cd next-750-year-sdam`
-- `yarn install`
-- `yarn build`
-- `pm2 restart next` 
-
-
-# TODO:
-- Product detail page
-- Form validation for checkout
-    - check email format
-    - check phone format
-- Placeholder feature for form builder
-- Multistepp form;
-    - Customer details
-    - payment method
-    - shipping method
-    - discount codes
+Docker is all you need to know.
