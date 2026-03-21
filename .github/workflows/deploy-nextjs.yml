@@ -1,0 +1,25 @@
+name: Deploy NextJS
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - next-750-year-sdam/**
+jobs:
+  build:
+    name: Build
+    runs-on: ubuntu-latest
+    steps:
+      - name: Execute deploy script
+        uses: appleboy/ssh-action@v1
+        env:
+          ENV_FILE: ${{ secrets.NEXTJS_ENV }}
+        with:
+          host: ${{ secrets.HOST }}
+          username: ${{ secrets.USERNAME }}
+          key: ${{ secrets.PRIVATE_KEY }}
+          envs: ENV_FILE
+          script: |
+            echo "$ENV_FILE" > .env
+            docker compose up --build
+            echo "Done."
