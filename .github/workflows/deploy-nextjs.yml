@@ -25,7 +25,7 @@ jobs:
             cd next-750-year-sdam
 
             cat <<'EOF' > .env
-            ${{ ENV_FILE }}
+            ${{ secrets.NEXTJS_ENV }}
             EOF
 
             docker compose up --build -d

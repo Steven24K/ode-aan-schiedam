@@ -27,15 +27,15 @@ jobs:
             cd cms-750-year-sdam
 
             cat <<'EOF' > strapi.env
-            ${{ STRAPI_ENV_FILE }}
+            ${{ secrets.STRAPI_ENV }}
             EOF
 
             cat <<'EOF' > postgres.env
-            ${{ POSTGRES_ENV_FILE }}
+            ${{ secrets.POSTGRES_ENV }}
             EOF
 
             cat <<'EOF' > pgadmin.env
-            ${{ PGADMIN_ENV_FILE }}
+            ${{ secrets.PGADMIN_ENV }}
             EOF
             
             docker compose up --build -d
