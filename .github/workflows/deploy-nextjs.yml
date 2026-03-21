@@ -25,8 +25,8 @@ jobs:
             cd next-750-year-sdam
 
             cat <<'EOF' > .env
-            $ENV_FILE
+            ${{ ENV_FILE }}
             EOF
-            
+
             docker compose up --build -d
             echo "Done."
