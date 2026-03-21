@@ -15,7 +15,7 @@ export default async function Home(props: PageProps) {
   const blocks = homepage.data.Blocks
 
   return <>
-    <Hero title={title} description={description} color={"fiery-red"} />
+    <Hero title={title} description={description} color={"royal-purple"} />
     <DisplayContent isHome blocks={blocks} pageParams={props} />
   </>
 }

@@ -20,6 +20,9 @@ jobs:
           key: ${{ secrets.PRIVATE_KEY }}
           envs: ENV_FILE
           script: |
+            cd ode-aan-schiedam
+            git pull
+            cd next-750-year-sdam
             cat <<EOF > .env
             ${{ secrets.NEXTJS_ENV }}
             EOF
