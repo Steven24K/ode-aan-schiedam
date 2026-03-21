@@ -12,8 +12,8 @@ export async function SiteMetaData(props: SiteMetaDataProps) {
 
     if (siteInfo.kind != 'ok') return <title>{siteInfo.error}</title>
 
-    const _title = siteInfo.data.SiteName
     const _slogan = siteInfo.data.Slogan
+    const _title = `${siteInfo.data.SiteName} | ${_slogan}`
     const _icon = siteInfo.data.Icon.url
 
     return <>
