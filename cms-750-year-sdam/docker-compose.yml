@@ -7,10 +7,7 @@ services:
     shm_size: 128mb
     volumes:
       - pg_data_cmsodeaanschiedam:/var/lib/postgresql/data
-    environment:
-      POSTGRES_DB: cms_odeaanschiedam
-      POSTGRES_USER: cms_odeaanschiedam
-      POSTGRES_PASSWORD: "Connect2TheWorld!"
+    env_file: postgres.env
     ports:
       - "5432:5432"
 
@@ -20,9 +17,7 @@ services:
     restart: "unless-stopped"
     ports:
       - "5050:80"
-    environment:
-      PGADMIN_DEFAULT_EMAIL: "steven_first@outlook.com"
-      PGADMIN_DEFAULT_PASSWORD: "Connect2TheWorld!"
+    env_file: pgadmin.env
     volumes:
       - pgadmin_data_cmsodeaanschiedam:/var/lib/pgadmin
     depends_on:
@@ -38,27 +33,7 @@ services:
       - "1337:1337"
     depends_on:
       - db
-    environment:
-      STRAPI_TELEMETRY_DISABLED: "true"
-      SERVER_URL: http://localhost:1337
-      HOST: 0.0.0.0
-      PORT: 1337
-      SMTP_HOST: smtp.hostinger.com
-      SMTP_PORT: 465
-      SMTP_USERNAME: "750@odeaanschiedam.nl"
-      SMTP_PASSWORD: "@Connect2TheWorld"
-      APP_KEYS: "NwAhp1aVqwmkUmHZo0xoAQ==,jJyib7TJi1sHQpwAteYSQg==,1UouFOEYsp7kgXOXyCNxSQ==,JwoDuYozYZ8eRkZY8H9fPQ=="
-      API_TOKEN_SALT: "u2r21j6zV3i7wT+iK3Bn0Q=="
-      ADMIN_JWT_SECRET: "fxTJ5nlz0GxVNUdQ+wwKQQ=="
-      TRANSFER_TOKEN_SALT: "aDzc3IOMpz14RrgYINYGDw=="
-      DATABASE_CLIENT: "postgres"
-      DATABASE_HOST: db
-      DATABASE_PORT: 5432
-      DATABASE_NAME: cms_odeaanschiedam
-      DATABASE_USERNAME: cms_odeaanschiedam
-      DATABASE_PASSWORD: "Connect2TheWorld!"
-      DATABASE_SSL: "false"
-      JWT_SECRET: "b/QdnEtNH4rnuK24KaAhgQ=="
+    env_file: strapi.env
 
 volumes:
   strapi_uploads_cmsodeaanschiedam:

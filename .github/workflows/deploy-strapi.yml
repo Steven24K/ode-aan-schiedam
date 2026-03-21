@@ -1,0 +1,42 @@
+name: Deploy Strapi
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - cms-750-year-sdam/**
+jobs:
+  build:
+    name: Build
+    runs-on: ubuntu-latest
+    steps:
+      - name: Execute deploy script
+        uses: appleboy/ssh-action@v1
+        env:
+          STRAPI_ENV_FILE: ${{ secrets.STRAPI_ENV }}
+          POSTGRES_ENV_FILE: ${{ secrets.POSTGRES_ENV }}
+          PGADMIN_ENV_FILE: ${{ secrets.PGADMIN_ENV }}
+        with:
+          host: ${{ secrets.HOST }}
+          username: ${{ secrets.USERNAME }}
+          key: ${{ secrets.PRIVATE_KEY }}
+          envs: STRAPI_ENV_FILE,POSTGRES_ENV_FILE,PGADMIN_ENV_FILE
+          script: |
+            cd ode-aan-schiedam
+            git pull
+            cd cms-750-year-sdam
+
+            cat <<'EOF' > strapi.env
+            $STRAPI_ENV_FILE
+            EOF
+
+            cat <<'EOF' > postgres.env
+            $POSTGRES_ENV_FILE
+            EOF
+
+            cat <<'EOF' > pgadmin.env
+            $PGADMIN_ENV_FILE
+            EOF
+            
+            docker compose up --build -d
+            echo "Done."
