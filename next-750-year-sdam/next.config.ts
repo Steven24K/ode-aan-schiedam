@@ -7,6 +7,8 @@ const nextConfig: NextConfig = {
       {
         source: "/:path*",
         headers: [
+          { key: "Referrer-Policy", value: "strict-origin-when-cross-origin" },
+          { key: "Content-Security-Policy", value: "frame-ancestors https://cms.odeaanschiedam.nl" },
           { key: "Access-Control-Allow-Credentials", value: "true" },
           { key: "Access-Control-Allow-Origin", value: "https://cms.odeaanschiedam.nl" },
           { key: "Access-Control-Allow-Methods", value: "GET" },
