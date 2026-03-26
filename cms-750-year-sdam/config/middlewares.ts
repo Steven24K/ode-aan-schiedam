@@ -7,9 +7,9 @@ export default [
       contentSecurityPolicy: {
         useDefaults: true,
         directives: {
-          'connect-src': ["'self'", 'https:', 'https://odeaanschiedam.nl'],
-          'frame-ancestors': ["'self'", 'https://odeaanschiedam.nl'],
-          'img-src': ["'self'", 'data:', 'blob:', 'https://odeaanschiedam.nl'],
+          'connect-src': ["'self'", 'https:', 'https://www.odeaanschiedam.nl'],
+          'frame-ancestors': ["'self'", 'https://www.odeaanschiedam.nl'],
+          'img-src': ["'self'", 'data:', 'blob:', 'https://www.odeaanschiedam.nl'],
         },
       },
     },
@@ -17,7 +17,7 @@ export default [
   {
     name: 'strapi::cors',
     config: {
-      origin: ['https://odeaanschiedam.nl', 'https://cms.odeaanschiedam.nl'],
+      origin: ['https://www.odeaanschiedam.nl', 'https://cms.odeaanschiedam.nl'],
       methods: ['GET'],
       headers: ['Content-Type', 'Authorization', 'Origin', 'Accept'],
       keepHeaderOnError: true,
