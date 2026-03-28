@@ -7,9 +7,9 @@ export default [
       contentSecurityPolicy: {
         useDefaults: true,
         directives: {
-          'connect-src': ["'self'", 'https:', 'https://www.odeaanschiedam.nl'],
-          'frame-ancestors': ["'self'", 'https://www.odeaanschiedam.nl'],
-          'img-src': ["'self'", 'data:', 'blob:', 'https://www.odeaanschiedam.nl'],
+          'connect-src': ["'self'", 'https:', 'https://odeaanschiedam.nl'],
+          'frame-ancestors': ["'self'", 'https://odeaanschiedam.nl'],
+          'img-src': ["'self'", 'data:', 'blob:', 'https://odeaanschiedam.nl'],
         },
       },
     },
