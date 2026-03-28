@@ -20,7 +20,7 @@ export const Hero = (props: HeroProps) => {
             className={`hart bg-${color}--light`}
             width={2382}
             height={2382}
-            src={'/img/logos/SDAM750-hart_RGB.png'}
+            src={'/img/logos/heart-of-love.png'}
             alt="750 Schiedam Logo"
         />
         <div className="hero-content flex flex-col justify-center items-center h-full space-y-4">
