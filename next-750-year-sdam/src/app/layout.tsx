@@ -5,8 +5,8 @@ import ErrorBoundary from "../components/Error/ErrorBoundary";
 import "./styling.scss";
 import { SiteMetaData } from "@/components/SiteMetaData";
 import { GeneralError } from "@/components/Error/GeneralError";
-import { ShoppingCart } from "@/components/ShoppingCart";
-import { ShoppingCartProvider } from "@/components/Blocks/ShoppingCartProvider";
+// import { ShoppingCart } from "@/components/ShoppingCart";
+// import { ShoppingCartProvider } from "@/components/Blocks/ShoppingCartProvider";
 import { StrapiCMSService } from "@/services/StrapiCMSService";
 
 export const dynamic = 'force-dynamic'
@@ -30,10 +30,10 @@ export default async function RootLayout(props: Readonly<LayoutProps>) {
           <NavBar />
 
           <main>
-            <ShoppingCartProvider>
+            {/* <ShoppingCartProvider> */}
               {children}
-              <ShoppingCart siteInfo={siteInfo} />
-            </ShoppingCartProvider>
+              {/* <ShoppingCart siteInfo={siteInfo} /> */}
+            {/* </ShoppingCartProvider> */}
           </main>
 
           <Footer />
