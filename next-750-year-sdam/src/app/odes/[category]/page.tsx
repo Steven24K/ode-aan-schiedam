@@ -7,6 +7,19 @@ import { PageProps } from "@/types/Params"
 import { notFound } from "next/navigation"
 import { Suspense } from "react"
 
+export async function generateMetadata(props: PageProps) {
+    const { params } = props
+    const { category } = await params
+
+    const strapi = new StrapiCMSService()
+    const page = await strapi.GetCategoryBySlug(category)
+    
+    return {
+        title: (page.kind == 'ok' ? page.data.Title : 'Niet gevonden'),
+        description: page.kind == 'ok' ? page.data.Description : '',
+    }
+}
+
 
 export default async function StoryOverview(props: PageProps) {
     const { params } = props

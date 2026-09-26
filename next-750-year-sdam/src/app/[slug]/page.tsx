@@ -4,6 +4,19 @@ import { StrapiCMSService } from "@/services/StrapiCMSService";
 import { PageProps } from "@/types/Params";
 import { notFound } from "next/navigation";
 
+export async function generateMetadata(props: PageProps) {
+    const { params } = props
+    const { slug } = await params
+
+    const strapi = new StrapiCMSService()
+    const page = await strapi.GetPage(slug)
+    
+    return {
+        title: (page.kind == 'ok' ? page.data.Title : 'Niet gevonden'),
+        description: page.kind == 'ok' ? page.data.Description : '',
+    }
+}
+
 export default async function CMSPage(props: PageProps) {
     const { params } = props
     const { slug } = await params

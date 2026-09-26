@@ -8,6 +8,19 @@ import Image from "next/image"
 import Link from "next/link"
 import { notFound } from "next/navigation"
 
+export async function generateMetadata(props: PageProps) {
+    const { params } = props
+    const { slug } = await params
+
+    const strapi = new StrapiCMSService()
+    const data = await strapi.getPodcastBySlug(slug)
+    
+    return {
+        title: (data.kind == 'ok' ? data.data.episode.Title + ' | ' + data.data.podcastInfo.Title : 'Niet gevonden'),
+        description: data.kind == 'ok' ? data.data.podcastInfo.Description : '',
+    }
+}
+
 
 export default async function PodcastPage(props: PageProps) {
     const { params } = props

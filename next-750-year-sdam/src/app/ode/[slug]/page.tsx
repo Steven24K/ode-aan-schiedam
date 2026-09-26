@@ -7,6 +7,18 @@ import Link from "next/link"
 import { notFound } from "next/navigation"
 import Markdown from "react-markdown"
 
+export async function generateMetadata(props: PageProps) {
+    const { params } = props
+    const { slug } = await params
+
+    const strapi = new StrapiCMSService()
+    const page = await strapi.GetPoem(slug || 'null')
+    
+    return {
+        title: (page.kind == 'ok' ? page.data.Title : 'Niet gevonden'),
+        description: page.kind == 'ok' ? page.data.Content : '',
+    }
+}
 
 export default async function StoryPage(props: PageProps) {
     const { params } = props
