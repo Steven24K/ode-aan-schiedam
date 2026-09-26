@@ -86,11 +86,11 @@ export class StrapiCMSService {
     private async StrapiFetch<T>(end_point: EndPoint, options: StrapiOptions = {}): Promise<StrapiData<T>> {
         const { populate, filters, method, body, sort, pagination } = options
 
-        const _filters = filters ? filters.reduce((xs, x) => `${xs}filters[${x.field}][${x.operator}]=${x.value}`, "") : ''
+        const _filters = filters ? filters.reduce((xs, x) => `${xs}filters[${x.field}][${x.operator}]=${x.value}&`, "") : ''
         const _populate = populate == undefined ? "populate=*&" : populate.reduce((xs, x, i) => `${xs}populate[${i}]=${x}&`, "")
         const _sort = sort ? sort.reduce((xs, x, i) => `${xs}sort[${i}]=${x}&`, "") : ''
         const _pagination = pagination ? `pagination[page]=${pagination.page}&pagination[pageSize]=${pagination.pageSize}&withCount=${boolToString(pagination.withCount)}` : ''
-
+        
         let _url = `${this.STRAPI_CMS_URL}/api/${end_point}/?${_populate}${_filters}${_sort}${_pagination}`
         if (method == 'POST')
             _url = _url + 'status=draft'
