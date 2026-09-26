@@ -171,7 +171,7 @@ export class StrapiCMSService {
 
     public GetCategoryBySlug = async (slug: string): Promise<ApiResult<PostCategory>> =>
         this.StrapiFetch<PostCategory[]>('categories', {
-            populate: populator,
+            populate: ["Blocks", "Blocks.Image", "Blocks.Media", "Blocks.Button", "Blocks.Images"],
             filters: [{ field: 'slug', operator: '$eq', value: slug }]
         })
             .then(categories => {
@@ -213,7 +213,7 @@ export class StrapiCMSService {
 
     public GetPost = async (slug: string): Promise<ApiResult<StrapiPost>> =>
         this.StrapiFetch<StrapiPost[]>('posts', {
-            populate: populator,
+            populate: ["Blocks", "Blocks.Image", "Blocks.Media", "Blocks.Images", "Blocks.Button" ],
             filters: [{ field: 'slug', operator: '$eq', value: slug }],
 
         })
@@ -226,7 +226,7 @@ export class StrapiCMSService {
     public GetPoem = async (slug: string): Promise<ApiResult<StrapiPoem>> =>
         this.StrapiFetch<StrapiPoem[]>('poems', {
             filters: [{ field: 'slug', operator: '$eq', value: slug }],
-            populate: populator.concat(['category'])
+            populate: ["category", "Blocks", "Blocks.Button", "Blocks.Image", "Blocks.Images", "Blocks.Media"]
         })
             .then(pages => {
                 if (pages.data.length == 0) return Promise.reject('Poem not found')

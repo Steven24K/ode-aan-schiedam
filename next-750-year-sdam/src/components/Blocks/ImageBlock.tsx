@@ -8,8 +8,8 @@ export const ImageBlock = (props: PageBlock) => {
     return <div className="image-block">
         <Image src={Media.url}
             alt={Media.name}
-            height={Media.height}
-            width={Media.width}
+            height={Media.height || 500}
+            width={Media.width || 500}
         />
         {Caption && <figcaption>{Caption}</figcaption>}
     </div>
