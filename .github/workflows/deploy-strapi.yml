@@ -34,4 +34,9 @@ jobs:
             EOF
             
             docker compose up --build -d
+
+            rm strapi.env
+            rm postgres.env
+            rm pgadmin.env
+            
             echo "Done."
