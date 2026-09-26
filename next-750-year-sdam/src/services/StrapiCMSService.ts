@@ -133,7 +133,7 @@ export class StrapiCMSService {
             .then(podcastInfo =>
                 this.StrapiFetch<PodcastEpisode[]>('podcast-episodes', {
                     filters: [{ field: 'slug', operator: '$eq', value: slug }],
-                    populate: populator.concat(['Audio', 'Thumbnail'])
+                    populate: ["Thumbnail", "Audio"]
                 })
                     .then(episodes => {
                         if (episodes.data.length == 0) return Promise.reject('Podcast not found')
@@ -213,7 +213,7 @@ export class StrapiCMSService {
 
     public GetPost = async (slug: string): Promise<ApiResult<StrapiPost>> =>
         this.StrapiFetch<StrapiPost[]>('posts', {
-            populate: ["Blocks", "Blocks.Image", "Blocks.Media", "Blocks.Images", "Blocks.Button" ],
+            populate: ["Blocks", "Blocks.Image", "Blocks.Media", "Blocks.Images", "Blocks.Button"],
             filters: [{ field: 'slug', operator: '$eq', value: slug }],
 
         })
