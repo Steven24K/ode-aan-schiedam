@@ -13,8 +13,8 @@ module.exports = ({ env }) => ({
           // ... any custom nodemailer options
         },
         settings: {
-          defaultFrom: '750@odeaanschiedam.nl',
-          defaultReplyTo: '750@odeaanschiedam.nl',
+          defaultFrom: env('SMTP_USERNAME'),
+          defaultReplyTo: env('SMTP_USERNAME'),
         },
       },
     },
